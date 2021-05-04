@@ -690,7 +690,7 @@ def formula_from_ss(mineral,endi):
             Fetot += split[el]
     if Fetot > 0:
         formula['Fe'] = Fetot
-    
+
     return formula
 
 
@@ -1519,7 +1519,7 @@ class system:
 
         # logK spacing between .
         spacing_lk = 9
-        
+
         # If the mineral is a pure phase
         if species.endmember_num == 1:
             formula = chem.get_Berman_formula(species.props['element_comp'][0])
@@ -1594,18 +1594,18 @@ class system:
 
             s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
             s += '+----------------------------------------------------------------------------\n'
-        
+
         # If the mineral is a solid solution
         else:
             for ei in range(species.endmember_num):
                 endm_name = species.endmember_names[ei]
                 if len(endm_name) > 15:
                     endm_name = endm_name[:15]
-                
+
                 endm = np.zeros(species.endmember_num)
                 endm[ei] = 1
                 formula = formula_from_ss(species,ei)
-                
+
                 # Check endmember is in the chemical system in use
                 if all(el in self.elements for el in formula):
 
@@ -1680,7 +1680,7 @@ class system:
 
                     s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
                     s += '+----------------------------------------------------------------------------\n'
-            
+
         return(s)
 
 
@@ -1772,7 +1772,7 @@ class system:
                 endm = np.zeros(species.endmember_num)
                 endm[i] = 1
                 formula = formula_from_ss(species,i)
-                
+
                 matrix = np.zeros([np.shape(self.basis_species_matrix)[0]+1,np.shape(self.basis_species_matrix)[1]+1])
                 matrix[:-1,:-1] = self.basis_species_matrix
                 for j in range(len(self.elements)):
@@ -1795,8 +1795,8 @@ class system:
                         stoich[species.endmember_names[i]] = soln[j]
 
                 self.stoichiometry[species.endmember_names[i]] = stoich
-                
-                
+
+
 
     def make_basis_species_matrix(self,swap_H_OH = False, exclude_gas = False):
         formulae = list()
@@ -1859,7 +1859,7 @@ class system:
             endm = np.zeros(species.endmember_num)
             endm[endi] = 1
             DG += self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
-            
+
         if mineral == True:
             if species.endmember_num == 1:
                 formula = formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
@@ -1871,21 +1871,21 @@ class system:
                 endm = np.zeros(species.endmember_num)
                 endm[endi] = 1
                 formula = formula_from_ss(species,endi)
-                
+
                 # Add reference state corrections
 #                 for el in formula:
 #                     DG += formula[el]*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*robieref[el]*298.15
-                
+
                 if 'Na' in formula:
                     DG += -1626*4.184*formula['Na']*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
                 if 'K' in formula:
                     DG += -1600*4.184*formula['K']*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
-        
+
         if species.endmember_num == 1:
             species_name = species.abbrev
         else:
             species_name = species.endmember_names[endi]
-        
+
         for s in self.basis_species:
             if s.abbrev in list(self.stoichiometry[species_name].keys()) and s.abbrev != 'H+':
                 if s.abbrev == 'O2':
