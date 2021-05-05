@@ -12,11 +12,12 @@ and compiled separately to this model. See the Jupyter notebooks supplied in the
 """
 
 # Import pyQ3 classes and methods
-from robieref import robieref
 import pyQ3.defaultsystem
+import pyQ3.system
 
 
-
+class system(pyQ3.system.system):
+    pass
 
 
 def load_coder_modules(working_dir='dew2019_coderfiles'):

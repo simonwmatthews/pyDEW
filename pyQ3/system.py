@@ -1,5 +1,17 @@
-import pyQ3.defaultsystem
-import pyQ3.core
+from pyQ3 import defaultsystem
+from pyQ3 import core
+
+import numpy as np
+from thermoengine import chem
+from copy import copy
+
+from ctypes import cdll
+from ctypes import util
+from rubicon.objc import ObjCClass, objc_method
+cdll.LoadLibrary(util.find_library('phaseobjc'))
+
+DEWFluid = ObjCClass('DEWDielectricConstant')
+obj = DEWFluid.alloc().init()
 
 class system:
     """
@@ -25,12 +37,13 @@ class system:
     """
 
     def __init__(self,
-                elements= pyQ3.defaultsystem.elements,
-                basis_species= pyQ3.defaultsystem.basis_species_names,
-                other_species= pyQ3.defaultsystem.other_species_names,
-                minerals= pyQ3.defaultsystem.minerals,
-                solid_solutions= pyQ3.defaultsystem.solid_solutions,
-                hydrated_species= pyQ3.defaultsystem.hydrated_species,
+                elements= defaultsystem.elements,
+                basis_species= defaultsystem.basis_species_names,
+                other_species= defaultsystem.other_species_names,
+                minerals= defaultsystem.minerals,
+                solid_solutions= defaultsystem.solid_solutions,
+                hydrated_species= defaultsystem.hydrated_species,
+                ion_size= defaultsystem.ion_size
                 ):
         """Initialisation routine for a system class.
 
@@ -61,6 +74,10 @@ class system:
             chemical reaction in DATA0. Keys are the names of the species to hydrate.
             This is only important if using with a version of EQ3 where a(H2O) is not
             set to 1.0.
+        ion_size : dict
+            A dictionary of complexes to assign a special ion size to. This is used in
+            the DEW EQ3 versions as a flag for species behaviour, so it probably shouldn't
+            be changed. The default ion size is 3.7.
         """
 
         # The element list must start with O and H:
@@ -72,15 +89,15 @@ class system:
         # If any of the basis species are strings, import DEW2019:
         find_species = []
         for sp in basis_species + other_species:
-            if istype(sp,'str'):
+            if isinstance(sp,str):
                 find_species.append(sp)
         if len(find_species) > 0:
-            dewdb = pyQ3.loadDEWSpecies.DEW_species()
+            dewdb = core.DEW_species()
 
         _basis_species_unordered = []
         _basis_species_names_unordered = []
         for sp in basis_species:
-            if istype(sp,str) == False:
+            if isinstance(sp,str) == False:
                 _basis_species_unordered.append(sp)
                 _basis_species_names_unordered.append(sp.abbrev)
             else:
@@ -91,35 +108,39 @@ class system:
         # Create a list of the basis species in the order of the elements:
         self.basis_species = [_basis_species_unordered[_basis_species_names_unordered.index('H2O')],
                               _basis_species_unordered[_basis_species_names_unordered.index('H+')]]
-        self._basis_species_unordered.pop(_basis_species_names_unordered.index('H2O'))
-        self._basis_species_unordered.pop(_basis_species_names_unordered.index('H+'))
+        _basis_species_unordered.pop(_basis_species_names_unordered.index('H2O'))
+        _basis_species_names_unordered.pop(_basis_species_names_unordered.index('H2O'))
+        _basis_species_unordered.pop(_basis_species_names_unordered.index('H+'))
+        _basis_species_names_unordered.pop(_basis_species_names_unordered.index('H+'))
 
         # O2 must go at the end of the list, but will interfere with finding the other basis species.
-        _O2 = self._basis_species_unordered(_basis_species_names_unordered.index('O2'))
-        self._basis_species_unordered.pop(_basis_species_names_unordered.index('O2'))
+        _O2 = _basis_species_unordered[_basis_species_names_unordered.index('O2')]
+        _basis_species_unordered.pop(_basis_species_names_unordered.index('O2'))
+        _basis_species_names_unordered.pop(_basis_species_names_unordered.index('O2'))
 
         # Construct an array describing which species could be basis species for each element:
         _potentialbasis = np.zeros([len(elements)-2]*2)
         for i,el in zip(range(len(self.elements[2:])),self.elements[2:]):
-            for j,sp in zip(range(len(_basis_species_unordered)),_basis_species_unordered:
-                if el in pyQ3.core.formula_to_dict(chem.get_Berman_formula(sp.props['element_comp'][0])).keys():
+            for j,sp in zip(range(len(_basis_species_unordered)),_basis_species_unordered):
+                if el in core.formula_to_dict(chem.get_Berman_formula(sp.props['element_comp'][0])).keys():
                     _potentialbasis[i,j] = 1
 
         _basis_dict = {}
         _speciesfound = []
         # Check which basis species contain a single element (other than H and O):
         for i in range(len(self.elements)-2):
-            if np.sum(_potentialbasis[i,:]) == 1.0:
+            if np.sum(_potentialbasis[i,:]) == 1:
                 _basis_dict[elements[2+i]] = _basis_species_unordered[i]
                 _speciesfound.append(i)
+
         # Delete those species from the matrix
         if len(_speciesfound) > 0:
             for i in _speciesfound:
-                _potential_basis[i,:] = np.zeros(len(self.elements)-2)
-                _potential_basis[:,i] = np.zeros(len(self.elements)-2)
+                _potentialbasis[i,:] = np.zeros(len(self.elements)-2)
+                _potentialbasis[:,i] = np.zeros(len(self.elements)-2)
         # Check if this has solved the problem:
         for i in range(len(self.elements)-2):
-            if np.sum(_potentialbasis[i,:]) == 1.0:
+            if np.sum(_potentialbasis[i,:]) == 1:
                 _basis_dict[elements[2+i]] = _basis_species_unordered[i]
                 _speciesfound.append(i)
 
@@ -127,7 +148,7 @@ class system:
         # sets of basis species. This scenario is unlikely to arise, and is probably avoidable,
         # so I will just raise an error for now.
         if len(_speciesfound) != len(self.elements) - 2:
-            raise pyQ3.core.InputError('Something has gone wrong with assigning basis species.')
+            raise core.InputError('Something has gone wrong with assigning basis species.')
 
         # Build the basis species in order:
         for el in self.elements[2:]:
@@ -150,7 +171,7 @@ class system:
         # Check whether there are any duplicate species in other_species, and lookup any if needed.
         self.other_species = []
         for sp in other_species:
-            if istype(sp,'str'):
+            if isinstance(sp,str):
                 if sp not in self.basis_species_names:
                     self.other_species.append(dewdb[sp])
             else:
@@ -167,6 +188,7 @@ class system:
         self.minerals = minerals
         self.hydrated_species = hydrated_species
         self.solid_solutions = solid_solutions
+        self.ion_size = ion_size
 
         self.n_elements = len(self.elements)
         self.n_basis_species = len(self.basis_species)
@@ -175,7 +197,7 @@ class system:
         self.error = ''
         self.validate()
         if self.valid == False:
-            raise pyQ3.core.InputError(self.error)
+            raise core.InputError(self.error)
 
         # Set up basis species matrices. The OH matrix is created for using
         # in calculations where H+ molalities are negative.
@@ -359,7 +381,7 @@ class system:
         s += 'aqueous species\n'
         return s
 
-    def d0_basis_set(self,species,s='',ion_size_dict=ion_size):
+    def d0_basis_set(self,species,s=''):
         # Spaces between = and .
         spacing = 4
 
@@ -371,19 +393,19 @@ class system:
         # characters between . and element name
         el_name = 4
 
-        charge = get_charge(species)
+        charge = core.get_charge(species)
         sCharge = '{0:.1f}'.format(charge)
 
         ion = '3.7'
 
-        if species.abbrev in ion_size_dict.keys():
-            ion = '{0:.1f}'.format(ion_size_dict[species.abbrev])
+        if species.abbrev in self.ion_size.keys():
+            ion = '{0:.1f}'.format(self.ion_size[species.abbrev])
 
         formula = chem.get_Berman_formula(species.props['element_comp'][0])
         if species.abbrev in self.hydrated_species:
-            formula = formula_to_dict(formula,add_H2O=self.hydrated_species[species.abbrev])
+            formula = core.formula_to_dict(formula,add_H2O=self.hydrated_species[species.abbrev])
         else:
-            formula = formula_to_dict(formula)
+            formula = core.formula_to_dict(formula)
 
         s += species.abbrev + '\n'
         s += '    ENTERED BY=                         DATE=   /  /   \n'
@@ -409,7 +431,7 @@ class system:
 
         return s
 
-    def d0_aqueous_species(self,species,t,p,s='',ion_size_dict=ion_size):
+    def d0_aqueous_species(self,species,t,p,s=''):
         # distance from = to .
         charge_space = 4
 
@@ -430,18 +452,18 @@ class system:
         # logK spacing between .
         spacing_lk = 9
 
-        charge = get_charge(species)
+        charge = core.get_charge(species)
         s_charge = '{0:.1f}'.format(charge)
 
         formula = chem.get_Berman_formula(species.props['element_comp'][0])
         if species.abbrev in self.hydrated_species:
-            formula = formula_to_dict(formula,add_H2O=self.hydrated_species[species.abbrev])
+            formula = core.formula_to_dict(formula,add_H2O=self.hydrated_species[species.abbrev])
         else:
-            formula = formula_to_dict(formula)
+            formula = core.formula_to_dict(formula)
 
         ion = '3.7'
-        if species.abbrev in ion_size_dict.keys():
-            ion = '{0:.1f}'.format(ion_size_dict[species.abbrev])
+        if species.abbrev in self.ion_size.keys():
+            ion = '{0:.1f}'.format(self.ion_size[species.abbrev])
 
         s += species.abbrev + '\n'
         s += '    ENTERED BY=                         DATE=   /  /   \n'
@@ -614,7 +636,7 @@ class system:
 
         return(s)
 
-    def d0_minerals(self,species,t,p,s='',ion_size_dict=ion_size):
+    def d0_minerals(self,species,t,p,s=''):
         # distance from = to .
         charge_space = 4
 
@@ -859,13 +881,13 @@ class system:
 
     def find_reaction(self,species):
         if species.endmember_num == 1:
-            formula = formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
+            formula = core.formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
             matrix = np.zeros([np.shape(self.basis_species_matrix)[0]+1,np.shape(self.basis_species_matrix)[1]+1])
             matrix[:-1,:-1] = self.basis_species_matrix
             for i in range(len(self.elements)):
                 if self.elements[i] in list(formula.keys()):
                     matrix[-1,i] = formula[self.elements[i]]
-            matrix[-1,-2] = get_charge(species)
+            matrix[-1,-2] = core.get_charge(species)
             matrix[-1,-1] = 1
 
             b = np.zeros(len(self.basis_species)+1)
@@ -926,7 +948,7 @@ class system:
             basis_species_use[1] = self.other_species[self.other_species_names.index('OH-')]
 
         for s in basis_species_use:
-            formula = formula_to_dict(chem.get_Berman_formula(s.props['element_comp'][0]))
+            formula = core.formula_to_dict(chem.get_Berman_formula(s.props['element_comp'][0]))
             formulae += [formula]
 
         matrix = np.zeros([len(basis_species_use),self.n_elements+1])
@@ -934,7 +956,7 @@ class system:
             for j in range(self.n_elements):
                 if self.elements[j] in list(formulae[i].keys()):
                     matrix[i,j] = formulae[i][self.elements[j]]
-            matrix[i,-1] = get_charge(basis_species_use[i])
+            matrix[i,-1] = core.get_charge(basis_species_use[i])
 
         return matrix
 

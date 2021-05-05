@@ -1,7 +1,9 @@
 import dill
 import pyximport
 import importlib
-sym.init_printing()
+import numpy as np
+import os
+from thermoengine import model
 
 def load_coder_modules(working_dir='dew2019_coderfiles'):
     """ Imports previously generated coder modules. This is required for loading
@@ -19,7 +21,7 @@ def load_coder_modules(working_dir='dew2019_coderfiles'):
     mask = np.array([file.endswith('.pyx') for file in working_dir_code ])
     mod_names = [os.path.splitext(file)[0] for file in working_dir_code[mask]]
 
-    os.chdir('working')
+    os.chdir(working_dir)
     [importlib.import_module(mod_name) for mod_name in mod_names]
     os.chdir('..')
 
@@ -44,6 +46,12 @@ def DEW_species(working_dir='dew2019_coderfiles',pickle_file='DEW2019.pkl'):
     with open('DEW2019.pkl','rb') as file:
         dew = dill.load(file)
         file.close()
+
+    # Load the SWIM model and O2.
+    _db = model.Database()
+    dew['H2O'] = _db.get_phase('H2O')
+    dew['O2'] = _db.get_phase('O2')
+
     return dew
 
 

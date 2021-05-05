@@ -1,6 +1,6 @@
 ﻿name,EQ_name,symbol,formula,include,G_ref,H_ref,S_ref,V_ref,Cp_ref,omega0,z,prd_omega,prd_ac,compl,gas,a1,a2,a3,a4,c1,c2,comments
 "acetate,aq",ACETATE(AQ),CH3COO-,C(2)H(3)O(2),1,-88270,-116180,20.6,40.49992596,6.311742607,1.3182,-1,0,0,0,0,10.018,2.809,6.72,-2.8941,26.3,-3.86,"revised January 26th, 2016; new a1 value from complexes and organics correlation."
-"acetic-acid,aq",ACETICACID(AQ),CH3COOH,C(2)H(4)O(2),1,-94760,-116100,42.7,52.01002163,41.0835516,-0.076,0,0,0,0,0,11.5,5.5,1.67,-2.87,44.9,-2.63,Plyasunov & Shock (2001)
+"acetic-acid,aq",ACETIC-ACID(AQ),CH3COOH,C(2)H(4)O(2),1,-94760,-116100,42.7,52.01002163,41.0835516,-0.076,0,0,0,0,0,11.5,5.5,1.67,-2.87,44.9,-2.63,Plyasunov & Shock (2001)
 Ag+,AG+,Ag(+),Ag(1),1,18427,25275,17.54,-0.800077918,7.899675145,0.216,1,0,1,0,0,2.046419845,-4.387713541,7.018168801,-2.597611922,12.78627351,-1.425436173,Shock & Helgeson (1988) revised with new predicted a1 for cations
 "AgCl,aq",AGCL(AQ),AgCl(0),Ag(1)Cl(1),0,-17450,-18270,34.1,27,6.700093693,-0.038,0,0,1,1,0,6.745843118,2.139575589,3.044086894,-2.867450055,9.743184748,-1.669790915,Sverjensky et al. (1997) with new V greater than the sum of a1 values of ions
 AgCl2-,AGCL2-,AgCl2(-),Ag(1)Cl(2),0,-51560,-61130,47,53,7.699895915,0.9169,-1,0,1,1,0,12.25332547,7.383245133,-1.352680325,-3.084223354,19.12646662,-1.466131202,Sverjensky et al. (1997) with new V greater than the sum of a1 values of ions
@@ -142,7 +142,7 @@ MgCl+,MGCL+,MgCl(+),Mg(1)Cl(1),1,-139700,-150933,-19,1.3,25,0.8449,1,0,0,0,0,3.2
 MgOH+,MG(OH)+,MgOH(+),Mg(1)O(1)H(1),1,-149225,-152955,-18,2,40,0.8449,1,0,1,1,0,2.314080328,-2.079902218,6.582079048,-2.693016842,37.39299436,5.1134,"Revised by Dimitri, January, 2019; with minimum volume needed"
 MgSiO2HCO3+,MGSIO2HCO3+,MgSiC+,Mg(1)Si(1)C(1)O(5)H(1),1,-454300,-479123,48,53.5,78.5,-0.175212,1,1,1,1,0,11.82659373,6.976954178,-1.01200921,-3.067427286,50.55824383,12.95585,Huang & Sverjensky (2019)
 "MgSO4,aq",MGSO4(AQ),MgSO4,Mg(1)S(1)O(4),1,-289449,-327449,-1,35,20,0.05,0,0,1,1,0,8.341732739,3.659020821,1.770046467,-2.930263921,18.34847908,1.0394,"S, Cp, V, omega from fit to Akilan et al. (2006a) and Frantz et al. (1994)"
-Mn+2,MN++,Mn(+2),Mn(1),1,-54500,-52724,-17.6,-17.0999747,-4.099909557,1.4006,2,0,1,1,0,-1.128781594,-5.3578483,9.330605774,-2.557506551,16.6673016,-3.869751577,Shock et al. (1997) revised with new predicted a1 for cations
+Mn+2,MN+2,Mn(+2),Mn(1),1,-54500,-52724,-17.6,-17.0999747,-4.099909557,1.4006,2,0,1,1,0,-1.128781594,-5.3578483,9.330605774,-2.557506551,16.6673016,-3.869751577,Shock et al. (1997) revised with new predicted a1 for cations
 MnCl+,MNCL+,MnCl(+),Mn(1)Cl(1),0,-86290,-88280,12,6.3,24.62958331,0.3686,1,0,1,1,0,2.920723754,-1.502317498,6.097779734,-2.716894195,23.99690949,1.982446121,Sverjensky et al. (1997) with revised a1 equal to the sum of the ions used to predict new values of V using new correlation in Sverjensky et al. (2014)
 MnO4-,MNO4-,MnO4(-),Mn(1)O(4),0,-106900,-129400,45.7,41.99996854,-1.799658769,0.9368,-1,0,1,0,0,6.89229405,13.7706596,1.682219843,-3.348279068,13.74247747,-3.401190491,Shock et al. (1997) revised with new predicted a1 for ions
 MnO4-2,MNO4-2,MnO4(-2),Mn(1)O(4),0,-119700,-156000,14,27.3997969,-59.30044504,3.0024,-2,0,1,0,0,11.8563775,-5.695410276,0.340150423,-2.543551739,-0.926495461,-15.11410065,Shock et al. (1997) revised with new predicted a1 for ions
