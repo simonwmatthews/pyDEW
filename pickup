@@ -1,0 +1,26 @@
+* pickup file written by eq3nr.3245R110
+*  supported by eqlib.3245R136
+                                                                                
+                                                                                
+endit.
+    uacion= NONE        
+    tempci=   .50000E+03
+     nxmod=  0
+     iopg1=  0               iopg2= -1               iopg3=  0
+     iopg4=  0               iopg5=  1               iopg6=  0
+     iopg7=  0               iopg8=  0               iopg9=  0
+    iopg10=  0
+       kct=  5                 ksq=  6                 kmt=  6
+       kxt=  6                kdim=  6                kprs=  0
+   O                   .557086861197449E+02
+   H                   .921738835868547E+13
+   CL                  .100000000007386E+00
+   FE                  .100000000006656E+00
+   NA                  .100000000000157E+00
+   electr              .179684045420458E-11
+   H2O                H2O                     .174436091209183E+01
+   H+                 H+                     -.553412129232464E+01
+   CL-                CL-                    -.118350130353381E+01
+   FE+2               FE+2                   -.285557802004034E+01
+   NA+                NA+                    -.101279285424476E+01
+   O2                 O2                     -.520255640431908E+02

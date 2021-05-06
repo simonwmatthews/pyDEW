@@ -4,6 +4,7 @@ import importlib
 import numpy as np
 import os
 from thermoengine import model
+import subprocess
 
 def load_coder_modules(working_dir='dew2019_coderfiles'):
     """ Imports previously generated coder modules. This is required for loading
@@ -48,11 +49,22 @@ def DEW_species(working_dir='dew2019_coderfiles',pickle_file='DEW2019.pkl'):
         file.close()
 
     # Load the SWIM model and O2.
-    _db = model.Database()
+    _db = berman_database()
     dew['H2O'] = _db.get_phase('H2O')
     dew['O2'] = _db.get_phase('O2')
 
     return dew
+
+def berman_database():
+    """ Returns the Berman database from thermoengine.
+
+    Returns
+    -------
+    thermoengine database
+        The Berman database.
+    """
+    db = model.Database()
+    return db
 
 
 def get_charge(species):
@@ -177,9 +189,37 @@ def formula_from_ss(mineral,endi):
 
     return formula
 
+def convert_float(string):
+    if len(string[1:].split('-')) > 1:
+        if string[1:].split('-')[0][-1] != 'E':
+            return float(string[0] + string[1:].split('-')[0] + 'E' + ''.join(string[1:].split('-')[1:]))
+    if string[0] == '.':
+        return float('0'+string)
+    elif string[0] == '-':
+        return float('-0'+string[1:])
+    else:
+        return string
+
 class Error(Exception):
     pass
 
 class InputError(Error):
     def __init__(self, message):
         self.message = message
+
+def run_eqpt():
+    cmnds = b'n\n n\n n\n'
+
+    proc = subprocess.Popen("./EQPT",shell=True,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE)
+    proc.communicate(cmnds)
+    proc.terminate()
+
+
+def run_eq3():
+    proc = subprocess.Popen("./EQ3",shell=True,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE)
+    proc.communicate(b'\n')
+    proc.terminate()

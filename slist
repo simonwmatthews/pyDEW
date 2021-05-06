@@ -1,0 +1,269 @@
+
+
+
+
+
+
+ eeee   qqq   pppp   ttttt
+ e     q   q  p   p    t  
+ eeee  q   q  pppp     t  
+ e     q   q  p        t  
+ eeee   qqq   p        t  
+           q              
+
+
+
+ eq6.3245R71   
+  supported by eqlib.3245R136  
+
+
+           no. of elements on the data file =    29
+              the dimensioned limit =   100
+           no. of aqueous species in the master set =    30
+              the dimensioned limit =   200
+
+
+
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+
+
+
+
+ element = O       , atwt =   15.99940
+ element = H       , atwt =    1.00790
+ element = AG      , atwt =  107.86800
+ element = AL      , atwt =   26.98154
+ element = AU      , atwt =  196.96650
+ element = BA      , atwt =  137.33000
+ element = CA      , atwt =   40.08000
+ element = C       , atwt =   12.01100
+ element = SI      , atwt =   28.08550
+ element = CL      , atwt =   35.45300
+ element = S       , atwt =   32.06000
+ element = CD      , atwt =  112.40000
+ element = N       , atwt =   14.00670
+ element = CR      , atwt =   51.99610
+ element = CS      , atwt =  132.90540
+ element = CU      , atwt =   63.54600
+ element = EU      , atwt =  151.96400
+ element = F       , atwt =   18.99840
+ element = FE      , atwt =   55.84700
+ element = P       , atwt =   30.97376
+ element = HG      , atwt =  200.59000
+ element = K       , atwt =   39.09830
+ element = MG      , atwt =   24.30500
+ element = MN      , atwt =   54.93800
+ element = NA      , atwt =   22.98977
+ element = PB      , atwt =  207.20000
+ element = SR      , atwt =   87.62000
+ element = U       , atwt =  238.02900
+ element = ZN      , atwt =   65.38000
+
+
+aqueous species         
+     1  H2O                 H+                  AG+               
+     4  AL+3                AU+                 BA+2              
+     7  CA+2                CO2(AQ)             SIO2(AQ)          
+    10  CL-                 SO4-2               CD+2              
+    13  N2(AQ)              CR+2                CS+               
+    16  CU+                 EU+2                F-                
+    19  FE+2                H3PO4(AQ)           HG+2              
+    22  K+                  MG+2                MN+2              
+    25  NA+                 PB+2                SR+2              
+    28  U+4                 ZN+2                O2                
+    31  ACETATE(AQ)         ACETIC(AQ)          ALO2-             
+    34  ALO2(SIO2)-         CA(HCO3)+           CA(HCOO)+         
+    37  CA(HSIO3)+          CA(OH)+             CACL+             
+    40  CACO3(AQ)           CASO4(AQ)           CN-               
+    43  CO(AQ)              CO3-2               CU+2              
+    46  DIGLYCINE(AQ)       DIKETOPIP(AQ)       ETHANE(AQ)        
+    49  ETHANOL(AQ)         ETHYLENE(AQ)        FE(HCOO)+         
+    52  FE(OH)+             FE+3                FECL+             
+    55  FECL+2              FECL2(AQ)           FECL3(AQ)         
+    58  FECL4-              FEO(AQ)             FORMATE(AQ)       
+    61  FORMIC(AQ)          GLUTAMIC(AQ)        GLYCINE(AQ)       
+    64  H2(AQ)              H2CO3(AQ)           H2PO4-            
+    67  H2S(AQ)             HALO2(AQ)           HCL(AQ)           
+    70  HCO3-               HFEO2-              HG2+2             
+    73  HPO4-2              HS-                 HSIO3-            
+    76  HSO4-               KCL(AQ)             KOH(AQ)           
+    79  KSO4-               METHANE(AQ)         METHANOL(AQ)      
+    82  MG(HCO3)+           MG(HSIO3)+          MGCL+             
+    85  MGCO3(AQ)           MG(OH)+             MGSIO2HCO3+       
+    88  MGSO4(AQ)           NACL(AQ)            NACO3-            
+    91  NAHCO3(AQ)          NAOH(AQ)            NH3(AQ)           
+    94  NH4+                NO3-                O2(AQ)            
+    97  OH-                 PROPANE(AQ)         PROPANOATE-       
+   100  PROPANOL(AQ)        S3-                 SI2O4(AQ)         
+   103  SI3O6(AQ)           SRCL+               UO2+2             
+   106  UREA(AQ)          
+
+
+minerals                
+     1  APATITE             MAGNETITE           CORUNDUM          
+     4  HEMATITE            PERICLASE           LIME              
+     7  BRUCITE             DIASPORE            CALCITE           
+    10  MAGNESITE           ANDALUSITE          KYANITE           
+    13  SILLIMANITE         LAWSONITE           ZOISITE           
+
+ ----- O   mass imbalance =  2.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  4.000000E+00 for the reaction below -----
+
+                        1.00000  FORSTERITE        
+                   +    4.00000  H+                
+
+                               =
+
+                        2.00000  H2O               
+                   +    1.00000  SIO2(AQ)          
+                   +    2.00000  MG+2              
+    16  CLINOZOISITE        FORSTERITE          FAYALITE          
+
+ ----- O   mass imbalance =  2.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  4.000000E+00 for the reaction below -----
+
+                        1.00000  FAYALITE          
+                   +    4.00000  H+                
+
+                               =
+
+                        2.00000  H2O               
+                   +    1.00000  SIO2(AQ)          
+                   +    2.00000  FE+2              
+
+ ----- O   mass imbalance =  4.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  8.000000E+00 for the reaction below -----
+
+                        1.00000  MERWINITE         
+                   +    8.00000  H+                
+
+                               =
+
+                        4.00000  H2O               
+                   +    3.00000  CA+2              
+                   +    2.00000  SIO2(AQ)          
+                   +    1.00000  MG+2              
+    19  MONTICELLITE        MERWINITE           CHRYSOTILE        
+    22  CLINOENSTATIT       ORTHOENSTATIT       PROTOENSTATIT     
+    25  DIOPSIDE            JADEITE             FERROSILITE       
+    28  WOLLASTONITE        TREMOLITE           ANTHOPHYLLITE     
+    31  CORDIERITE          POTASSIUM_FEL       ALBITE            
+
+ ----- O   mass imbalance =  4.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  8.000000E+00 for the reaction below -----
+
+                        1.00000  ANORTHITE         
+                   +    8.00000  H+                
+
+                               =
+
+                        4.00000  H2O               
+                   +    2.00000  AL+3              
+                   +    1.00000  CA+2              
+                   +    2.00000  SIO2(AQ)          
+    34  ANORTHITE           GEHLENITE           KAOLINITE         
+    37  ANTIGORITE          PYROPHYLLITE        TALC              
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  MUSCOVITE         
+                   +   10.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    3.00000  AL+3              
+                   +    3.00000  SIO2(AQ)          
+                   +    1.00000  K+                
+    40  MUSCOVITE           PHLOGOPITE          PARAGONITE        
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  PARAGONITE        
+                   +   10.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    3.00000  AL+3              
+                   +    3.00000  SIO2(AQ)          
+                   +    1.00000  NA+               
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  PREHNITE          
+                   +   10.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    2.00000  AL+3              
+                   +    2.00000  CA+2              
+                   +    3.00000  SIO2(AQ)          
+    43  PREHNITE            CLINOCHLORE         PYROPE            
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  PYROPE            
+                   +   12.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    2.00000  AL+3              
+                   +    3.00000  SIO2(AQ)          
+                   +    3.00000  MG+2              
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  ALMANDINE         
+                   +   12.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    2.00000  AL+3              
+                   +    3.00000  SIO2(AQ)          
+                   +    3.00000  FE+2              
+
+ ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
+
+ ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
+
+                        1.00000  GROSSULAR         
+                   +   12.00000  H+                
+
+                               =
+
+                        6.00000  H2O               
+                   +    2.00000  AL+3              
+                   +    3.00000  CA+2              
+                   +    3.00000  SIO2(AQ)          
+    46  ALMANDINE           GROSSULAR           MEIONITE          
+    49  QUARTZ              COESITE           
+
+
+gases                   
+     1  O2                
+
+
+solid solutions         
+     1  K-FELDSPAR(SS)      PLAGIOCLASE(SS)     ORTHOPYROXENE(SS) 
+     4  OLIVINE(SS)         GARNET(SS)          CLINOPYROXENE(SS) 

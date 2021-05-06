@@ -12,11 +12,15 @@ and compiled separately to this model. See the Jupyter notebooks supplied in the
 """
 
 # Import pyQ3 classes and methods
-import pyQ3.defaultsystem
-import pyQ3.system
+from pyQ3 import defaultsystem
+from pyQ3 import system
+from pyQ3 import fluid
 
 
-class system(pyQ3.system.system):
+class System(system.system):
+    pass
+
+class Fluid(fluid.fluid):
     pass
 
 

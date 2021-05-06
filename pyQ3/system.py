@@ -40,6 +40,7 @@ class system:
                 elements= defaultsystem.elements,
                 basis_species= defaultsystem.basis_species_names,
                 other_species= defaultsystem.other_species_names,
+                dummy_species = [],
                 minerals= defaultsystem.minerals,
                 solid_solutions= defaultsystem.solid_solutions,
                 hydrated_species= defaultsystem.hydrated_species,
@@ -61,6 +62,9 @@ class system:
             part of the basis set. Must include OH-. If the species are in DEW2019,
             the species name as a string may be passed instead. Will use the default
             system, unless specified.
+        dummy_species:  list of dicts
+            For each dummy species provide a dictionary with keys abbrev (str), charge (float),
+            formula (dict).
         minerals:    list
             List of mineral objects. Will use the default system, unless specified. The
             minerals can be pure or solution phases. If solution phases are provided,
@@ -184,56 +188,73 @@ class system:
             self.other_species_names.append(species.abbrev)
             self.species[species.abbrev] = species
 
+        #------
+        # Extract minerals if needed.
+        self.minerals = []
+        if any(isinstance(min,str) for min in minerals):
+            db = core.berman_database()
+        for min in minerals:
+            if isinstance(min,str):
+                try:
+                    _phobj = db.get_phase(min)
+                    _phobj.enable_gibbs_energy_reference_state()
+                    self.minerals.append(_phobj)
+                except:
+                    raise core.InputError(min+' phase string not recognised. Make sure you are using the thermoengine mineral abbreviations.')
+            else:
+                self.minerals.append(min)
+
+        #------
         # Store the other information, which shouldn't need processing
-        self.minerals = minerals
         self.hydrated_species = hydrated_species
         self.solid_solutions = solid_solutions
         self.ion_size = ion_size
+        self.dummy_species = dummy_species
 
         self.n_elements = len(self.elements)
         self.n_basis_species = len(self.basis_species)
 
-        self.valid = True
-        self.error = ''
-        self.validate()
-        if self.valid == False:
-            raise core.InputError(self.error)
+        self._valid = True
+        self._error = ''
+        self._validate()
+        if self._valid == False:
+            raise core.InputError(self._error)
 
         # Set up basis species matrices. The OH matrix is created for using
         # in calculations where H+ molalities are negative.
-        self.basis_species_matrix = self.make_basis_species_matrix()
-        self.basis_species_matrix_OH = self.make_basis_species_matrix(swap_H_OH=True,exclude_gas=True)
-        self.basis_species_matrix_soln = self.make_basis_species_matrix(exclude_gas=True)
+        self._basis_species_matrix = self._make_basis_species_matrix()
+        self._basis_species_matrix_OH = self._make_basis_species_matrix(swap_H_OH=True,exclude_gas=True)
+        self._basis_species_matrix_soln = self._make_basis_species_matrix(exclude_gas=True)
 
-        self.stoichiometry = dict()
+        self._stoichiometry = dict()
         for species in self.other_species + self.minerals:
-            self.find_reaction(species)
+            self._find_reaction(species)
 
-    def validate(self):
+    def _validate(self):
         if self.basis_species_names[0] != 'H2O':
-            self.valid = False
-            self.error += 'H2O must be first basis species. '
+            self._valid = False
+            self._error += 'H2O must be first basis species. '
         if self.basis_species_names[1] != 'H+':
-            self.valid = False
-            self.error += 'H+ must be second basis species. '
+            self._valid = False
+            self._error += 'H+ must be second basis species. '
         if 'OH-' in self.basis_species_names:
-            self.valid = False
-            self.error += 'OH- cannot be a basis species. '
+            self._valid = False
+            self._error += 'OH- cannot be a basis species. '
         if 'O2' not in self.basis_species_names:
-            self.valid = False
-            self.error += 'O2 must be a basis species. '
+            self._valid = False
+            self._error += 'O2 must be a basis species. '
         if self.n_basis_species -1 != self.n_elements:
-            self.valid = False
-            self.error += 'There must be a basis species for each element, plus O2,g. '
+            self._valid = False
+            self._error += 'There must be a basis species for each element, plus O2,g. '
         if 'H' not in self.elements:
-            self.valid = False
-            self.error += 'H must be an element. '
+            self._valid = False
+            self._error += 'H must be an element. '
         if 'O' not in self.elements:
-            self.valid = False
-            self.error += 'O must be an element. '
+            self._valid = False
+            self._error += 'O must be an element. '
 
 
-    def d0_preamble(self,s=''):
+    def _d0_preamble(self,s=''):
         s += 'data0\n'
         s += '   ' + str(len(self.elements))+'   ' + str(len(self.basis_species)) +'\n'
         s += '\n\n\n\n'
@@ -277,7 +298,7 @@ class system:
         return s
 
 
-    def d0_t_p_block(self,T,P,s=''):
+    def _d0_t_p_block(self,T,P,s='',dT=50.0):
         """
         Construct the Temperature and Pressure grid. Puts the same T and P value at all positions.
 
@@ -286,9 +307,11 @@ class system:
         s : str
             The T P block will be added on to the end of the string passed.
         T : float
-            Temperature in degC
+            Temperature in K at which to start.
         P : float
             Pressure in bar
+        dT : float
+            Temperature interval
         """
 
         T = T-273.15
@@ -298,7 +321,7 @@ class system:
         # Characters between periods
         spacing = 9
 
-        temps = np.linspace(T,T+350,8)
+        temps = np.linspace(T,T+dT*7,8)
 
         # Convert Temperature and Pressure to string
         sT = list()
@@ -322,18 +345,37 @@ class system:
 
 
 
-    def d0_h2o_props_block(self,T,P,s=''):
-        dha = obj.AgammaFromT_andP_(T,P)
-        dhb = obj.BgammaFromT_andP_(T,P)
-
-        s_dha = '{0:0.4f}'.format(dha)
-        s_dhb = '{0:0.4f}'.format(dhb/1e8)
+    def _d0_h2o_props_block(self,T,P,s='',dT=50.0):
+        """
+        """
+        s_dha = []
+        s_dhb = []
+        for i in range(8):
+            t = T+i*dT
+            dha = obj.AgammaFromT_andP_(T,P)
+            dhb = obj.BgammaFromT_andP_(T,P)
+            s_dha.append('{0:0.4f}'.format(dha))
+            s_dhb.append('{0:0.4f}'.format(dhb/1e8))
 
         s += 'debye huckel a (adh)\n'
-        s += (' '*(10-len(s_dha.split('.')[0])) + (s_dha + ' '*(10-len(s_dha)))*4 + '\n')*2
+        s += ' '*(10-len(s_dha[0].split('.')[0]))
+        for i in range(4):
+            s += (s_dha[i] + ' '*(10-len(s_dha[i])))
+        s += '\n'
+        s += ' '*(10-len(s_dha[4].split('.')[0]))
+        for i in range(4):
+            s += (s_dha[i+4] + ' '*(10-len(s_dha[i+4])))
+        s += '\n'
 
         s += 'debye huckel b (bdh)\n'
-        s += (' '*(10-len(s_dhb.split('.')[0])) + (s_dhb + ' '*(10-len(s_dhb)))*4 + '\n')*2
+        s += ' '*(10-len(s_dhb[0].split('.')[0]))
+        for i in range(4):
+            s += (s_dhb[i] + ' '*(10-len(s_dhb[i])))
+        s += '\n'
+        s += ' '*(10-len(s_dhb[4].split('.')[0]))
+        for i in range(4):
+            s += (s_dhb[i+4] + ' '*(10-len(s_dhb[i+4])))
+        s += '\n'
 
         s += 'bdot\n'
         s += '         0.0000    0.0000    0.0000    0.0000\n'
@@ -377,11 +419,11 @@ class system:
 
         return s
 
-    def d0_init_aq_species(self,s=''):
+    def _d0_init_aq_species(self,s=''):
         s += 'aqueous species\n'
         return s
 
-    def d0_basis_set(self,species,s=''):
+    def _d0_basis_set(self,species,s=''):
         # Spaces between = and .
         spacing = 4
 
@@ -431,7 +473,7 @@ class system:
 
         return s
 
-    def d0_aqueous_species(self,species,t,p,s=''):
+    def _d0_aqueous_species(self,species,t,p,s='',dT=50.0):
         # distance from = to .
         charge_space = 4
 
@@ -487,7 +529,7 @@ class system:
                 s += sel
                 sel = ''
 
-        stoichiometry = self.stoichiometry[species.abbrev].copy()
+        stoichiometry = self._stoichiometry[species.abbrev].copy()
         extra_h2o_in_rxn = 0
 
         for species_name in list(stoichiometry.keys()):
@@ -522,18 +564,26 @@ class system:
                 s += srx
                 srx = ''
 
-        logKr = self.logK(species,t,p)
+        slogK = []
+        for i in range(8):
+            logKr = self.logK(species, t+dT*i, p)
+            slogK.append('{0:.4f}'.format(logKr))
 
-        slogK = '{0:.4f}'.format(logKr)
-
-        s += (' '*(margin_lk - len(slogK.split('.')[0])) + slogK + (' '*(spacing_lk-len(slogK)+1) + slogK)*3 + '\n')*2
+        s += ' '*(margin_lk - len(slogK[0].split('.')[0])) + slogK[0]
+        for i in range(3):
+            s += (' '*(spacing_lk-len(slogK[i+1])+1) + slogK[i+1])
+        s += '\n'
+        s += ' '*(margin_lk - len(slogK[4].split('.')[0])) + slogK[4]
+        for i in range(3):
+            s += (' '*(spacing_lk-len(slogK[i+5])+1) + slogK[i+5])
+        s += '\n'
 
         s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
         s += '+----------------------------------------------------------------------------\n'
 
         return(s)
 
-    def d0_dummy_species(self,abbrev,charge,formula,s=''):
+    def _d0_dummy_species(self,abbrev,charge,formula,s=''):
         # distance from = to .
         charge_space = 4
 
@@ -581,8 +631,8 @@ class system:
                 sel = ''
 
         ### FIND STOICHIOMETRY- MODIFIED FIND_REACTION FUNCTION
-        matrix = np.zeros([np.shape(self.basis_species_matrix)[0]+1,np.shape(self.basis_species_matrix)[1]+1])
-        matrix[:-1,:-1] = self.basis_species_matrix
+        matrix = np.zeros([np.shape(self._basis_species_matrix)[0]+1,np.shape(self._basis_species_matrix)[1]+1])
+        matrix[:-1,:-1] = self._basis_species_matrix
         for i in range(len(self.elements)):
             if self.elements[i] in list(formula.keys()):
                 matrix[-1,i] = formula[self.elements[i]]
@@ -636,7 +686,7 @@ class system:
 
         return(s)
 
-    def d0_minerals(self,species,t,p,s=''):
+    def _d0_minerals(self,species,t,p,s='',dT=50.0):
         # distance from = to .
         charge_space = 4
 
@@ -660,10 +710,13 @@ class system:
         # If the mineral is a pure phase
         if species.endmember_num == 1:
             formula = chem.get_Berman_formula(species.props['element_comp'][0])
-            formula = formula_to_dict(formula)
+            formula = core.formula_to_dict(formula)
 
-
-            s += species.abbrev + '\n'
+            if len(species.phase_name) > 13:
+                phname = species.phase_name[:13]
+            else:
+                phname = species.phase_name
+            s += phname.upper() + '\n'
             s += '    ENTERED BY=                         DATE=   /  /   \n'
             s += '        SOURCE=                      QUALITY=\n'
             s += '        VOLUME=   10.000 CC/MOL \n'
@@ -684,7 +737,7 @@ class system:
                     s += sel
                     sel = ''
 
-            stoichiometry = self.stoichiometry[species.abbrev].copy()
+            stoichiometry = self._stoichiometry[species.abbrev].copy()
             extra_h2o_in_rxn = 0
 
             for species_name in list(stoichiometry.keys()):
@@ -705,9 +758,11 @@ class system:
             srx = ''
 
             species_in_order = [species.abbrev]
+            species_names_in_order = [species.phase_name.upper()]
             for species_name in list(stoichiometry.keys()):
                 if species_name not in species_in_order:
                     species_in_order.append(species_name)
+                    species_names_in_order.append(species_name)
 
             for i in range(len(stoichiometry)):
                 sStoich = '{0:.3f}'.format(stoichiometry[species_in_order[i]])
@@ -717,17 +772,29 @@ class system:
                     srx += ' '*(el_2 - len(sStoich.split('.')[0]) - len(srx))
                 if i%3 == 2:
                     srx += ' '*(el_3 - len(sStoich.split('.')[0]) - len(srx))
-                srx += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + species_in_order[i]
+                if len(species_names_in_order[i]) > 13:
+                    species_name_to_print = species_names_in_order[i][:13]
+                else:
+                    species_name_to_print = species_names_in_order[i]
+                srx += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + species_name_to_print
                 if i%3 == 2 or i == len(stoichiometry) - 1:
                     srx += '\n'
                     s += srx
                     srx = ''
 
-            logKr = self.logK(species,t,p,mineral=True)
+            slogK = []
+            for i in range(8):
+                logKr = self.logK(species,t+dT*i,p,mineral=True)
+                slogK.append('{0:.4f}'.format(logKr))
 
-            slogK = '{0:.4f}'.format(logKr)
-
-            s += (' '*(margin_lk - len(slogK.split('.')[0])) + slogK + (' '*(spacing_lk-len(slogK)+1) + slogK)*3 + '\n')*2
+            s += ' '*(margin_lk - len(slogK[0].split('.')[0])) + slogK[0]
+            for i in range(3):
+                s += (' '*(spacing_lk-len(slogK[i+1])+1) + slogK[i+1])
+            s += '\n'
+            s += ' '*(margin_lk - len(slogK[4].split('.')[0])) + slogK[4]
+            for i in range(3):
+                s += (' '*(spacing_lk-len(slogK[i+5])+1) + slogK[i+5])
+            s += '\n'
 
             s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
             s += '+----------------------------------------------------------------------------\n'
@@ -767,7 +834,7 @@ class system:
                             s += sel
                             sel = ''
 
-                    stoichiometry = self.stoichiometry[species.endmember_names[ei]].copy()
+                    stoichiometry = self._stoichiometry[species.endmember_names[ei]].copy()
                     extra_h2o_in_rxn = 0
 
                     for species_name in list(stoichiometry.keys()):
@@ -809,11 +876,19 @@ class system:
                             s += srx
                             srx = ''
 
-                    logKr = self.logK(species,t,p,mineral=True,endi=ei)
+                    slogK = []
+                    for i in range(8):
+                        logKr = self.logK(species,t,p,mineral=True,endi=ei)
+                        slogK.append('{0:.4f}'.format(logKr))
 
-                    slogK = '{0:.4f}'.format(logKr)
-
-                    s += (' '*(margin_lk - len(slogK.split('.')[0])) + slogK + (' '*(spacing_lk-len(slogK)+1) + slogK)*3 + '\n')*2
+                    s += ' '*(margin_lk - len(slogK[0].split('.')[0])) + slogK[0]
+                    for i in range(3):
+                        s += ' '*(spacing_lk-len(slogK[i+1])+1) + slogK[i+1]
+                    s += '\n'
+                    s += ' '*(margin_lk - len(slogK[4].split('.')[0])) + slogK[4]
+                    for i in range(3):
+                        s += ' '*(spacing_lk-len(slogK[i+5])+1) + slogK[i+5]
+                    s += '\n'
 
                     s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
                     s += '+----------------------------------------------------------------------------\n'
@@ -821,12 +896,12 @@ class system:
         return(s)
 
 
-    def d0_end_species(self,s=''):
+    def _d0_end_species(self,s=''):
         s += 'endit.\n'
         s += 'minerals \n'
         return s
 
-    def d0_end_minerals(self,s=''):
+    def _d0_end_minerals(self,s=''):
         s += 'endit.\n'
         s += 'gases \n'
         s += 'O2                   X\n'
@@ -844,12 +919,12 @@ class system:
         s += '+----------------------------------------------------------------------------\n'
         return s
 
-    def d0_end_gases(self,s=''):
+    def _d0_end_gases(self,s=''):
         s += 'endit.\n'
         s += 'solid solutions \n'
         return s
 
-    def d0_solid_solution(self,ss,s=''):
+    def _d0_solid_solution(self,ss,s=''):
         ss_name = ss[0]
         ss_endmembers = ss[1]
         s += ss_name + (24-len(ss_name))*' '+str(len(ss_endmembers))+'    0\n'
@@ -865,25 +940,17 @@ class system:
         s += '+----------------------------------------------------------------------\n'
         return s
 
-    def d0_end_solid_solutions(self,s=''):
+    def _d0_end_solid_solutions(self,s=''):
         s += 'endit.\n'
         s += 'stop.'
         return s
 
-    # def d0_final_components(self,s=''):
-    #     s += 'endit.\n'
-    #     s += 'gases \n'
-    #     s += 'endit.\n'
-    #     s += 'solid solutions \n'
-    #     s += 'endit.\n'
-    #     s += 'stop.'
-    #     return s
 
-    def find_reaction(self,species):
+    def _find_reaction(self,species):
         if species.endmember_num == 1:
             formula = core.formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
-            matrix = np.zeros([np.shape(self.basis_species_matrix)[0]+1,np.shape(self.basis_species_matrix)[1]+1])
-            matrix[:-1,:-1] = self.basis_species_matrix
+            matrix = np.zeros([np.shape(self._basis_species_matrix)[0]+1,np.shape(self._basis_species_matrix)[1]+1])
+            matrix[:-1,:-1] = self._basis_species_matrix
             for i in range(len(self.elements)):
                 if self.elements[i] in list(formula.keys()):
                     matrix[-1,i] = formula[self.elements[i]]
@@ -903,19 +970,19 @@ class system:
                 if i == len(soln)-1:
                     stoich[species.abbrev] = soln[i]
 
-            self.stoichiometry[species.abbrev] = stoich
+            self._stoichiometry[species.abbrev] = stoich
         else:
             for i in range(species.endmember_num):
                 endm = np.zeros(species.endmember_num)
                 endm[i] = 1
-                formula = formula_from_ss(species,i)
+                formula = core.formula_from_ss(species,i)
 
-                matrix = np.zeros([np.shape(self.basis_species_matrix)[0]+1,np.shape(self.basis_species_matrix)[1]+1])
-                matrix[:-1,:-1] = self.basis_species_matrix
+                matrix = np.zeros([np.shape(self._basis_species_matrix)[0]+1,np.shape(self._basis_species_matrix)[1]+1])
+                matrix[:-1,:-1] = self._basis_species_matrix
                 for j in range(len(self.elements)):
                     if self.elements[j] in list(formula.keys()):
                         matrix[-1,j] = formula[self.elements[j]]
-                matrix[-1,-2] = get_charge(species)
+                matrix[-1,-2] = core.get_charge(species)
                 matrix[-1,-1] = 1
 
                 b = np.zeros(len(self.basis_species)+1)
@@ -931,11 +998,11 @@ class system:
                     if j == len(soln)-1:
                         stoich[species.endmember_names[i]] = soln[j]
 
-                self.stoichiometry[species.endmember_names[i]] = stoich
+                self._stoichiometry[species.endmember_names[i]] = stoich
 
 
 
-    def make_basis_species_matrix(self,swap_H_OH = False, exclude_gas = False):
+    def _make_basis_species_matrix(self,swap_H_OH = False, exclude_gas = False):
         formulae = list()
 
         if exclude_gas == True:
@@ -961,26 +1028,26 @@ class system:
         return matrix
 
 
-    def make_data0(self,t,p,dummy_species=[]):
-        s = self.d0_preamble()
-        s = self.d0_t_p_block(t,p,s)
-        s = self.d0_h2o_props_block(t,p,s)
-        s = self.d0_init_aq_species(s)
+    def make_data0(self,t,p,dT=50.0):
+        s = self._d0_preamble()
+        s = self._d0_t_p_block(t,p,s,dT=dT)
+        s = self._d0_h2o_props_block(t,p,s,dT=dT)
+        s = self._d0_init_aq_species(s)
         for spec in self.basis_species:
-            s = self.d0_basis_set(spec,s=s)
+            s = self._d0_basis_set(spec,s=s)
         for spec in self.other_species:
-            s = self.d0_aqueous_species(spec,t,p,s=s)
-        for dummy in dummy_species:
-            s = self.d0_dummy_species(dummy['abbrev'],dummy['charge'],
+            s = self._d0_aqueous_species(spec,t,p,s=s,dT=dT)
+        for dummy in self.dummy_species:
+            s = self._d0_dummy_species(dummy['abbrev'],dummy['charge'],
                                       dummy['formula'],s)
-        s = self.d0_end_species(s=s)
+        s = self._d0_end_species(s=s)
         for miner in self.minerals:
-            s = self.d0_minerals(miner,t,p,s=s)
-        s = self.d0_end_minerals(s=s)
-        s = self.d0_end_gases(s=s)
+            s = self._d0_minerals(miner,t,p,s=s,dT=dT)
+        s = self._d0_end_minerals(s=s)
+        s = self._d0_end_gases(s=s)
         for ss in self.solid_solutions.items():
-            s = self.d0_solid_solution(ss,s=s)
-        s = self.d0_end_solid_solutions(s=s)
+            s = self._d0_solid_solution(ss,s=s)
+        s = self._d0_end_solid_solutions(s=s)
 
         file = open('DATA0','w')
         file.write(s)
@@ -989,21 +1056,21 @@ class system:
     def logK(self,species,t,p,mineral=False,endi=0):
         DG = 0.0
         if species.abbrev == 'O2':
-            DG += self.stoichiometry[species.abbrev][species.abbrev]*self.muO2(t,p)
+            DG += self._stoichiometry[species.abbrev][species.abbrev]*self.muO2(t,p)
         elif species.endmember_num == 1:
-            DG += self.stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
+            DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
         else:
             endm = np.zeros(species.endmember_num)
             endm[endi] = 1
-            DG += self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
+            DG += self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
 
         if mineral == True:
             if species.endmember_num == 1:
-                formula = formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
+                formula = core.formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
                 if 'Na' in formula:
-                    DG += -1626*4.184*formula['Na']*self.stoichiometry[species.abbrev][species.abbrev]
+                    DG += -1626*4.184*formula['Na']*self._stoichiometry[species.abbrev][species.abbrev]
                 if 'K' in formula:
-                    DG += -1600*4.184*formula['K']*self.stoichiometry[species.abbrev][species.abbrev]
+                    DG += -1600*4.184*formula['K']*self._stoichiometry[species.abbrev][species.abbrev]
             else:
                 endm = np.zeros(species.endmember_num)
                 endm[endi] = 1
@@ -1014,9 +1081,9 @@ class system:
 #                     DG += formula[el]*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*robieref[el]*298.15
 
                 if 'Na' in formula:
-                    DG += -1626*4.184*formula['Na']*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
+                    DG += -1626*4.184*formula['Na']*self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
                 if 'K' in formula:
-                    DG += -1600*4.184*formula['K']*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
+                    DG += -1600*4.184*formula['K']*self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
 
         if species.endmember_num == 1:
             species_name = species.abbrev
@@ -1024,11 +1091,11 @@ class system:
             species_name = species.endmember_names[endi]
 
         for s in self.basis_species:
-            if s.abbrev in list(self.stoichiometry[species_name].keys()) and s.abbrev != 'H+':
+            if s.abbrev in list(self._stoichiometry[species_name].keys()) and s.abbrev != 'H+':
                 if s.abbrev == 'O2':
-                    DG += self.stoichiometry[species_name][s.abbrev]*self.muO2(t,p)
+                    DG += self._stoichiometry[species_name][s.abbrev]*self.muO2(t,p)
                 else:
-                    DG += self.stoichiometry[species_name][s.abbrev]*s.gibbs_energy(t,p)
+                    DG += self._stoichiometry[species_name][s.abbrev]*s.gibbs_energy(t,p)
         return -DG/(8.3145*t)/2.303
 
     def muO2(self,t, p):

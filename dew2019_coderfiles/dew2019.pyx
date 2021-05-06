@@ -5408,107 +5408,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "PROPANOIC_A_l_AQ_r__dew2019_calc.h":
-    const char *PROPANOIC_A_l_AQ_r__dew2019_identifier();
-    const char *PROPANOIC_A_l_AQ_r__dew2019_name();
-    const char *PROPANOIC_A_l_AQ_r__dew2019_formula();
-    const double PROPANOIC_A_l_AQ_r__dew2019_mw();
-    const double *PROPANOIC_A_l_AQ_r__dew2019_elements();
-    double PROPANOIC_A_l_AQ_r__dew2019_g(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_dgdt(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_dgdp(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_s(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_v(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_cv(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_cp(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_alpha(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_beta(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_K(double t, double p)
-    double PROPANOIC_A_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "PROPANOIC_l_AQ_r__dew2019_calc.h":
+    const char *PROPANOIC_l_AQ_r__dew2019_identifier();
+    const char *PROPANOIC_l_AQ_r__dew2019_name();
+    const char *PROPANOIC_l_AQ_r__dew2019_formula();
+    const double PROPANOIC_l_AQ_r__dew2019_mw();
+    const double *PROPANOIC_l_AQ_r__dew2019_elements();
+    double PROPANOIC_l_AQ_r__dew2019_g(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_s(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_v(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_cv(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_cp(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_beta(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_K(double t, double p)
+    double PROPANOIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_PROPANOIC_A_l_AQ_r__dew2019_identifier():
-    result = <bytes> PROPANOIC_A_l_AQ_r__dew2019_identifier()
+def cy_PROPANOIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> PROPANOIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_PROPANOIC_A_l_AQ_r__dew2019_name():
-    result = <bytes> PROPANOIC_A_l_AQ_r__dew2019_name()
+def cy_PROPANOIC_l_AQ_r__dew2019_name():
+    result = <bytes> PROPANOIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_PROPANOIC_A_l_AQ_r__dew2019_formula():
-    result = <bytes> PROPANOIC_A_l_AQ_r__dew2019_formula()
+def cy_PROPANOIC_l_AQ_r__dew2019_formula():
+    result = <bytes> PROPANOIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_PROPANOIC_A_l_AQ_r__dew2019_mw():
-    result = PROPANOIC_A_l_AQ_r__dew2019_mw()
+def cy_PROPANOIC_l_AQ_r__dew2019_mw():
+    result = PROPANOIC_l_AQ_r__dew2019_mw()
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_elements():
-    cdef const double *e = PROPANOIC_A_l_AQ_r__dew2019_elements()
+def cy_PROPANOIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = PROPANOIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_PROPANOIC_A_l_AQ_r__dew2019_g(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_g(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_s(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_s(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_v(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_v(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_cv(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_cp(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_alpha(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_beta(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_K(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_K(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_PROPANOIC_A_l_AQ_r__dew2019_Kp(double t, double p):
-    result = PROPANOIC_A_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_PROPANOIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = PROPANOIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -8906,107 +8906,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "MN_p_p_dew2019_calc.h":
-    const char *MN_p_p_dew2019_identifier();
-    const char *MN_p_p_dew2019_name();
-    const char *MN_p_p_dew2019_formula();
-    const double MN_p_p_dew2019_mw();
-    const double *MN_p_p_dew2019_elements();
-    double MN_p_p_dew2019_g(double t, double p)
-    double MN_p_p_dew2019_dgdt(double t, double p)
-    double MN_p_p_dew2019_dgdp(double t, double p)
-    double MN_p_p_dew2019_d2gdt2(double t, double p)
-    double MN_p_p_dew2019_d2gdtdp(double t, double p)
-    double MN_p_p_dew2019_d2gdp2(double t, double p)
-    double MN_p_p_dew2019_d3gdt3(double t, double p)
-    double MN_p_p_dew2019_d3gdt2dp(double t, double p)
-    double MN_p_p_dew2019_d3gdtdp2(double t, double p)
-    double MN_p_p_dew2019_d3gdp3(double t, double p)
-    double MN_p_p_dew2019_s(double t, double p)
-    double MN_p_p_dew2019_v(double t, double p)
-    double MN_p_p_dew2019_cv(double t, double p)
-    double MN_p_p_dew2019_cp(double t, double p)
-    double MN_p_p_dew2019_dcpdt(double t, double p)
-    double MN_p_p_dew2019_alpha(double t, double p)
-    double MN_p_p_dew2019_beta(double t, double p)
-    double MN_p_p_dew2019_K(double t, double p)
-    double MN_p_p_dew2019_Kp(double t, double p)
+cdef extern from "MN_p2_dew2019_calc.h":
+    const char *MN_p2_dew2019_identifier();
+    const char *MN_p2_dew2019_name();
+    const char *MN_p2_dew2019_formula();
+    const double MN_p2_dew2019_mw();
+    const double *MN_p2_dew2019_elements();
+    double MN_p2_dew2019_g(double t, double p)
+    double MN_p2_dew2019_dgdt(double t, double p)
+    double MN_p2_dew2019_dgdp(double t, double p)
+    double MN_p2_dew2019_d2gdt2(double t, double p)
+    double MN_p2_dew2019_d2gdtdp(double t, double p)
+    double MN_p2_dew2019_d2gdp2(double t, double p)
+    double MN_p2_dew2019_d3gdt3(double t, double p)
+    double MN_p2_dew2019_d3gdt2dp(double t, double p)
+    double MN_p2_dew2019_d3gdtdp2(double t, double p)
+    double MN_p2_dew2019_d3gdp3(double t, double p)
+    double MN_p2_dew2019_s(double t, double p)
+    double MN_p2_dew2019_v(double t, double p)
+    double MN_p2_dew2019_cv(double t, double p)
+    double MN_p2_dew2019_cp(double t, double p)
+    double MN_p2_dew2019_dcpdt(double t, double p)
+    double MN_p2_dew2019_alpha(double t, double p)
+    double MN_p2_dew2019_beta(double t, double p)
+    double MN_p2_dew2019_K(double t, double p)
+    double MN_p2_dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_MN_p_p_dew2019_identifier():
-    result = <bytes> MN_p_p_dew2019_identifier()
+def cy_MN_p2_dew2019_identifier():
+    result = <bytes> MN_p2_dew2019_identifier()
     return result.decode('UTF-8')
-def cy_MN_p_p_dew2019_name():
-    result = <bytes> MN_p_p_dew2019_name()
+def cy_MN_p2_dew2019_name():
+    result = <bytes> MN_p2_dew2019_name()
     return result.decode('UTF-8')
-def cy_MN_p_p_dew2019_formula():
-    result = <bytes> MN_p_p_dew2019_formula()
+def cy_MN_p2_dew2019_formula():
+    result = <bytes> MN_p2_dew2019_formula()
     return result.decode('UTF-8')
-def cy_MN_p_p_dew2019_mw():
-    result = MN_p_p_dew2019_mw()
+def cy_MN_p2_dew2019_mw():
+    result = MN_p2_dew2019_mw()
     return result
-def cy_MN_p_p_dew2019_elements():
-    cdef const double *e = MN_p_p_dew2019_elements()
+def cy_MN_p2_dew2019_elements():
+    cdef const double *e = MN_p2_dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_MN_p_p_dew2019_g(double t, double p):
-    result = MN_p_p_dew2019_g(<double> t, <double> p)
+def cy_MN_p2_dew2019_g(double t, double p):
+    result = MN_p2_dew2019_g(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_dgdt(double t, double p):
-    result = MN_p_p_dew2019_dgdt(<double> t, <double> p)
+def cy_MN_p2_dew2019_dgdt(double t, double p):
+    result = MN_p2_dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_dgdp(double t, double p):
-    result = MN_p_p_dew2019_dgdp(<double> t, <double> p)
+def cy_MN_p2_dew2019_dgdp(double t, double p):
+    result = MN_p2_dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d2gdt2(double t, double p):
-    result = MN_p_p_dew2019_d2gdt2(<double> t, <double> p)
+def cy_MN_p2_dew2019_d2gdt2(double t, double p):
+    result = MN_p2_dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d2gdtdp(double t, double p):
-    result = MN_p_p_dew2019_d2gdtdp(<double> t, <double> p)
+def cy_MN_p2_dew2019_d2gdtdp(double t, double p):
+    result = MN_p2_dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d2gdp2(double t, double p):
-    result = MN_p_p_dew2019_d2gdp2(<double> t, <double> p)
+def cy_MN_p2_dew2019_d2gdp2(double t, double p):
+    result = MN_p2_dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d3gdt3(double t, double p):
-    result = MN_p_p_dew2019_d3gdt3(<double> t, <double> p)
+def cy_MN_p2_dew2019_d3gdt3(double t, double p):
+    result = MN_p2_dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d3gdt2dp(double t, double p):
-    result = MN_p_p_dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_MN_p2_dew2019_d3gdt2dp(double t, double p):
+    result = MN_p2_dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d3gdtdp2(double t, double p):
-    result = MN_p_p_dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_MN_p2_dew2019_d3gdtdp2(double t, double p):
+    result = MN_p2_dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_d3gdp3(double t, double p):
-    result = MN_p_p_dew2019_d3gdp3(<double> t, <double> p)
+def cy_MN_p2_dew2019_d3gdp3(double t, double p):
+    result = MN_p2_dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_s(double t, double p):
-    result = MN_p_p_dew2019_s(<double> t, <double> p)
+def cy_MN_p2_dew2019_s(double t, double p):
+    result = MN_p2_dew2019_s(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_v(double t, double p):
-    result = MN_p_p_dew2019_v(<double> t, <double> p)
+def cy_MN_p2_dew2019_v(double t, double p):
+    result = MN_p2_dew2019_v(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_cv(double t, double p):
-    result = MN_p_p_dew2019_cv(<double> t, <double> p)
+def cy_MN_p2_dew2019_cv(double t, double p):
+    result = MN_p2_dew2019_cv(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_cp(double t, double p):
-    result = MN_p_p_dew2019_cp(<double> t, <double> p)
+def cy_MN_p2_dew2019_cp(double t, double p):
+    result = MN_p2_dew2019_cp(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_dcpdt(double t, double p):
-    result = MN_p_p_dew2019_dcpdt(<double> t, <double> p)
+def cy_MN_p2_dew2019_dcpdt(double t, double p):
+    result = MN_p2_dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_alpha(double t, double p):
-    result = MN_p_p_dew2019_alpha(<double> t, <double> p)
+def cy_MN_p2_dew2019_alpha(double t, double p):
+    result = MN_p2_dew2019_alpha(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_beta(double t, double p):
-    result = MN_p_p_dew2019_beta(<double> t, <double> p)
+def cy_MN_p2_dew2019_beta(double t, double p):
+    result = MN_p2_dew2019_beta(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_K(double t, double p):
-    result = MN_p_p_dew2019_K(<double> t, <double> p)
+def cy_MN_p2_dew2019_K(double t, double p):
+    result = MN_p2_dew2019_K(<double> t, <double> p)
     return result
-def cy_MN_p_p_dew2019_Kp(double t, double p):
-    result = MN_p_p_dew2019_Kp(<double> t, <double> p)
+def cy_MN_p2_dew2019_Kp(double t, double p):
+    result = MN_p2_dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -10496,107 +10496,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "LACTIC_ACID_l_AQ_r__dew2019_calc.h":
-    const char *LACTIC_ACID_l_AQ_r__dew2019_identifier();
-    const char *LACTIC_ACID_l_AQ_r__dew2019_name();
-    const char *LACTIC_ACID_l_AQ_r__dew2019_formula();
-    const double LACTIC_ACID_l_AQ_r__dew2019_mw();
-    const double *LACTIC_ACID_l_AQ_r__dew2019_elements();
-    double LACTIC_ACID_l_AQ_r__dew2019_g(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_dgdt(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_dgdp(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_s(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_v(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_cv(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_cp(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_alpha(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_beta(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_K(double t, double p)
-    double LACTIC_ACID_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "LACTIC_l_AQ_r__dew2019_calc.h":
+    const char *LACTIC_l_AQ_r__dew2019_identifier();
+    const char *LACTIC_l_AQ_r__dew2019_name();
+    const char *LACTIC_l_AQ_r__dew2019_formula();
+    const double LACTIC_l_AQ_r__dew2019_mw();
+    const double *LACTIC_l_AQ_r__dew2019_elements();
+    double LACTIC_l_AQ_r__dew2019_g(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_s(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_v(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_cv(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_cp(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_beta(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_K(double t, double p)
+    double LACTIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_LACTIC_ACID_l_AQ_r__dew2019_identifier():
-    result = <bytes> LACTIC_ACID_l_AQ_r__dew2019_identifier()
+def cy_LACTIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> LACTIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_LACTIC_ACID_l_AQ_r__dew2019_name():
-    result = <bytes> LACTIC_ACID_l_AQ_r__dew2019_name()
+def cy_LACTIC_l_AQ_r__dew2019_name():
+    result = <bytes> LACTIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_LACTIC_ACID_l_AQ_r__dew2019_formula():
-    result = <bytes> LACTIC_ACID_l_AQ_r__dew2019_formula()
+def cy_LACTIC_l_AQ_r__dew2019_formula():
+    result = <bytes> LACTIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_LACTIC_ACID_l_AQ_r__dew2019_mw():
-    result = LACTIC_ACID_l_AQ_r__dew2019_mw()
+def cy_LACTIC_l_AQ_r__dew2019_mw():
+    result = LACTIC_l_AQ_r__dew2019_mw()
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_elements():
-    cdef const double *e = LACTIC_ACID_l_AQ_r__dew2019_elements()
+def cy_LACTIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = LACTIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_LACTIC_ACID_l_AQ_r__dew2019_g(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_g(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_s(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_s(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_v(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_v(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_cv(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_cp(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_alpha(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_beta(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_K(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_K(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_LACTIC_ACID_l_AQ_r__dew2019_Kp(double t, double p):
-    result = LACTIC_ACID_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_LACTIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = LACTIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -15266,213 +15266,213 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "H_SUCCINATE_l_AQ_r__dew2019_calc.h":
-    const char *H_SUCCINATE_l_AQ_r__dew2019_identifier();
-    const char *H_SUCCINATE_l_AQ_r__dew2019_name();
-    const char *H_SUCCINATE_l_AQ_r__dew2019_formula();
-    const double H_SUCCINATE_l_AQ_r__dew2019_mw();
-    const double *H_SUCCINATE_l_AQ_r__dew2019_elements();
-    double H_SUCCINATE_l_AQ_r__dew2019_g(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_dgdt(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_dgdp(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_s(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_v(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_cv(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_cp(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_alpha(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_beta(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_K(double t, double p)
-    double H_SUCCINATE_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "H_SUCCINA_l_AQ_r__dew2019_calc.h":
+    const char *H_SUCCINA_l_AQ_r__dew2019_identifier();
+    const char *H_SUCCINA_l_AQ_r__dew2019_name();
+    const char *H_SUCCINA_l_AQ_r__dew2019_formula();
+    const double H_SUCCINA_l_AQ_r__dew2019_mw();
+    const double *H_SUCCINA_l_AQ_r__dew2019_elements();
+    double H_SUCCINA_l_AQ_r__dew2019_g(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_dgdt(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_dgdp(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_s(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_v(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_cv(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_cp(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_alpha(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_beta(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_K(double t, double p)
+    double H_SUCCINA_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_H_SUCCINATE_l_AQ_r__dew2019_identifier():
-    result = <bytes> H_SUCCINATE_l_AQ_r__dew2019_identifier()
+def cy_H_SUCCINA_l_AQ_r__dew2019_identifier():
+    result = <bytes> H_SUCCINA_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_H_SUCCINATE_l_AQ_r__dew2019_name():
-    result = <bytes> H_SUCCINATE_l_AQ_r__dew2019_name()
+def cy_H_SUCCINA_l_AQ_r__dew2019_name():
+    result = <bytes> H_SUCCINA_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_H_SUCCINATE_l_AQ_r__dew2019_formula():
-    result = <bytes> H_SUCCINATE_l_AQ_r__dew2019_formula()
+def cy_H_SUCCINA_l_AQ_r__dew2019_formula():
+    result = <bytes> H_SUCCINA_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_H_SUCCINATE_l_AQ_r__dew2019_mw():
-    result = H_SUCCINATE_l_AQ_r__dew2019_mw()
+def cy_H_SUCCINA_l_AQ_r__dew2019_mw():
+    result = H_SUCCINA_l_AQ_r__dew2019_mw()
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_elements():
-    cdef const double *e = H_SUCCINATE_l_AQ_r__dew2019_elements()
+def cy_H_SUCCINA_l_AQ_r__dew2019_elements():
+    cdef const double *e = H_SUCCINA_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_H_SUCCINATE_l_AQ_r__dew2019_g(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_g(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_s(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_s(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_v(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_v(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_cv(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_cv(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_cp(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_cp(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_alpha(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_alpha(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_beta(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_beta(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_K(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_K(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_H_SUCCINATE_l_AQ_r__dew2019_Kp(double t, double p):
-    result = H_SUCCINATE_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_H_SUCCINA_l_AQ_r__dew2019_Kp(double t, double p):
+    result = H_SUCCINA_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "GLYCOLIC_AC_l_AQ_r__dew2019_calc.h":
-    const char *GLYCOLIC_AC_l_AQ_r__dew2019_identifier();
-    const char *GLYCOLIC_AC_l_AQ_r__dew2019_name();
-    const char *GLYCOLIC_AC_l_AQ_r__dew2019_formula();
-    const double GLYCOLIC_AC_l_AQ_r__dew2019_mw();
-    const double *GLYCOLIC_AC_l_AQ_r__dew2019_elements();
-    double GLYCOLIC_AC_l_AQ_r__dew2019_g(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_dgdt(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_dgdp(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_s(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_v(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_cv(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_cp(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_alpha(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_beta(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_K(double t, double p)
-    double GLYCOLIC_AC_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "GLYCOLIC_l_AQ_r__dew2019_calc.h":
+    const char *GLYCOLIC_l_AQ_r__dew2019_identifier();
+    const char *GLYCOLIC_l_AQ_r__dew2019_name();
+    const char *GLYCOLIC_l_AQ_r__dew2019_formula();
+    const double GLYCOLIC_l_AQ_r__dew2019_mw();
+    const double *GLYCOLIC_l_AQ_r__dew2019_elements();
+    double GLYCOLIC_l_AQ_r__dew2019_g(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_s(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_v(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_cv(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_cp(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_beta(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_K(double t, double p)
+    double GLYCOLIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_identifier():
-    result = <bytes> GLYCOLIC_AC_l_AQ_r__dew2019_identifier()
+def cy_GLYCOLIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> GLYCOLIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_name():
-    result = <bytes> GLYCOLIC_AC_l_AQ_r__dew2019_name()
+def cy_GLYCOLIC_l_AQ_r__dew2019_name():
+    result = <bytes> GLYCOLIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_formula():
-    result = <bytes> GLYCOLIC_AC_l_AQ_r__dew2019_formula()
+def cy_GLYCOLIC_l_AQ_r__dew2019_formula():
+    result = <bytes> GLYCOLIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_mw():
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_mw()
+def cy_GLYCOLIC_l_AQ_r__dew2019_mw():
+    result = GLYCOLIC_l_AQ_r__dew2019_mw()
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_elements():
-    cdef const double *e = GLYCOLIC_AC_l_AQ_r__dew2019_elements()
+def cy_GLYCOLIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = GLYCOLIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_g(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_g(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_s(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_s(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_v(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_v(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_cv(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_cp(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_alpha(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_beta(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_K(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_K(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_GLYCOLIC_AC_l_AQ_r__dew2019_Kp(double t, double p):
-    result = GLYCOLIC_AC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_GLYCOLIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = GLYCOLIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -15796,107 +15796,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "GLUTARIC_AC_l_AQ_r__dew2019_calc.h":
-    const char *GLUTARIC_AC_l_AQ_r__dew2019_identifier();
-    const char *GLUTARIC_AC_l_AQ_r__dew2019_name();
-    const char *GLUTARIC_AC_l_AQ_r__dew2019_formula();
-    const double GLUTARIC_AC_l_AQ_r__dew2019_mw();
-    const double *GLUTARIC_AC_l_AQ_r__dew2019_elements();
-    double GLUTARIC_AC_l_AQ_r__dew2019_g(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_dgdt(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_dgdp(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_s(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_v(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_cv(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_cp(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_alpha(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_beta(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_K(double t, double p)
-    double GLUTARIC_AC_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "GLUTARIC_l_AQ_r__dew2019_calc.h":
+    const char *GLUTARIC_l_AQ_r__dew2019_identifier();
+    const char *GLUTARIC_l_AQ_r__dew2019_name();
+    const char *GLUTARIC_l_AQ_r__dew2019_formula();
+    const double GLUTARIC_l_AQ_r__dew2019_mw();
+    const double *GLUTARIC_l_AQ_r__dew2019_elements();
+    double GLUTARIC_l_AQ_r__dew2019_g(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_s(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_v(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_cv(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_cp(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_beta(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_K(double t, double p)
+    double GLUTARIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_identifier():
-    result = <bytes> GLUTARIC_AC_l_AQ_r__dew2019_identifier()
+def cy_GLUTARIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> GLUTARIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_name():
-    result = <bytes> GLUTARIC_AC_l_AQ_r__dew2019_name()
+def cy_GLUTARIC_l_AQ_r__dew2019_name():
+    result = <bytes> GLUTARIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_formula():
-    result = <bytes> GLUTARIC_AC_l_AQ_r__dew2019_formula()
+def cy_GLUTARIC_l_AQ_r__dew2019_formula():
+    result = <bytes> GLUTARIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_mw():
-    result = GLUTARIC_AC_l_AQ_r__dew2019_mw()
+def cy_GLUTARIC_l_AQ_r__dew2019_mw():
+    result = GLUTARIC_l_AQ_r__dew2019_mw()
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_elements():
-    cdef const double *e = GLUTARIC_AC_l_AQ_r__dew2019_elements()
+def cy_GLUTARIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = GLUTARIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_g(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_g(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_s(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_s(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_v(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_v(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_cv(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_cp(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_alpha(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_beta(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_K(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_K(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_GLUTARIC_AC_l_AQ_r__dew2019_Kp(double t, double p):
-    result = GLUTARIC_AC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_GLUTARIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = GLUTARIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -16114,107 +16114,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "GLUTAMIC_AC_l_AQ_r__dew2019_calc.h":
-    const char *GLUTAMIC_AC_l_AQ_r__dew2019_identifier();
-    const char *GLUTAMIC_AC_l_AQ_r__dew2019_name();
-    const char *GLUTAMIC_AC_l_AQ_r__dew2019_formula();
-    const double GLUTAMIC_AC_l_AQ_r__dew2019_mw();
-    const double *GLUTAMIC_AC_l_AQ_r__dew2019_elements();
-    double GLUTAMIC_AC_l_AQ_r__dew2019_g(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_dgdt(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_dgdp(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_s(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_v(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_cv(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_cp(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_alpha(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_beta(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_K(double t, double p)
-    double GLUTAMIC_AC_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "GLUTAMIC_l_AQ_r__dew2019_calc.h":
+    const char *GLUTAMIC_l_AQ_r__dew2019_identifier();
+    const char *GLUTAMIC_l_AQ_r__dew2019_name();
+    const char *GLUTAMIC_l_AQ_r__dew2019_formula();
+    const double GLUTAMIC_l_AQ_r__dew2019_mw();
+    const double *GLUTAMIC_l_AQ_r__dew2019_elements();
+    double GLUTAMIC_l_AQ_r__dew2019_g(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_s(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_v(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_cv(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_cp(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_beta(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_K(double t, double p)
+    double GLUTAMIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_identifier():
-    result = <bytes> GLUTAMIC_AC_l_AQ_r__dew2019_identifier()
+def cy_GLUTAMIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> GLUTAMIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_name():
-    result = <bytes> GLUTAMIC_AC_l_AQ_r__dew2019_name()
+def cy_GLUTAMIC_l_AQ_r__dew2019_name():
+    result = <bytes> GLUTAMIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_formula():
-    result = <bytes> GLUTAMIC_AC_l_AQ_r__dew2019_formula()
+def cy_GLUTAMIC_l_AQ_r__dew2019_formula():
+    result = <bytes> GLUTAMIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_mw():
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_mw()
+def cy_GLUTAMIC_l_AQ_r__dew2019_mw():
+    result = GLUTAMIC_l_AQ_r__dew2019_mw()
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_elements():
-    cdef const double *e = GLUTAMIC_AC_l_AQ_r__dew2019_elements()
+def cy_GLUTAMIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = GLUTAMIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_g(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_g(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_s(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_s(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_v(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_v(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_cv(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_cp(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_alpha(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_beta(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_K(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_K(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_GLUTAMIC_AC_l_AQ_r__dew2019_Kp(double t, double p):
-    result = GLUTAMIC_AC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_GLUTAMIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = GLUTAMIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -16538,107 +16538,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "FORMIC_ACID_l_AQ_r__dew2019_calc.h":
-    const char *FORMIC_ACID_l_AQ_r__dew2019_identifier();
-    const char *FORMIC_ACID_l_AQ_r__dew2019_name();
-    const char *FORMIC_ACID_l_AQ_r__dew2019_formula();
-    const double FORMIC_ACID_l_AQ_r__dew2019_mw();
-    const double *FORMIC_ACID_l_AQ_r__dew2019_elements();
-    double FORMIC_ACID_l_AQ_r__dew2019_g(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_dgdt(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_dgdp(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_s(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_v(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_cv(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_cp(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_alpha(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_beta(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_K(double t, double p)
-    double FORMIC_ACID_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "FORMIC_l_AQ_r__dew2019_calc.h":
+    const char *FORMIC_l_AQ_r__dew2019_identifier();
+    const char *FORMIC_l_AQ_r__dew2019_name();
+    const char *FORMIC_l_AQ_r__dew2019_formula();
+    const double FORMIC_l_AQ_r__dew2019_mw();
+    const double *FORMIC_l_AQ_r__dew2019_elements();
+    double FORMIC_l_AQ_r__dew2019_g(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_s(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_v(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_cv(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_cp(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_beta(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_K(double t, double p)
+    double FORMIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_FORMIC_ACID_l_AQ_r__dew2019_identifier():
-    result = <bytes> FORMIC_ACID_l_AQ_r__dew2019_identifier()
+def cy_FORMIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> FORMIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_FORMIC_ACID_l_AQ_r__dew2019_name():
-    result = <bytes> FORMIC_ACID_l_AQ_r__dew2019_name()
+def cy_FORMIC_l_AQ_r__dew2019_name():
+    result = <bytes> FORMIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_FORMIC_ACID_l_AQ_r__dew2019_formula():
-    result = <bytes> FORMIC_ACID_l_AQ_r__dew2019_formula()
+def cy_FORMIC_l_AQ_r__dew2019_formula():
+    result = <bytes> FORMIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_FORMIC_ACID_l_AQ_r__dew2019_mw():
-    result = FORMIC_ACID_l_AQ_r__dew2019_mw()
+def cy_FORMIC_l_AQ_r__dew2019_mw():
+    result = FORMIC_l_AQ_r__dew2019_mw()
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_elements():
-    cdef const double *e = FORMIC_ACID_l_AQ_r__dew2019_elements()
+def cy_FORMIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = FORMIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_FORMIC_ACID_l_AQ_r__dew2019_g(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_g(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_s(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_s(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_v(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_v(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_cv(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_cp(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_alpha(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_beta(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_K(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_K(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_FORMIC_ACID_l_AQ_r__dew2019_Kp(double t, double p):
-    result = FORMIC_ACID_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_FORMIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = FORMIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -18022,107 +18022,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "FE_l_CH3COO_r_2_l_AQ_r__dew2019_calc.h":
-    const char *FE_l_CH3COO_r_2_l_AQ_r__dew2019_identifier();
-    const char *FE_l_CH3COO_r_2_l_AQ_r__dew2019_name();
-    const char *FE_l_CH3COO_r_2_l_AQ_r__dew2019_formula();
-    const double FE_l_CH3COO_r_2_l_AQ_r__dew2019_mw();
-    const double *FE_l_CH3COO_r_2_l_AQ_r__dew2019_elements();
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_g(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdt(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdp(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_s(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_v(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_cv(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_cp(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_alpha(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_beta(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_K(double t, double p)
-    double FE_l_CH3COO_r_2_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "FE_l_CH3COO_r_2_l_A_dew2019_calc.h":
+    const char *FE_l_CH3COO_r_2_l_A_dew2019_identifier();
+    const char *FE_l_CH3COO_r_2_l_A_dew2019_name();
+    const char *FE_l_CH3COO_r_2_l_A_dew2019_formula();
+    const double FE_l_CH3COO_r_2_l_A_dew2019_mw();
+    const double *FE_l_CH3COO_r_2_l_A_dew2019_elements();
+    double FE_l_CH3COO_r_2_l_A_dew2019_g(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_dgdt(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_dgdp(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d2gdt2(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d2gdtdp(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d2gdp2(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d3gdt3(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d3gdt2dp(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d3gdtdp2(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_d3gdp3(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_s(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_v(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_cv(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_cp(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_dcpdt(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_alpha(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_beta(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_K(double t, double p)
+    double FE_l_CH3COO_r_2_l_A_dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_identifier():
-    result = <bytes> FE_l_CH3COO_r_2_l_AQ_r__dew2019_identifier()
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_identifier():
+    result = <bytes> FE_l_CH3COO_r_2_l_A_dew2019_identifier()
     return result.decode('UTF-8')
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_name():
-    result = <bytes> FE_l_CH3COO_r_2_l_AQ_r__dew2019_name()
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_name():
+    result = <bytes> FE_l_CH3COO_r_2_l_A_dew2019_name()
     return result.decode('UTF-8')
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_formula():
-    result = <bytes> FE_l_CH3COO_r_2_l_AQ_r__dew2019_formula()
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_formula():
+    result = <bytes> FE_l_CH3COO_r_2_l_A_dew2019_formula()
     return result.decode('UTF-8')
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_mw():
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_mw()
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_mw():
+    result = FE_l_CH3COO_r_2_l_A_dew2019_mw()
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_elements():
-    cdef const double *e = FE_l_CH3COO_r_2_l_AQ_r__dew2019_elements()
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_elements():
+    cdef const double *e = FE_l_CH3COO_r_2_l_A_dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_g(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_g(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_g(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_dgdt(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_dgdp(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d2gdt2(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d2gdtdp(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d2gdp2(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d3gdt3(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d3gdt2dp(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d3gdtdp2(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_d3gdp3(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_s(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_s(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_s(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_v(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_v(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_v(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_cv(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_cv(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_cv(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_cp(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_cp(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_cp(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_dcpdt(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_alpha(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_alpha(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_alpha(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_beta(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_beta(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_beta(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_K(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_K(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_K(<double> t, <double> p)
     return result
-def cy_FE_l_CH3COO_r_2_l_AQ_r__dew2019_Kp(double t, double p):
-    result = FE_l_CH3COO_r_2_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_FE_l_CH3COO_r_2_l_A_dew2019_Kp(double t, double p):
+    result = FE_l_CH3COO_r_2_l_A_dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -19082,107 +19082,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "DIKETOPIPER_l_AQ_r__dew2019_calc.h":
-    const char *DIKETOPIPER_l_AQ_r__dew2019_identifier();
-    const char *DIKETOPIPER_l_AQ_r__dew2019_name();
-    const char *DIKETOPIPER_l_AQ_r__dew2019_formula();
-    const double DIKETOPIPER_l_AQ_r__dew2019_mw();
-    const double *DIKETOPIPER_l_AQ_r__dew2019_elements();
-    double DIKETOPIPER_l_AQ_r__dew2019_g(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_dgdt(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_dgdp(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_s(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_v(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_cv(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_cp(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_alpha(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_beta(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_K(double t, double p)
-    double DIKETOPIPER_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "DIKETOPIP_l_AQ_r__dew2019_calc.h":
+    const char *DIKETOPIP_l_AQ_r__dew2019_identifier();
+    const char *DIKETOPIP_l_AQ_r__dew2019_name();
+    const char *DIKETOPIP_l_AQ_r__dew2019_formula();
+    const double DIKETOPIP_l_AQ_r__dew2019_mw();
+    const double *DIKETOPIP_l_AQ_r__dew2019_elements();
+    double DIKETOPIP_l_AQ_r__dew2019_g(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_dgdt(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_dgdp(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_s(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_v(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_cv(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_cp(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_alpha(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_beta(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_K(double t, double p)
+    double DIKETOPIP_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_DIKETOPIPER_l_AQ_r__dew2019_identifier():
-    result = <bytes> DIKETOPIPER_l_AQ_r__dew2019_identifier()
+def cy_DIKETOPIP_l_AQ_r__dew2019_identifier():
+    result = <bytes> DIKETOPIP_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_DIKETOPIPER_l_AQ_r__dew2019_name():
-    result = <bytes> DIKETOPIPER_l_AQ_r__dew2019_name()
+def cy_DIKETOPIP_l_AQ_r__dew2019_name():
+    result = <bytes> DIKETOPIP_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_DIKETOPIPER_l_AQ_r__dew2019_formula():
-    result = <bytes> DIKETOPIPER_l_AQ_r__dew2019_formula()
+def cy_DIKETOPIP_l_AQ_r__dew2019_formula():
+    result = <bytes> DIKETOPIP_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_DIKETOPIPER_l_AQ_r__dew2019_mw():
-    result = DIKETOPIPER_l_AQ_r__dew2019_mw()
+def cy_DIKETOPIP_l_AQ_r__dew2019_mw():
+    result = DIKETOPIP_l_AQ_r__dew2019_mw()
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_elements():
-    cdef const double *e = DIKETOPIPER_l_AQ_r__dew2019_elements()
+def cy_DIKETOPIP_l_AQ_r__dew2019_elements():
+    cdef const double *e = DIKETOPIP_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_DIKETOPIPER_l_AQ_r__dew2019_g(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_g(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_s(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_s(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_v(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_v(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_cv(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_cv(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_cp(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_cp(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_alpha(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_alpha(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_beta(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_beta(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_K(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_K(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_DIKETOPIPER_l_AQ_r__dew2019_Kp(double t, double p):
-    result = DIKETOPIPER_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_DIKETOPIP_l_AQ_r__dew2019_Kp(double t, double p):
+    result = DIKETOPIP_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
@@ -23958,107 +23958,107 @@ import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API
 
 # here we just replicate the function signature from the header
-cdef extern from "ACETICACID_l_AQ_r__dew2019_calc.h":
-    const char *ACETICACID_l_AQ_r__dew2019_identifier();
-    const char *ACETICACID_l_AQ_r__dew2019_name();
-    const char *ACETICACID_l_AQ_r__dew2019_formula();
-    const double ACETICACID_l_AQ_r__dew2019_mw();
-    const double *ACETICACID_l_AQ_r__dew2019_elements();
-    double ACETICACID_l_AQ_r__dew2019_g(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_dgdt(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_dgdp(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d2gdt2(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d2gdtdp(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d2gdp2(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d3gdt3(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_d3gdp3(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_s(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_v(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_cv(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_cp(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_dcpdt(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_alpha(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_beta(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_K(double t, double p)
-    double ACETICACID_l_AQ_r__dew2019_Kp(double t, double p)
+cdef extern from "ACETIC_l_AQ_r__dew2019_calc.h":
+    const char *ACETIC_l_AQ_r__dew2019_identifier();
+    const char *ACETIC_l_AQ_r__dew2019_name();
+    const char *ACETIC_l_AQ_r__dew2019_formula();
+    const double ACETIC_l_AQ_r__dew2019_mw();
+    const double *ACETIC_l_AQ_r__dew2019_elements();
+    double ACETIC_l_AQ_r__dew2019_g(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_dgdt(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_dgdp(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d2gdt2(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d2gdtdp(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d2gdp2(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d3gdt3(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_d3gdp3(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_s(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_v(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_cv(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_cp(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_dcpdt(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_alpha(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_beta(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_K(double t, double p)
+    double ACETIC_l_AQ_r__dew2019_Kp(double t, double p)
 
 # here is the "wrapper" signature
-def cy_ACETICACID_l_AQ_r__dew2019_identifier():
-    result = <bytes> ACETICACID_l_AQ_r__dew2019_identifier()
+def cy_ACETIC_l_AQ_r__dew2019_identifier():
+    result = <bytes> ACETIC_l_AQ_r__dew2019_identifier()
     return result.decode('UTF-8')
-def cy_ACETICACID_l_AQ_r__dew2019_name():
-    result = <bytes> ACETICACID_l_AQ_r__dew2019_name()
+def cy_ACETIC_l_AQ_r__dew2019_name():
+    result = <bytes> ACETIC_l_AQ_r__dew2019_name()
     return result.decode('UTF-8')
-def cy_ACETICACID_l_AQ_r__dew2019_formula():
-    result = <bytes> ACETICACID_l_AQ_r__dew2019_formula()
+def cy_ACETIC_l_AQ_r__dew2019_formula():
+    result = <bytes> ACETIC_l_AQ_r__dew2019_formula()
     return result.decode('UTF-8')
-def cy_ACETICACID_l_AQ_r__dew2019_mw():
-    result = ACETICACID_l_AQ_r__dew2019_mw()
+def cy_ACETIC_l_AQ_r__dew2019_mw():
+    result = ACETIC_l_AQ_r__dew2019_mw()
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_elements():
-    cdef const double *e = ACETICACID_l_AQ_r__dew2019_elements()
+def cy_ACETIC_l_AQ_r__dew2019_elements():
+    cdef const double *e = ACETIC_l_AQ_r__dew2019_elements()
     np_array = np.zeros(106)
     for i in range(0,106):
         np_array[i] = e[i]
     return np_array
-def cy_ACETICACID_l_AQ_r__dew2019_g(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_g(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_g(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_g(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_dgdt(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_dgdt(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_dgdt(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_dgdp(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_dgdp(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_dgdp(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d2gdt2(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d2gdt2(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d2gdt2(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d2gdtdp(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d2gdtdp(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d2gdtdp(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d2gdp2(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d2gdp2(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d2gdp2(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d3gdt3(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d3gdt3(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d3gdt3(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d3gdt2dp(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d3gdt2dp(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d3gdtdp2(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d3gdtdp2(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_d3gdp3(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_d3gdp3(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_d3gdp3(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_s(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_s(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_s(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_s(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_v(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_v(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_v(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_v(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_cv(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_cv(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_cv(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_cv(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_cp(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_cp(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_cp(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_cp(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_dcpdt(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_dcpdt(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_dcpdt(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_alpha(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_alpha(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_alpha(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_alpha(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_beta(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_beta(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_beta(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_beta(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_K(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_K(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_K(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_K(<double> t, <double> p)
     return result
-def cy_ACETICACID_l_AQ_r__dew2019_Kp(double t, double p):
-    result = ACETICACID_l_AQ_r__dew2019_Kp(<double> t, <double> p)
+def cy_ACETIC_l_AQ_r__dew2019_Kp(double t, double p):
+    result = ACETIC_l_AQ_r__dew2019_Kp(<double> t, <double> p)
     return result
 import numpy as np
 cimport numpy as cnp # cimport gives us access to NumPy's C API

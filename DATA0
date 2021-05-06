@@ -1,0 +1,2252 @@
+data0
+   29   30
+
+
+
+
+ELEMENTS, ATOMIC WEIGHTS, OXIDES, AND GRAVIMETRIC FACTORS
+O         15.99940     NONE            0.00000
+H          1.00790     H2O             8.93645
+AG       107.86800     AG2O            1.07416
+AL        26.98154     AL2O3           1.88947
+AU       196.96650     AU              1.00000
+BA       137.33000     BAO             1.11649
+CA        40.08000     CAO             1.39919
+C         12.01100     CO2             3.66409
+SI        28.08550     SIO2            2.13931
+CL        35.45300     HCL             1.02843
+S         32.06000     H2S             1.06288
+CD       112.40000     CDO             1.00000
+N         14.00670     NH3             1.21589
+CR        51.99610     CR2O3           1.46156
+CS       132.90540     CS2O            1.06019
+CU        63.54600     CU2O            1.12590
+EU       151.96400     EU2O3           2.31585
+F         18.99840     HF              1.05305
+FE        55.84700     FEO             1.28649
+P         30.97376     P2O5            2.29137
+HG       200.59000     HGO             1.07971
+K         39.09830     K2O             1.20459
+MG        24.30500     MGO             1.65809
+MN        54.93800     MNO             1.29123
+NA        22.98977     NA2O            1.34797
+PB       207.20000     PBO             1.07723
+SR        87.62000     SRO             1.18260
+U        238.02900     U3O8            1.17925
+ZN        65.38000     ZNO             1.24476
+temperatures
+       499.0000  500.0000  501.0000  502.0000  
+       503.0000  504.0000  505.0000  506.0000  
+pressures
+     10000.000 10000.000 10000.000 10000.000
+     10000.000 10000.000 10000.000 10000.000
+debye huckel a (adh)
+         0.7195    0.7195    0.7195    0.7195    
+         0.7195    0.7195    0.7195    0.7195    
+debye huckel b (bdh)
+         0.3697    0.3697    0.3697    0.3697    
+         0.3697    0.3697    0.3697    0.3697    
+bdot
+         0.0000    0.0000    0.0000    0.0000
+         0.0000    0.0000    0.0000    0.0000
+c co2 1
+       0.        0.        0.        0.      
+       0.        0.        0.        0.      
+c co2 2
+       0.        0.        0.        0.      
+       0.        0.        0.        0.      
+c co2 3
+       0.        0.        0.        0.      
+       0.        0.        0.        0.      
+c co2 4
+       0.        0.        0.        0.
+       0.        0.        0.        0.
+c h2o 1
+       0.        0.        0.        0.
+       0.        0.        0.        0.
+c h2o 2
+       0.        0.        0.        0.
+       0.        0.        0.        0.
+c h2o 3
+       0.        0.        0.        0.
+       0.        0.        0.        0.
+c h2o 4
+       0.        0.        0.        0.
+       0.        0.        0.        0.
+log k for eh reaction
+         0.0000    0.0000    0.0000    0.0000
+         0.0000    0.0000    0.0000    0.0000
+log k for o2 gas solubility
+         0.0000    0.0000    0.0000    0.0000
+         0.0000    0.0000    0.0000    0.0000
+log k for h2 gas solubility
+         0.0000    0.0000    0.0000    0.0000
+         0.0000    0.0000    0.0000    0.0000
+log k for n2 gas solubility
+         0.0000    0.0000    0.0000    0.0000
+         0.0000    0.0000    0.0000    0.0000
+aqueous species
+H2O
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   0.0 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       2.000 H               1.000 O
++----------------------------------------------------------------------------
+H+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 H
++----------------------------------------------------------------------------
+AG+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 AG
++----------------------------------------------------------------------------
+AL+3
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   3.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 AL
++----------------------------------------------------------------------------
+AU+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 AU
++----------------------------------------------------------------------------
+BA+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 BA
++----------------------------------------------------------------------------
+CA+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CA
++----------------------------------------------------------------------------
+CO2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 C               2.000 O
++----------------------------------------------------------------------------
+SIO2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 SI              4.000 H
++----------------------------------------------------------------------------
+CL-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=  -1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CL
++----------------------------------------------------------------------------
+SO4-2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=  -2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       4.000 O               1.000 S
++----------------------------------------------------------------------------
+CD+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CD
++----------------------------------------------------------------------------
+N2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       2.000 N
++----------------------------------------------------------------------------
+CR+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CR
++----------------------------------------------------------------------------
+CS+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CS
++----------------------------------------------------------------------------
+CU+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CU
++----------------------------------------------------------------------------
+EU+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 EU
++----------------------------------------------------------------------------
+F-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=  -1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 F
++----------------------------------------------------------------------------
+FE+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 FE
++----------------------------------------------------------------------------
+H3PO4(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       3.000 H               4.000 O               1.000 P
++----------------------------------------------------------------------------
+HG+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 HG
++----------------------------------------------------------------------------
+K+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 K
++----------------------------------------------------------------------------
+MG+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 MG
++----------------------------------------------------------------------------
+MN+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 MN
++----------------------------------------------------------------------------
+NA+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   1.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 NA
++----------------------------------------------------------------------------
+PB+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 PB
++----------------------------------------------------------------------------
+SR+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 SR
++----------------------------------------------------------------------------
+U+4
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   4.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 U
++----------------------------------------------------------------------------
+ZN+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   2.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 ZN
++----------------------------------------------------------------------------
+O2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY= 
+        CHARGE=   0.0           TITR. FACTOR=   0.0 EQ/MOL
+      ION SIZE=   0.0 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       2.000 O
++----------------------------------------------------------------------------
+ACETATE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       3.000 H               2.000 C               2.000 O
+     4 SPECIES IN REACTION=
+      -1.000 ACETATE(AQ)     1.500 H2O             2.000 CO2(AQ)
+      -1.750 O2
+        49.3204   49.2678   49.2154   49.1631
+        49.1110   49.0591   49.0073   48.9557
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ACETIC(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 H               2.000 C               2.000 O
+     4 SPECIES IN REACTION=
+      -1.000 ACETIC(AQ)      2.000 H2O             2.000 CO2(AQ)
+      -2.000 O2
+        50.8692   50.8020   50.7351   50.6683
+        50.6018   50.5354   50.4692   50.4032
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ALO2-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 AL              4.000 H
+     4 SPECIES IN REACTION=
+      -1.000 ALO2-           4.000 H2O            -4.000 H+
+       1.000 AL+3
+         5.5838    5.5703    5.5567    5.5432
+         5.5298    5.5163    5.5029    5.4896
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ALO2(SIO2)-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       7.000 O               1.000 AL              1.000 SI
+       6.000 H
+     5 SPECIES IN REACTION=
+      -1.000 ALO2(SIO2)-     3.000 H2O            -4.000 H+
+       1.000 AL+3            1.000 SIO2(AQ)
+         3.4077    3.3954    3.3832    3.3711
+         3.3589    3.3468    3.3348    3.3227
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CA(HCO3)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               3.000 O
+       1.000 CA
+     5 SPECIES IN REACTION=
+      -1.000 CA(HCO3)+       1.000 H2O            -1.000 H+
+       1.000 CA+2            1.000 CO2(AQ)
+         3.3739    3.3758    3.3777    3.3796
+         3.3815    3.3834    3.3853    3.3872
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CA(HCOO)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               2.000 O
+       1.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 CA(HCOO)+       1.000 H2O            -1.000 H+
+       1.000 CA+2            1.000 CO2(AQ)        -0.500 O2
+        15.8910   15.8697   15.8484   15.8272
+        15.8060   15.7849   15.7639   15.7429
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CA(HSIO3)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       3.000 H               4.000 O               1.000 SI
+       1.000 CA
+     5 SPECIES IN REACTION=
+      -1.000 CA(HSIO3)+     -0.000 H2O            -1.000 H+
+       1.000 CA+2            1.000 SIO2(AQ)
+         2.0393    2.0312    2.0231    2.0150
+         2.0070    1.9989    1.9909    1.9829
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CA(OH)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O               1.000 CA
+     4 SPECIES IN REACTION=
+      -1.000 CA(OH)+         1.000 H2O            -1.000 H+
+       1.000 CA+2
+         5.0833    5.0781    5.0729    5.0677
+         5.0625    5.0573    5.0522    5.0470
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CACL+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 CL              1.000 CA
+     3 SPECIES IN REACTION=
+      -1.000 CACL+           1.000 CA+2            1.000 CL-
+        -1.9559   -1.9622   -1.9685   -1.9747
+        -1.9810   -1.9873   -1.9936   -1.9998
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CACO3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O               1.000 CA
+     5 SPECIES IN REACTION=
+      -1.000 CACO3(AQ)       1.000 H2O            -2.000 H+
+       1.000 CA+2            1.000 CO2(AQ)
+        10.4456   10.4496   10.4537   10.4578
+        10.4618   10.4659   10.4700   10.4741
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CASO4(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 S               1.000 CA
+     3 SPECIES IN REACTION=
+      -1.000 CASO4(AQ)       1.000 CA+2            1.000 SO4-2
+        -3.0836   -3.0844   -3.0852   -3.0859
+        -3.0867   -3.0875   -3.0883   -3.0892
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CN-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 C               1.000 N
+     6 SPECIES IN REACTION=
+      -1.000 CN-             0.500 H2O            -1.000 H+
+       1.000 CO2(AQ)         0.500 N2(AQ)         -1.250 O2
+        42.8107   42.7633   42.7160   42.6690
+        42.6220   42.5752   42.5286   42.4821
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CO(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 C               1.000 O
+     3 SPECIES IN REACTION=
+      -1.000 CO(AQ)          1.000 CO2(AQ)        -0.500 O2
+        14.5446   14.5174   14.4903   14.4632
+        14.4362   14.4092   14.3824   14.3556
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CO3-2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O
+     4 SPECIES IN REACTION=
+      -1.000 CO3-2           1.000 H2O            -2.000 H+
+       1.000 CO2(AQ)
+        16.0586   16.0708   16.0831   16.0953
+        16.1075   16.1197   16.1320   16.1442
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CU+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 CU
+     5 SPECIES IN REACTION=
+      -1.000 CU+2           -0.500 H2O             1.000 H+
+       1.000 CU+             0.250 O2
+        -2.6366   -2.6230   -2.6094   -2.5958
+        -2.5823   -2.5688   -2.5553   -2.5419
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+DIGLYCINE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       8.000 H               4.000 C               2.000 N
+       3.000 O
+     5 SPECIES IN REACTION=
+      -1.000 DIGLYCINE(AQ)   4.000 H2O             4.000 CO2(AQ)
+       1.000 N2(AQ)         -4.500 O2
+       123.8010  123.6634  123.5262  123.3894
+       123.2530  123.1170  122.9814  122.8462
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+DIKETOPIP(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       6.000 H               4.000 C               2.000 N
+       2.000 O
+     5 SPECIES IN REACTION=
+      -1.000 DIKETOPIP(AQ)   3.000 H2O             4.000 CO2(AQ)
+       1.000 N2(AQ)         -4.500 O2
+       125.0301  124.8931  124.7564  124.6202
+       124.4844  124.3490  124.2141  124.0795
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ETHANE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       6.000 H               2.000 C
+     5 SPECIES IN REACTION=
+      -1.000 ETHANE(AQ)      3.000 H2O            -0.000 H+
+       2.000 CO2(AQ)        -3.500 O2
+        84.8116   84.6852   84.5592   84.4335
+        84.3082   84.1832   84.0585   83.9342
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ETHANOL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       6.000 H               2.000 C               1.000 O
+     4 SPECIES IN REACTION=
+      -1.000 ETHANOL(AQ)     3.000 H2O             2.000 CO2(AQ)
+      -3.000 O2
+        75.7671   75.6577   75.5486   75.4398
+        75.3313   75.2231   75.1152   75.0076
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ETHYLENE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       4.000 H               2.000 C
+     4 SPECIES IN REACTION=
+      -1.000 ETHYLENE(AQ)    2.000 H2O             2.000 CO2(AQ)
+      -3.000 O2
+        77.2899   77.1759   77.0621   76.9487
+        76.8356   76.7228   76.6104   76.4982
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FE(HCOO)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               2.000 O
+       1.000 FE
+     6 SPECIES IN REACTION=
+      -1.000 FE(HCOO)+       1.000 H2O            -1.000 H+
+       1.000 CO2(AQ)         1.000 FE+2           -0.500 O2
+        10.2001   10.1782   10.1564   10.1346
+        10.1129   10.0913   10.0697   10.0482
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FE(OH)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O               1.000 FE
+     4 SPECIES IN REACTION=
+      -1.000 FE(OH)+         1.000 H2O            -1.000 H+
+       1.000 FE+2
+         4.1814    4.1772    4.1730    4.1687
+         4.1645    4.1603    4.1562    4.1520
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FE+3
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   3.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       1.000 FE
+     5 SPECIES IN REACTION=
+      -1.000 FE+3           -0.500 H2O             1.000 H+
+       1.000 FE+2            0.250 O2
+         1.7802    1.7895    1.7988    1.8081
+         1.8173    1.8265    1.8357    1.8449
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FECL+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 CL              1.000 FE
+     3 SPECIES IN REACTION=
+      -1.000 FECL+           1.000 CL-             1.000 FE+2
+        -1.6401   -1.6456   -1.6512   -1.6568
+        -1.6623   -1.6679   -1.6735   -1.6790
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FECL+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 CL              1.000 FE
+     6 SPECIES IN REACTION=
+      -1.000 FECL+2         -0.500 H2O             1.000 H+
+       1.000 CL-             1.000 FE+2            0.250 O2
+        -3.1241   -3.1208   -3.1176   -3.1144
+        -3.1112   -3.1080   -3.1048   -3.1017
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FECL2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       2.000 CL              1.000 FE
+     3 SPECIES IN REACTION=
+      -1.000 FECL2(AQ)       2.000 CL-             1.000 FE+2
+        -4.4088   -4.4255   -4.4422   -4.4588
+        -4.4755   -4.4921   -4.5087   -4.5253
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FECL3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       3.000 CL              1.000 FE
+     6 SPECIES IN REACTION=
+      -1.000 FECL3(AQ)      -0.500 H2O             1.000 H+
+       3.000 CL-             1.000 FE+2            0.250 O2
+        -3.6632   -3.6640   -3.6649   -3.6657
+        -3.6666   -3.6676   -3.6685   -3.6695
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FECL4-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       4.000 CL              1.000 FE
+     6 SPECIES IN REACTION=
+      -1.000 FECL4-         -0.500 H2O             1.000 H+
+       4.000 CL-             1.000 FE+2            0.250 O2
+         0.0609    0.0642    0.0676    0.0709
+         0.0742    0.0775    0.0807    0.0840
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FEO(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       2.000 O               1.000 FE              2.000 H
+     4 SPECIES IN REACTION=
+      -1.000 FEO(AQ)         2.000 H2O            -2.000 H+
+       1.000 FE+2
+         9.4878    9.4799    9.4721    9.4643
+         9.4565    9.4487    9.4409    9.4332
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FORMATE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               2.000 O
+     4 SPECIES IN REACTION=
+      -1.000 FORMATE(AQ)     0.500 H2O             1.000 CO2(AQ)
+      -0.250 O2
+        12.2681   12.2631   12.2581   12.2531
+        12.2482   12.2432   12.2384   12.2335
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FORMIC(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       2.000 H               1.000 C               2.000 O
+     4 SPECIES IN REACTION=
+      -1.000 FORMIC(AQ)      1.000 H2O             1.000 CO2(AQ)
+      -0.500 O2
+        15.6279   15.6099   15.5919   15.5741
+        15.5562   15.5385   15.5207   15.5031
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+GLUTAMIC(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       9.000 H               5.000 C               1.000 N
+       4.000 O
+     5 SPECIES IN REACTION=
+      -1.000 GLUTAMIC(AQ)    4.500 H2O             5.000 CO2(AQ)
+       0.500 N2(AQ)         -5.250 O2
+       142.3262  142.1649  142.0040  141.8437
+       141.6838  141.5244  141.3655  141.2070
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+GLYCINE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       5.000 H               2.000 C               1.000 N
+       2.000 O
+     5 SPECIES IN REACTION=
+      -1.000 GLYCINE(AQ)     2.500 H2O             2.000 CO2(AQ)
+       0.500 N2(AQ)         -2.250 O2
+        62.0463   61.9799   61.9136   61.8476
+        61.7818   61.7162   61.6508   61.5856
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+H2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       2.000 H
+     3 SPECIES IN REACTION=
+      -1.000 H2(AQ)          1.000 H2O            -0.500 O2
+        13.3779   13.3491   13.3203   13.2917
+        13.2631   13.2345   13.2061   13.1777
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+H2CO3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       2.000 H               1.000 C               3.000 O
+     3 SPECIES IN REACTION=
+      -1.000 H2CO3(AQ)       1.000 H2O             1.000 CO2(AQ)
+         0.3598    0.3582    0.3565    0.3549
+         0.3532    0.3515    0.3499    0.3482
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+H2PO4-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       2.000 H               4.000 O               1.000 P
+     3 SPECIES IN REACTION=
+      -1.000 H2PO4-         -1.000 H+              1.000 H3PO4(AQ)
+         2.8002    2.8045    2.8088    2.8130
+         2.8173    2.8215    2.8258    2.8301
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+H2S(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       2.000 H               1.000 S
+     4 SPECIES IN REACTION=
+      -1.000 H2S(AQ)         2.000 H+              1.000 SO4-2
+      -2.000 O2
+        27.9693   27.8807   27.7923   27.7041
+        27.6161   27.5282   27.4406   27.3531
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HALO2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       3.000 H               3.000 O               1.000 AL
+     4 SPECIES IN REACTION=
+      -1.000 HALO2(AQ)       3.000 H2O            -3.000 H+
+       1.000 AL+3
+         0.9410    0.9254    0.9098    0.8942
+         0.8787    0.8632    0.8477    0.8322
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HCL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 H               1.000 CL
+     3 SPECIES IN REACTION=
+      -1.000 HCL(AQ)         1.000 H+              1.000 CL-
+        -1.2603   -1.2670   -1.2737   -1.2805
+        -1.2872   -1.2939   -1.3006   -1.3074
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HCO3-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               3.000 O
+     4 SPECIES IN REACTION=
+      -1.000 HCO3-           1.000 H2O            -1.000 H+
+       1.000 CO2(AQ)
+         7.3917    7.4015    7.4112    7.4210
+         7.4307    7.4405    7.4502    7.4599
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HFEO2-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       3.000 H               3.000 O               1.000 FE
+     4 SPECIES IN REACTION=
+      -1.000 HFEO2-          3.000 H2O            -3.000 H+
+       1.000 FE+2
+        15.1312   15.1199   15.1086   15.0973
+        15.0860   15.0748   15.0637   15.0525
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HG2+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       2.000 HG
+     5 SPECIES IN REACTION=
+      -1.000 HG2+2           1.000 H2O            -2.000 H+
+       2.000 HG+2           -0.500 O2
+         5.5162    5.5104    5.5047    5.4990
+         5.4932    5.4875    5.4818    5.4762
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HPO4-2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               4.000 O               1.000 P
+     3 SPECIES IN REACTION=
+      -1.000 HPO4-2         -2.000 H+              1.000 H3PO4(AQ)
+         9.5483    9.5584    9.5685    9.5786
+         9.5887    9.5987    9.6088    9.6189
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HS-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 H               1.000 S
+     4 SPECIES IN REACTION=
+      -1.000 HS-             1.000 H+              1.000 SO4-2
+      -2.000 O2
+        34.1891   34.1057   34.0225   33.9395
+        33.8567   33.7741   33.6917   33.6095
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HSIO3-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       3.000 H               4.000 O               1.000 SI
+     4 SPECIES IN REACTION=
+      -1.000 HSIO3-          0.000 H2O            -1.000 H+
+       1.000 SIO2(AQ)
+         7.2806    7.2824    7.2842    7.2859
+         7.2877    7.2895    7.2912    7.2930
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HSO4-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               4.000 O               1.000 S
+     3 SPECIES IN REACTION=
+      -1.000 HSO4-           1.000 H+              1.000 SO4-2
+        -5.7295   -5.7379   -5.7464   -5.7548
+        -5.7633   -5.7717   -5.7801   -5.7886
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+KCL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 CL              1.000 K
+     3 SPECIES IN REACTION=
+      -1.000 KCL(AQ)         1.000 CL-             1.000 K+
+         0.2089    0.2068    0.2047    0.2026
+         0.2005    0.1984    0.1963    0.1942
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+KOH(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O               1.000 K
+     4 SPECIES IN REACTION=
+      -1.000 KOH(AQ)         1.000 H2O            -1.000 H+
+       1.000 K+
+         7.4081    7.4043    7.4005    7.3967
+         7.3929    7.3891    7.3854    7.3817
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+KSO4-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 S               1.000 K
+     4 SPECIES IN REACTION=
+      -1.000 KSO4-          -0.000 H+              1.000 SO4-2
+       1.000 K+
+        -0.6638   -0.6665   -0.6693   -0.6720
+        -0.6747   -0.6775   -0.6802   -0.6829
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+METHANE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       4.000 H               1.000 C
+     4 SPECIES IN REACTION=
+      -1.000 METHANE(AQ)     2.000 H2O             1.000 CO2(AQ)
+      -2.000 O2
+        46.7007   46.6262   46.5520   46.4779
+        46.4041   46.3304   46.2569   46.1837
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+METHANOL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 H               1.000 C               1.000 O
+     4 SPECIES IN REACTION=
+      -1.000 METHANOL(AQ)    2.000 H2O             1.000 CO2(AQ)
+      -1.500 O2
+        40.0050   39.9467   39.8885   39.8305
+        39.7727   39.7150   39.6575   39.6001
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MG(HCO3)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               3.000 O
+       1.000 MG
+     5 SPECIES IN REACTION=
+      -1.000 MG(HCO3)+       1.000 H2O            -1.000 H+
+       1.000 CO2(AQ)         1.000 MG+2
+         4.9421    4.9457    4.9493    4.9530
+         4.9566    4.9602    4.9638    4.9674
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MG(HSIO3)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       3.000 H               4.000 O               1.000 MG
+       1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 MG(HSIO3)+     -0.000 H2O            -1.000 H+
+       1.000 SIO2(AQ)        1.000 MG+2
+         5.0587    5.0604    5.0620    5.0637
+         5.0653    5.0670    5.0687    5.0703
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MGCL+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 MG              1.000 CL
+     3 SPECIES IN REACTION=
+      -1.000 MGCL+           1.000 CL-             1.000 MG+2
+        -1.5634   -1.5683   -1.5733   -1.5782
+        -1.5832   -1.5881   -1.5931   -1.5980
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MGCO3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O               1.000 MG
+     5 SPECIES IN REACTION=
+      -1.000 MGCO3(AQ)       1.000 H2O            -2.000 H+
+       1.000 CO2(AQ)         1.000 MG+2
+        14.6816   14.6933   14.7049   14.7166
+        14.7282   14.7399   14.7515   14.7631
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MG(OH)+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O               1.000 MG
+     4 SPECIES IN REACTION=
+      -1.000 MG(OH)+         1.000 H2O            -1.000 H+
+       1.000 MG+2
+         4.1288    4.1215    4.1141    4.1068
+         4.0995    4.0922    4.0850    4.0777
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MGSIO2HCO3+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     5 CHEMICAL ELEMENTS=
+       3.000 H               1.000 C               6.000 O
+       1.000 MG              1.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 MGSIO2HCO3+     0.000 H2O            -1.000 H+
+       1.000 CO2(AQ)         1.000 SIO2(AQ)        1.000 MG+2
+        -1.0614   -1.0590   -1.0566   -1.0542
+        -1.0518   -1.0494   -1.0470   -1.0446
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MGSO4(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 MG              1.000 S
+     3 SPECIES IN REACTION=
+      -1.000 MGSO4(AQ)       1.000 SO4-2           1.000 MG+2
+        -4.4406   -4.4489   -4.4572   -4.4655
+        -4.4738   -4.4821   -4.4903   -4.4986
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NACL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 NA              1.000 CL
+     3 SPECIES IN REACTION=
+      -1.000 NACL(AQ)        1.000 CL-             1.000 NA+
+         0.1509    0.1487    0.1465    0.1444
+         0.1422    0.1400    0.1378    0.1356
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NACO3-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O               1.000 NA
+     5 SPECIES IN REACTION=
+      -1.000 NACO3-          1.000 H2O            -2.000 H+
+       1.000 CO2(AQ)         1.000 NA+
+        15.0964   15.1067   15.1169   15.1272
+        15.1375   15.1477   15.1580   15.1683
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NAHCO3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       1.000 H               1.000 C               3.000 O
+       1.000 NA
+     5 SPECIES IN REACTION=
+      -1.000 NAHCO3(AQ)      1.000 H2O            -1.000 H+
+       1.000 CO2(AQ)         1.000 NA+
+         6.1669    6.1718    6.1767    6.1816
+         6.1865    6.1914    6.1963    6.2012
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NAOH(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O               1.000 NA
+     4 SPECIES IN REACTION=
+      -1.000 NAOH(AQ)        1.000 H2O            -1.000 H+
+       1.000 NA+
+         7.6144    7.6103    7.6062    7.6021
+         7.5980    7.5939    7.5898    7.5858
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NH3(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       3.000 H               1.000 N
+     4 SPECIES IN REACTION=
+      -1.000 NH3(AQ)         1.500 H2O             0.500 N2(AQ)
+      -0.750 O2
+        18.4672   18.4409   18.4147   18.3885
+        18.3625   18.3365   18.3106   18.2847
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NH4+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       4.000 H               1.000 N
+     5 SPECIES IN REACTION=
+      -1.000 NH4+            1.500 H2O             1.000 H+
+       0.500 N2(AQ)         -0.750 O2
+        14.4212   14.4001   14.3790   14.3579
+        14.3369   14.3160   14.2952   14.2744
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+NO3-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 N               3.000 O
+     5 SPECIES IN REACTION=
+      -1.000 NO3-            0.500 H2O            -1.000 H+
+       0.500 N2(AQ)          1.250 O2
+         8.7024    8.7138    8.7253    8.7367
+         8.7481    8.7594    8.7708    8.7822
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+O2(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       2.000 O
+     2 SPECIES IN REACTION=
+      -1.000 O2(AQ)          1.000 O2
+         3.7149    3.7078    3.7008    3.6938
+         3.6868    3.6798    3.6728    3.6659
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+OH-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 H               1.000 O
+     3 SPECIES IN REACTION=
+      -1.000 OH-             1.000 H2O            -1.000 H+
+         7.9936    7.9925    7.9913    7.9902
+         7.9891    7.9880    7.9870    7.9859
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PROPANE(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       8.000 H               3.000 C
+     4 SPECIES IN REACTION=
+      -1.000 PROPANE(AQ)     4.000 H2O             3.000 CO2(AQ)
+      -5.000 O2
+       122.3892  122.2120  122.0352  121.8590
+       121.6832  121.5079  121.3331  121.1587
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PROPANOATE-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       5.000 H               3.000 C               2.000 O
+     5 SPECIES IN REACTION=
+      -1.000 PROPANOATE-     3.000 H2O            -1.000 H+
+       3.000 CO2(AQ)        -3.500 O2
+        92.5957   92.4821   92.3689   92.2560
+        92.1434   92.0312   91.9192   91.8076
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PROPANOL(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       8.000 H               3.000 C               1.000 O
+     4 SPECIES IN REACTION=
+      -1.000 PROPANOL(AQ)    4.000 H2O             3.000 CO2(AQ)
+      -4.500 O2
+       113.8427  113.6820  113.5218  113.3620
+       113.2026  113.0437  112.8852  112.7271
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+S3-
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=  -1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     1 CHEMICAL ELEMENTS=
+       3.000 S
+     5 SPECIES IN REACTION=
+      -1.000 S3-            -2.500 H2O             5.000 H+
+       3.000 SO4-2          -4.750 O2
+        64.8570   64.6394   64.4223   64.2057
+        63.9895   63.7738   63.5586   63.3438
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+SI2O4(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+       7.000 O               2.000 SI              6.000 H
+     3 SPECIES IN REACTION=
+      -1.000 SI2O4(AQ)       2.000 SIO2(AQ)       -1.000 H2O
+        -0.3365   -0.3348   -0.3330   -0.3313
+        -0.3295   -0.3278   -0.3260   -0.3243
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+SI3O6(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     3 CHEMICAL ELEMENTS=
+      10.000 O               3.000 SI              8.000 H
+     3 SPECIES IN REACTION=
+      -1.000 SI3O6(AQ)       3.000 SIO2(AQ)       -2.000 H2O
+         2.0369    2.0317    2.0265    2.0212
+         2.0160    2.0109    2.0057    2.0005
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+SRCL+
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   1.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       1.000 CL              1.000 SR
+     3 SPECIES IN REACTION=
+      -1.000 SRCL+           1.000 CL-             1.000 SR+2
+        -1.6823   -1.6875   -1.6927   -1.6978
+        -1.7030   -1.7082   -1.7134   -1.7186
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+UO2+2
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   2.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     2 CHEMICAL ELEMENTS=
+       2.000 O               1.000 U
+     5 SPECIES IN REACTION=
+      -1.000 UO2+2           1.000 H2O            -2.000 H+
+       1.000 U+4             0.500 O2
+       -10.9036  -10.8929  -10.8822  -10.8715
+       -10.8608  -10.8502  -10.8396  -10.8290
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+UREA(AQ)
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        CHARGE=   0.0           TITR. FACTOR=   1.0 EQ/MOL
+      ION SIZE=   3.7 A         HYDR. NUMBER=  0.0
+     4 CHEMICAL ELEMENTS=
+       4.000 H               1.000 C               2.000 N
+       1.000 O
+     5 SPECIES IN REACTION=
+      -1.000 UREA(AQ)        2.000 H2O             1.000 CO2(AQ)
+       1.000 N2(AQ)         -1.500 O2
+        40.1624   40.1199   40.0775   40.0352
+        39.9931   39.9511   39.9092   39.8675
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+endit.
+minerals 
+APATITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       1.000 H              13.000 O               3.000 P
+       5.000 CA
+     7 SPECIES IN REACTION=
+      -1.000 APATITE         1.000 H2O           -10.000 H+
+       0.000 AL+3            5.000 CA+2            3.000 H3PO4(AQ)
+      -0.000 O2
+         5.4765    5.4540    5.4316    5.4092
+         5.3868    5.3644    5.3421    5.3198
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MAGNETITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       4.000 O               3.000 FE
+     5 SPECIES IN REACTION=
+      -1.000 MAGNETITE       3.000 H2O            -6.000 H+
+       3.000 FE+2            0.500 O2
+        -2.3761   -2.3770   -2.3780   -2.3789
+        -2.3798   -2.3808   -2.3817   -2.3827
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CORUNDUM
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       3.000 O               2.000 AL
+     4 SPECIES IN REACTION=
+      -1.000 CORUNDUM        3.000 H2O            -6.000 H+
+       2.000 AL+3
+        -5.4350   -5.4579   -5.4808   -5.5037
+        -5.5265   -5.5493   -5.5720   -5.5947
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+HEMATITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       3.000 O               2.000 FE
+     5 SPECIES IN REACTION=
+      -1.000 HEMATITE        2.000 H2O            -4.000 H+
+       2.000 FE+2            0.500 O2
+        -4.6601   -4.6534   -4.6469   -4.6403
+        -4.6337   -4.6272   -4.6207   -4.6142
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PERICLASE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       1.000 O               1.000 MG
+     4 SPECIES IN REACTION=
+      -1.000 PERICLASE       1.000 H2O            -2.000 H+
+       1.000 MG+2
+         6.9485    6.9374    6.9263    6.9153
+         6.9044    6.8934    6.8825    6.8716
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+LIME
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       1.000 O               1.000 CA
+     4 SPECIES IN REACTION=
+      -1.000 LIME            1.000 H2O            -2.000 H+
+       1.000 CA+2
+        12.9588   12.9419   12.9251   12.9083
+        12.8916   12.8749   12.8583   12.8417
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+BRUCITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       2.000 H               2.000 O               1.000 MG
+     4 SPECIES IN REACTION=
+      -1.000 BRUCITE         2.000 H2O            -2.000 H+
+       1.000 MG+2
+         6.0160    6.0088    6.0016    5.9944
+         5.9873    5.9802    5.9731    5.9660
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+DIASPORE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       1.000 H               2.000 O               1.000 AL
+     4 SPECIES IN REACTION=
+      -1.000 DIASPORE        2.000 H2O            -3.000 H+
+       1.000 AL+3
+        -2.7051   -2.7144   -2.7236   -2.7327
+        -2.7419   -2.7510   -2.7602   -2.7693
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CALCITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O               1.000 CA
+     5 SPECIES IN REACTION=
+      -1.000 CALCITE         1.000 H2O            -2.000 H+
+       1.000 CA+2            1.000 CO2(AQ)
+         6.7251    6.7279    6.7308    6.7337
+         6.7365    6.7394    6.7423    6.7452
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MAGNESITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       1.000 C               3.000 O               1.000 MG
+     5 SPECIES IN REACTION=
+      -1.000 MAGNESITE       1.000 H2O            -2.000 H+
+       1.000 CO2(AQ)         1.000 MG+2
+         5.3221    5.3259    5.3298    5.3336
+         5.3374    5.3413    5.3451    5.3489
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ANDALUSITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       5.000 O               2.000 AL              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 ANDALUSITE      1.000 H2O            -6.000 H+
+       2.000 AL+3            1.000 SIO2(AQ)
+        -6.3466   -6.3665   -6.3863   -6.4061
+        -6.4259   -6.4456   -6.4652   -6.4848
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+KYANITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       5.000 O               2.000 AL              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 KYANITE         1.000 H2O            -6.000 H+
+       2.000 AL+3            1.000 SIO2(AQ)
+        -6.6622   -6.6811   -6.6999   -6.7187
+        -6.7375   -6.7562   -6.7749   -6.7935
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+SILLIMANITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       5.000 O               2.000 AL              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 SILLIMANITE     1.000 H2O            -6.000 H+
+       2.000 AL+3            1.000 SIO2(AQ)
+        -6.4254   -6.4454   -6.4654   -6.4853
+        -6.5052   -6.5250   -6.5448   -6.5646
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+LAWSONITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       4.000 H              10.000 O               2.000 AL
+       2.000 SI              1.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 LAWSONITE       2.000 H2O            -8.000 H+
+       2.000 AL+3            1.000 CA+2            2.000 SIO2(AQ)
+        -1.8140   -1.8311   -1.8481   -1.8651
+        -1.8821   -1.8990   -1.9159   -1.9328
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ZOISITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       1.000 H              13.000 O               3.000 AL
+       3.000 SI              2.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 ZOISITE         1.000 H2O           -13.000 H+
+       3.000 AL+3            2.000 CA+2            3.000 SIO2(AQ)
+        -0.5041   -0.5414   -0.5786   -0.6157
+        -0.6527   -0.6897   -0.7266   -0.7634
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CLINOZOISITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       1.000 H              13.000 O               3.000 AL
+       3.000 SI              2.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 CLINOZOISITE    1.000 H2O           -13.000 H+
+       3.000 AL+3            2.000 CA+2            3.000 SIO2(AQ)
+        -0.2681   -0.3049   -0.3417   -0.3784
+        -0.4151   -0.4516   -0.4881   -0.5245
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FORSTERITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       4.000 O               2.000 MG              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 FORSTERITE      2.000 H2O            -4.000 H+
+       1.000 SIO2(AQ)        2.000 MG+2
+         8.8469    8.8334    8.8198    8.8063
+         8.7928    8.7794    8.7660    8.7526
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FAYALITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       4.000 O               1.000 SI              2.000 FE
+     5 SPECIES IN REACTION=
+      -1.000 FAYALITE        2.000 H2O            -4.000 H+
+       1.000 SIO2(AQ)        2.000 FE+2
+         4.9788    4.9671    4.9555    4.9439
+         4.9323    4.9208    4.9092    4.8977
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MONTICELLITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       4.000 O               1.000 MG              1.000 SI
+       1.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 MONTICELLITE   -0.000 H2O            -4.000 H+
+       1.000 CA+2            1.000 SIO2(AQ)        1.000 MG+2
+        11.9793   11.9634   11.9475   11.9317
+        11.9159   11.9002   11.8845   11.8688
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MERWINITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       8.000 O               1.000 MG              2.000 SI
+       3.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 MERWINITE       4.000 H2O            -8.000 H+
+       3.000 CA+2            2.000 SIO2(AQ)        1.000 MG+2
+        27.7938   27.7575   27.7213   27.6851
+        27.6491   27.6132   27.5773   27.5416
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CHRYSOTILE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       4.000 H               9.000 O               3.000 MG
+       2.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 CHRYSOTILE      1.000 H2O            -6.000 H+
+       2.000 SIO2(AQ)        3.000 MG+2
+        12.1622   12.1507   12.1393   12.1280
+        12.1167   12.1054   12.0942   12.0829
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CLINOENSTATIT
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       3.000 O               1.000 MG              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 CLINOENSTATIT  -1.000 H2O            -2.000 H+
+       1.000 SIO2(AQ)        1.000 MG+2
+         3.6582    3.6534    3.6485    3.6437
+         3.6389    3.6342    3.6294    3.6246
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ORTHOENSTATIT
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       3.000 O               1.000 MG              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 ORTHOENSTATIT  -1.000 H2O            -2.000 H+
+       1.000 SIO2(AQ)        1.000 MG+2
+         3.6762    3.6713    3.6663    3.6614
+         3.6565    3.6516    3.6467    3.6419
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PROTOENSTATIT
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       3.000 O               1.000 MG              1.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 PROTOENSTATIT  -1.000 H2O            -2.000 H+
+       1.000 SIO2(AQ)        1.000 MG+2
+         3.7862    3.7810    3.7758    3.7706
+         3.7655    3.7604    3.7553    3.7502
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+DIOPSIDE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       6.000 O               1.000 MG              2.000 SI
+       1.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 DIOPSIDE       -2.000 H2O            -4.000 H+
+       1.000 CA+2            2.000 SIO2(AQ)        1.000 MG+2
+         8.1863    8.1776    8.1689    8.1602
+         8.1516    8.1429    8.1343    8.1258
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+JADEITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       6.000 O               1.000 NA              1.000 AL
+       2.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 JADEITE        -2.000 H2O            -4.000 H+
+       1.000 AL+3            2.000 SIO2(AQ)        1.000 NA+
+        -0.0188   -0.0216   -0.0244   -0.0272
+        -0.0299   -0.0327   -0.0355   -0.0382
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+FERROSILITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       3.000 O               1.000 SI              1.000 FE
+     5 SPECIES IN REACTION=
+      -1.000 FERROSILITE    -1.000 H2O            -2.000 H+
+       1.000 SIO2(AQ)        1.000 FE+2
+         1.9989    1.9947    1.9905    1.9863
+         1.9821    1.9780    1.9738    1.9697
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+WOLLASTONITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     3 CHEMICAL ELEMENTS=
+       3.000 O               1.000 SI              1.000 CA
+     5 SPECIES IN REACTION=
+      -1.000 WOLLASTONITE   -1.000 H2O            -2.000 H+
+       1.000 CA+2            1.000 SIO2(AQ)
+         6.1199    6.1136    6.1073    6.1010
+         6.0948    6.0885    6.0823    6.0760
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+TREMOLITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       2.000 H              24.000 O               5.000 MG
+       8.000 SI              2.000 CA
+     8 SPECIES IN REACTION=
+      -1.000 TREMOLITE      -8.000 H2O           -14.000 H+
+       0.000 AL+3            2.000 CA+2            8.000 SIO2(AQ)
+       5.000 MG+2           -0.000 O2
+        24.6321   24.6091   24.5862   24.5633
+        24.5405   24.5178   24.4952   24.4726
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ANTHOPHYLLITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       2.000 H              24.000 O               7.000 MG
+       8.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 ANTHOPHYLLITE  -8.000 H2O           -14.000 H+
+       8.000 SIO2(AQ)        7.000 MG+2
+        23.7745   23.7471   23.7199   23.6928
+        23.6657   23.6388   23.6119   23.5851
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CORDIERITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+      18.000 O               2.000 MG              4.000 AL
+       5.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 CORDIERITE     -2.000 H2O           -16.000 H+
+       4.000 AL+3            5.000 SIO2(AQ)        2.000 MG+2
+        -4.8924   -4.9444   -4.9963   -5.0481
+        -5.0998   -5.1514   -5.2028   -5.2542
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+POTASSIUM_FEL
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       8.000 O               1.000 AL              3.000 SI
+       1.000 K
+     6 SPECIES IN REACTION=
+      -1.000 POTASSIUM_FEL  -4.000 H2O            -4.000 H+
+       1.000 AL+3            3.000 SIO2(AQ)        1.000 K+
+        -1.9800   -1.9812   -1.9824   -1.9835
+        -1.9847   -1.9859   -1.9871   -1.9882
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ALBITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       8.000 O               1.000 NA              1.000 AL
+       3.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 ALBITE         -4.000 H2O            -4.000 H+
+       1.000 AL+3            3.000 SIO2(AQ)        1.000 NA+
+        -1.5002   -1.5017   -1.5031   -1.5046
+        -1.5061   -1.5076   -1.5090   -1.5105
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ANORTHITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       8.000 O               2.000 AL              2.000 SI
+       1.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 ANORTHITE       4.000 H2O            -8.000 H+
+       2.000 AL+3            1.000 CA+2            2.000 SIO2(AQ)
+        -1.5237   -1.5500   -1.5763   -1.6025
+        -1.6286   -1.6547   -1.6808   -1.7068
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+GEHLENITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       7.000 O               2.000 AL              1.000 SI
+       2.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 GEHLENITE       3.000 H2O           -10.000 H+
+       2.000 AL+3            2.000 CA+2            1.000 SIO2(AQ)
+         9.6961    9.6535    9.6110    9.5685
+         9.5262    9.4840    9.4419    9.3998
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+KAOLINITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       4.000 H               9.000 O               2.000 AL
+       2.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 KAOLINITE       1.000 H2O            -6.000 H+
+       2.000 AL+3            2.000 SIO2(AQ)
+        -6.9784   -6.9893   -7.0002   -7.0111
+        -7.0220   -7.0328   -7.0436   -7.0544
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ANTIGORITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+      62.000 H             147.000 O              48.000 MG
+      34.000 SI
+     7 SPECIES IN REACTION=
+      -1.000 ANTIGORITE     11.000 H2O           -96.000 H+
+       0.000 AL+3           -0.000 CO2(AQ)        34.000 SIO2(AQ)
+      48.000 MG+2
+       185.5265  185.3453  185.1648  184.9848
+       184.8054  184.6266  184.4483  184.2706
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PYROPHYLLITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               2.000 AL
+       4.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 PYROPHYLLITE   -4.000 H2O            -6.000 H+
+       2.000 AL+3            4.000 SIO2(AQ)
+        -9.2774   -9.2839   -9.2903   -9.2968
+        -9.3032   -9.3096   -9.3160   -9.3224
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+TALC
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               3.000 MG
+       4.000 SI
+     5 SPECIES IN REACTION=
+      -1.000 TALC           -4.000 H2O            -6.000 H+
+       4.000 SIO2(AQ)        3.000 MG+2
+         8.7220    8.7162    8.7105    8.7048
+         8.6991    8.6934    8.6878    8.6822
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MUSCOVITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               3.000 AL
+       3.000 SI              1.000 K
+     6 SPECIES IN REACTION=
+      -1.000 MUSCOVITE       6.000 H2O           -10.000 H+
+       3.000 AL+3            3.000 SIO2(AQ)        1.000 K+
+        -8.6624   -8.6814   -8.7003   -8.7191
+        -8.7380   -8.7567   -8.7755   -8.7942
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PHLOGOPITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     6 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               3.000 MG
+       1.000 AL              3.000 SI              1.000 K
+     7 SPECIES IN REACTION=
+      -1.000 PHLOGOPITE      0.000 H2O           -10.000 H+
+       1.000 AL+3            3.000 SIO2(AQ)        1.000 K+
+       3.000 MG+2
+        10.2301   10.2099   10.1898   10.1697
+        10.1497   10.1298   10.1099   10.0901
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PARAGONITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               1.000 NA
+       3.000 AL              3.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 PARAGONITE      6.000 H2O           -10.000 H+
+       3.000 AL+3            3.000 SIO2(AQ)        1.000 NA+
+        -7.9231   -7.9419   -7.9607   -7.9794
+        -7.9981   -8.0167   -8.0354   -8.0539
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PREHNITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       2.000 H              12.000 O               2.000 AL
+       3.000 SI              2.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 PREHNITE        6.000 H2O           -10.000 H+
+       2.000 AL+3            2.000 CA+2            3.000 SIO2(AQ)
+         3.6341    3.6086    3.5833    3.5579
+         3.5327    3.5075    3.4823    3.4572
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+CLINOCHLORE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       8.000 H              18.000 O               5.000 MG
+       2.000 AL              3.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 CLINOCHLORE     6.000 H2O           -16.000 H+
+       2.000 AL+3            3.000 SIO2(AQ)        5.000 MG+2
+        11.4845   11.4483   11.4122   11.3762
+        11.3403   11.3044   11.2687   11.2330
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+PYROPE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+      12.000 O               3.000 MG              2.000 AL
+       3.000 SI
+     6 SPECIES IN REACTION=
+      -1.000 PYROPE          6.000 H2O           -12.000 H+
+       2.000 AL+3            3.000 SIO2(AQ)        3.000 MG+2
+         6.0571    6.0178    5.9785    5.9394
+         5.9004    5.8615    5.8226    5.7839
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+ALMANDINE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+      12.000 O               2.000 AL              3.000 SI
+       3.000 FE
+     6 SPECIES IN REACTION=
+      -1.000 ALMANDINE       6.000 H2O           -12.000 H+
+       2.000 AL+3            3.000 SIO2(AQ)        3.000 FE+2
+        -0.5976   -0.6316   -0.6656   -0.6995
+        -0.7333   -0.7671   -0.8008   -0.8344
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+GROSSULAR
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     4 CHEMICAL ELEMENTS=
+      12.000 O               2.000 AL              3.000 SI
+       3.000 CA
+     6 SPECIES IN REACTION=
+      -1.000 GROSSULAR       6.000 H2O           -12.000 H+
+       2.000 AL+3            3.000 CA+2            3.000 SIO2(AQ)
+         9.5674    9.5328    9.4982    9.4638
+         9.4294    9.3951    9.3609    9.3267
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+MEIONITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     5 CHEMICAL ELEMENTS=
+       1.000 C              27.000 O               6.000 AL
+       6.000 SI              4.000 CA
+     7 SPECIES IN REACTION=
+      -1.000 MEIONITE        1.000 H2O           -26.000 H+
+       6.000 AL+3            4.000 CA+2            1.000 CO2(AQ)
+       6.000 SIO2(AQ)
+         3.1706    3.0905    3.0105    2.9307
+         2.8511    2.7717    2.6925    2.6134
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+QUARTZ
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       2.000 O               1.000 SI
+     3 SPECIES IN REACTION=
+      -1.000 QUARTZ          1.000 SIO2(AQ)       -2.000 H2O
+        -1.0356   -1.0324   -1.0293   -1.0261
+        -1.0230   -1.0198   -1.0167   -1.0135
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+COESITE
+    ENTERED BY=                         DATE=   /  /   
+        SOURCE=                      QUALITY=
+        VOLUME=   10.000 CC/MOL 
+     2 CHEMICAL ELEMENTS=
+       2.000 O               1.000 SI
+     3 SPECIES IN REACTION=
+      -1.000 COESITE         1.000 SIO2(AQ)       -2.000 H2O
+        -0.7736   -0.7707   -0.7677   -0.7648
+        -0.7619   -0.7589   -0.7560   -0.7531
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+endit.
+gases 
+O2                   X
+    ENTERED BY=                         DATE=   /  /    
+        SOURCE=                      QUALITY=        
+        VOLUME=    0.000 CC/MOL      
+     1 CHEMICAL ELEMENTS=    
+       2.000 O  
+     2 SPECIES IN REACTION=  
+      -1.000 O2              1.000 O2      
+         0.0000    0.0000    0.0000    0.0000  
+         0.0000    0.0000    0.0000    0.0000  
+         0.0000    0.0000    0.0000    0.0000   
+         0.0000    0.0000    0.0000    0.0000   
++----------------------------------------------------------------------------
+endit.
+solid solutions 
+K-FELDSPAR(SS)          2    0
+       1.000 POTASSIUM_FEL         1.000 ALBITE
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+PLAGIOCLASE(SS)         2    0
+       1.000 ALBITE                1.000 ANORTHITE
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+ORTHOPYROXENE(SS)       2    0
+       1.000 ORTHOENSTATITE        1.000 FERROSILITE
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+OLIVINE(SS)             2    0
+       1.000 FORSTERITE            1.000 FAYALITE
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+GARNET(SS)              3    0
+       1.000 PYROPE                1.000 ALMANDINE
+       1.000 GROSSULAR             
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+CLINOPYROXENE(SS)       2    0
+       1.000 DIOPSIDE              1.000 JADEITE
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
++----------------------------------------------------------------------
+endit.
+stop.
