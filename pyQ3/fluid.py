@@ -102,7 +102,7 @@ class fluid:
             self.fO2 = None
 
         # Create DATA0 and run EQPT
-        self.system.make_data0(self.T-1.0,self.P,dT=1.0)
+        self.system.make_data0(self.T-50.0,self.P,dT=50.0)
         core.run_eqpt()
 
         # Create input file and run EQ3
@@ -188,12 +188,10 @@ class fluid:
         s += 'endit.\n'
         return s
 
-    def _make_input_solid_solution(self,solid_solution,s=''):
-        ss_name = solid_solution[0]
-        ss_minerals = solid_solution[1]
+    def _make_input_solid_solution(self,ss_name,ss_minerals,s=''):
         s += '   ' + ss_name + '\n'
         for mineral in ss_minerals:
-            s += '      ' + mineral[0] + ' '*(31-len(mineral[0])) + '{:.4f}'.format(mineral[1]) + '\n'
+            s += '      ' + mineral + ' '*(31-len(mineral)) + '{:.4f}'.format(ss_minerals[mineral]) + '\n'
         s += '      endit.\n'
         return s
 
@@ -214,8 +212,8 @@ class fluid:
         s = self._input_end_file(s)
 
         if len(self.solid_solutions) > 0:
-            for ss in self.solid_solutions.items():
-                s = self._make_input_solid_solution(ss,s=s)
+            for ss_name in self.solid_solutions:
+                s = self._make_input_solid_solution(ss_name,self.solid_solutions[ss_name],s=s)
             s += '   endit.\n'
 
         file = open('input','w')

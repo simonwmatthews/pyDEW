@@ -748,11 +748,14 @@ class system:
                 totH2O = stoichiometry['H2O'] + extra_h2o_in_rxn
             else:
                 totH2O = extra_h2o_in_rxn
+
             if totH2O != 0:
                 if 'H2O' in stoichiometry:
                     stoichiometry['H2O'] += extra_h2o_in_rxn
                 else:
                     stoichiometry['H2O'] = extra_h2o_in_rxn
+            elif 'H2O' in stoichiometry:
+                stoichiometry.pop('H2O')
 
             s += '     ' + str(len(stoichiometry)) + ' SPECIES IN REACTION=\n'
             srx = ''
@@ -965,8 +968,8 @@ class system:
             stoich = {}
 
             for i in range(len(soln)):
-                if np.abs(soln[i]) > 1e-15 and i<len(soln)-1:
-                    stoich[self.basis_species[i].abbrev] = soln[i]
+                if np.abs(soln[i]) > 1e-10 and i<len(soln)-1:
+                    stoich[self.basis_species[i].abbrev] = np.round(soln[i],3)
                 if i == len(soln)-1:
                     stoich[species.abbrev] = soln[i]
 
@@ -993,10 +996,10 @@ class system:
                 stoich = {}
 
                 for j in range(len(soln)):
-                    if np.abs(soln[j]) > 1e-15 and j<len(soln)-1:
-                        stoich[self.basis_species[j].abbrev] = soln[j]
+                    if np.abs(soln[j]) > 1e-10 and j<len(soln)-1:
+                        stoich[self.basis_species[j].abbrev] = np.round(soln[j],3)
                     if j == len(soln)-1:
-                        stoich[species.endmember_names[i]] = soln[j]
+                        stoich[species.endmember_names[i]] = np.round(soln[j],3)
 
                 self._stoichiometry[species.endmember_names[i]] = stoich
 

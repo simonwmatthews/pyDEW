@@ -27,9 +27,9 @@ hydrated_species = {'ACETATE(AQ)': 0, 'ACETIC(AQ)': 0, 'AG+': 0, 'AL+3': 0, 'ALO
     'ZN+2': 0}
 
 
-ion_size = {'O2,aq':-0.5,'H2,aq':-0.5,'N2,aq':-0.5,'CO,aq':-0.5,'CH4,aq':-0.5,'ethane,aq':-0.5,'propane,aq':-0.5,'methane,aq':-0.5,
-            'methanol,aq':-0.5,'ethanol,aq':-0.5,'propanol,aq':-0.5,'CO2,aq':-0.5,'H2CO3,aq':-0.5,'acetic-acid,aq':-0.5,
-            'propanoic-a,aq':-0.5,'glutamic-ac,aq':-0.5,'H2O':0.0,'O2':0.0,'formic-acid,aq':0.0}
+ion_size = {'O2(AQ)':-0.5,'H2(AQ)':-0.5,'N2(AQ)':-0.5,'CO(AQ)':-0.5,'CH4(AQ)':-0.5,'ETHANE(AQ)':-0.5,'PROPANE(AQ)':-0.5,'METHANE(AQ)':-0.5,
+            'METHANOL(AQ)':-0.5,'ETHANOL(AQ)':-0.5,'PROPANOL(AQ)':-0.5,'CO2(AQ)':-0.5,'H2CO3(AQ)':-0.5,'ACETIC(AQ)':-0.5,
+            'PROPANOIC(AQ)':-0.5,'GLUTAMIC(AQ)':-0.5,'H2O':0.0,'O2':0.0,'FORMIC(AQ)':0.0}
 
 # These phases are typically in DATA0, but do not exist in the thermoengine Berman database.
 # Fluorapatite, chlorapatite, diamond, siderite, aragonite, dolomite, glaucophane, pumpellyite, hedenbergite, annite, margarite, chamosite, iron

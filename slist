@@ -108,154 +108,16 @@ minerals
      7  BRUCITE             DIASPORE            CALCITE           
     10  MAGNESITE           ANDALUSITE          KYANITE           
     13  SILLIMANITE         LAWSONITE           ZOISITE           
-
- ----- O   mass imbalance =  2.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  4.000000E+00 for the reaction below -----
-
-                        1.00000  FORSTERITE        
-                   +    4.00000  H+                
-
-                               =
-
-                        2.00000  H2O               
-                   +    1.00000  SIO2(AQ)          
-                   +    2.00000  MG+2              
     16  CLINOZOISITE        FORSTERITE          FAYALITE          
-
- ----- O   mass imbalance =  2.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  4.000000E+00 for the reaction below -----
-
-                        1.00000  FAYALITE          
-                   +    4.00000  H+                
-
-                               =
-
-                        2.00000  H2O               
-                   +    1.00000  SIO2(AQ)          
-                   +    2.00000  FE+2              
-
- ----- O   mass imbalance =  4.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  8.000000E+00 for the reaction below -----
-
-                        1.00000  MERWINITE         
-                   +    8.00000  H+                
-
-                               =
-
-                        4.00000  H2O               
-                   +    3.00000  CA+2              
-                   +    2.00000  SIO2(AQ)          
-                   +    1.00000  MG+2              
     19  MONTICELLITE        MERWINITE           CHRYSOTILE        
     22  CLINOENSTATIT       ORTHOENSTATIT       PROTOENSTATIT     
     25  DIOPSIDE            JADEITE             FERROSILITE       
     28  WOLLASTONITE        TREMOLITE           ANTHOPHYLLITE     
     31  CORDIERITE          POTASSIUM_FEL       ALBITE            
-
- ----- O   mass imbalance =  4.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  8.000000E+00 for the reaction below -----
-
-                        1.00000  ANORTHITE         
-                   +    8.00000  H+                
-
-                               =
-
-                        4.00000  H2O               
-                   +    2.00000  AL+3              
-                   +    1.00000  CA+2              
-                   +    2.00000  SIO2(AQ)          
     34  ANORTHITE           GEHLENITE           KAOLINITE         
     37  ANTIGORITE          PYROPHYLLITE        TALC              
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  MUSCOVITE         
-                   +   10.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    3.00000  AL+3              
-                   +    3.00000  SIO2(AQ)          
-                   +    1.00000  K+                
     40  MUSCOVITE           PHLOGOPITE          PARAGONITE        
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  PARAGONITE        
-                   +   10.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    3.00000  AL+3              
-                   +    3.00000  SIO2(AQ)          
-                   +    1.00000  NA+               
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  PREHNITE          
-                   +   10.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    2.00000  AL+3              
-                   +    2.00000  CA+2              
-                   +    3.00000  SIO2(AQ)          
     43  PREHNITE            CLINOCHLORE         PYROPE            
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  PYROPE            
-                   +   12.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    2.00000  AL+3              
-                   +    3.00000  SIO2(AQ)          
-                   +    3.00000  MG+2              
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  ALMANDINE         
-                   +   12.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    2.00000  AL+3              
-                   +    3.00000  SIO2(AQ)          
-                   +    3.00000  FE+2              
-
- ----- O   mass imbalance =  6.000000E+00 for the reaction below -----
-
- ----- H   mass imbalance =  1.200000E+01 for the reaction below -----
-
-                        1.00000  GROSSULAR         
-                   +   12.00000  H+                
-
-                               =
-
-                        6.00000  H2O               
-                   +    2.00000  AL+3              
-                   +    3.00000  CA+2              
-                   +    3.00000  SIO2(AQ)          
     46  ALMANDINE           GROSSULAR           MEIONITE          
     49  QUARTZ              COESITE           
 

@@ -21,9 +21,6 @@ data file master species= CL-
 data file master species= NA+
    switch with species=  
    jflag=  0   csp= 1.0000E-01
-data file master species= FE+2
-   switch with species=  
-   jflag=  0   csp= 1.0000E-01
 data file master species= H+
    switch with species=  
    jflag= 16   csp= -5.0000E+00
@@ -31,4 +28,12 @@ data file master species= O2
    switch with species=  
    jflag= 19   csp= 
    uphase= MAGNETITE
+data file master species= SIO2(AQ)
+   switch with species=  
+   jflag= 19   csp= 
+   uphase= QUARTZ
+data file master species= FE+2
+   switch with species=  
+   jflag= 19   csp= 
+   uphase= FAYALITE
 endit.
