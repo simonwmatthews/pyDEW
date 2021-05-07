@@ -83,7 +83,6 @@ class fluid:
         nxmods = list
             nxmods to apply to the input file. NEED TO CHECK THE FORMAT.
         """
-        print('Need to check whether fO2 is being set by mineral equilibria!')
 
         self.system = system
         self.T = T
