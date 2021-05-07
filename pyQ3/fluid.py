@@ -112,7 +112,7 @@ class fluid:
         self.eq3output = output.eq3output()
         self.elemental_comp = self.eq3output.elemental_comp
         self.pH = float(self.eq3output.electrochemistry['pH'][0])
-        self.aqeuous_species = self.eq3output.aqueous_species
+        self.aqueous_species = self.eq3output.aqueous_species
         self.fO2 = float(self.eq3output.redox['log_fO2'][0])
         self.mineral_saturation = self.eq3output.mineral_saturation
 
