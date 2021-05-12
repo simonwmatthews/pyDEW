@@ -5,8 +5,10 @@ import numpy as np
 import os
 from thermoengine import model
 import subprocess
+dir_path = os.path.dirname(os.path.realpath(__file__))
+w_path = os.getcwd()
 
-def load_coder_modules(working_dir='dew2019_coderfiles'):
+def load_coder_modules(working_dir=dir_path+'/dew2019_coderfiles'):
     """ Imports previously generated coder modules. This is required for loading
     the DEW2019 species, but might also be useful for loading mineral models, or
     other aqueous species.
@@ -24,10 +26,10 @@ def load_coder_modules(working_dir='dew2019_coderfiles'):
 
     os.chdir(working_dir)
     [importlib.import_module(mod_name) for mod_name in mod_names]
-    os.chdir('..')
+    os.chdir(w_path)
 
 
-def DEW_species(working_dir='dew2019_coderfiles',pickle_file='DEW2019.pkl'):
+def DEW_species(working_dir=dir_path+'/dew2019_coderfiles',pickle_file=dir_path+'/DEW2019.pkl'):
     """ Returns the DEW2019 database (or any other database if the working_dir is set).
 
     Parameters
@@ -44,7 +46,7 @@ def DEW_species(working_dir='dew2019_coderfiles',pickle_file='DEW2019.pkl'):
         Keys are the aqueous species names, the values are the phase objects.
     """
     load_coder_modules(working_dir)
-    with open('DEW2019.pkl','rb') as file:
+    with open(pickle_file,'rb') as file:
         dew = dill.load(file)
         file.close()
 
