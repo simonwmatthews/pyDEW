@@ -1031,7 +1031,7 @@ class system:
         return matrix
 
 
-    def make_data0(self,t,p,dT=50.0):
+    def make_data0(self,t,p,dT=50.0,filename='DATA0'):
         s = self._d0_preamble()
         s = self._d0_t_p_block(t,p,s,dT=dT)
         s = self._d0_h2o_props_block(t,p,s,dT=dT)
@@ -1052,7 +1052,7 @@ class system:
             s = self._d0_solid_solution(ss,s=s)
         s = self._d0_end_solid_solutions(s=s)
 
-        file = open('DATA0','w')
+        file = open(filename,'w')
         file.write(s)
         file.close()
 

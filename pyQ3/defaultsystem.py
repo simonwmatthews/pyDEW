@@ -5,13 +5,13 @@ elements = ['O','H','Ag','Al','Au','Ba','Ca','C','Si','Cl','S','Cd','N','Cr','Cs
 basis_species_names = ['H2O','H+','AG+','AL+3','AU+','BA+2','CA+2','CO2(AQ)','H4SIO4(AQ)','CL-','SO4-2','CD+2','N2(AQ)','CR+2','CS+','CU+',
     'EU+2','F-','FE+2','H3PO4(AQ)','HG+2','K+','MG+2','MN+2','NA+','PB+2','SR+2','U+4','ZN+2','O2']
 
-other_species_names = ['CH3COO-','CH3COOHAQ)','AG+','AL+3','AL(OH)4-','AL(OH)SI(OH)-','AU+','BA+2','CA(HCO3)+','CA(HCOO)+','CA(H3SIO4)+',
+other_species_names = ['CH3COO-','CH3COOH(AQ)','AG+','AL+3','AL(OH)4-','AL(OH)SI(OH)-','AU+','BA+2','CA(HCO3)+','CA(HCOO)+','CA(H3SIO4)+',
     'CA(OH)+','CA+2','CACL+','CACO3(AQ)','CASO4(AQ)','CD+2','CL-','CN-','CO(AQ)','CO2(AQ)','CO3-2','CR+2','CS+','CU+','CU+2','DIGLYCINE(AQ)',
     'DKP(AQ)','ETHANE(AQ)','ETHANOL(AQ)','ETHYLENE(AQ)','EU+2','F-','FE(HCOO)+','FE(OH)+','FE+2','FE+3','FECL+','FECL+2','FECL2(AQ)',
     'FECL3(AQ)','FECL4-','FE(OH)2(AQ)','HCOO-','HCOOH(AQ)','GLUTAMIC(AQ)','GLYCINE(AQ)','H+','H2(AQ)','H2CO3(AQ)','H2PO4-','H2S(AQ)',
     'H3PO4(AQ)','AL(OH)3(AQ)','HCL(AQ)','HCO3-','FE(OH)3-','HG+2','HG2+2','HPO4-2','HS-','H3SIO4-','HSO4-','K+','KCL(AQ)','KOH(AQ)','KSO4-',
     'METHANE(AQ)','METHANOL(AQ)','MG(HCO3)+','MG(H3SIO4)+','MG+2','MGCL+','MGCO3(AQ)','MG(OH)+','MGSIC+','MGSO4(AQ)','MN+2','N2(AQ)','NA+',
-    'NACL(AQ)','NACO3-','NAHCO3(AQ)','NAOH(AQ)','NH3(AQ)','NH4+','NO3-','O2(AQ)','OH-','PB+2','PROPANE(AQ)','PROPANOATE-','PROPANOL(AQ)','S3-',
+    'NACL(AQ)','NACO3-','NAHCO3(AQ)','NAOH(AQ)','NH3(AQ)','NH4+','NO3-','O2(AQ)','OH-','PB+2','PROPANE(AQ)','CH3CH2COO-','PROPANOL(AQ)','S3-',
     'H6SI2O7(AQ)','H8SI3O10(AQ)','H4SIO4(AQ)','SO4-2','SR+2','SRCL+','U+4','UO2+2','UREA(AQ)','ZN+2']
 
 hydrated_species = { 'AL(OH)4-': 2, 'AL(OH)SI(OH)-': 3, 'CA(H3SIO4)+': 1, 'FE(OH)2(AQ)': 1,
