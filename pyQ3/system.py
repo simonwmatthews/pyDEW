@@ -352,8 +352,8 @@ class system:
         s_dhb = []
         for i in range(8):
             t = T+i*dT
-            dha = obj.AgammaFromT_andP_(T,P)
-            dhb = obj.BgammaFromT_andP_(T,P)
+            dha = obj.AgammaFromT_andP_(t,P)
+            dhb = obj.BgammaFromT_andP_(t,P)
             s_dha.append('{0:0.4f}'.format(dha))
             s_dhb.append('{0:0.4f}'.format(dhb/1e8))
 
@@ -393,17 +393,17 @@ class system:
         s += '       0.        0.        0.        0.\n'
         s += '       0.        0.        0.        0.\n'
         s += 'c h2o 1\n'
-        s += '       0.        0.        0.        0.\n'
-        s += '       0.        0.        0.        0.\n'
+        s += '           500.        1.      500.        1.   \n'
+        s += '             1.      500.      500.      500.   \n'
         s += 'c h2o 2\n'
-        s += '       0.        0.        0.        0.\n'
-        s += '       0.        0.        0.        0.\n'
+        s += '           500.        1.      500.        1.   \n'
+        s += '             1.      500.      500.      500.   \n'
         s += 'c h2o 3\n'
-        s += '       0.        0.        0.        0.\n'
-        s += '       0.        0.        0.        0.\n'
+        s += '           500.        1.      500.        1.   \n'
+        s += '             1.      500.      500.      500.   \n'
         s += 'c h2o 4\n'
-        s += '       0.        0.        0.        0.\n'
-        s += '       0.        0.        0.        0.\n'
+        s += '           500.        1.      500.        1.   \n'
+        s += '             1.      500.      500.      500.   \n'
         s += 'log k for eh reaction\n'
         s += '         0.0000    0.0000    0.0000    0.0000\n'
         s += '         0.0000    0.0000    0.0000    0.0000\n'
@@ -1031,28 +1031,58 @@ class system:
         return matrix
 
 
-    def make_data0(self,t,p,dT=50.0,filename='DATA0'):
+    def make_data0(self, t, p, format='traditional', filepath='DATA0'):
+        """ Method to build the DATA0 file, ready for processing with EQPT. This can be used to
+        generate DATA0 files in the traditional format, or to generate intermediate files for use
+        in pyQ3 internal calculations.
+
+        Parameters
+        ----------
+        t : float
+            Temperature in K. If using the traditional format, this will be the temperature at
+            which the file starts, with 7 incremements of 50 K following. If using the pyQ3 format,
+            this will be the temperature at which the chemical properties are calculated, but
+            dummy temperature values will be printed in DATA0.
+        p : float
+            Pressure in bars.
+        format : {'traditional', 'pyQ3'}
+            How to format the temperature variation in the file.
+        filepath : str, default: 'DATA0'
+            The filepath and filename with which to save DATA0. For linux EQPT, the file must be
+            saved as lowercase.
+        """
         s = self._d0_preamble()
-        s = self._d0_t_p_block(t,p,s,dT=dT)
-        s = self._d0_h2o_props_block(t,p,s,dT=dT)
+
+        if format == 'traditional':
+            T = t
+            dT = 0.0
+        elif format == 'pyQ3':
+            T = 500.0 + 273.15
+            dT = 0.0
+        else:
+            raise core.InputError("format must be one of 'traditional' or 'pyQ3'.")
+
+        s = self._d0_t_p_block(t, p, s, dT=50.0)
+
+        s = self._d0_h2o_props_block(t, p, s, dT=dT)
         s = self._d0_init_aq_species(s)
         for spec in self.basis_species:
             s = self._d0_basis_set(spec,s=s)
         for spec in self.other_species:
-            s = self._d0_aqueous_species(spec,t,p,s=s,dT=dT)
+            s = self._d0_aqueous_species(spec, t, p, s=s, dT=dT)
         for dummy in self.dummy_species:
-            s = self._d0_dummy_species(dummy['abbrev'],dummy['charge'],
-                                      dummy['formula'],s)
+            s = self._d0_dummy_species(dummy['abbrev'], dummy['charge'],
+                                      dummy['formula'], s)
         s = self._d0_end_species(s=s)
         for miner in self.minerals:
-            s = self._d0_minerals(miner,t,p,s=s,dT=dT)
+            s = self._d0_minerals(miner, t, p, s=s, dT=dT)
         s = self._d0_end_minerals(s=s)
         s = self._d0_end_gases(s=s)
         for ss in self.solid_solutions.items():
-            s = self._d0_solid_solution(ss,s=s)
+            s = self._d0_solid_solution(ss, s=s)
         s = self._d0_end_solid_solutions(s=s)
 
-        file = open(filename,'w')
+        file = open(filepath,'w')
         file.write(s)
         file.close()
 

@@ -2,8 +2,8 @@ import pandas as pd
 from pyQ3 import core
 
 class eq3output:
-    def __init__(self,filename='output',suppress_warnings=False):
-        f = open(filename,'r',encoding='mac-roman')
+    def __init__(self, filepath='output', suppress_warnings=False):
+        f = open(filepath,'r',encoding='mac-roman')
 
         # Variable to store important parameters from the input printout
         self.calc_props = dict()

@@ -5,8 +5,30 @@ import numpy as np
 import os
 from thermoengine import model
 import subprocess
+import platform
+
+class Error(Exception):
+    pass
+
+class InputError(Error):
+    def __init__(self, message):
+        self.message = message
+
+class CompatibilityError(Error):
+    def __init__(self, message):
+        self.message = message
+
+
+# Get the installation directory. This is necessary for importing files and finding the
+# executables.
 dir_path = os.path.dirname(os.path.realpath(__file__))
+# Get the current working directory.
 w_path = os.getcwd()
+# Get the operating system, and check that it is one of Mac OSX or Linux
+operatingsystem = platform.system()
+if operatingsystem not in ['Linux', 'Darwin']:
+    raise CompatibilityError('The pyQ3 package is only compatible with Mac OSX and Linux.')
+
 
 def load_coder_modules(working_dir=dir_path+'/dew2019_coderfiles'):
     """ Imports previously generated coder modules. This is required for loading
@@ -202,26 +224,46 @@ def convert_float(string):
     else:
         return string
 
-class Error(Exception):
-    pass
+def run_eqpt(working_directory='', executable_name=None):
+    # Keep track of whether to delete EQPT or not:
+    tidyup = False
+    # Copy the executable into the working folder
+    if executable_name is None:
+        tidyup = True
+        if operatingsystem == 'Darwin':
+            os.system("cp " + dir_path + '/executables/EQPT_mac ' + working_directory + '/EQPT')
+        elif operatingsystem == 'Linux':
+            os.system("cp " + dir_path + '/executables/EQPT_linux ' + working_directory + '/EQPT')
+        executable_name = 'EQPT'
 
-class InputError(Error):
-    def __init__(self, message):
-        self.message = message
-
-def run_eqpt():
     cmnds = b'n\n n\n n\n'
 
-    proc = subprocess.Popen("./EQPT",shell=True,
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE)
+    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd = working_directory + '/',
+                            shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
     proc.communicate(cmnds)
     proc.terminate()
 
+    if tidyup:
+        os.system('rm ' + working_directory + '/EQPT')
 
-def run_eq3():
-    proc = subprocess.Popen("./EQ3",shell=True,
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE)
+
+def run_eq3(working_directory='', executable_name=None):
+    # Keep track of whether to delete EQPT or not:
+    tidyup = False
+    # Copy the executable into the working folder
+    if executable_name is None:
+        tidyup = True
+        if operatingsystem == 'Darwin':
+            os.system("cp " + dir_path + '/executables/EQ3_mac ' + working_directory + '/EQ3')
+        elif operatingsystem == 'Linux':
+            os.system("cp " + dir_path + '/executables/EQ3_linux ' + working_directory + '/EQ3')
+        executable_name = 'EQ3'
+
+    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd = working_directory + '/',
+                            shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     proc.communicate(b'\n')
     proc.terminate()
+
+    if tidyup:
+        os.system('rm ' + working_directory + '/EQ3')

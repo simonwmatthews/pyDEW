@@ -1,5 +1,6 @@
 from pyQ3 import core
 from pyQ3 import output
+import os
 
 class fluid:
     """
@@ -43,7 +44,13 @@ class fluid:
                  solid_solutions={},
                  uebal='H+',
                  uacion='',
-                 nxmods=[]
+                 nxmods=[],
+                 eq3_working_directory =  'working',
+                 eqpt_working_directory = 'working',
+                 data0_filename = None,
+                 input_filename = 'input',
+                 eq3_executable_name = None,
+                 eqpt_executable_name = None,
                  ):
         """
         Initialises a DEW fluid object
@@ -80,8 +87,28 @@ class fluid:
             The name of the basis species to be set by charge balance. Default is H+.
         uacion : str
             The name of the basis species to use as uacion. Default is empty.
-        nxmods = list
+        nxmods : list
             nxmods to apply to the input file. NEED TO CHECK THE FORMAT.
+        eq3_working_directory : str, default='working'
+            The working directory for EQ3.
+        eqpt_working_directory : str, default='working'
+            The working directory for EQPT.
+        data0_filename : str or None, default=None
+            The filename for DATA0. If running on with the linux executables, this must be 'data0',
+            for OSX it must be 'DATA0'. If set to None, pyQ3 will choose the correct name based
+            on the operating system.
+        input_filename : str, default='input'
+            The filename for the EQ3 input file.
+        eq3_executable_name : str or None, default=None
+            Use to specify a particular version of EQ3 to use, otherwise (if set to None) a version
+            of EQ3 will be copied into the working directory, according to the operating system
+            in use. If specified, the EQ3 executable must be in the working directory set by
+            eq3_working_directory.
+        eqpt_executable_name : str or None, default=None
+            Use to specify a particular version of EQPT to use, otherwise (if set to None) a
+            version of EQPT will be copied into the working directory, according to the operating
+            system in use. If specified, the EQPT executable must be in the working directory
+            set by eqpt_working_directory.
         """
 
         self.system = system
@@ -101,15 +128,37 @@ class fluid:
             self.fO2 = None
 
         # Create DATA0 and run EQPT
-        self.system.make_data0(self.T-50.0,self.P,dT=50.0)
-        core.run_eqpt()
+        # Determine filename automatically
+        if data0_filename is None and core.operatingsystem == 'Darwin':
+            data0_filename = 'DATA0'
+        elif data0_filename is None and core.operatingsystem == 'Linux':
+            data0_filename = 'data0'
+        # Create the working directory if it doesn't exist:
+        if not os.path.isdir(eqpt_working_directory):
+            os.makedirs(eqpt_working_directory)
+        # Create DATA0
+        self.system.make_data0(self.T, self.P, format='pyQ3',
+                               filepath = eqpt_working_directory + '/' + data0_filename)
+        # Run EQPT
+        core.run_eqpt(working_directory = eqpt_working_directory,
+                      executable_name = eqpt_executable_name)
+
+        # Create the eq3 working directory if it doesn't exist:
+        if not os.path.isdir(eq3_working_directory):
+            os.makedirs(eq3_working_directory)
+
+        # Check to see if the working directories are different:
+        if eq3_working_directory != eqpt_working_directory:
+            os.system("cp " + eqpt_working_directory + '/data1 ' +
+                      eq3_working_directory + '/data1')
 
         # Create input file and run EQ3
-        self._make_input()
-        core.run_eq3()
+        self._make_input(filepath = eq3_working_directory + '/' + input_filename)
+        core.run_eq3(working_directory = eq3_working_directory,
+                     executable_name = eq3_executable_name)
 
         # Collect output
-        self.eq3output = output.eq3output()
+        self.eq3output = output.eq3output(filepath = eq3_working_directory + '/output')
         self.elemental_comp = self.eq3output.elemental_comp
         self.pH = float(self.eq3output.electrochemistry['pH'][0])
         self.aqueous_species = self.eq3output.aqueous_species
@@ -194,7 +243,7 @@ class fluid:
         s += '      endit.\n'
         return s
 
-    def _make_input(self):
+    def _make_input(self, filepath='input'):
         if len(self.solid_solutions) > 0:
             using_solid_solutions = True
         else:
@@ -215,6 +264,6 @@ class fluid:
                 s = self._make_input_solid_solution(ss_name,self.solid_solutions[ss_name],s=s)
             s += '   endit.\n'
 
-        file = open('input','w')
+        file = open(filepath,'w')
         file.write(s)
         file.close()
