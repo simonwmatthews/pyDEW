@@ -139,8 +139,8 @@ class eq3output:
                             self.jflags[-1].append(s[3])
 
                     # Check whether nxmod is set and warn that the script won't read this
-                    if s[0] == 'nxmod=' and s[1] == '1' and suppress_warnings == False:
-                        print('WARNING: DATA0 modified with nxmod. This will not be read by the script.')
+                    # if s[0] == 'nxmod=' and s[1] == '1' and suppress_warnings == False:
+                    #     print('WARNING: DATA0 modified with nxmod. This will not be read by the script.')
                     continue
 
                 ### READ SOLID SOLUTION COMPOSITION ############################

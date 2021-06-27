@@ -51,6 +51,7 @@ class fluid:
                  input_filename = 'input',
                  eq3_executable_name = None,
                  eqpt_executable_name = None,
+                 dummy_temperature = 500.0
                  ):
         """
         Initialises a DEW fluid object
@@ -109,6 +110,10 @@ class fluid:
             version of EQPT will be copied into the working directory, according to the operating
             system in use. If specified, the EQPT executable must be in the working directory
             set by eqpt_working_directory.
+        dummy_temperature : float, default = 500.0
+            The dummy temperature (in degC) to provide DATA0 and input files. This value is just
+            provided to the EQ3 interpolation routine, and should have no influence on the
+            calculation results.
         """
 
         self.system = system
@@ -122,6 +127,7 @@ class fluid:
         self.uebal = uebal
         self.uacion = uacion
         self.nxmods = nxmods
+        self.dummy_temperature = dummy_temperature
 
         # If O2 is being set by mineral equilibrium:
         if 'O2' in self.mineral_eq:
@@ -138,7 +144,8 @@ class fluid:
             os.makedirs(eqpt_working_directory)
         # Create DATA0
         self.system.make_data0(self.T, self.P, format='pyQ3',
-                               filepath = eqpt_working_directory + '/' + data0_filename)
+                               filepath = eqpt_working_directory + '/' + data0_filename,
+                               dummy_temperature = self.dummy_temperature - 50)
         # Run EQPT
         core.run_eqpt(working_directory = eqpt_working_directory,
                       executable_name = eqpt_executable_name)
@@ -153,7 +160,7 @@ class fluid:
                       eq3_working_directory + '/data1')
 
         # Create input file and run EQ3
-        self._make_input(filepath = eq3_working_directory + '/' + input_filename)
+        self._make_input(filepath = eq3_working_directory + '/' + input_filename, format='pyQ3')
         core.run_eq3(working_directory = eq3_working_directory,
                      executable_name = eq3_executable_name)
 
@@ -166,8 +173,12 @@ class fluid:
         self.mineral_saturation = self.eq3output.mineral_saturation
 
 
-    def _input_preamble(self, s='', using_solid_solutions=False, uebal='H+', uacion='', fep=-12.6):
-        T_s = '{0:.2f}'.format(self.T-273.15)
+    def _input_preamble(self, s='', using_solid_solutions=False, uebal='H+', uacion='', fep=-12.6,
+                        t=None):
+        if t is None:
+            T_s = '{0:.2f}'.format(self.T-273.15)
+        else:
+            T_s = '{0:.2f}'.format(t)
 
         s += '\n \nendit. \n'
         s += '     tempc=' + ' '*(13-len(T_s)) + T_s +'\n'
@@ -243,13 +254,17 @@ class fluid:
         s += '      endit.\n'
         return s
 
-    def _make_input(self, filepath='input'):
+    def _make_input(self, filepath='input', format='traditional'):
         if len(self.solid_solutions) > 0:
             using_solid_solutions = True
         else:
             using_solid_solutions = False
-        s = self._input_preamble(using_solid_solutions=using_solid_solutions,uebal=self.uebal,
-                                uacion=self.uacion,fep=self.fO2)
+        if format == 'traditional':
+            s = self._input_preamble(using_solid_solutions=using_solid_solutions,uebal=self.uebal,
+                                    uacion=self.uacion,fep=self.fO2)
+        elif format == 'pyQ3':
+            s = self._input_preamble(using_solid_solutions=using_solid_solutions,uebal=self.uebal,
+                                    uacion=self.uacion,fep=self.fO2,t=self.dummy_temperature)
         s = self._input_nxmod(s,self.nxmods)
         for sp in self.molalities:
             s = self._input_basis_species_conc(sp, self.molalities[sp],s=s)

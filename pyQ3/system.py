@@ -1031,7 +1031,7 @@ class system:
         return matrix
 
 
-    def make_data0(self, t, p, format='traditional', filepath='DATA0'):
+    def make_data0(self, t, p, format='traditional', filepath='DATA0', dummy_temperature = 500.0):
         """ Method to build the DATA0 file, ready for processing with EQPT. This can be used to
         generate DATA0 files in the traditional format, or to generate intermediate files for use
         in pyQ3 internal calculations.
@@ -1050,6 +1050,10 @@ class system:
         filepath : str, default: 'DATA0'
             The filepath and filename with which to save DATA0. For linux EQPT, the file must be
             saved as lowercase.
+        dummy_temperature : float, default = 500.0
+            The dummy temperature (in degC) to provide DATA0 if the pyQ3 format is being used. This
+            value is just provided to the EQ3 interpolation routine, and should have no influence
+            on the calculation results.
         """
         s = self._d0_preamble()
 
@@ -1057,12 +1061,12 @@ class system:
             T = t
             dT = 0.0
         elif format == 'pyQ3':
-            T = 500.0 + 273.15
+            T = dummy_temperature + 273.15
             dT = 0.0
         else:
             raise core.InputError("format must be one of 'traditional' or 'pyQ3'.")
 
-        s = self._d0_t_p_block(t, p, s, dT=50.0)
+        s = self._d0_t_p_block(T, p, s, dT=50.0)
 
         s = self._d0_h2o_props_block(t, p, s, dT=dT)
         s = self._d0_init_aq_species(s)
