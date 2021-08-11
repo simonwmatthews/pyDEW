@@ -166,7 +166,9 @@ class fluid:
 
         # Collect output
         self.eq3output = output.eq3output(filepath = eq3_working_directory + '/output')
-        self.elemental_comp = self.eq3output.elemental_comp
+        self.elemental_comp = self.eq3output.elemental_comp.set_index('element').astype('float')
+        self.elemental_comp_ppm = dict(self.elemental_comp.ppm)
+        self.elemental_comp_molality = dict(self.elemental_comp.molality)
         self.pH = float(self.eq3output.electrochemistry['pH'][0])
         self.aqueous_species = self.eq3output.aqueous_species
         self.fO2 = float(self.eq3output.redox['log_fO2'][0])

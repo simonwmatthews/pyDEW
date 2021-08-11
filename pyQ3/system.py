@@ -43,8 +43,10 @@ class system:
                 dummy_species = [],
                 minerals= defaultsystem.minerals,
                 solid_solutions= defaultsystem.solid_solutions,
+                gases = defaultsystem.gases,
                 hydrated_species= defaultsystem.hydrated_species,
-                ion_size= defaultsystem.ion_size
+                ion_size= defaultsystem.ion_size,
+                mineral_NaK_adjustment = []
                 ):
         """Initialisation routine for a system class.
 
@@ -82,6 +84,9 @@ class system:
             A dictionary of complexes to assign a special ion size to. This is used in
             the DEW EQ3 versions as a flag for species behaviour, so it probably shouldn't
             be changed. The default ion size is 3.7.
+        mineral_NaK_adjustment : list, default=[]
+            List of mineral names for which the adjustment to the free energy for Na/K
+            (Sverjensky, 1991) should be applied.
         """
 
         # The element list must start with O and H:
@@ -97,6 +102,14 @@ class system:
                 find_species.append(sp)
         if len(find_species) > 0:
             dewdb = core.DEW_species()
+
+        # If any of the mineral names are strings, import DEW_MINERALS:
+        find_minerals = []
+        for min in minerals:
+            if isinstance(min,str):
+                find_minerals.append(min)
+        if len(find_minerals) > 0:
+            mineralsdb = core.DEW_minerals()
 
         _basis_species_unordered = []
         _basis_species_names_unordered = []
@@ -118,9 +131,9 @@ class system:
         _basis_species_names_unordered.pop(_basis_species_names_unordered.index('H+'))
 
         # O2 must go at the end of the list, but will interfere with finding the other basis species.
-        _O2 = _basis_species_unordered[_basis_species_names_unordered.index('O2')]
-        _basis_species_unordered.pop(_basis_species_names_unordered.index('O2'))
-        _basis_species_names_unordered.pop(_basis_species_names_unordered.index('O2'))
+        _O2 = _basis_species_unordered[_basis_species_names_unordered.index('O2(G)')]
+        _basis_species_unordered.pop(_basis_species_names_unordered.index('O2(G)'))
+        _basis_species_names_unordered.pop(_basis_species_names_unordered.index('O2(G)'))
 
         # Construct an array describing which species could be basis species for each element:
         _potentialbasis = np.zeros([len(elements)-2]*2)
@@ -167,7 +180,7 @@ class system:
         for species in self.basis_species:
             self.basis_species_names.append(species.abbrev)
             self.species[species.abbrev] = species
-            if species.abbrev != 'O2' and species.abbrev != 'O2,g':
+            if species.abbrev != 'O2(G)' and species.abbrev != 'O2,g':
                 self.basis_species_names_soln.append(species.abbrev)
                 self.basis_species_soln.append(species)
 
@@ -191,18 +204,28 @@ class system:
         #------
         # Extract minerals if needed.
         self.minerals = []
-        if any(isinstance(min,str) for min in minerals):
-            db = core.berman_database()
         for min in minerals:
             if isinstance(min,str):
                 try:
-                    _phobj = db.get_phase(min)
-                    _phobj.enable_gibbs_energy_reference_state()
-                    self.minerals.append(_phobj)
+                    self.minerals.append(mineralsdb[min])
                 except:
-                    raise core.InputError(min+' phase string not recognised. Make sure you are using the thermoengine mineral abbreviations.')
+                    raise core.InputError(min+' phase string not recognised.')
             else:
                 self.minerals.append(min)
+        self.mineral_NaK_adjustment = mineral_NaK_adjustment
+
+        #------
+        # Extract gases if needed.
+        self.gases = []
+        for gas in gases:
+            if isinstance(gas, str):
+                try:
+                    self.gases.append(dewdb[gas])
+                except:
+                    raise core.InputError(min+' phase string not recognised.')
+            else:
+                self.gases.append(gas)
+
 
         #------
         # Store the other information, which shouldn't need processing
@@ -227,7 +250,7 @@ class system:
         self._basis_species_matrix_soln = self._make_basis_species_matrix(exclude_gas=True)
 
         self._stoichiometry = dict()
-        for species in self.other_species + self.minerals:
+        for species in self.other_species + self.minerals + self.gases:
             self._find_reaction(species)
 
     def _validate(self):
@@ -240,7 +263,7 @@ class system:
         if 'OH-' in self.basis_species_names:
             self._valid = False
             self._error += 'OH- cannot be a basis species. '
-        if 'O2' not in self.basis_species_names:
+        if 'O2(G)' not in self.basis_species_names:
             self._valid = False
             self._error += 'O2 must be a basis species. '
         if self.n_basis_species -1 != self.n_elements:
@@ -455,20 +478,21 @@ class system:
         s += '        CHARGE=' + ' '*(spacing-len(sCharge.split('.')[0])) + sCharge +'           TITR. FACTOR=   0.0 EQ/MOL\n'
         s += '      ION SIZE=' + ' '*(6-len(ion)) + ion + ' A         HYDR. NUMBER=  0.0\n'
 
-        s += '     '+str(len(formula)) + ' CHEMICAL ELEMENTS=\n'
-        sel = ''
-        for i in range(len(formula)):
-            sStoich = '{0:.3f}'.format(formula[list(formula.keys())[i]])
-            if i%3 == 0:
-                sel += ' '*(el_1 - len(sStoich.split('.')[0]))
-            if i%3 == 1:
-                sel += ' '*(el_2 - len(sStoich.split('.')[0]) - len(sel))
-            if i%3 == 2:
-                sel += ' '*(el_3 - len(sStoich.split('.')[0]) - len(sel))
-            sel += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + list(formula.keys())[i].upper()
-            if i%3 == 2 or i == len(formula) - 1:
-                sel += '\n'
-        s += sel
+        if species.abbrev != 'O2(G)':
+            s += '     '+str(len(formula)) + ' CHEMICAL ELEMENTS=\n'
+            sel = ''
+            for i in range(len(formula)):
+                sStoich = '{0:.3f}'.format(formula[list(formula.keys())[i]])
+                if i%3 == 0:
+                    sel += ' '*(el_1 - len(sStoich.split('.')[0]))
+                if i%3 == 1:
+                    sel += ' '*(el_2 - len(sStoich.split('.')[0]) - len(sel))
+                if i%3 == 2:
+                    sel += ' '*(el_3 - len(sStoich.split('.')[0]) - len(sel))
+                sel += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + list(formula.keys())[i].upper()
+                if i%3 == 2 or i == len(formula) - 1:
+                    sel += '\n'
+            s += sel
         s += '+----------------------------------------------------------------------------\n'
 
         return s
@@ -512,6 +536,112 @@ class system:
         s += '        SOURCE=                      QUALITY=\n'
         s += '        CHARGE=' + ' '*(charge_space-len(s_charge.split('.')[0])) + s_charge + ' '*(titr_space-len(s_charge.split('.')[1])) + 'TITR. FACTOR=   1.0 EQ/MOL\n'
         s += '      ION SIZE=' + ' '*(6-len(ion)) + ion + ' A         HYDR. NUMBER=  0.0\n'
+        s += '     ' + str(len(formula)) + ' CHEMICAL ELEMENTS=\n'
+
+        sel = ''
+        for i in range(len(formula)):
+            sStoich = '{0:.3f}'.format(formula[list(formula.keys())[i]])
+            if i%3 == 0:
+                sel += ' '*(el_1 - len(sStoich.split('.')[0]))
+            if i%3 == 1:
+                sel += ' '*(el_2 - len(sStoich.split('.')[0]) - len(sel))
+            if i%3 == 2:
+                sel += ' '*(el_3 - len(sStoich.split('.')[0]) - len(sel))
+            sel += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + list(formula.keys())[i].upper()
+            if i%3 == 2 or i == len(formula) - 1:
+                sel += '\n'
+                s += sel
+                sel = ''
+
+        stoichiometry = self._stoichiometry[species.abbrev].copy()
+        extra_h2o_in_rxn = 0
+
+        for species_name in list(stoichiometry.keys()):
+            if species_name in self.hydrated_species:
+                extra_h2o_in_rxn = extra_h2o_in_rxn - stoichiometry[species_name]*self.hydrated_species[species_name]
+
+        if extra_h2o_in_rxn != 0:
+            if 'H2O' in stoichiometry:
+                stoichiometry['H2O'] += extra_h2o_in_rxn
+            else:
+                stoichiometry['H2O'] = extra_h2o_in_rxn
+
+        s += '     ' + str(len(stoichiometry)) + ' SPECIES IN REACTION=\n'
+        srx = ''
+
+        species_in_order = [species.abbrev]
+        for species_name in list(stoichiometry.keys()):
+            if species_name not in species_in_order:
+                species_in_order.append(species_name)
+
+        for i in range(len(stoichiometry)):
+            sStoich = '{0:.3f}'.format(stoichiometry[species_in_order[i]])
+            if i%3 == 0:
+                srx += ' '*(el_1 - len(sStoich.split('.')[0]))
+            if i%3 == 1:
+                srx += ' '*(el_2 - len(sStoich.split('.')[0]) - len(srx))
+            if i%3 == 2:
+                srx += ' '*(el_3 - len(sStoich.split('.')[0]) - len(srx))
+            srx += sStoich + ' '*(el_name-len(sStoich.split('.')[1])) + species_in_order[i]
+            if i%3 == 2 or i == len(stoichiometry) - 1:
+                srx += '\n'
+                s += srx
+                srx = ''
+
+        slogK = []
+        for i in range(8):
+            logKr = self.logK(species, t+dT*i, p)
+            slogK.append('{0:.4f}'.format(logKr))
+
+        s += ' '*(margin_lk - len(slogK[0].split('.')[0])) + slogK[0]
+        for i in range(3):
+            s += (' '*(spacing_lk-len(slogK[i+1])+1) + slogK[i+1])
+        s += '\n'
+        s += ' '*(margin_lk - len(slogK[4].split('.')[0])) + slogK[4]
+        for i in range(3):
+            s += (' '*(spacing_lk-len(slogK[i+5])+1) + slogK[i+5])
+        s += '\n'
+
+        s += '         0.0000    0.0000    0.0000    0.0000   \n'*2
+        s += '+----------------------------------------------------------------------------\n'
+
+        return(s)
+
+    def _d0_gases(self,species,t,p,s='',dT=50.0):
+        # distance from = to .
+        charge_space = 4
+
+        # distance from start of line to X
+        x_space = 22
+
+        # distance from . to TITR.
+        titr_space = 12
+
+        # characters until first, second, third . in elements and species
+        el_1 = 8
+        el_2 = 30
+        el_3 = 52
+
+        # characters between . and element name
+        el_name = 4
+
+        # logK margin to .
+        margin_lk = 10
+
+        # logK spacing between .
+        spacing_lk = 9
+
+
+        formula = chem.get_Berman_formula(species.props['element_comp'][0])
+        if species.abbrev in self.hydrated_species:
+            formula = core.formula_to_dict(formula,add_H2O=self.hydrated_species[species.abbrev])
+        else:
+            formula = core.formula_to_dict(formula)
+
+        s += species.abbrev + ' '*(x_space-len(species.abbrev)) + 'X\n'
+        s += '    ENTERED BY=                         DATE=   /  /   \n'
+        s += '        SOURCE=                      QUALITY=\n'
+        s += '        VOLUME=    0.000 CC/MOL     \n'
         s += '     ' + str(len(formula)) + ' CHEMICAL ELEMENTS=\n'
 
         sel = ''
@@ -686,7 +816,7 @@ class system:
 
         return(s)
 
-    def _d0_minerals(self,species,t,p,s='',dT=50.0):
+    def _d0_minerals(self, species, t, p, s='', dT=50.0, adjust_NaK=False):
         # distance from = to .
         charge_space = 4
 
@@ -724,7 +854,7 @@ class system:
 
             sel = ''
             for i in range(len(formula)):
-                sStoich = '{0:.3f}'.format(formula[list(formula.keys())[i]])
+                sStoich = '{0:.3f}'.format(formula[list(formula.keys())[i]],2)
                 if i%3 == 0:
                     sel += ' '*(el_1 - len(sStoich.split('.')[0]))
                 if i%3 == 1:
@@ -749,7 +879,7 @@ class system:
             else:
                 totH2O = extra_h2o_in_rxn
 
-            if totH2O != 0:
+            if np.abs(totH2O) > 0.001:
                 if 'H2O' in stoichiometry:
                     stoichiometry['H2O'] += extra_h2o_in_rxn
                 else:
@@ -787,7 +917,7 @@ class system:
 
             slogK = []
             for i in range(8):
-                logKr = self.logK(species,t+dT*i,p,mineral=True)
+                logKr = self.logK(species, t+dT*i, p, mineral=True, adjust_NaK=adjust_NaK)
                 slogK.append('{0:.4f}'.format(logKr))
 
             s += ' '*(margin_lk - len(slogK[0].split('.')[0])) + slogK[0]
@@ -907,14 +1037,14 @@ class system:
     def _d0_end_minerals(self,s=''):
         s += 'endit.\n'
         s += 'gases \n'
-        s += 'O2                   X\n'
+        s += 'O2(G)                X\n'
         s += '    ENTERED BY=                         DATE=   /  /    \n'
         s += '        SOURCE=                      QUALITY=        \n'
         s += '        VOLUME=    0.000 CC/MOL      \n'
         s += '     1 CHEMICAL ELEMENTS=    \n'
         s += '       2.000 O  \n'
         s += '     2 SPECIES IN REACTION=  \n'
-        s += '      -1.000 O2              1.000 O2      \n'
+        s += '      -1.000 O2(G)           1.000 O2(G)   \n'
         s += '         0.0000    0.0000    0.0000    0.0000  \n'
         s += '         0.0000    0.0000    0.0000    0.0000  \n'
         s += '         0.0000    0.0000    0.0000    0.0000   \n'
@@ -968,7 +1098,7 @@ class system:
             stoich = {}
 
             for i in range(len(soln)):
-                if np.abs(soln[i]) > 1e-10 and i<len(soln)-1:
+                if np.abs(soln[i]) > 0.001 and i<len(soln)-1:
                     stoich[self.basis_species[i].abbrev] = np.round(soln[i],3)
                 if i == len(soln)-1:
                     stoich[species.abbrev] = soln[i]
@@ -1059,7 +1189,7 @@ class system:
 
         if format == 'traditional':
             T = t
-            dT = 0.0
+            dT = 50.0
         elif format == 'pyQ3':
             T = dummy_temperature + 273.15
             dT = 0.0
@@ -1079,8 +1209,15 @@ class system:
                                       dummy['formula'], s)
         s = self._d0_end_species(s=s)
         for miner in self.minerals:
-            s = self._d0_minerals(miner, t, p, s=s, dT=dT)
+            if miner.phase_name.upper() in self.mineral_NaK_adjustment:
+                adjust_NaK = True
+            else:
+                adjust_NaK = False
+            s = self._d0_minerals(miner, t, p, s=s, dT=dT, adjust_NaK=adjust_NaK)
         s = self._d0_end_minerals(s=s)
+
+        for gas in self.gases:
+            s = self._d0_gases(gas, t, p, s=s, dT=dT)
         s = self._d0_end_gases(s=s)
         for ss in self.solid_solutions.items():
             s = self._d0_solid_solution(ss, s=s)
@@ -1090,9 +1227,33 @@ class system:
         file.write(s)
         file.close()
 
-    def logK(self,species,t,p,mineral=False,endi=0):
+    def logK(self, species, t, p, mineral=False, endi=0, adjust_NaK=False):
+        """
+        Calculate the logK for the species or mineral of interest, for its reaction with the
+        basis species.
+
+        Parameters
+        ----------
+        species : thermoengine.Phase object
+            The species or mineral for which logK should be calculated.
+        t : float
+            The temperature in K.
+        p : float
+            The pressure in bars.
+        mineral : bool, default=False
+            Is the "species" a mineral? Only required when using the refstate_correction.
+        adjust_NaK : bool, default=False
+            Apply the Sverjensky (1991) correction for Na- and K-bearing minerals. If using the
+            DEW mineral database, this correction is not required. If using any thermoengine
+            Berman phases, the correction is required.
+
+        Returns
+        -------
+        float
+            The logK value.
+        """
         DG = 0.0
-        if species.abbrev == 'O2':
+        if species.abbrev == 'O2(G)':
             DG += self._stoichiometry[species.abbrev][species.abbrev]*self.muO2(t,p)
         elif species.endmember_num == 1:
             DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
@@ -1101,7 +1262,7 @@ class system:
             endm[endi] = 1
             DG += self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
 
-        if mineral == True:
+        if mineral is True and adjust_NaK is True:
             if species.endmember_num == 1:
                 formula = core.formula_to_dict(chem.get_Berman_formula(species.props['element_comp'][0]))
                 if 'Na' in formula:
@@ -1112,11 +1273,6 @@ class system:
                 endm = np.zeros(species.endmember_num)
                 endm[endi] = 1
                 formula = formula_from_ss(species,endi)
-
-                # Add reference state corrections
-#                 for el in formula:
-#                     DG += formula[el]*self.stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*robieref[el]*298.15
-
                 if 'Na' in formula:
                     DG += -1626*4.184*formula['Na']*self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
                 if 'K' in formula:
@@ -1129,11 +1285,11 @@ class system:
 
         for s in self.basis_species:
             if s.abbrev in list(self._stoichiometry[species_name].keys()) and s.abbrev != 'H+':
-                if s.abbrev == 'O2':
+                if s.abbrev == 'O2(G)':
                     DG += self._stoichiometry[species_name][s.abbrev]*self.muO2(t,p)
                 else:
                     DG += self._stoichiometry[species_name][s.abbrev]*s.gibbs_energy(t,p)
-        return -DG/(8.3145*t)/2.303
+        return -DG/(8.314462618*t)/2.30258509299
 
     def muO2(self,t, p):
         tr = 298.15

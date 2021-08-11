@@ -75,7 +75,33 @@ def DEW_species(working_dir=dir_path+'/dew2019_coderfiles',pickle_file=dir_path+
     # Load the SWIM model and O2.
     _db = berman_database()
     dew['H2O'] = _db.get_phase('H2O')
-    dew['O2'] = _db.get_phase('O2')
+    dew['O2(G)'] = _db.get_phase('O2')
+    dew['O2(G)']._abbrev = 'O2(G)'
+    dew['H2(G)'] = _db.get_phase('H2')
+    dew['H2(G)']._abbrev = 'H2(G)'
+
+    return dew
+
+def DEW_minerals(working_dir=dir_path+'/dew_minerals_coderfiles',pickle_file=dir_path+'/dewminerals.pkl'):
+    """ Returns the DEW Minerals database (or any other database if the working_dir is set).
+
+    Parameters
+    ----------
+    working_dir : str
+        The directory in which to look for the module files. Default is dew2019_coderfiles.
+    pickle_file : str
+        The filename for the pickle file containing the coder objects for the DEW2019
+        aqueous species.
+
+    Returns
+    -------
+    dict
+        Keys are the mineral names, the values are the phase objects.
+    """
+    load_coder_modules(working_dir)
+    with open(pickle_file,'rb') as file:
+        dew = dill.load(file)
+        file.close()
 
     return dew
 
