@@ -130,7 +130,7 @@ class fluid:
         self.dummy_temperature = dummy_temperature
 
         # If O2 is being set by mineral equilibrium:
-        if 'O2' in self.mineral_eq:
+        if 'O2(G)' in self.mineral_eq:
             self.fO2 = None
 
         # Create DATA0 and run EQPT

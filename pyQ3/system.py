@@ -941,7 +941,7 @@ class system:
 
                 endm = np.zeros(species.endmember_num)
                 endm[ei] = 1
-                formula = formula_from_ss(species,ei)
+                formula = core.formula_from_ss(species,ei)
 
                 # Check endmember is in the chemical system in use
                 if all(el in self.elements for el in formula):
@@ -1272,7 +1272,7 @@ class system:
             else:
                 endm = np.zeros(species.endmember_num)
                 endm[endi] = 1
-                formula = formula_from_ss(species,endi)
+                formula = core.formula_from_ss(species,endi)
                 if 'Na' in formula:
                     DG += -1626*4.184*formula['Na']*self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]
                 if 'K' in formula:

@@ -7,12 +7,15 @@ from thermoengine import model
 import subprocess
 import platform
 
+
 class Error(Exception):
     pass
+
 
 class InputError(Error):
     def __init__(self, message):
         self.message = message
+
 
 class CompatibilityError(Error):
     def __init__(self, message):
@@ -27,7 +30,8 @@ w_path = os.getcwd()
 # Get the operating system, and check that it is one of Mac OSX or Linux
 operatingsystem = platform.system()
 if operatingsystem not in ['Linux', 'Darwin']:
-    raise CompatibilityError('The pyQ3 package is only compatible with Mac OSX and Linux.')
+    raise CompatibilityError(
+        'The pyQ3 package is only compatible with Mac OSX and Linux.')
 
 
 def load_coder_modules(working_dir=dir_path+'/dew2019_coderfiles'):
@@ -43,7 +47,7 @@ def load_coder_modules(working_dir=dir_path+'/dew2019_coderfiles'):
     pyximport.install(language_level=3)
 
     working_dir_code = np.array(os.listdir(working_dir))
-    mask = np.array([file.endswith('.pyx') for file in working_dir_code ])
+    mask = np.array([file.endswith('.pyx') for file in working_dir_code])
     mod_names = [os.path.splitext(file)[0] for file in working_dir_code[mask]]
 
     os.chdir(working_dir)
@@ -51,7 +55,7 @@ def load_coder_modules(working_dir=dir_path+'/dew2019_coderfiles'):
     os.chdir(w_path)
 
 
-def DEW_species(working_dir=dir_path+'/dew2019_coderfiles',pickle_file=dir_path+'/DEW2019.pkl'):
+def DEW_species(working_dir=dir_path+'/dew2019_coderfiles', pickle_file=dir_path+'/DEW2019.pkl'):
     """ Returns the DEW2019 database (or any other database if the working_dir is set).
 
     Parameters
@@ -68,7 +72,7 @@ def DEW_species(working_dir=dir_path+'/dew2019_coderfiles',pickle_file=dir_path+
         Keys are the aqueous species names, the values are the phase objects.
     """
     load_coder_modules(working_dir)
-    with open(pickle_file,'rb') as file:
+    with open(pickle_file, 'rb') as file:
         dew = dill.load(file)
         file.close()
 
@@ -82,7 +86,8 @@ def DEW_species(working_dir=dir_path+'/dew2019_coderfiles',pickle_file=dir_path+
 
     return dew
 
-def DEW_minerals(working_dir=dir_path+'/dew_minerals_coderfiles',pickle_file=dir_path+'/dewminerals.pkl'):
+
+def DEW_minerals(working_dir=dir_path+'/dew_minerals_coderfiles', pickle_file=dir_path+'/dewminerals.pkl'):
     """ Returns the DEW Minerals database (or any other database if the working_dir is set).
 
     Parameters
@@ -99,11 +104,12 @@ def DEW_minerals(working_dir=dir_path+'/dew_minerals_coderfiles',pickle_file=dir
         Keys are the mineral names, the values are the phase objects.
     """
     load_coder_modules(working_dir)
-    with open(pickle_file,'rb') as file:
+    with open(pickle_file, 'rb') as file:
         dew = dill.load(file)
         file.close()
 
     return dew
+
 
 def berman_database():
     """ Returns the Berman database from thermoengine.
@@ -144,7 +150,8 @@ def get_charge(species):
         charge = - float(abbrev[-1])
     return charge
 
-def formula_to_dict(formula,add_H2O=0):
+
+def formula_to_dict(formula, add_H2O=0):
     """ Converts a Berman formula to a dictionary representation of the formula.
 
     Parameters
@@ -182,10 +189,10 @@ def formula_to_dict(formula,add_H2O=0):
     return d
 
 
-def formula_from_ss(mineral,endi):
+def formula_from_ss(mineral, endi):
     endm = np.zeros(mineral.endmember_num)
     endm[endi] = 1.0
-    fs = mineral.compute_formula(298.15,1.0,endm)
+    fs = mineral.compute_formula(298.15, 1.0, endm)
     split = {}
     el = ''
     st = ''
@@ -197,7 +204,7 @@ def formula_from_ss(mineral,endi):
         if fs[j] == '(':
             inbracket = True
 
-        if fs[j] not in ['0','1','2','3','4','5','6','7','8','9','.']:
+        if fs[j] not in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']:
             if look_for_bracket_multiplier == True:
                 for el in els_in_bracket:
                     split[el] = split[el]*float(st)
@@ -205,7 +212,7 @@ def formula_from_ss(mineral,endi):
                 el = ''
                 look_for_bracket_multiplier = False
 
-            if len(st) > 0: #and look_for_bracket_multiplier == False:
+            if len(st) > 0:  # and look_for_bracket_multiplier == False:
                 split[el] = float(st)
                 if inbracket == True:
                     els_in_bracket += [el]
@@ -215,7 +222,6 @@ def formula_from_ss(mineral,endi):
                     el += fs[j]
             elif fs[j] != '(' and fs[j] != ')' and fs[j] != "'":
                 el += fs[j]
-
 
         else:
             st += fs[j]
@@ -239,6 +245,7 @@ def formula_from_ss(mineral,endi):
 
     return formula
 
+
 def convert_float(string):
     if len(string[1:].split('-')) > 1:
         if string[1:].split('-')[0][-1] != 'E':
@@ -250,6 +257,7 @@ def convert_float(string):
     else:
         return string
 
+
 def run_eqpt(working_directory='', executable_name=None):
     # Keep track of whether to delete EQPT or not:
     tidyup = False
@@ -257,14 +265,16 @@ def run_eqpt(working_directory='', executable_name=None):
     if executable_name is None:
         tidyup = True
         if operatingsystem == 'Darwin':
-            os.system("cp " + dir_path + '/executables/EQPT_mac ' + working_directory + '/EQPT')
+            os.system("cp " + dir_path + '/executables/EQPT_mac '
+                      + working_directory + '/EQPT')
         elif operatingsystem == 'Linux':
-            os.system("cp " + dir_path + '/executables/EQPT_linux ' + working_directory + '/EQPT')
+            os.system("cp " + dir_path + '/executables/EQPT_linux '
+                      + working_directory + '/EQPT')
         executable_name = 'EQPT'
 
     cmnds = b'n\n n\n n\n'
 
-    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd = working_directory + '/',
+    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd=working_directory + '/',
                             shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
     proc.communicate(cmnds)
@@ -281,15 +291,40 @@ def run_eq3(working_directory='', executable_name=None):
     if executable_name is None:
         tidyup = True
         if operatingsystem == 'Darwin':
-            os.system("cp " + dir_path + '/executables/EQ3_mac ' + working_directory + '/EQ3')
+            os.system("cp " + dir_path + '/executables/EQ3_mac '
+                      + working_directory + '/EQ3')
         elif operatingsystem == 'Linux':
-            os.system("cp " + dir_path + '/executables/EQ3_linux ' + working_directory + '/EQ3')
+            os.system("cp " + dir_path + '/executables/EQ3_linux '
+                      + working_directory + '/EQ3')
         executable_name = 'EQ3'
 
-    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd = working_directory + '/',
+    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd=working_directory + '/',
                             shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     proc.communicate(b'\n')
     proc.terminate()
 
     if tidyup:
         os.system('rm ' + working_directory + '/EQ3')
+
+
+def run_eq6(working_directory='', executable_name=None):
+    # Keep track of whether to delete EQ6 or not:
+    tidyup = False
+    # Copy the executable into the working folder
+    if executable_name is None:
+        tidyup = True
+        if operatingsystem == 'Darwin':
+            os.system("cp " + dir_path + '/executables/EQ6_mac '
+                      + working_directory + '/EQ6')
+        elif operatingsystem == 'Linux':
+            os.system("cp " + dir_path + '/executables/EQ6_linux '
+                      + working_directory + '/EQ6')
+        executable_name = 'EQ6'
+
+    proc = subprocess.Popen(bytes("./" + executable_name, 'utf-8'), cwd=working_directory + '/',
+                            shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    proc.communicate(b'\n')
+    proc.terminate()
+
+    if tidyup:
+        os.system('rm ' + working_directory + '/EQ6')

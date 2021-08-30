@@ -12,34 +12,19 @@ and compiled separately to this model. See the Jupyter notebooks supplied in the
 """
 
 # Import pyQ3 classes and methods
-from pyQ3 import defaultsystem
+# from pyQ3 import defaultsystem
 from pyQ3 import system
 from pyQ3 import fluid
+from pyQ3 import reaction
 
 
 class System(system.system):
     pass
 
+
 class Fluid(fluid.fluid):
     pass
 
 
-def load_coder_modules(working_dir='dew2019_coderfiles'):
-    """ Imports previously generated coder modules. This is required for loading
-    the DEW2019 species, but might also be useful for loading mineral models, or
-    other aqueous species.
-
-    Parameters
-    ----------
-    working_dir     str
-        The directory in which to look for the module files. Default is dew2019_coderfiles.
-    """
-    pyximport.install(language_level=3)
-
-    working_dir_code = np.array(os.listdir(working_dir))
-    mask = np.array([file.endswith('.pyx') for file in working_dir_code ])
-    mod_names = [os.path.splitext(file)[0] for file in working_dir_code[mask]]
-
-    os.chdir('working')
-    [importlib.import_module(mod_name) for mod_name in mod_names]
-    os.chdir('..')
+class Reaction(reaction.reaction):
+    pass
