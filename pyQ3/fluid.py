@@ -111,9 +111,9 @@ class fluid:
             system in use. If specified, the EQPT executable must be in the working directory
             set by eqpt_working_directory.
         dummy_temperature : float, default = 500.0
-            The dummy temperature (in degC) to provide DATA0 and input files. This value is just
-            provided to the EQ3 interpolation routine, and should have no influence on the
-            calculation results.
+            The dummy temperature (in degC) to provide DATA0 and input files. This might be useful
+            for calculations above 1000 degC. This value is just provided to the EQ3 interpolation
+            routine, and should have no influence on the calculation results.
         """
 
         self.system = system

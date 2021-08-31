@@ -1,6 +1,7 @@
 
 import linecache
 import pandas as pd
+import numpy as np
 
 # All of this code is from Fang's EQ6 output reading and plotting notebook
 
@@ -19,11 +20,13 @@ class eq6output:
         self.destroyed_reactants = None
         self.created_and_destroyed = None
         self.species_concs = None
+        self.solid_solutions = None
 
         self._created_destroyed_begin = None
 
         self.read_ph(tab_filepath)
         self.read_logmoles(tab_filepath)
+        self.read_solids(tab_filepath)
         self.read_log_elements(tab_filepath)
         self.read_dest_mol(tab_filepath)
         self.read_dest_other(tab_filepath, self._created_destroyed_begin)
@@ -79,6 +82,7 @@ class eq6output:
         tab.set_index('log zi', inplace=True)
 
         self.table_pH = tab
+        linecache.clearcache()
 
     def read_logmoles(self, tab_filepath):
         """
@@ -166,6 +170,93 @@ class eq6output:
         tab.set_index('log zi', inplace=True)
 
         self.minerals = tab
+        linecache.clearcache()
+
+    def read_solids(self, tab_filepath):
+        """
+        Function to read table of solid solution product compositions.
+        """
+        # Find index of beginning of table
+        begin = 0
+        lookup = 'solid solution product compositions'
+        file = open(tab_filepath, 'r')
+        for num, line in enumerate(file, 1):
+            if lookup in line:
+                begin += num
+                break
+        file.close()
+
+        # Find index of beginning of next table
+        end = 0
+        lookup = 'log of moles of product minerals'
+        file = open(tab_filepath, 'r')
+        for num, line in enumerate(file, 1):
+            if lookup in line:
+                end += num
+                break
+        file.close()
+
+        # Add 2 to start index to shift from table title to first row of headers
+        begin += 2
+
+        tab = pd.DataFrame()
+
+        size = np.arange(begin, end, 3)
+
+        if(len(size) == 1):
+            print("Solid solution disabled.")
+            return
+
+        for a, x in enumerate(size):
+
+            # Read header row
+            top = []
+            t = linecache.getline(tab_filepath, x).strip().split('  ')
+            for i, val in enumerate(t):
+                if val != '':
+                    top.append(val.strip())
+
+            # Combine multi-line species names into single string
+            for p, m in enumerate(top):
+                ind = linecache.getline(tab_filepath, x).index(m)
+                top[p] = linecache.getline(
+                    tab_filepath, x)[ind:ind+10]+linecache.getline(tab_filepath, x+1)[ind:ind+10].strip()
+                top[p] = top[p].strip()
+
+            # Advance to read numerical values
+            x += 2
+
+            # Read line of values
+            line = []
+            l = linecache.getline(tab_filepath, x).split(' ')
+            for j, v in enumerate(l):
+                if v != '' and v != '\n':
+                    line.append(float(v))
+
+            data = [line]
+
+            # Add new line to existing table
+            temp = pd.DataFrame(data=data, columns=top)
+            tab = tab.append(temp, sort=False, ignore_index=True)
+
+        # Reformat table to delete duplicates and empty rows
+        tab.infer_objects()
+        tab.drop_duplicates(inplace=True)
+        for i, row in enumerate(tab['log zi']):
+            if np.isnan(row):
+                for j, val in enumerate(tab.iloc[i]):
+                    if not np.isnan(val):
+                        tab.iloc[i-1, j] = val
+        tab.reset_index(inplace=True, drop=True)
+        for i, row in enumerate(tab['log zi']):
+            if np.isnan(row):
+                tab.drop(i, inplace=True)
+
+        # Set row labels as log zi values
+        tab.set_index('log zi', inplace=True)
+
+        self.solid_solutions = tab
+        linecache.clearcache()
 
     def read_log_elements(self, tab_filepath):
         """
@@ -243,6 +334,7 @@ class eq6output:
         tab.drop_duplicates(inplace=True)
 
         self.elements = tab
+        linecache.clearcache()
 
     def read_dest_mol(self, tab_filepath):
         """
@@ -300,6 +392,7 @@ class eq6output:
 
         self._created_destroyed_begin = begin
         self.destroyed_reactants = tab
+        linecache.clearcache()
 
     def read_dest_other(self, tab_filepath, begin):
         """
@@ -339,6 +432,7 @@ class eq6output:
         tab.set_index('log zi', inplace=True)
 
         self.created_and_destroyed = tab
+        linecache.clearcache()
 
     def read_log_conc(self, output_filepath):
 
@@ -391,3 +485,4 @@ class eq6output:
         tab.drop_duplicates(inplace=True)
 
         self.species_concs = tab
+        linecache.clearcache()

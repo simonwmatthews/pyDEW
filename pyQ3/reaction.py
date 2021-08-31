@@ -93,7 +93,7 @@ class reaction:
 
         # Check if pressure is the same as fluid, if not, regenerate DATA0 and run EQPT
         # Also need to re-run DATA0 if there is a temperature change during the calculation.
-        if self.P != self.fluid.P or self.dT != 0.0:
+        if self.P != self.fluid.P or self.dT != 0.0 or self.T != self.fluid.T:
             if core.operatingsystem == 'Darwin':
                 data0_filename = 'DATA0'
             elif core.operatingsystem == 'Linux':
@@ -120,8 +120,12 @@ class reaction:
                           executable_name=eqpt_executable_name)
 
         # Make the input file
-        self._make_input(pickup, self.T, self.reactants, self.dT, self.calculation_mode,
-                         self.zimax, eq6_working_directory)
+        if dT == 0 and self.T == self.fluid.T:
+            self._make_input(pickup, self.dummy_temperature+273.15, self.reactants, self.dT,
+                             self.calculation_mode, self.zimax, eq6_working_directory)
+        else:
+            self._make_input(pickup, self.T, self.reactants, self.dT,
+                             self.calculation_mode, self.zimax, eq6_working_directory)
 
         # Run EQ6
         core.run_eq6(eq6_working_directory, eq6_executable_name)
@@ -131,6 +135,7 @@ class reaction:
                                            tab_filepath=eq6_working_directory+'/tab',
                                            output_filepath=eq6_working_directory+'/output')
         self.minerals = self.output.minerals
+        self.solid_solutions = self.output.solid_solutions
         self.elements = self.output.elements
         self.species_concs = self.output.species_concs
         self.logzi = np.array(self.output.table_pH.index)
