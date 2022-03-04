@@ -24,13 +24,16 @@ class eq6output:
 
         self._created_destroyed_begin = None
 
-        self.read_ph(tab_filepath)
-        self.read_logmoles(tab_filepath)
-        self.read_solids(tab_filepath)
-        self.read_log_elements(tab_filepath)
-        self.read_dest_mol(tab_filepath)
-        self.read_dest_other(tab_filepath, self._created_destroyed_begin)
-        self.read_log_conc(output_filepath)
+        try:
+            self.read_ph(tab_filepath)
+            self.read_logmoles(tab_filepath)
+            self.read_solids(tab_filepath)
+            self.read_log_elements(tab_filepath)
+            self.read_dest_mol(tab_filepath)
+            self.read_dest_other(tab_filepath, self._created_destroyed_begin)
+            self.read_log_conc(output_filepath)
+        except:
+            linecache.clearcache()
 
         self.pH = self.table_pH['ph']
         self.T = self.table_pH['tempc']
@@ -315,7 +318,7 @@ class eq6output:
                 t = linecache.getline(tab_filepath, i).split(' ')
                 line = []
                 for j, v in enumerate(t):
-                    if v != '' and v != '\n':
+                    if v != '' and v != '\n' and v != 'nan':
                         line.append(float(v))
                 lines.append(line)
 

@@ -100,7 +100,7 @@ class reaction:
                 data0_filename = 'data0'
 
             if self.dT == 0.0:
-                self.fluid.system.make_data0(self.T, self.P, format=='pyQ3',
+                self.fluid.system.make_data0(self.T, self.P, format='pyQ3',
                                              filepath=eqpt_working_directory+'/'+data0_filename,
                                              dummy_temperature = self.dummy_temperature)
             else:
@@ -231,7 +231,7 @@ class reaction:
         s += zi_string + ' \n'
 
         s += '     tstrt=           0.    timemx=           0. \n'
-        s += '    kstpmx=         1000     cplim=           0. \n'
+        s += '    kstpmx=        10000     cplim=           0. \n'
         s += '     dzipr=       1.e+38    dzprlg=         0.05    ksppmx= 10000 \n'
         s += '    dzplot=       1.e+38    dzpllg=       10000.    ksplmx= 10000 \n'
         s += '     ifile= 60 \n'
