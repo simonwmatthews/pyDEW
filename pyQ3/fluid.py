@@ -45,6 +45,7 @@ class fluid:
                  uebal='H+',
                  uacion='',
                  nxmods=[],
+                 max_iterations=99,
                  eq3_working_directory =  'working',
                  eqpt_working_directory = 'working',
                  data0_filename = None,
@@ -90,6 +91,9 @@ class fluid:
             The name of the basis species to use as uacion. Default is empty.
         nxmods : list
             nxmods to apply to the input file. NEED TO CHECK THE FORMAT.
+        max_iterations : int , default = 99
+            The maximum iterations for EQ3 to perform. Default value is the maximum number of
+            iterations supported by EQ3 (99).
         eq3_working_directory : str, default='working'
             The working directory for EQ3.
         eqpt_working_directory : str, default='working'
@@ -128,6 +132,11 @@ class fluid:
         self.uacion = uacion
         self.nxmods = nxmods
         self.dummy_temperature = dummy_temperature
+        if max_iterations > 99:
+            raise core.InputError("EQ3 only supports a maximum of 99 iterations.")
+        elif max_iterations < 0 or isinstance(max_iterations, int) is False:
+            raise core.InputError("Maximum iterations must be a positive integer.")
+        self.max_iterations = max_iterations
 
         # If O2 is being set by mineral equilibrium:
         if 'O2(G)' in self.mineral_eq:
@@ -190,7 +199,8 @@ class fluid:
         else:
             s += '       fep=        ' + '{:.1f}'.format(fep)+ '    uredox=\n'
         s += '     tolbt=        .1E-7     toldl=        .1E-7    tolsat=           0.\n'
-        s += '    itermx=  0\n'
+        s += '    itermx= ' + ' '*(2-len(str(int(self.max_iterations))))
+        s += '{}\n'.format(int(self.max_iterations))
         s += '*               1    2    3    4    5    6    7    8    9  10\n'
         if fep is None:
             s += '  iopt1-10=    -3'
