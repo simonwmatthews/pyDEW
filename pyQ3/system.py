@@ -1254,8 +1254,7 @@ class system:
         if species.abbrev == 'O2(G)':
             DG += self._stoichiometry[species.abbrev][species.abbrev]*self.muO2(t,p)
         elif species.endmember_num == 1:
-            with redirect_stdout(_f):
-                DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
+            DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
         else:
             endm = np.zeros(species.endmember_num)
             endm[endi] = 1
