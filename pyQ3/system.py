@@ -5,8 +5,16 @@ import numpy as np
 from thermoengine import chem
 from copy import copy
 
+from ctypes import cdll
+from ctypes import util
+from rubicon.objc import ObjCClass, objc_method
+cdll.LoadLibrary(util.find_library('phaseobjc'))
+
 from contextlib import redirect_stdout
 import io
+
+DEWFluid = ObjCClass('DEWDielectricConstant')
+obj = DEWFluid.alloc().init()
 
 # Variable to send H2O driver warnings into the void
 _f = io.StringIO()
@@ -1254,11 +1262,13 @@ class system:
         if species.abbrev == 'O2(G)':
             DG += self._stoichiometry[species.abbrev][species.abbrev]*self.muO2(t,p)
         elif species.endmember_num == 1:
-            DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
+            with redirect_stdout(_f):
+                DG += self._stoichiometry[species.abbrev][species.abbrev]*species.gibbs_energy(t,p)
         else:
             endm = np.zeros(species.endmember_num)
             endm[endi] = 1
-            DG += self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
+            with redirect_stdout(_f):
+                DG += self._stoichiometry[species.endmember_names[endi]][species.endmember_names[endi]]*species.gibbs_energy(t,p,mol=endm)
 
         if mineral is True and adjust_NaK is True:
             if species.endmember_num == 1:
