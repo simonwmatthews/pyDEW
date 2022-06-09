@@ -11,6 +11,8 @@ pickup
 slist
 notebooks/working/
 notebooks/mineral_comparisons/
+notebooks/tutorials/tutorial5_working/
+notebooks/tutorials/tutorial5_species.pkl
 
 .DS_Store
 
