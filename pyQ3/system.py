@@ -381,10 +381,11 @@ class system:
         s_dhb = []
         for i in range(8):
             t = T+i*dT
-            dha = obj.AgammaFromT_andP_(t,P)
-            dhb = obj.BgammaFromT_andP_(t,P)
-            s_dha.append('{0:0.4f}'.format(dha))
-            s_dhb.append('{0:0.4f}'.format(dhb/1e8))
+            with redirect_stdout(_f):
+                dha = obj.AgammaFromT_andP_(t,P)
+                dhb = obj.BgammaFromT_andP_(t,P)
+                s_dha.append('{0:0.4f}'.format(dha))
+                s_dhb.append('{0:0.4f}'.format(dhb/1e8))
 
         s += 'debye huckel a (adh)\n'
         s += ' '*(10-len(s_dha[0].split('.')[0]))
@@ -1296,7 +1297,8 @@ class system:
                 if s.abbrev == 'O2(G)':
                     DG += self._stoichiometry[species_name][s.abbrev]*self.muO2(t,p)
                 else:
-                    DG += self._stoichiometry[species_name][s.abbrev]*s.gibbs_energy(t,p)
+                    with redirect_stdout(_f):
+                        DG += self._stoichiometry[species_name][s.abbrev]*s.gibbs_energy(t,p)
         return -DG/(8.314462618*t)/2.30258509299
 
     def muO2(self,t, p):
