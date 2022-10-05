@@ -132,8 +132,8 @@ P = model.get_symbol_for_p()
 Tr = model.get_symbol_for_tr()
 Pr = model.get_symbol_for_pr()
 
-k0,k1,k2,k3,k5 = sym.symbols('k0 k1 k2 k3 k5')
-CpPr = k0+k1/sym.sqrt(T)+k2/T**2+k3/T**3+k5*T
+k0,k1,k2,k3,k5,k6 = sym.symbols('k0 k1 k2 k3 k5 k6')
+CpPr = k0+k1/sym.sqrt(T)+k2/T**2+k3/T**3+k5*T + k6*T**2
 STrPr,HTrPr = sym.symbols('S_TrPr H_TrPr')
 
 params = [('H_TrPr','J',HTrPr), ('S_TrPr','J/K',STrPr), ('k0','J/K-m',k0), ('k1','J-K^(1/2)-m',k1),
@@ -193,7 +193,20 @@ d = pd.read_csv('dew_berman.csv')
 
 params = {}
 for i, row in d.iterrows():
-    params[row['name']] = {  'Phase': row['name'],
+    species_name = row['name']
+    
+    if species_name[-1] == '-':
+        species_name = species_name[:-1]+'_n'
+    if species_name[-2] == '-':
+        species_name = species_name[:-2]+'_n'+species_name[-1]
+    species_name = species_name.replace('-','_')
+    species_name = species_name.replace('+','_p')
+    species_name = species_name.replace('(','_l_')
+    species_name = species_name.replace(')','_r_')
+        
+    species_name = species_name.replace(',','_')
+    
+    params[row['name']] = {  'Phase': species_name,
                           'Formula': row.formula,
                           'H_TrPr':row.H_ref + row.ref_state*298.15,
                           'S_TrPr': row.S_ref,
@@ -202,6 +215,7 @@ for i, row in d.iterrows():
                           'k2': row.k2,
                           'k3': row.k3,
                           'k5': row.k5,
+                          'k6': row.k6,
                           'V_TrPr': row.v0,
                           'v1': row.v3*1e-5,
                           'v2': row.v4*1e-8,

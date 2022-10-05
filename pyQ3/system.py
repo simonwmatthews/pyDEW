@@ -16,6 +16,9 @@ import io
 DEWFluid = ObjCClass('DEWDielectricConstant')
 obj = DEWFluid.alloc().init()
 
+DuanAndZhangCO2 = ObjCClass('DuanCO2')
+objCO2 = DuanAndZhangCO2.alloc().init()
+
 # Variable to send H2O driver warnings into the void
 _f = io.StringIO()
 
@@ -52,7 +55,9 @@ class system:
                 gases = defaultsystem.gases,
                 hydrated_species= defaultsystem.hydrated_species,
                 ion_size= defaultsystem.ion_size,
-                mineral_NaK_adjustment = []
+                mineral_NaK_adjustment = [],
+                carbon_activity_mode='bdot*xi',
+                huang_CO2_coeff=None
                 ):
         """Initialisation routine for a system class.
 
@@ -93,6 +98,13 @@ class system:
         mineral_NaK_adjustment : list, default=[]
             List of mineral names for which the adjustment to the free energy for Na/K
             (Sverjensky, 1991) should be applied.
+        carbon_activity_mode : str, default: 'bdot*xi'
+            Which equation to use for calculating the activity coefficient for CO2. One of:
+            - 'bdot*xi': the former default option for DEW
+            - 'sverjensky22': The new a(CO2) equations developed by Sverjensky (in prep.).
+            - 'huang19': The empirical approach taken by Huang & Sverjensky (2019).
+        huang_CO2_coeff : numpyArray or None, default: None
+            The coefficients to use for b = coeff[0] + coeff[1]*T + coeff[2]*T**2
         """
 
         # The element list must start with O and H:
@@ -226,7 +238,7 @@ class system:
         for gas in gases:
             if isinstance(gas, str):
                 try:
-                    self.gases.append(dewdb[gas])
+                    self.gases.append(mineralsdb[gas])
                 except:
                     raise core.InputError(min+' phase string not recognised.')
             else:
@@ -258,6 +270,12 @@ class system:
         self._stoichiometry = dict()
         for species in self.other_species + self.minerals + self.gases:
             self._find_reaction(species)
+
+        if carbon_activity_mode not in ['bdot*xi', 'sverjensky22', 'huang19']:
+            raise core.InputError("Carbon activity mode not recognised")
+        self.carbon_activity_mode = carbon_activity_mode
+        self.huang_CO2_coeff = huang_CO2_coeff
+        self.bhatCO2 = dewdb['bhatCO2']
 
     def _validate(self):
         if self.basis_species_names[0] != 'H2O':
@@ -343,14 +361,12 @@ class system:
             Temperature interval
         """
 
-        T = T-273.15
-
         # Characters to first period
         indent = 10
         # Characters between periods
         spacing = 9
 
-        temps = np.linspace(T,T+dT*7,8)
+        temps = np.linspace(T - 273.15, T - 273.15 + dT * 7,8)
 
         # Convert Temperature and Pressure to string
         sT = list()
@@ -379,6 +395,10 @@ class system:
         """
         s_dha = []
         s_dhb = []
+        s_co21 = []
+        s_co22 = []
+        s_co23 = []
+        s_co24 = []
         for i in range(8):
             t = T+i*dT
             with redirect_stdout(_f):
@@ -386,6 +406,27 @@ class system:
                 dhb = obj.BgammaFromT_andP_(t,P)
                 s_dha.append('{0:0.4f}'.format(dha))
                 s_dhb.append('{0:0.4f}'.format(dhb/1e8))
+                if self.carbon_activity_mode == 'sverjensky22':
+                    co22 = self.epsCO2(t, P)
+                    co23 = self.epsH2O(t, P)
+                    co21 = self.omega_hat(t, P, co23, co22)
+                    co24 = self.b_hat(t, P)
+                elif self.carbon_activity_mode == 'huang19':
+                    co21 = (self.huang_CO2_coeff[0]
+                            + self.huang_CO2_coeff[1] * T
+                            + self.huang_CO2_coeff[2] * T**2)
+                    co22 = 0.0
+                    co23 = 0.0
+                    co24 = 0.0
+                else:
+                    co21 = 0.0
+                    co22 = 0.0
+                    co23 = 0.0
+                    co24 = 0.0
+                s_co21.append('{0:0.4f}'.format(co21))
+                s_co22.append('{0:0.4f}'.format(co22))
+                s_co23.append('{0:0.4f}'.format(co23))
+                s_co24.append('{0:0.4f}'.format(co24))
 
         s += 'debye huckel a (adh)\n'
         s += ' '*(10-len(s_dha[0].split('.')[0]))
@@ -410,18 +451,47 @@ class system:
         s += 'bdot\n'
         s += '         0.0000    0.0000    0.0000    0.0000\n'
         s += '         0.0000    0.0000    0.0000    0.0000\n'
+
         s += 'c co2 1\n'
-        s += '       0.        0.        0.        0.      \n'
-        s += '       0.        0.        0.        0.      \n'
+        s += ' '*(10-len(s_co21[0].split('.')[0]))
+        for i in range(4):
+            s += (s_co21[i] + ' '*(10-len(s_co21[i])))
+        s += '\n'
+        s += ' '*(10-len(s_co21[4].split('.')[0]))
+        for i in range(4):
+            s += (s_co21[i+4] + ' '*(10-len(s_co21[i+4])))
+        s += '\n'
+
         s += 'c co2 2\n'
-        s += '       0.        0.        0.        0.      \n'
-        s += '       0.        0.        0.        0.      \n'
+        s += ' '*(10-len(s_co22[0].split('.')[0]))
+        for i in range(4):
+            s += (s_co22[i] + ' '*(10-len(s_co22[i])))
+        s += '\n'
+        s += ' '*(10-len(s_co22[4].split('.')[0]))
+        for i in range(4):
+            s += (s_co22[i+4] + ' '*(10-len(s_co22[i+4])))
+        s += '\n'
+
         s += 'c co2 3\n'
-        s += '       0.        0.        0.        0.      \n'
-        s += '       0.        0.        0.        0.      \n'
+        s += ' '*(10-len(s_co23[0].split('.')[0]))
+        for i in range(4):
+            s += (s_co23[i] + ' '*(10-len(s_co23[i])))
+        s += '\n'
+        s += ' '*(10-len(s_co23[4].split('.')[0]))
+        for i in range(4):
+            s += (s_co23[i+4] + ' '*(10-len(s_co23[i+4])))
+        s += '\n'
+
         s += 'c co2 4\n'
-        s += '       0.        0.        0.        0.\n'
-        s += '       0.        0.        0.        0.\n'
+        s += ' '*(10-len(s_co24[0].split('.')[0]))
+        for i in range(4):
+            s += (s_co24[i] + ' '*(10-len(s_co24[i])))
+        s += '\n'
+        s += ' '*(10-len(s_co24[4].split('.')[0]))
+        for i in range(4):
+            s += (s_co24[i+4] + ' '*(10-len(s_co24[i+4])))
+        s += '\n'
+
         s += 'c h2o 1\n'
         s += '           500.        1.      500.        1.   \n'
         s += '             1.      500.      500.      500.   \n'
@@ -1168,7 +1238,7 @@ class system:
         return matrix
 
 
-    def make_data0(self, t, p, format='traditional', filepath='DATA0', dummy_temperature = 500.0):
+    def make_data0(self, t, p, format='traditional', filepath='DATA0', dummy_temperature = 300.0):
         """ Method to build the DATA0 file, ready for processing with EQPT. This can be used to
         generate DATA0 files in the traditional format, or to generate intermediate files for use
         in pyQ3 internal calculations.
@@ -1176,10 +1246,14 @@ class system:
         Parameters
         ----------
         t : float
-            Temperature in K. If using the traditional format, this will be the temperature at
-            which the file starts, with 7 incremements of 50 K following. If using the pyQ3 format,
-            this will be the temperature at which the chemical properties are calculated, but
-            dummy temperature values will be printed in DATA0.
+            If using the traditional format:
+            The temperature that DATA0 must include (in K). If < 650 C (923.15 K) a low temperature
+            DATA0 will be generated (300 C - 650 C), if >= 650 C (923.15 K), a high temperature
+            DATA0 will be generated (650 C - 1000 C).
+
+            If using the pyQ3 format:
+            The temperature that the parameters will be calculated at. The DATA0 file will be
+            generated according to the dummy temperature.
         p : float
             Pressure in bars.
         format : {'traditional', 'pyQ3'}
@@ -1187,7 +1261,7 @@ class system:
         filepath : str, default: 'DATA0'
             The filepath and filename with which to save DATA0. For linux EQPT, the file must be
             saved as lowercase.
-        dummy_temperature : float, default = 500.0
+        dummy_temperature : float, default = 300.0
             The dummy temperature (in degC) to provide DATA0 if the pyQ3 format is being used. This
             value is just provided to the EQ3 interpolation routine, and should have no influence
             on the calculation results.
@@ -1195,7 +1269,16 @@ class system:
         s = self._d0_preamble()
 
         if format == 'traditional':
-            T = t
+            if t < 923.15 and t >= 573.15:
+                T = 300.0 + 273.15
+            elif t >= 923.15 and t <= 1273.15:
+                T = 650.0 + 273.15
+            else:
+                raise core.InputError("The temperature specified is not compatible with EQ3. It "
+                                      "must be between 300 C and 1000 C. Otherwise, you could "
+                                      "use a dummy temperature by generating a pyQ3 formatted "
+                                      "DATA0.")
+            t = T
             dT = 50.0
         elif format == 'pyQ3':
             T = dummy_temperature + 273.15
@@ -1213,7 +1296,7 @@ class system:
             s = self._d0_aqueous_species(spec, t, p, s=s, dT=dT)
         for dummy in self.dummy_species:
             s = self._d0_dummy_species(dummy['abbrev'], dummy['charge'],
-                                      dummy['formula'], s)
+                                       dummy['formula'], s)
         s = self._d0_end_species(s=s)
         for miner in self.minerals:
             if miner.phase_name.upper() in self.mineral_NaK_adjustment:
@@ -1308,3 +1391,18 @@ class system:
         ss = 205.15 + 23.10248*np.log(t/tr)  - 2.0*804.8876*(1.0/np.sqrt(t)-1.0/np.sqrt(tr)) \
            - 0.5*1762835.0*(1.0/(t*t)-1.0/(tr*tr)) + 18172.91960*(1.0/t-1.0/tr) + 0.002676*(t-tr)
         return hs - t*ss + 205.15*298.15
+
+    def epsCO2(self, t, p):
+        v_co2 = objCO2.getVolumeFromT_andP_(t, p)*10
+        density_co2 = 1 / v_co2
+        ln_eps_co2 = 2.7761 + 0.61526 * np.log(density_co2)
+        return np.exp(ln_eps_co2)
+
+    def epsH2O(self, t, p):
+        return obj.epsilonFromT_andP_(t, p)
+
+    def omega_hat(self, t, p, eps_h2o, eps_co2):
+        return 7.5404 - 10.043 * (1 / eps_co2 - 1 / eps_h2o)
+
+    def b_hat(self, t, p):
+        return self.bhatCO2.gibbs_energy(t, p) / (2.303 * 8.3145 * t)

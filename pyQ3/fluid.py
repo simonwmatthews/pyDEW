@@ -52,7 +52,8 @@ class fluid:
                  input_filename = 'input',
                  eq3_executable_name = None,
                  eqpt_executable_name = None,
-                 dummy_temperature = 500.0
+                 dummy_temperature = 300.0,
+                 aH2O_mode='unity'
                  ):
         """
         Initialises a DEW fluid object
@@ -118,6 +119,9 @@ class fluid:
             The dummy temperature (in degC) to provide DATA0 and input files. This might be useful
             for calculations above 1000 degC. This value is just provided to the EQ3 interpolation
             routine, and should have no influence on the calculation results.
+        aH2O_mode : string, default: 'unity'
+            Either 'molfraction' or 'unity'. If 'molfraction', the activity of water will be set to
+            the mole fraction of water. If 'unity', the activity of water will always be 1.
         """
 
         self.system = system
@@ -138,6 +142,10 @@ class fluid:
             raise core.InputError("Maximum iterations must be a positive integer.")
         self.max_iterations = max_iterations
 
+        if aH2O_mode not in ['unity', 'molfraction']:
+            raise core.InputError("aH2O mode note recognised.")
+        self.aH2O_mode = aH2O_mode
+
         # If O2 is being set by mineral equilibrium:
         if 'O2(G)' in self.mineral_eq:
             self.fO2 = None
@@ -154,7 +162,7 @@ class fluid:
         # Create DATA0
         self.system.make_data0(self.T, self.P, format='pyQ3',
                                filepath = eqpt_working_directory + '/' + data0_filename,
-                               dummy_temperature = self.dummy_temperature - 50)
+                               dummy_temperature = self.dummy_temperature)
         # Run EQPT
         core.run_eqpt(working_directory = eqpt_working_directory,
                       executable_name = eqpt_executable_name)
@@ -210,7 +218,28 @@ class fluid:
             s += '    0    0    2    0    0    0    0    0   0\n'
         else:
             s += '    0    0    0    0    0    0    0    0   0\n'
-        s += '  iopg1-10=     0   -1    0    0    1    0    0    0    0   0\n'
+        s += '  iopg1-10=     0   -1    0    0    '
+
+        if self.system.carbon_activity_mode == 'sverjensky22':
+            s += '0'
+        elif self.system.carbon_activity_mode == 'huang19':
+            s += '2'
+        else:
+            s += '1'
+
+        s += '    0    '
+
+        if self.aH2O_mode == 'molfraction':
+            s += '1    '
+        else:
+            s += '0    '
+
+        if (t is None and self.T >= 650+273.15) or (t is not None and t >= 650):
+            s += '1'
+        else:
+            s += '0'
+
+        s += '    0   0\n'
         s += '  iopr1-10=     0    2    0    0    0    0    1         0   \n'
         s += ' iopr11-20=     0    0    0    0    0    0    0  \n'
         s += '  iodb1-10=     0    0    0    0    0    0    0  \n'

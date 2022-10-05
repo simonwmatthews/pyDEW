@@ -21,7 +21,7 @@ hydrated_species = { 'AL(OH)4-': 2, 'AL(OH)SI(OH)-': 3, 'CA(H3SIO4)+': 1, 'FE(OH
     'AL(OH)3(AQ)': 1, 'FE(OH)3-': 1, 'H3SIO4-': 1, 'MG(H3SIO4)+': 1, 'MGSIC+': 1,
     'H6SI2O7(AQ)': 3, 'H8SI3O10(AQ)': 4, 'H4SIO4(AQ)': 2,}
 
-gases = ['H2(G)']
+gases = ['H2(G)', 'CO2(G)', 'S2(G)', 'CH4(G)', 'H2S(G)', 'H2O(G)']
 
 
 ion_size = {'O2(AQ)':-0.5, 'H2(AQ)':-0.5, 'N2(AQ)':-0.5, 'CO(AQ)':-0.5, 'CH4(AQ)':-0.5,
