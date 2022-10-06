@@ -57,7 +57,8 @@ def load_coder_modules(working_dir=dir_path + "/dew2019_coderfiles"):
 
 
 def DEW_species(
-    working_dir=dir_path + "/dew2019_coderfiles", pickle_file=dir_path + "/DEW2019.pkl"
+    working_dir=dir_path + "/dew2019_coderfiles", pickle_file=dir_path + "/DEW2019.pkl",
+    alternative_pickle_file=dir_path + "/DEW2019_oldTE.pkl"
 ):
     """Returns the DEW2019 database (or any other database if the working_dir is set).
 
@@ -68,6 +69,9 @@ def DEW_species(
     pickle_file : str
         The filename for the pickle file containing the coder objects for the DEW2019
         aqueous species.
+    alternative_pickle_file : str
+        Filename for an alternative pickle file if the first one fails. Added to get around
+        cluster ThermoEngine being older than current.
 
     Returns
     -------
@@ -75,9 +79,14 @@ def DEW_species(
         Keys are the aqueous species names, the values are the phase objects.
     """
     load_coder_modules(working_dir)
-    with open(pickle_file, "rb") as file:
-        dew = dill.load(file)
-        file.close()
+    try:
+        with open(pickle_file, "rb") as file:
+            dew = dill.load(file)
+            file.close()
+    except:
+        with open(alternative_pickle_file, "rb") as file:
+            dew = dill.load(file)
+            file.close()
 
     # Load the SWIM model and O2.
     _db = berman_database()
@@ -93,6 +102,7 @@ def DEW_species(
 def DEW_minerals(
     working_dir=dir_path + "/dew_minerals_coderfiles",
     pickle_file=dir_path + "/dewminerals.pkl",
+    alternative_pickle_file=dir_path + "/dewminerals_oldTE.pkl"
 ):
     """Returns the DEW Minerals database (or any other database if the working_dir is set).
 
@@ -103,6 +113,9 @@ def DEW_minerals(
     pickle_file : str
         The filename for the pickle file containing the coder objects for the DEW2019
         aqueous species.
+    alternative_pickle_file : str
+        Filename for an alternative pickle file if the first one fails. Added to get around
+        cluster ThermoEngine being older than current.
 
     Returns
     -------
@@ -110,9 +123,14 @@ def DEW_minerals(
         Keys are the mineral names, the values are the phase objects.
     """
     load_coder_modules(working_dir)
-    with open(pickle_file, "rb") as file:
-        dew = dill.load(file)
-        file.close()
+    try:
+        with open(pickle_file, "rb") as file:
+            dew = dill.load(file)
+            file.close()
+    except:
+        with open(alternative_pickle_file, "rb") as file:
+            dew = dill.load(file)
+            file.close()
 
     return dew
 
