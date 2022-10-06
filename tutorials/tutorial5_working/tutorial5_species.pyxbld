@@ -1,0 +1,14 @@
+import numpy
+
+#            module name specified by `%%cython_pyximport` magic
+#            |        just `modname + ".pyx"`
+#            |        |
+def make_ext(modname, pyxfilename):
+    from setuptools.extension import Extension
+    return Extension(modname,
+                     sources=[pyxfilename, 'new_NaCl_aq_tutorial5_species_calib.c'],
+                     include_dirs=['.', numpy.get_include()],
+                     extra_compile_args=['-O3'],
+                     libraries=['gsl', 'swimdew'],
+                     library_dirs=['/usr/local/lib'],
+                     runtime_library_dirs=['/usr/local/lib'])
