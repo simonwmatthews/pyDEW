@@ -24,7 +24,7 @@ setup(name='pyQ3',
          'thermoengine',
          'numpy',
          'pandas',
-      ]
+      ],
       include_package_data=True,
       zip_safe=False,
       test_suite='tests',
