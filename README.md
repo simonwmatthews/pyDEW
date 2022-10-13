@@ -1,5 +1,5 @@
-# pyQ3
-Tools for interacting with DEW, EQPT, and EQ3, via python
+# pyDEW
+Tools for interacting with DEW, EQPT, and EQ3, via python (formally known as pyQ3).
 
 The first step is to import DEW into ENKI by making phase objects for each DEW species. This is done in the import_DEW.ipnb notebook.
 
