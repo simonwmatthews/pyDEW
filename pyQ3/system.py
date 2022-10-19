@@ -1405,4 +1405,4 @@ class system:
         return 7.5404 - 10.043 * (1 / eps_co2 - 1 / eps_h2o)
 
     def b_hat(self, t, p):
-        return self.bhatCO2.gibbs_energy(t, p) / (2.303 * 8.3145 * t)
+        return - self.bhatCO2.gibbs_energy(t, p) / (2.303 * 8.3145 * t)

@@ -239,7 +239,18 @@ class fluid:
         else:
             s += '0'
 
-        s += '    0   0\n'
+        s += '    '
+
+        if self.system.carbon_activity_mode == 'sverjensky22':
+            if 'C' in self.system.elements:
+                carb_pos = self.system.elements.index('C') + 1
+                s += str(carb_pos)
+            else:
+                raise InputError("Carbon not found in the system.")
+        else:
+            s += '0'
+
+        s += '   0\n'
         s += '  iopr1-10=     0    2    0    0    0    0    1         0   \n'
         s += ' iopr11-20=     0    0    0    0    0    0    0  \n'
         s += '  iodb1-10=     0    0    0    0    0    0    0  \n'
