@@ -31,7 +31,7 @@ w_path = os.getcwd()
 operatingsystem = platform.system()
 if operatingsystem not in ["Linux", "Darwin"]:
     raise CompatibilityError(
-        "The pyQ3 package is only compatible with Mac OSX and Linux."
+        "The pyDEW package is only compatible with Mac OSX and Linux."
     )
 
 

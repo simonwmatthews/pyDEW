@@ -1,4 +1,4 @@
-"""pyQ3 - a python wrapper for EQ3 for DEW calculations
+"""pyDEW - a python library for performing Deep Earth Water (DEW) calculations
 
 Developed and maintained by Simon Matthews (simonm@hi.is).
 
@@ -11,11 +11,10 @@ with scientific python distributions. The ThermoEngine coder objects for the DEW
 and compiled separately to this model. See the Jupyter notebooks supplied in the repository.
 """
 
-# Import pyQ3 classes and methods
-# from pyQ3 import defaultsystem
-from pyQ3 import system
-from pyQ3 import fluid
-from pyQ3 import reaction
+
+from pyDEW import system
+from pyDEW import fluid
+from pyDEW import reaction
 
 
 class System(system.system):

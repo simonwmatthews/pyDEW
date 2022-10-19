@@ -1,5 +1,5 @@
-from pyQ3 import defaultsystem
-from pyQ3 import core
+from pyDEW import defaultsystem
+from pyDEW import core
 
 import numpy as np
 from thermoengine import chem
@@ -1241,7 +1241,7 @@ class system:
     def make_data0(self, t, p, format='traditional', filepath='DATA0', dummy_temperature = 300.0):
         """ Method to build the DATA0 file, ready for processing with EQPT. This can be used to
         generate DATA0 files in the traditional format, or to generate intermediate files for use
-        in pyQ3 internal calculations.
+        in pyDEW internal calculations.
 
         Parameters
         ----------
@@ -1251,18 +1251,18 @@ class system:
             DATA0 will be generated (300 C - 650 C), if >= 650 C (923.15 K), a high temperature
             DATA0 will be generated (650 C - 1000 C).
 
-            If using the pyQ3 format:
+            If using the pyDEW format:
             The temperature that the parameters will be calculated at. The DATA0 file will be
             generated according to the dummy temperature.
         p : float
             Pressure in bars.
-        format : {'traditional', 'pyQ3'}
+        format : {'traditional', 'pyDEW'}
             How to format the temperature variation in the file.
         filepath : str, default: 'DATA0'
             The filepath and filename with which to save DATA0. For linux EQPT, the file must be
             saved as lowercase.
         dummy_temperature : float, default = 300.0
-            The dummy temperature (in degC) to provide DATA0 if the pyQ3 format is being used. This
+            The dummy temperature (in degC) to provide DATA0 if the pyDEW format is being used. This
             value is just provided to the EQ3 interpolation routine, and should have no influence
             on the calculation results.
         """
@@ -1276,15 +1276,15 @@ class system:
             else:
                 raise core.InputError("The temperature specified is not compatible with EQ3. It "
                                       "must be between 300 C and 1000 C. Otherwise, you could "
-                                      "use a dummy temperature by generating a pyQ3 formatted "
+                                      "use a dummy temperature by generating a pyDEW formatted "
                                       "DATA0.")
             t = T
             dT = 50.0
-        elif format == 'pyQ3':
+        elif format == 'pyDEW':
             T = dummy_temperature + 273.15
             dT = 0.0
         else:
-            raise core.InputError("format must be one of 'traditional' or 'pyQ3'.")
+            raise core.InputError("format must be one of 'traditional' or 'pyDEW'.")
 
         s = self._d0_t_p_block(T, p, s, dT=50.0)
 

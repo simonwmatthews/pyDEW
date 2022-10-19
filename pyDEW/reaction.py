@@ -1,5 +1,5 @@
-from pyQ3 import core
-from pyQ3 import eq6_output
+from pyDEW import core
+from pyDEW import eq6_output
 
 import numpy as np
 import os
@@ -14,7 +14,7 @@ class reaction:
 
     Parameters
     ----------
-    fluid : pyQ3.Fluid object
+    fluid : pyDEW.Fluid object
         The fluid object to react with
     t : float
         The temperature (K)
@@ -56,7 +56,7 @@ class reaction:
         of EQ3 will be copied into the working directory, according to the operating system
         in use.
     dummy_temperature : float, default = 500.0
-        The dummy temperature (in degC) to provide DATA0 if the pyQ3 format is being used. This
+        The dummy temperature (in degC) to provide DATA0 if the pyDEW format is being used. This
         value is just provided to the EQ3/EQ6 interpolation routine, and should have no influence
         on the calculation results. An exception to this is carbon species in some versions of
         EQ3.
@@ -100,7 +100,7 @@ class reaction:
                 data0_filename = 'data0'
 
             if self.dT == 0.0:
-                self.fluid.system.make_data0(self.T, self.P, format='pyQ3',
+                self.fluid.system.make_data0(self.T, self.P, format='pyDEW',
                                              filepath=eqpt_working_directory+'/'+data0_filename,
                                              dummy_temperature = self.dummy_temperature)
             else:

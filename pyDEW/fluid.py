@@ -1,5 +1,5 @@
-from pyQ3 import core
-from pyQ3 import output
+from pyDEW import core
+from pyDEW import output
 import os
 
 class fluid:
@@ -19,7 +19,7 @@ class fluid:
         The temperature of the fluid in K
     P : bar
         The pressure of the fluid in bar
-    eq3output: pyQ3.output object or nonetype
+    eq3output: pyDEW.output object or nonetype
         The results of an EQ3 calculation, once calculated.
     pH : float
         The pH of the system (from the eq3 output)
@@ -60,7 +60,7 @@ class fluid:
 
         parameters
         ----------
-        system:   pyQ3.system object
+        system:   pyDEW.system object
             The system object for the system the fluid belongs to.
         T:  float
             Temperature of the fluid in K.
@@ -101,7 +101,7 @@ class fluid:
             The working directory for EQPT.
         data0_filename : str or None, default=None
             The filename for DATA0. If running on with the linux executables, this must be 'data0',
-            for OSX it must be 'DATA0'. If set to None, pyQ3 will choose the correct name based
+            for OSX it must be 'DATA0'. If set to None, pyDEW will choose the correct name based
             on the operating system.
         input_filename : str, default='input'
             The filename for the EQ3 input file.
@@ -160,7 +160,7 @@ class fluid:
         if not os.path.isdir(eqpt_working_directory):
             os.makedirs(eqpt_working_directory)
         # Create DATA0
-        self.system.make_data0(self.T, self.P, format='pyQ3',
+        self.system.make_data0(self.T, self.P, format='pyDEW',
                                filepath = eqpt_working_directory + '/' + data0_filename,
                                dummy_temperature = self.dummy_temperature)
         # Run EQPT
@@ -177,7 +177,7 @@ class fluid:
                       eq3_working_directory + '/data1')
 
         # Create input file and run EQ3
-        self._make_input(filepath = eq3_working_directory + '/' + input_filename, format='pyQ3')
+        self._make_input(filepath = eq3_working_directory + '/' + input_filename, format='pyDEW')
         core.run_eq3(working_directory = eq3_working_directory,
                      executable_name = eq3_executable_name)
 
@@ -314,7 +314,7 @@ class fluid:
         if format == 'traditional':
             s = self._input_preamble(using_solid_solutions=using_solid_solutions,uebal=self.uebal,
                                     uacion=self.uacion,fep=self.fO2)
-        elif format == 'pyQ3':
+        elif format == 'pyDEW':
             s = self._input_preamble(using_solid_solutions=using_solid_solutions,uebal=self.uebal,
                                     uacion=self.uacion,fep=self.fO2,t=self.dummy_temperature)
         s = self._input_nxmod(s,self.nxmods)

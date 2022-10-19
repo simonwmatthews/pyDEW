@@ -1,5 +1,5 @@
 import pandas as pd
-from pyQ3 import core
+from pyDEW import core
 
 class eq3output:
     def __init__(self, filepath='output', suppress_warnings=False):
