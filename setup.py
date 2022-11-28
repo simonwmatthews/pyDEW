@@ -2,10 +2,14 @@ from setuptools import setup, find_packages
 # from setuptools.command.install import install
 from subprocess import check_call
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(name='pyDEW',
-      version='0.12',
+      version='0.14',
       description='Python library for performing Deep Earth Water (DEW) calculations.',
+      long_description=long_description,
+      long_description_content_type="text/markdown",
       url='http://github.com/simonwmatthews/pyDEW',
       author='Simon Matthews',
       author_email='simonm@hi.is',

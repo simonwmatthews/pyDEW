@@ -13,8 +13,7 @@ cdll.LoadLibrary(util.find_library('phaseobjc'))
 from contextlib import redirect_stdout
 import io
 
-DEWFluid = ObjCClass('DEWDielectricConstant')
-obj = DEWFluid.alloc().init()
+from thermoengine import aqueous
 
 DuanAndZhangCO2 = ObjCClass('DuanCO2')
 objCO2 = DuanAndZhangCO2.alloc().init()
@@ -402,8 +401,8 @@ class system:
         for i in range(8):
             t = T+i*dT
             with redirect_stdout(_f):
-                dha = obj.AgammaFromT_andP_(t,P)
-                dhb = obj.BgammaFromT_andP_(t,P)
+                dha = aqueous.cy_DEW_Agamma(t, P)
+                dhb = aqueous.cy_DEW_Bgamma(t, P)
                 s_dha.append('{0:0.4f}'.format(dha))
                 s_dhb.append('{0:0.4f}'.format(dhb/1e8))
                 if self.carbon_activity_mode == 'sverjensky22':
@@ -1399,7 +1398,7 @@ class system:
         return np.exp(ln_eps_co2)
 
     def epsH2O(self, t, p):
-        return obj.epsilonFromT_andP_(t, p)
+        return aqueous.cy_DEW_epsilon(t, p)
 
     def omega_hat(self, t, p, eps_h2o, eps_co2):
         return 7.5404 - 10.043 * (1 / eps_co2 - 1 / eps_h2o)

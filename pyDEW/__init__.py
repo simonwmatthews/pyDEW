@@ -11,6 +11,8 @@ with scientific python distributions. The ThermoEngine coder objects for the DEW
 and compiled separately to this model. See the Jupyter notebooks supplied in the repository.
 """
 
+__version__ = "0.14"
+__author__ = "Simon Matthews"
 
 from pyDEW import system
 from pyDEW import fluid
