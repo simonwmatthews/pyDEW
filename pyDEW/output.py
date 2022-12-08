@@ -147,7 +147,7 @@ class eq3output:
                 if p == 16:
                     if s[0] != 'endit.' and len(s) == 1:
                         ss_name = s[0]
-                        ss_info = pd.Series()
+                        ss_info = pd.Series(dtype='float64')
                         stored = False
                     elif s[0] != 'component' and len(s) > 1:
                         ss_info[s[0]]=core.convert_float(s[1])
@@ -170,7 +170,9 @@ class eq3output:
                         row = {'element':s[0],
                                'ppm':s[2],
                                'molality':s[3]}
-                        self.elemental_comp = self.elemental_comp.append(row,ignore_index=True)
+                        self.elemental_comp = pd.concat([self.elemental_comp,
+                                                         pd.DataFrame.from_records([row])],
+                                                        ignore_index=True)
 
                 ### BASIS SPECIES ##################################################
                 if p == 5:
@@ -184,7 +186,9 @@ class eq3output:
                                 row = {'species':s[0],
                                        'ppm':core.convert_float(s[2]),
                                        'molality':core.convert_float(s[3])}
-                        self.basis_species_comp = self.basis_species_comp.append(row,ignore_index=True)
+                        self.basis_species_comp = pd.concat([self.basis_species_comp,
+                                                             pd.DataFrame.from_records([row])],
+                                                            ignore_index=True)
 
                 ### EQUIVALENT COMPOSITION #########################################
                 if p == 6:
@@ -193,13 +197,17 @@ class eq3output:
                                'pH':core.convert_float(s[3]),
                                'Eh':core.convert_float(s[4]),
                                'pe':core.convert_float(s[5])}
-                        self.electrochemistry = self.electrochemistry.append(row,ignore_index=True)
+                        self.electrochemistry = pd.concat([self.electrochemistry,
+                                                           pd.DataFrame.from_records([row])],
+                                                          ignore_index=True)
                     elif s[:4] == 'modified nbs ph scale'.split():
                         row = {'scale': ' '.join(s[:3]),
                                'pH': core.convert_float(s[4]),
                                'Eh': core.convert_float(s[5]),
                                'pe': core.convert_float(s[6])}
-                        self.electrochemistry = self.electrochemistry.append(row,ignore_index=True)
+                        self.electrochemistry = pd.concat([self.electrochemistry,
+                                                           pd.DataFrame.from_records([row])],
+                                                          ignore_index=True)
 
                 ### ELECTRICAL BALANCE #############################################
                 if p == 7:
@@ -213,7 +221,9 @@ class eq3output:
                                'molality': core.convert_float(s[1]),
                                'log_g': core.convert_float(s[3]),
                                'activity': core.convert_float(s[4])}
-                        self.aqueous_species = self.aqueous_species.append(row,ignore_index=True)
+                        self.aqueous_species = pd.concat([self.aqueous_species,
+                                                          pd.DataFrame.from_records([row])],
+                                                         ignore_index=True)
 
                 ### SUMMARY OF AQUEOUS REDOX REACTIONS #############################
                 if p == 11:
@@ -223,7 +233,9 @@ class eq3output:
                                'pe':core.convert_float(s[-3]),
                                'log_fO2':core.convert_float(s[-2]),
                                'ah':core.convert_float(s[-1])}
-                        self.redox = self.redox.append(row,ignore_index=True)
+                        self.redox = pd.concat([self.redox,
+                                                pd.DataFrame.from_records([row])],
+                                               ignore_index=True)
 
                 ### MINERAL SATURATION STATES ######################################
                 if p == 13:
@@ -234,7 +246,9 @@ class eq3output:
                                'aff': core.convert_float(s[2])}
                         if len(s) > 3 and (s[3] == 'satd' or s[3] == 'ssatd'):
                             row.update({'state': s[3]})
-                        self.mineral_saturation = self.mineral_saturation.append(row,ignore_index=True)
+                        self.mineral_saturation = pd.concat([self.mineral_saturation,
+                                                             pd.DataFrame.from_records([row])],
+                                                            ignore_index=True)
 
                         if len(s) > 4:
                             if s[3] == 'satd' or s[3] == 'ssatd':
@@ -249,14 +263,18 @@ class eq3output:
                                        'aff': core.convert_float(s[5])}
                                 if len(s) > 6:
                                        row.update({'state':s[6]})
-                            self.mineral_saturation = self.mineral_saturation.append(row,ignore_index=True)
+                            self.mineral_saturation = pd.concat([self.mineral_saturation,
+                                                                 pd.DataFrame.from_records([row])],
+                                                                ignore_index=True)
 
                 ### SUMMARY OF GASES ###############################################
                 if p == 14:
                     if s[0] != 'gas':
                         row = {'gas':s[0],
                                'fugacity':core.convert_float(s[1])}
-                        self.gases = self.gases.append(row,ignore_index=True)
+                        self.gases = pd.concat([self.gases,
+                                                pd.DataFrame.from_records([row])],
+                                               ignore_index=True)
 
                 ### SOLID SOLUTIONS ############################################
                 if p == 18:
@@ -278,4 +296,6 @@ class eq3output:
                                        'xbar': core.convert_float(s[1]),
                                        'lamda': core.convert_float(s[2]),
                                        'activity': core.convert_float(s[3])}
-                                ss_endmembers = ss_endmembers.append(row,ignore_index=True)
+                                ss_endmembers = pd.concat([ss_endmembers,
+                                                           pd.DataFrame.from_records([row])],
+                                                          ignore_index=True)

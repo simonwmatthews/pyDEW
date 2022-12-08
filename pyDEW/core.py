@@ -290,10 +290,13 @@ def convert_float(string):
 def run_eqpt(working_directory="", executable_name=None):
     # Keep track of whether to delete EQPT or not:
     tidyup = False
+    # Commands for EQPT when running
+    cmnds = b"n\n n\n n\n"
+
     # Copy the executable into the working folder
     if executable_name is None:
-        tidyup = True
         if operatingsystem == "Darwin":
+            tidyup = True
             os.system(
                 "cp "
                 + dir_path
@@ -301,26 +304,35 @@ def run_eqpt(working_directory="", executable_name=None):
                 + working_directory
                 + "/EQPT"
             )
+            executable_name = "EQPT"
         elif operatingsystem == "Linux":
-            os.system(
-                "cp "
-                + dir_path
-                + "/executables/EQPT_linux "
-                + working_directory
-                + "/EQPT"
+        # Setting this up now so it will run eqpt from compiled library
+        #     os.system(
+        #         "cp "
+        #         + dir_path
+        #         + "/executables/EQPT_linux "
+        #         + working_directory
+        #         + "/EQPT"
+        #     )
+
+            proc = subprocess.Popen(
+                bytes('eqpt', "utf-8"),
+                cwd=working_directory + "/",
+                shell=True,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
             )
-        executable_name = "EQPT"
 
-    cmnds = b"n\n n\n n\n"
-
-    proc = subprocess.Popen(
-        bytes("./" + executable_name, "utf-8"),
-        cwd=working_directory + "/",
-        shell=True,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    if executable_name is not None:
+        proc = subprocess.Popen(
+            bytes("./" + executable_name, "utf-8"),
+            cwd=working_directory + "/",
+            shell=True,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
 
     proc.communicate(cmnds)
     proc.terminate()
@@ -334,29 +346,40 @@ def run_eq3(working_directory="", executable_name=None):
     tidyup = False
     # Copy the executable into the working folder
     if executable_name is None:
-        tidyup = True
         if operatingsystem == "Darwin":
+            tidyup = True
             os.system(
                 "cp " + dir_path + "/executables/EQ3_mac " + working_directory + "/EQ3"
             )
-        elif operatingsystem == "Linux":
-            os.system(
-                "cp "
-                + dir_path
-                + "/executables/EQ3_linux "
-                + working_directory
-                + "/EQ3"
-            )
-        executable_name = "EQ3"
+            executable_name = "EQ3"
 
-    proc = subprocess.Popen(
-        bytes("./" + executable_name, "utf-8"),
-        cwd=working_directory + "/",
-        shell=True,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+        elif operatingsystem == "Linux":
+            # os.system(
+            #     "cp "
+            #     + dir_path
+            #     + "/executables/EQ3_linux "
+            #     + working_directory
+            #     + "/EQ3"
+            # )
+            proc = subprocess.Popen(
+                bytes('eq3', "utf-8"),
+                cwd=working_directory + "/",
+                shell=True,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+
+    if executable_name is not None:
+        proc = subprocess.Popen(
+            bytes("./" + executable_name, "utf-8"),
+            cwd=working_directory + "/",
+            shell=True,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
     proc.communicate(b"\n")
     proc.terminate()
 
@@ -369,29 +392,38 @@ def run_eq6(working_directory="", executable_name=None):
     tidyup = False
     # Copy the executable into the working folder
     if executable_name is None:
-        tidyup = True
         if operatingsystem == "Darwin":
+            tidyup = True
+            executable_name = "EQ6"
             os.system(
                 "cp " + dir_path + "/executables/EQ6_mac " + working_directory + "/EQ6"
             )
         elif operatingsystem == "Linux":
-            os.system(
-                "cp "
-                + dir_path
-                + "/executables/EQ6_linux "
-                + working_directory
-                + "/EQ6"
+            # os.system(
+            #     "cp "
+            #     + dir_path
+            #     + "/executables/EQ6_linux "
+            #     + working_directory
+            #     + "/EQ6"
+            # )
+            proc = subprocess.Popen(
+                bytes('eq6', "utf-8"),
+                cwd=working_directory + "/",
+                shell=True,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
             )
-        executable_name = "EQ6"
 
-    proc = subprocess.Popen(
-        bytes("./" + executable_name, "utf-8"),
-        cwd=working_directory + "/",
-        shell=True,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    if executable_name is not None:
+        proc = subprocess.Popen(
+            bytes("./" + executable_name, "utf-8"),
+            cwd=working_directory + "/",
+            shell=True,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
     proc.communicate(b"\n")
     proc.terminate()
 

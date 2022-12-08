@@ -159,7 +159,7 @@ class eq6output:
 
             # Add new line(s) to existing table
             temp = pd.DataFrame(data=lines, columns=top)
-            tab = tab.append(temp, sort=False, ignore_index=True)
+            tab = pd.concat([tab, temp], ignore_index=True, sort=False)
 
             # Advance index to next row of headers
             x += 3+count
@@ -240,7 +240,7 @@ class eq6output:
 
             # Add new line to existing table
             temp = pd.DataFrame(data=data, columns=top)
-            tab = tab.append(temp, sort=False, ignore_index=True)
+            tab = pd.concat([tab, temp], ignore_index=True, sort=False)
 
         # Reformat table to delete duplicates and empty rows
         tab.infer_objects()
