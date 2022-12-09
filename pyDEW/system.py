@@ -398,6 +398,8 @@ class system:
         s_co22 = []
         s_co23 = []
         s_co24 = []
+        s_h2o1 = []
+        s_h2o2 = []
         for i in range(8):
             t = T+i*dT
             with redirect_stdout(_f):
@@ -407,9 +409,11 @@ class system:
                 s_dhb.append('{0:0.4f}'.format(dhb/1e8))
                 if self.carbon_activity_mode == 'sverjensky22':
                     co22 = self.epsCO2(t, P)
-                    co23 = self.epsH2O(t, P)
-                    co21 = self.omega_hat(t, P, co23, co22)
+                    h2o1 = self.epsH2O(t, P)
+                    co23 = self.volCO2(t, P)
+                    co21 = self.omega_hat(t, P, h2o1, co22)
                     co24 = self.b_hat(t, P)
+                    h2o2 = self.volH2O(t, P)
                 elif self.carbon_activity_mode == 'huang19':
                     co21 = (self.huang_CO2_coeff[0]
                             + self.huang_CO2_coeff[1] * T
@@ -417,15 +421,21 @@ class system:
                     co22 = 0.0
                     co23 = 0.0
                     co24 = 0.0
+                    h2o1 = 0.0
+                    h2o2 = 0.0
                 else:
                     co21 = 0.0
                     co22 = 0.0
                     co23 = 0.0
                     co24 = 0.0
+                    h2o1 = 0.0
+                    h2o2 = 0.0
                 s_co21.append('{0:0.4f}'.format(co21))
                 s_co22.append('{0:0.4f}'.format(co22))
                 s_co23.append('{0:0.4f}'.format(co23))
                 s_co24.append('{0:0.4f}'.format(co24))
+                s_h2o1.append('{0:0.4f}'.format(h2o1))
+                s_h2o2.append('{0:0.4f}'.format(h2o2))
 
         s += 'debye huckel a (adh)\n'
         s += ' '*(10-len(s_dha[0].split('.')[0]))
@@ -492,11 +502,25 @@ class system:
         s += '\n'
 
         s += 'c h2o 1\n'
-        s += '           500.        1.      500.        1.   \n'
-        s += '             1.      500.      500.      500.   \n'
+        s += ' '*(10-len(s_h2o1[0].split('.')[0]))
+        for i in range(4):
+            s += (s_h2o1[i] + ' '*(10-len(s_h2o1[i])))
+        s += '\n'
+        s += ' '*(10-len(s_h2o1[4].split('.')[0]))
+        for i in range(4):
+            s += (s_h2o1[i+4] + ' '*(10-len(s_h2o1[i+4])))
+        s += '\n'
+
         s += 'c h2o 2\n'
-        s += '           500.        1.      500.        1.   \n'
-        s += '             1.      500.      500.      500.   \n'
+        s += ' '*(10-len(s_h2o2[0].split('.')[0]))
+        for i in range(4):
+            s += (s_h2o2[i] + ' '*(10-len(s_h2o2[i])))
+        s += '\n'
+        s += ' '*(10-len(s_h2o2[4].split('.')[0]))
+        for i in range(4):
+            s += (s_h2o2[i+4] + ' '*(10-len(s_h2o2[i+4])))
+        s += '\n'
+
         s += 'c h2o 3\n'
         s += '           500.        1.      500.        1.   \n'
         s += '             1.      500.      500.      500.   \n'
@@ -1399,6 +1423,12 @@ class system:
 
     def epsH2O(self, t, p):
         return aqueous.cy_DEW_epsilon(t, p)
+
+    def volCO2(self, t, p):
+        return objCO2.getVolumeFromT_andP_(t, p)
+
+    def volH2O(self, t, p):
+        return aqueous.cy_SWIM_aqueous_v(t, p)
 
     def omega_hat(self, t, p, eps_h2o, eps_co2):
         return 7.5404 - 10.043 * (1 / eps_co2 - 1 / eps_h2o)
