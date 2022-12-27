@@ -209,6 +209,16 @@ class eq6output:
         if(len(size) == 1):
             print("Solid solution disabled.")
             return
+        
+        # Check for lines that are second lines of the same log zi and remove them from size array
+        to_remove = []
+        for a, x in enumerate(size):
+            t = linecache.getline(tab_filepath, x).strip().split('  ')
+            if t[0] != 'log zi':
+                print(size[a])
+                to_remove.append(a)
+        size = np.delete(size, to_remove)
+
 
         for a, x in enumerate(size):
 
@@ -236,11 +246,47 @@ class eq6output:
                 if v != '' and v != '\n':
                     line.append(float(v))
 
+            # Check that species are on a single line
+            t2 = linecache.getline(tab_filepath, x+1).strip().split('  ')
+            top2 = []
+            if t2[0] != 'log zi':
+                for i, val in enumerate(t2):
+                    if val != '':
+                        top2.append(val.strip())
+
+                # Combine multi-line species names into single string for second line if there are multiple lines
+                for p, m in enumerate(top2):
+                    ind = linecache.getline(tab_filepath, x+1).index(m)
+                    top2[p] = linecache.getline(
+                        tab_filepath, x+1)[ind:ind+10]+linecache.getline(tab_filepath, x+2)[ind:ind+10].strip()
+                    top2[p] = top2[p].strip()
+
+                # Advance to read numerical values
+                x += 3
+
+                # Read line of values
+                line2 = []
+                l = linecache.getline(tab_filepath, x).split(' ')
+                for j, v in enumerate(l):
+                    if v != '' and v != '\n':
+                        line2.append(float(v))
+
+                # Combine the species names of the two lines
+                for i in top2:
+                    top.append(i)
+
+                # Combine the values of the two lines
+                for j in line2:
+                    line.append(j)
+
             data = [line]
 
             # Add new line to existing table
             temp = pd.DataFrame(data=data, columns=top)
-            tab = pd.concat([tab, temp], ignore_index=True, sort=False)
+            if a == 0:
+                tab = temp.copy()
+            else:
+                tab = tab.merge(temp, how = 'outer')
 
         # Reformat table to delete duplicates and empty rows
         tab.infer_objects()
