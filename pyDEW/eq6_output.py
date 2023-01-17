@@ -2,6 +2,8 @@
 import linecache
 import pandas as pd
 import numpy as np
+from pyDEW import core
+from warnings import warn
 
 # All of this code is from Fang's EQ6 output reading and plotting notebook
 
@@ -26,14 +28,45 @@ class eq6output:
 
         try:
             self.read_ph(tab_filepath)
+        except:
+            linecache.clearcache()
+            warn("The pH output could not be read.")
+
+        try:
             self.read_logmoles(tab_filepath)
-            self.read_solids(tab_filepath)
+        except:
+            linecache.clearcache()
+            warn("The log(moles) output could not be read.")
+
+        # try:
+        self.read_solids(tab_filepath)
+        # except:
+        #     linecache.clearcache()
+        #     warn("The minerals output could not be read.")
+
+        try:
             self.read_log_elements(tab_filepath)
+        except:
+            linecache.clearcache()
+            warn("The element concentration output could not be read.")
+
+        try:
             self.read_dest_mol(tab_filepath)
+        except:
+            linecache.clearcache()
+            warn("The destroyed moles output could not be read.")
+
+        try:
             self.read_dest_other(tab_filepath, self._created_destroyed_begin)
+        except:
+            linecache.clearcache()
+            warn("The destroyed other output could not be read.")
+
+        try:
             self.read_log_conc(output_filepath)
         except:
             linecache.clearcache()
+            warn("The species concentration output could not be read.")
 
         self.pH = self.table_pH['ph']
         self.T = self.table_pH['tempc']
@@ -215,7 +248,6 @@ class eq6output:
         for a, x in enumerate(size):
             t = linecache.getline(tab_filepath, x).strip().split('  ')
             if t[0] != 'log zi':
-                print(size[a])
                 to_remove.append(a)
         size = np.delete(size, to_remove)
 
@@ -283,10 +315,7 @@ class eq6output:
 
             # Add new line to existing table
             temp = pd.DataFrame(data=data, columns=top)
-            if a == 0:
-                tab = temp.copy()
-            else:
-                tab = tab.merge(temp, how = 'outer')
+            tab = pd.concat([tab, temp], ignore_index=True, sort=False)
 
         # Reformat table to delete duplicates and empty rows
         tab.infer_objects()
