@@ -24,7 +24,7 @@ setup(name='pyDEW',
                              'executables/*']},
       install_requires=[
          'dill>=0.3.4',
-         'thermoengine',
+         'thermoengine>=1.0',
          'numpy>=1.20.3',
          'pandas>=1.3.3',
          'cython>=0.29.24',

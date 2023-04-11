@@ -262,10 +262,21 @@ class eq6output:
                     top.append(val.strip())
 
             # Combine multi-line species names into single string
+            ind_found = {} # Keep track of partial names in case two different endmembers have the same first line
             for p, m in enumerate(top):
-                ind = linecache.getline(tab_filepath, x).index(m)
-                top[p] = linecache.getline(
-                    tab_filepath, x)[ind:ind+10]+linecache.getline(tab_filepath, x+1)[ind:ind+10].strip()
+                # If first section of name is repeated:
+                if m in ind_found:
+                    ind = ind_found[m] + 10 # Start looking at string after first instance
+                    ind2 = linecache.getline(tab_filepath, x)[ind:].index(m)
+                    top[p] = (linecache.getline(tab_filepath, x)[ind + ind2 : ind + ind2 + 10]
+                              + linecache.getline(tab_filepath, x + 1)[ind + ind2 : ind + ind2 + 10].strip()
+                              )
+                    ind_found[m] = ind
+                else:
+                    ind = linecache.getline(tab_filepath, x).index(m)
+                    ind_found[m] = ind
+                    top[p] = linecache.getline(
+                        tab_filepath, x)[ind:ind+10]+linecache.getline(tab_filepath, x+1)[ind:ind+10].strip()
                 top[p] = top[p].strip()
 
             # Advance to read numerical values
@@ -287,10 +298,20 @@ class eq6output:
                         top2.append(val.strip())
 
                 # Combine multi-line species names into single string for second line if there are multiple lines
+                ind_found = {} # Check for similarly named ss endmembers (as above)
                 for p, m in enumerate(top2):
-                    ind = linecache.getline(tab_filepath, x+1).index(m)
-                    top2[p] = linecache.getline(
-                        tab_filepath, x+1)[ind:ind+10]+linecache.getline(tab_filepath, x+2)[ind:ind+10].strip()
+                    if m in ind_found:
+                        ind = ind_found[m] + 10
+                        ind2 = linecache.getline(tab_filepath, x+1)[ind:].index(m)
+                        top2[p] = (linecache.getline(tab_filepath, x+1)[ind + ind2 : ind + ind2 + 10]
+                                   + linecache.getline(tab_filepath, x+2)[ind + ind2 : ind + ind2 + 10].strip()
+                                   )
+                        ind_found[m] = ind
+                    else:
+                        ind = linecache.getline(tab_filepath, x+1).index(m)
+                        ind_found[m] = ind
+                        top2[p] = linecache.getline(
+                            tab_filepath, x+1)[ind:ind+10]+linecache.getline(tab_filepath, x+2)[ind:ind+10].strip()
                     top2[p] = top2[p].strip()
 
                 # Advance to read numerical values
