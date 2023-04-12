@@ -80,7 +80,7 @@ class reaction:
                  eqpt_working_directory='working',
                  eq6_working_directory='working',
                  eqpt_executable_name=None,
-                 dummy_temperature=500.0
+                 dummy_temperature=300.0
                  ):
         self.fluid = fluid
         self.calculation_mode = calculation_mode
