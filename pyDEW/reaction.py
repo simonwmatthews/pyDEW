@@ -42,6 +42,9 @@ class reaction:
           Fluid-centered flow-through open system. The fluid will flow through a solid mineral
           assemblage, react with that assemblage, produce secondary minerals, and then continue.
           The secondary minerals are lost at each stage.
+    point_calculation : bool, default: False
+        Run a point calculation or not. Equivalent to running only the first step of a reaction
+        path- i.e., allowing an EQ3 fluid to equilibrate by precipitating minerals.
     zimax : float, default: 1.0
         The maximum reaction progress.
     eq3_working_directory : string, default: 'working'
@@ -70,6 +73,7 @@ class reaction:
                  reactants,
                  dT=0.0,
                  calculation_mode='closed',
+                 point_calculation=False,
                  zimax=1.0,
                  eq6_executable_name=None,
                  eq3_working_directory='working',
@@ -88,6 +92,7 @@ class reaction:
         self.zimax = zimax
         self.dummy_temperature = dummy_temperature
         self.output = None
+        self.point_calculation = point_calculation
 
         pickup = self._read_pickup(eq3_working_directory)
 
@@ -231,7 +236,11 @@ class reaction:
         s += zi_string + ' \n'
 
         s += '     tstrt=           0.    timemx=           0. \n'
-        s += '    kstpmx=        10000     cplim=           0. \n'
+
+        if self.point_calculation is True:
+            s += '    kstpmx=        10000     cplim=           0. \n'
+        else:
+            s += '    kstpmx=            0     cplim=           0. \n'
         s += '     dzipr=       1.e+38    dzprlg=         0.05    ksppmx= 10000 \n'
         s += '    dzplot=       1.e+38    dzpllg=       10000.    ksplmx= 10000 \n'
         s += '     ifile= 60 \n'
