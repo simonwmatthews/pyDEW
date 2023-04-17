@@ -53,7 +53,8 @@ class fluid:
                  eq3_executable_name = None,
                  eqpt_executable_name = None,
                  dummy_temperature = 300.0,
-                 aH2O_mode='unity'
+                 aH2O_mode='unity',
+                 read_pickup=True,
                  ):
         """
         Initialises a DEW fluid object
@@ -122,6 +123,9 @@ class fluid:
         aH2O_mode : string, default: 'unity'
             Either 'molfraction' or 'unity'. If 'molfraction', the activity of water will be set to
             the mole fraction of water. If 'unity', the activity of water will always be 1.
+        read_pickup : bool, default: True
+            The pickup is required if the Fluid will be used as a starting point for a Reaction (EQ6)
+            calculation. You might be able to speed up the runs without reading this though.
         """
 
         self.system = system
@@ -190,6 +194,33 @@ class fluid:
         self.aqueous_species = self.eq3output.aqueous_species
         self.fO2 = float(self.eq3output.redox['log_fO2'].iloc[0])
         self.mineral_saturation = self.eq3output.mineral_saturation
+
+        if read_pickup is True:
+            self.pickup = self._read_pickup(eq3_working_directory)
+        else:
+            self.pickup = None
+
+    def _read_pickup(self,directory):
+        """
+        Read the EQ3 pickup file generated while running EQ3, needed for running EQ6 calculations.
+
+        Parameters
+        ----------
+        directory : str
+            The directory in which the pickup file is stored.
+        Returns
+        -------
+        str
+            The contents of the pickup file
+        """
+
+        if os.path.isfile(directory+'/pickup'):
+            text_file = open(directory+'/pickup', 'r')
+            pickup = text_file.read()
+            text_file.close()
+            return pickup
+        else:
+            raise core.InputError('The EQ3 pickup file was not found.')
 
 
     def _input_preamble(self, s='', using_solid_solutions=False, uebal='H+', uacion='', fep=-12.6,

@@ -22,6 +22,51 @@ class CompatibilityError(Error):
         self.message = message
 
 
+oxideMass = {'SiO2':  60.083,
+             'MgO':   40.304,
+             'FeO':   71.844,
+             'CaO':   56.077,
+             'Al2O3': 101.961,
+             'Na2O':  61.979,
+             'K2O':   94.195,
+             'MnO':   70.937,
+             'TiO2':  79.867,
+             'P2O5':  141.943,
+             'Cr2O3': 151.992,
+             'NiO':   74.692,
+             'CoO':   44.01,
+             'Fe2O3': 159.687,
+             'H2O':   18.02,
+             'CO2':   44.01,
+             'F2O':   37.997}
+
+CationNum = {'SiO2': 1, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 2, 'Na2O': 2,
+             'K2O': 2, 'MnO': 1, 'TiO2': 1, 'P2O5': 2, 'Cr2O3': 2,
+             'NiO': 1, 'CoO': 1, 'Fe2O3': 2, 'H2O': 2, 'CO2': 1, 'F2O': 2}
+
+OxygenNum = {'SiO2': 2, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 3, 'Na2O': 1,
+             'K2O': 1, 'MnO': 1, 'TiO2': 2, 'P2O5': 5, 'Cr2O3': 3,
+             'NiO': 1, 'CoO': 1, 'Fe2O3': 3, 'H2O': 1, 'CO2': 2, 'F2O': 1}
+
+CationCharge = {'SiO2': 4, 'MgO': 2, 'FeO': 2, 'CaO': 2, 'Al2O3': 3, 'Na2O': 1,
+                'K2O': 1, 'MnO': 2, 'TiO2': 4, 'P2O5': 5, 'Cr2O3': 3,
+                'NiO': 2, 'CoO': 2, 'Fe2O3': 3, 'H2O': 1, 'CO2': 4, 'F2O': 1}
+
+CationMass = {'SiO2': 28.085, 'MgO': 24.305, 'FeO': 55.845, 'CaO': 40.078, 'Al2O3': 26.982,
+              'Na2O': 22.990, 'K2O': 39.098, 'MnO': 54.938, 'TiO2': 47.867, 'P2O5': 30.974,
+              'Cr2O3': 51.996, 'NiO': 58.693, 'CoO': 28.01, 'Fe2O3': 55.845, 'H2O': 1.01,
+              'CO2': 12.011, 'F2O': 18.998}
+
+oxides_to_cations = {'SiO2': 'Si', 'MgO': 'Mg', 'FeO': 'Fe', 'CaO': 'Ca', 'Al2O3': 'Al',
+                     'Na2O': 'Na', 'K2O': 'K', 'MnO': 'Mn', 'TiO2': 'Ti', 'P2O5': 'P',
+                     'Cr2O3': 'Cr', 'NiO': 'Ni', 'CoO': 'Co', 'Fe2O3': 'Fe3', 'H2O': 'H',
+                     'CO2': 'C', 'F2O': 'F'}
+cations_to_oxides = {'Si': 'SiO2', 'Mg': 'MgO', 'Fe': 'FeO', 'Ca': 'CaO', 'Al': 'Al2O3',
+                     'Na': 'Na2O', 'K': 'K2O', 'Mn': 'MnO', 'Ti': 'TiO2', 'P': 'P2O5',
+                     'Cr': 'Cr2O3', 'Ni': 'NiO', 'Co': 'CoO', 'Fe3': 'Fe2O3', 'H': 'H2O',
+                     'C': 'CO2', 'F': 'F2O'}
+
+
 # Get the installation directory. This is necessary for importing files and finding the
 # executables.
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -33,6 +78,44 @@ if operatingsystem not in ["Linux", "Darwin"]:
     raise CompatibilityError(
         "The pyDEW package is only compatible with Mac OSX and Linux."
     )
+
+
+def convert_wtptoxides_to_mol_elements(oxides_wtpt, capitalise_elements=True):
+    """
+    Converts wtpt oxides to moles of elements, intended to be used with the reaction class
+    for specifying bulk compositions more conveniently.
+
+    Parameters
+    ----------
+    oxide_wtpt : dict
+        The oxide wtpt values, keys are oxide names.
+    capitalise_elements : bool, default: True
+        Return capitalised element names in the dictionary.
+
+    Returns
+    -------
+    dict
+        Element moles formatted in capitals ('SI') or normal ('Si').
+    """
+
+    mol_elements = {'O' : 0.0}
+    sum_mols = 0.0
+
+    for ox in oxides_wtpt:
+        if capitalise_elements:
+            element_name = oxides_to_cations[ox].upper()
+        else:
+            element_name = oxides_to_cations[ox]
+
+        mol_elements[element_name] = oxides_wtpt[ox] / oxideMass[ox] * CationNum[ox]
+        mol_elements['O'] += oxides_wtpt[ox] / oxideMass[ox] * OxygenNum[ox]
+
+        sum_mols += oxides_wtpt[ox] / oxideMass[ox] * (CationNum[ox] + OxygenNum[ox])
+
+    for el in mol_elements:
+        mol_elements[el] = mol_elements[el] / sum_mols
+
+    return mol_elements
 
 
 def load_coder_modules(working_dir=dir_path + "/dew2019_coderfiles"):
