@@ -302,7 +302,7 @@ class fluid:
         return s
 
     def _input_basis_species_conc(self,species_name, molality,s=''):
-        mol_s = '{0:.4E}'.format(molality)
+        mol_s = '{0:.6E}'.format(molality)
         s += 'data file master species= ' + species_name + '\n'
         s += '   switch with species=  \n'
         s += '   jflag=  0   csp= ' + mol_s + '\n'
