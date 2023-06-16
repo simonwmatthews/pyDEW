@@ -270,7 +270,8 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
 
         n = np.zeros(self.system.n_elements-1)
         # Ignore O:
-        n = self.n[1:]
+        # n = self.n[1:] # Just altered code to combine H and O into H2O
+        n[0] = n[0] * 2 # Convert from moles H2O to moles H
         x = np.linalg.solve(matrix.T, n)
 
         return x
@@ -330,7 +331,7 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
             
         self._make_fluid_from_k(k)
 
-        misfit_H = k * self.n[1] - self.elemental_comp_molality['H']
+        misfit_H = k * self.n[0] * 2 - self.elemental_comp_molality['H']
 
         if debug is True:
             print(f"The H_conservation_rootfinder misfit: {misfit_H}")
@@ -343,6 +344,9 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
         """
         
         m_H2O = 55.5086815578
+
+        print(self.n)
+        print(self.system.elements)
 
         soln = root_scalar(self._H_conservation_rootfinder,
                            x0 = 2 * m_H2O / self.n[self.system.elements.index('H')],
@@ -402,48 +406,82 @@ def DEWFluid_conv_moles_to_mole_frac(elm):
 
 
 def DEWFluid_endmember_number():
-    return len(elements)
+    return len(elements) - 1
 
 
 def DEWFluid_species_number():
-    return len(elements)
+    return len(elements) - 1
 
 
 def DEWFluid_species_name(i):
-    return elements[i]
+    if i == 0:
+        return 'H2O'
+    else:
+        return elements[i+1]
 
 
 def DEWFluid_species_formula(i):
-    return elements[i]
+    if i == 0:
+        return 'H2O'
+    else:
+        return elements[i+1]
 
 
 def DEWFluid_species_mw(i):
-    return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i]][0]
+    if i == 0:
+        return (chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'H'][0] * 2
+                + chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'O'][0])
+    else:
+        return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i+1]][0]
 
 
 def DEWFluid_species_elements(i):
-    i_pt = np.where(chem.PERIODIC_ORDER == elements[i])[0][0]
-    els = np.zeros(106)
-    els[i_pt] = 1
+    if i == 0:
+        els = np.zeros(107)
+        els[chem.PERIODIC_ORDER == 'H'] = 2
+        els[chem.PERIODIC_ORDER == 'O'] = 1
+
+    else:
+        i_pt = np.where(chem.PERIODIC_ORDER == elements[i+1])[0][0]
+        els = np.zeros(107)
+        els[i_pt] = 1
+    
     return els
 
 
 def DEWFluid_endmember_name(i):
-    return elements[i]
+    if i == 0:
+        return 'H2O'
+    else:
+        return elements[i+1]
 
 
 def DEWFluid_endmember_formula(i):
-    return elements[i]
+    if i == 0:
+        return 'H2O'
+    else:
+        return elements[i+1]
 
 
 def DEWFluid_endmember_mw(i):
-    return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i]][0]
+    if i == 0:
+        return (chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'H'][0] * 2
+                + chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'O'][0])
+    else:
+        return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i+1]][0]
 
 
 def DEWFluid_endmember_elements(i):
-    i_pt = np.where(chem.PERIODIC_ORDER == elements[i])[0][0]
-    els = np.zeros(106)
-    els[i_pt] = 1
+    if i == 0:
+        els = np.zeros(107)
+        els[chem.PERIODIC_ORDER == 'H'][0] = 2
+        els[chem.PERIODIC_ORDER == 'O'][0] = 1
+
+    else:
+        i_pt = np.where(chem.PERIODIC_ORDER == elements[i+1])[0][0]
+        els = np.zeros(107)
+        els[i_pt] = 1
+    
     return els
 
 
@@ -510,6 +548,9 @@ def DEWFluid_dgdp(t, p, n):
 
 
 def DEWFluid_dgdn(t, p, n):
+
+    print("Entered dgdn")
+
     dgdn = np.zeros(len(n))
 
     x0 = np.empty(len(n)+2)
@@ -551,6 +592,9 @@ def DEWFluid_d2gdndp(t, p, n):
 
 
 def DEWFluid_d2gdn2(t, p, n):
+
+    print("Entered d2gdn2")
+
     dgdn = np.zeros([len(n)]*2)
 
     x0 = np.empty(len(n)+2)
@@ -563,8 +607,8 @@ def DEWFluid_d2gdn2(t, p, n):
             vec = np.zeros(len(n)+2)
             if i != j:
                 # vec[2:] = - 1/(len(n)-2)
-                vec[2+i] = 0.5*n[i]
-                vec[2+j] = 0.5*n[j]
+                vec[2+i] = 0.5 #*n[i]
+                vec[2+j] = 0.5 #*n[j]
             else:
                 # vec[2:] = - 1/(len(n)-1)
                 vec[2+i] = 1*n[i]
