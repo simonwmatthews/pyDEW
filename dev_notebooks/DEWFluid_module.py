@@ -26,6 +26,11 @@ element_list = core.chem.PERIODIC_ORDER.tolist()
 
 ### IMPORT A FILE WITH INFO ABOUT ENDMEMBERS
 
+components = ['H2O', 'Si', 'Na', 'Cl', 'O2']
+components_to_elements = {'H2O': {'H': 2, 'O': 1},
+                          'O2': {'O': 2}}
+for comp in components[1:-1]:
+    components_to_elements[comp] = {comp : 1}
 elements = ['O', 'H', 'Si', 'Na', 'Cl']
 basis_species = ['H2O', 'H+', 'H4SIO4(AQ)', 'NA+', 'CL-', 'O2(G)']
 other_species = ['H6SI2O7(AQ)', 'H8SI3O10(AQ)', 'H3SIO4-', 'OH-', 'O2(AQ)', 'NACL(AQ)', 'NAOH(AQ)', 'HCL(AQ)']
@@ -58,6 +63,15 @@ import os
 from pyDEW import core
 from pyDEW import output
 import os
+
+
+def muO2_std(t, p):
+    tr = 298.15
+    hs = 23.10248*(t-tr) + 2.0*804.8876*(np.sqrt(t)-np.sqrt(tr)) - 1762835.0*(1.0/t-1.0/tr) \
+       - 18172.91960*np.log(t/tr) + 0.5*0.002676*(t*t-tr*tr)
+    ss = 205.15 + 23.10248*np.log(t/tr)  - 2.0*804.8876*(1.0/np.sqrt(t)-1.0/np.sqrt(tr)) \
+       - 0.5*1762835.0*(1.0/(t*t)-1.0/(tr*tr)) + 18172.91960*(1.0/t-1.0/tr) + 0.002676*(t-tr)
+    return hs - t*ss + 205.15*298.1e-5
 
 
 class fluid_equilibrate(pyDEW.fluid.fluid):
@@ -111,8 +125,8 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
                  eqpt_working_directory = 'eq_working',
                  data0_filename = None,
                  input_filename = 'input',
-                 eq3_executable_name = None,
-                 eqpt_executable_name = None,
+                 eq3_executable_name = 'EQ3_longoutput',    ## CHANGED FOR DEV PURPOSES
+                 eqpt_executable_name = 'EQPT_mac',    ## CHANGED FOR DEV PURPOSES
                  dummy_temperature = 300.0,
                  aH2O_mode='unity',
                  read_pickup=True,
@@ -270,11 +284,11 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
 
         n = np.zeros(self.system.n_elements-1)
         # Ignore O:
-        # n = self.n[1:] # Just altered code to combine H and O into H2O
-        n[0] = n[0] * 2 # Convert from moles H2O to moles H
+        n[:] = self.n[:-1]
         x = np.linalg.solve(matrix.T, n)
 
         return x
+
     
     def _make_fluid_from_k(self, k, debug=False):
         # Transform mole element components to mole basis species
@@ -345,12 +359,9 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
         
         m_H2O = 55.5086815578
 
-        print(self.n)
-        print(self.system.elements)
-
         soln = root_scalar(self._H_conservation_rootfinder,
-                           x0 = 2 * m_H2O / self.n[self.system.elements.index('H')],
-                           x1 = 2 * m_H2O / self.n[self.system.elements.index('H')] + 10,
+                           x0 = m_H2O / self.n[0],
+                           x1 = m_H2O / self.n[0] + 10,
                            )
         
         if soln.converged is True:
@@ -360,9 +371,14 @@ class fluid_equilibrate(pyDEW.fluid.fluid):
                                   "not be obtained.")
     
     def gibbs_energy(self):
-        g = 0
-        g += 55.5086815578 * \
-            self.system.species['H2O'].gibbs_energy(self.T, self.T)/self.k
+        g = 0.0
+
+        # g += (
+        #       # (55.5086815578 * self.system.species['H2O'].gibbs_energy(self.T, self.P) +
+        #        ( 8.314 * np.log((55.5086815578 - self.aqueous_species.molality.sum())/55.5086815578) )
+        #       / self.k
+        #       )
+
         for i, row in self.aqueous_species.iterrows():
             if row.species != 'H+':
                 g += (self.system.species[row.species].gibbs_energy(self.T, self.P)
@@ -406,81 +422,75 @@ def DEWFluid_conv_moles_to_mole_frac(elm):
 
 
 def DEWFluid_endmember_number():
-    return len(elements) - 1
+    return len(elements) 
 
 
 def DEWFluid_species_number():
-    return len(elements) - 1
+    return len(elements) 
 
 
 def DEWFluid_species_name(i):
-    if i == 0:
-        return 'H2O'
-    else:
-        return elements[i+1]
+    return components[i]
 
 
 def DEWFluid_species_formula(i):
-    if i == 0:
-        return 'H2O'
-    else:
-        return elements[i+1]
+    return components[i]
 
 
 def DEWFluid_species_mw(i):
-    if i == 0:
-        return (chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'H'][0] * 2
-                + chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'O'][0])
-    else:
-        return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i+1]][0]
+    
+    comp = components[i]
+
+    mw = 0.0
+    for el in components_to_elements[comp]:
+        mw += components_to_elements[comp][el] * chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == el][0]
+
+    return mw
 
 
 def DEWFluid_species_elements(i):
-    if i == 0:
-        els = np.zeros(107)
-        els[chem.PERIODIC_ORDER == 'H'] = 2
-        els[chem.PERIODIC_ORDER == 'O'] = 1
 
-    else:
-        i_pt = np.where(chem.PERIODIC_ORDER == elements[i+1])[0][0]
-        els = np.zeros(107)
-        els[i_pt] = 1
+    comp = components[i]
+
+    els = np.zeros(107)
+
+    for el in components_to_elements[comp]:
+        i_pt = np.where(chem.PERIODIC_ORDER == el)[0][0]
+        els[i] = components_to_elements[comp][el]
     
     return els
 
 
 def DEWFluid_endmember_name(i):
-    if i == 0:
-        return 'H2O'
-    else:
-        return elements[i+1]
+    return components[i]
 
 
 def DEWFluid_endmember_formula(i):
-    if i == 0:
-        return 'H2O'
-    else:
-        return elements[i+1]
+    return components[i]
 
 
 def DEWFluid_endmember_mw(i):
-    if i == 0:
-        return (chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'H'][0] * 2
-                + chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == 'O'][0])
-    else:
-        return chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == elements[i+1]][0]
+
+    comp = components[i]
+
+    mw = 0.0
+    for el in components_to_elements[comp]:
+        mw += components_to_elements[comp][el] * chem.PERIODIC_WEIGHTS[chem.PERIODIC_ORDER == el][0]
+
+    return mw
 
 
 def DEWFluid_endmember_elements(i):
-    if i == 0:
-        els = np.zeros(107)
-        els[chem.PERIODIC_ORDER == 'H'][0] = 2
-        els[chem.PERIODIC_ORDER == 'O'][0] = 1
 
-    else:
-        i_pt = np.where(chem.PERIODIC_ORDER == elements[i+1])[0][0]
-        els = np.zeros(107)
-        els[i_pt] = 1
+    comp = components[i]
+
+    els = np.zeros(107)
+
+    for el in components_to_elements[comp]:
+        els[element_list.index(el)] = components_to_elements[comp][el]
+
+        # i_pt = np.where(chem.PERIODIC_ORDER == el)[0][0]
+        # els[i] = components_to_elements[comp][el]
     
     return els
 
@@ -549,7 +559,7 @@ def DEWFluid_dgdp(t, p, n):
 
 def DEWFluid_dgdn(t, p, n):
 
-    print("Entered dgdn")
+    # print("Entered dgdn")
 
     dgdn = np.zeros(len(n))
 
@@ -558,8 +568,10 @@ def DEWFluid_dgdn(t, p, n):
     x0[1] = p
     x0[2:] = n
 
-    for i in range(len(n)):
-        step = 1e-3
+    # Don't need to calculate for H2O or O2 - ADDED H2O TO CHECK
+    # Assuming a(H2O) = 1 as assumed in most DEW calcs
+    for i in range(len(n)-1):
+        step = 1e-5
         vec = np.zeros(len(n)+2)
 
         # vec[2:] = - 1/(len(n)-1)
@@ -567,6 +579,11 @@ def DEWFluid_dgdn(t, p, n):
 
         dgdn[i] = nd.directionaldiff(
             DEWFluid_g_fordiff, x0, vec, step=step, method='forward')
+
+    # dgdn[-1] = muO2_std(t, p) + 8.314 * t * np.log(1e-12)
+
+    fluid = fluid_equilibrate(system, t, p, n, fO2=-12.0)
+    # dgdn[0] = fluid.system.species['H2O'].gibbs_energy(t, p)
 
     return dgdn
 
@@ -593,7 +610,7 @@ def DEWFluid_d2gdndp(t, p, n):
 
 def DEWFluid_d2gdn2(t, p, n):
 
-    print("Entered d2gdn2")
+    # print("Entered d2gdn2")
 
     dgdn = np.zeros([len(n)]*2)
 
@@ -730,11 +747,15 @@ def DEWFluid_Kp(t, p, n):
 
 
 def DEWFluid_conv_moles_to_elm(n):
+
     ne = len(element_list)
     conv = np.zeros(ne)
-    for i in range(0, ne):
-        if element_list[i] in elements:
-            conv[i] = n[elements.index(element_list[i])]
+
+    for i, comp in zip(range(len(components)), components):
+        elements_in_component = components_to_elements[comp]
+        for element in elements_in_component:
+            conv[element_list.index(element)] += elements_in_component[element] * n[i]
+
     return conv
 
 
