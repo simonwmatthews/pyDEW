@@ -11,7 +11,7 @@ To use a binder instance of the code, go here:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/simonwmatthews/myBinder_pydew/HEAD?labpath=tutorials%2Ftutorial1_DATA0.ipynb)
 
 ## Running pyDEW in Docker
-At the time of writing (May 2023) the capacity of myBinder has reduced substantially, making it rather unreliable for running pyDEW. We will soon have pyDEW available on the ENKI server, but until then the easiest way to get pyDEW running is to use a [Docker](http://www.docker.com) container. Once you have Docker installed, and running, you can run the following command in a terminal to download and run the pyDEW container:
+At the time of writing (May 2023) the capacity of myBinder has reduced substantially, making it rather unreliable for running pyDEW. We will soon have pyDEW available on the ENKI server, but until then the easiest way to get pyDEW running is to use a [Docker](http://www.docker.com) container. Once you have Docker installed, and running, you can run the following command (at least in OSX or linux)| in a terminal to download and run the pyDEW container:
 
 `docker run -p 8888:8888 --env JUPYTER_ENABLE_LAB=yes --user root -e GRANT_SUDO=yes simonwmatthews/pydew:v2.9`
 
