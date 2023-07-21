@@ -429,7 +429,7 @@ class eq6output:
             x += count+3
 
         # Remove H column and duplicate rows
-        tab.drop(['H'], axis=1, inplace=True)
+        # tab.drop(['H'], axis=1, inplace=True)
         tab.drop_duplicates(inplace=True)
 
         self.elements = tab

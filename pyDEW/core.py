@@ -22,6 +22,11 @@ class CompatibilityError(Error):
         self.message = message
 
 
+# MAYBE MOVE ALL OF THIS INTO SYSTEM DEFINITION?
+# IF DEFINING A SMALL SYSTEM COULD AUTOMATE EXTRACTING DATA
+# AND PROMPT IF THERE IS AN ELEMENT MISSING
+
+# For the purpose of 'oxides' negative ions will be hydrides
 oxideMass = {'SiO2':  60.083,
              'MgO':   40.304,
              'FeO':   71.844,
@@ -38,19 +43,46 @@ oxideMass = {'SiO2':  60.083,
              'Fe2O3': 159.687,
              'H2O':   18.02,
              'CO2':   44.01,
-             'F2O':   37.997}
+             'Ag2O': 231.735,
+             'Au2O': 409.93,
+             'BaO': 153.3394,
+             'HCl': 36.461,
+             'SO2': 64.065,
+             'CdO': 128.41,
+             'NO2': 46.006,
+             'Cs2O': 281.81,
+             'Cu2O': 143.09,
+             'EuO': 167.96,
+             'HF': 20.006,
+             'HgO': 216.59,
+             'PbO2': 239.1988,
+             'SrO': 103.62,
+             'UO4': 302.3,
+             'ZnO': 81.379,
+             }
 
+# For Cl, F, they will be 'cations'
 CationNum = {'SiO2': 1, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 2, 'Na2O': 2,
              'K2O': 2, 'MnO': 1, 'TiO2': 1, 'P2O5': 2, 'Cr2O3': 2,
-             'NiO': 1, 'CoO': 1, 'Fe2O3': 2, 'H2O': 2, 'CO2': 1, 'F2O': 2}
+             'NiO': 1, 'CoO': 1, 'Fe2O3': 2, 'H2O': 2, 'CO2': 1, 'HF': 2,
+             'Ag2O': 2, 'Au2O': 2, 'BaO': 1, 'HCl': 1, 'SO2': 1, 'CdO': 1,
+             'NO2': 1, 'Cs2O': 2, 'Cu2O': 2, 'EuO': 1, 'HgO': 1, 'PbO2': 1,
+             'SrO': 1, 'UO4': 1, 'ZnO': 1}
 
+# For Cl, F, H will be 'oxygen'
 OxygenNum = {'SiO2': 2, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 3, 'Na2O': 1,
              'K2O': 1, 'MnO': 1, 'TiO2': 2, 'P2O5': 5, 'Cr2O3': 3,
-             'NiO': 1, 'CoO': 1, 'Fe2O3': 3, 'H2O': 1, 'CO2': 2, 'F2O': 1}
+             'NiO': 1, 'CoO': 1, 'Fe2O3': 3, 'H2O': 1, 'CO2': 2, 'HF': 1,
+             'Ag2O': 1, 'Au2O': 1, 'BaO': 1, 'HCl': 1, 'SO2': 2, 'CdO': 1,
+             'NO2': 2, 'Cs2O': 1, 'Cu2O': 1, 'EuO': 1, 'HgO': 1, 'PbO2': 2,
+             'SrO': 1, 'UO4': 4, 'ZnO': 1}
 
 CationCharge = {'SiO2': 4, 'MgO': 2, 'FeO': 2, 'CaO': 2, 'Al2O3': 3, 'Na2O': 1,
                 'K2O': 1, 'MnO': 2, 'TiO2': 4, 'P2O5': 5, 'Cr2O3': 3,
-                'NiO': 2, 'CoO': 2, 'Fe2O3': 3, 'H2O': 1, 'CO2': 4, 'F2O': 1}
+                'NiO': 2, 'CoO': 2, 'Fe2O3': 3, 'H2O': 1, 'CO2': 4, 'HF': -1,
+                'Ag2O': 1, 'Au2O': 1, 'BaO': 2, 'HCl': -1, 'SO2': 4, 'CdO': 2,
+                'NO2': 4, 'Cs2O': 1, 'Cu2O': 1, 'EuO': 2, 'HgO': 2, 'PbO2': 4,
+                'SrO': 2, 'UO4': 8, 'ZnO': 2}
 
 CationMass = {'SiO2': 28.085, 'MgO': 24.305, 'FeO': 55.845, 'CaO': 40.078, 'Al2O3': 26.982,
               'Na2O': 22.990, 'K2O': 39.098, 'MnO': 54.938, 'TiO2': 47.867, 'P2O5': 30.974,

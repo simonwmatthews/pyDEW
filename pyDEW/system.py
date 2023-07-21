@@ -221,6 +221,8 @@ class system:
         #------
         # Extract minerals if needed.
         self.minerals = []
+        # Need to switch code to using a dict, for now persist with both
+        self.minerals_dict = {}
         for min in minerals:
             if isinstance(min,str):
                 try:
@@ -229,6 +231,7 @@ class system:
                     raise core.InputError(min+' phase string not recognised.')
             else:
                 self.minerals.append(min)
+            self.minerals_dict[self.minerals[-1].abbrev] = self.minerals[-1]
         self.mineral_NaK_adjustment = mineral_NaK_adjustment
 
         #------
