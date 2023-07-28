@@ -87,16 +87,23 @@ CationCharge = {'SiO2': 4, 'MgO': 2, 'FeO': 2, 'CaO': 2, 'Al2O3': 3, 'Na2O': 1,
 CationMass = {'SiO2': 28.085, 'MgO': 24.305, 'FeO': 55.845, 'CaO': 40.078, 'Al2O3': 26.982,
               'Na2O': 22.990, 'K2O': 39.098, 'MnO': 54.938, 'TiO2': 47.867, 'P2O5': 30.974,
               'Cr2O3': 51.996, 'NiO': 58.693, 'CoO': 28.01, 'Fe2O3': 55.845, 'H2O': 1.01,
-              'CO2': 12.011, 'F2O': 18.998}
+              'CO2': 12.011,  'HF': 18.998403, 'Ag2O': 107.8682, 'Au2O': 196.96657, 
+              'BaO': 137.327, 'HCl': 35.453, 'SO2': 32.065, 'CdO': 112.411,
+              'NO2': 14.0067, 'Cs2O': 132.90545, 'Cu2O': 63.546, 'EuO': 151.964, 'HgO': 200.59, 
+              'PbO2': 207.2, 'SrO': 87.62, 'UO4': 238.02891, 'ZnO': 65.38}
 
 oxides_to_cations = {'SiO2': 'Si', 'MgO': 'Mg', 'FeO': 'Fe', 'CaO': 'Ca', 'Al2O3': 'Al',
                      'Na2O': 'Na', 'K2O': 'K', 'MnO': 'Mn', 'TiO2': 'Ti', 'P2O5': 'P',
                      'Cr2O3': 'Cr', 'NiO': 'Ni', 'CoO': 'Co', 'Fe2O3': 'Fe3', 'H2O': 'H',
-                     'CO2': 'C', 'F2O': 'F'}
+                     'CO2': 'C', 'HF': 'F', 'Ag2O': 'Ag', 'Au2O': 'Au', 'BaO': 'Ba', 
+                     'HCl': 'Cl', 'SO2': 'S', 'CdO': 'Cd', 'NO2': 'N', 'Cs2O': 'Cs', 'Cu2O': 'Cu', 
+                     'EuO': 'Eu', 'HgO': 'Hg', 'PbO2': 'Pb', 'SrO': 'Sr', 'UO4': 'U', 'ZnO': 'Zn'}
 cations_to_oxides = {'Si': 'SiO2', 'Mg': 'MgO', 'Fe': 'FeO', 'Ca': 'CaO', 'Al': 'Al2O3',
                      'Na': 'Na2O', 'K': 'K2O', 'Mn': 'MnO', 'Ti': 'TiO2', 'P': 'P2O5',
                      'Cr': 'Cr2O3', 'Ni': 'NiO', 'Co': 'CoO', 'Fe3': 'Fe2O3', 'H': 'H2O',
-                     'C': 'CO2', 'F': 'F2O'}
+                     'C': 'CO2', 'F': 'HF', 'Ag': 'Ag2O', 'Au': 'Au2O', 'Ba': 'BaO', 
+                     'Cl': 'HCl', 'S': 'SO2', 'Cd': 'CdO', 'N': 'NO2', 'Cs': 'Cs2O', 'Cu': 'Cu2O', 
+                     'Eu': 'EuO', 'Hg': 'HgO', 'Pb': 'PbO2', 'Sr': 'SrO', 'U': 'UO4', 'Zn': 'ZnO'}
 
 
 # Get the installation directory. This is necessary for importing files and finding the
