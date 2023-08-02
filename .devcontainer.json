@@ -1,0 +1,8 @@
+{
+    "build": { "dockerfile": "Dockerfile" },
+  
+  
+    "forwardPorts": [3000],
+
+    "extensions": ["Jupyter", "ipython", "ipykernel"]
+  }

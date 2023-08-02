@@ -62,7 +62,7 @@ oxideMass = {'SiO2':  60.083,
              }
 
 # For Cl, F, they will be 'cations'
-CationNum = {'SiO2': 1, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 2, 'Na2O': 2,
+cationNum = {'SiO2': 1, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 2, 'Na2O': 2,
              'K2O': 2, 'MnO': 1, 'TiO2': 1, 'P2O5': 2, 'Cr2O3': 2,
              'NiO': 1, 'CoO': 1, 'Fe2O3': 2, 'H2O': 2, 'CO2': 1, 'HF': 2,
              'Ag2O': 2, 'Au2O': 2, 'BaO': 1, 'HCl': 1, 'SO2': 1, 'CdO': 1,
@@ -70,21 +70,21 @@ CationNum = {'SiO2': 1, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 2, 'Na2O': 2,
              'SrO': 1, 'UO4': 1, 'ZnO': 1}
 
 # For Cl, F, H will be 'oxygen'
-OxygenNum = {'SiO2': 2, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 3, 'Na2O': 1,
+oxygenNum = {'SiO2': 2, 'MgO': 1, 'FeO': 1, 'CaO': 1, 'Al2O3': 3, 'Na2O': 1,
              'K2O': 1, 'MnO': 1, 'TiO2': 2, 'P2O5': 5, 'Cr2O3': 3,
              'NiO': 1, 'CoO': 1, 'Fe2O3': 3, 'H2O': 1, 'CO2': 2, 'HF': 1,
              'Ag2O': 1, 'Au2O': 1, 'BaO': 1, 'HCl': 1, 'SO2': 2, 'CdO': 1,
              'NO2': 2, 'Cs2O': 1, 'Cu2O': 1, 'EuO': 1, 'HgO': 1, 'PbO2': 2,
              'SrO': 1, 'UO4': 4, 'ZnO': 1}
 
-CationCharge = {'SiO2': 4, 'MgO': 2, 'FeO': 2, 'CaO': 2, 'Al2O3': 3, 'Na2O': 1,
+cationCharge = {'SiO2': 4, 'MgO': 2, 'FeO': 2, 'CaO': 2, 'Al2O3': 3, 'Na2O': 1,
                 'K2O': 1, 'MnO': 2, 'TiO2': 4, 'P2O5': 5, 'Cr2O3': 3,
                 'NiO': 2, 'CoO': 2, 'Fe2O3': 3, 'H2O': 1, 'CO2': 4, 'HF': -1,
                 'Ag2O': 1, 'Au2O': 1, 'BaO': 2, 'HCl': -1, 'SO2': 4, 'CdO': 2,
                 'NO2': 4, 'Cs2O': 1, 'Cu2O': 1, 'EuO': 2, 'HgO': 2, 'PbO2': 4,
                 'SrO': 2, 'UO4': 8, 'ZnO': 2}
 
-CationMass = {'SiO2': 28.085, 'MgO': 24.305, 'FeO': 55.845, 'CaO': 40.078, 'Al2O3': 26.982,
+cationMass = {'SiO2': 28.085, 'MgO': 24.305, 'FeO': 55.845, 'CaO': 40.078, 'Al2O3': 26.982,
               'Na2O': 22.990, 'K2O': 39.098, 'MnO': 54.938, 'TiO2': 47.867, 'P2O5': 30.974,
               'Cr2O3': 51.996, 'NiO': 58.693, 'CoO': 28.01, 'Fe2O3': 55.845, 'H2O': 1.01,
               'CO2': 12.011,  'HF': 18.998403, 'Ag2O': 107.8682, 'Au2O': 196.96657, 
@@ -146,10 +146,10 @@ def convert_wtptoxides_to_mol_elements(oxides_wtpt, capitalise_elements=True):
         else:
             element_name = oxides_to_cations[ox]
 
-        mol_elements[element_name] = oxides_wtpt[ox] / oxideMass[ox] * CationNum[ox]
-        mol_elements['O'] += oxides_wtpt[ox] / oxideMass[ox] * OxygenNum[ox]
+        mol_elements[element_name] = oxides_wtpt[ox] / oxideMass[ox] * cationNum[ox]
+        mol_elements['O'] += oxides_wtpt[ox] / oxideMass[ox] * oxygenNum[ox]
 
-        sum_mols += oxides_wtpt[ox] / oxideMass[ox] * (CationNum[ox] + OxygenNum[ox])
+        sum_mols += oxides_wtpt[ox] / oxideMass[ox] * (cationNum[ox] + oxygenNum[ox])
 
     for el in mol_elements:
         mol_elements[el] = mol_elements[el] / sum_mols

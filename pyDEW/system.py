@@ -56,7 +56,14 @@ class system:
                 ion_size= defaultsystem.ion_size,
                 mineral_NaK_adjustment = [],
                 carbon_activity_mode='bdot*xi',
-                huang_CO2_coeff=None
+                huang_CO2_coeff=None,
+                oxideMass=None,
+                cationCharge=None,
+                cationNum=None,
+                oxygenNum=None,
+                cationMass=None,
+                oxides_to_cations=None,
+                cations_to_oxides=None,
                 ):
         """Initialisation routine for a system class.
 
@@ -104,7 +111,103 @@ class system:
             - 'huang19': The empirical approach taken by Huang & Sverjensky (2019).
         huang_CO2_coeff : numpyArray or None, default: None
             The coefficients to use for b = coeff[0] + coeff[1]*T + coeff[2]*T**2
+        oxideMass : dict or None, default: None
+            Oxides to use in the system plus their masses. If None, will construct from
+            default options. For negative ions, the oxide can be a hydride.
+        cationCharge : dict or None, default: None
+            The charge on the cation in each of the oxides. For hydrides treat the anion
+            as the cation. If None, it will be constructed from the default options.
+        cationNum : dict or None, default: None
+            The number of cations in each of the oxides. For hydrides treat the anion
+            as the cation. If None, it will be constructed from the default options.
+        oxygenNum : dict or None, default: None
+            The number of oxygens in each of the oxides. For hydrides, this is the
+            number of hydrogens. If None, it will be constructed from the default options.
+        cationMass : dict or None, default: None
+            The atomic mass of the cation (oxide is key). For hydrides treat the anion as 
+            the cation.
+        oxides_to_cations: dict or None, default: None
+            Oxides as keys, cations as values. For hydrides treat the anion as the 
+            cation. If None, it will be constructed from the default options.
+        cations_to_oxides: dict or None, default: None
+            Cations as keys, oxides as values. For hydrides treat the anion as the 
+            cation. If None, it will be constructed from the default options.
         """
+
+        # Sort out oxide information. At the time of writing this is primarily used
+        # for conversion of bulk compositions in reaction calculations.
+        # This could be made much more intelligent, but most users are unlikely to
+        # interact with this.
+        if oxideMass is None:
+            self.oxideMass = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.oxideMass[core.cations_to_oxides[el]] = core.oxideMass[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default oxides. Please specify directly.')
+        else:
+            self.oxideMass = oxideMass
+        
+        if cationCharge is None:
+            self.cationCharge = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.cationCharge[core.cations_to_oxides[el]] = core.cationCharge[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default oxides. Please specify directly.')
+        else:
+            self.cationCharge = cationCharge
+        
+        if cationNum is None:
+            self.cationNum = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.cationNum[core.cations_to_oxides[el]] = core.cationNum[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default cations. Please specify directly.')
+        else:
+            self.cationNum = cationNum
+
+        if oxygenNum is None:
+            self.oxygenNum = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.oxygenNum[core.cations_to_oxides[el]] = core.oxygenNum[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default cations. Please specify directly.')
+        else:
+            self.oxygenNum = oxygenNum
+
+        if cationMass is None:
+            self.cationMass = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.cationMass[core.cations_to_oxides[el]] = core.cationMass[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default cations. Please specify directly.')
+        else:
+            self.cationMass = cationMass
+        
+        if oxides_to_cations is None:
+            self.oxides_to_cations = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.oxides_to_cations[core.cations_to_oxides[el]] = core.oxides_to_cations[core.cations_to_oxides[el]]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default cations. Please specify directly.')
+        else:
+            self.oxides_to_cations = oxides_to_cations
+
+        if cations_to_oxides is None:
+            self.cations_to_oxides = {}
+            for el in elements:
+                if el != 'O' and el in core.cations_to_oxides:
+                    self.oxides_to_cations[el] = core.cations_to_oxides[el]
+                elif el != 'O':
+                    raise core.InputError(el + ' not found in default cations. Please specify directly.')
+        else:
+            self.cations_to_oxides = cations_to_oxides
+        ####
 
         # The element list must start with O and H:
         self.elements = ['O','H']
