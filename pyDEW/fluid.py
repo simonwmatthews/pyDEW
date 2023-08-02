@@ -55,6 +55,7 @@ class fluid:
                  dummy_temperature = 300.0,
                  aH2O_mode='unity',
                  read_pickup=True,
+                 long_output=True,
                  ):
         """
         Initialises a DEW fluid object
@@ -126,6 +127,9 @@ class fluid:
         read_pickup : bool, default: True
             The pickup is required if the Fluid will be used as a starting point for a Reaction (EQ6)
             calculation. You might be able to speed up the runs without reading this though.
+        long_output : bool, default: True
+            Print basis species molalities to 9 s.f. instead of 4 s.f. This will not work with
+            legacy versions of EQ3.
         """
 
         self.system = system
@@ -302,7 +306,10 @@ class fluid:
         return s
 
     def _input_basis_species_conc(self,species_name, molality,s=''):
-        mol_s = '{0:.9E}'.format(molality)
+        if self.long_output is True:
+            mol_s = '{0:.9E}'.format(molality)
+        else:
+            mol_s = '{0:.4E}'.format(molality)
         s += 'data file master species= ' + species_name + '\n'
         s += '   switch with species=  \n'
         s += '   jflag=  0   csp= ' + mol_s + '\n'
