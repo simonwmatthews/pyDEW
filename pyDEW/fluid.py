@@ -144,6 +144,7 @@ class fluid:
         self.uacion = uacion
         self.nxmods = nxmods
         self.dummy_temperature = dummy_temperature
+        self.long_output = long_output
         if max_iterations > 99:
             raise core.InputError("EQ3 only supports a maximum of 99 iterations.")
         elif max_iterations < 0 or isinstance(max_iterations, int) is False:
