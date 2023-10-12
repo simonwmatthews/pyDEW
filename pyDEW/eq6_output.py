@@ -336,6 +336,8 @@ class eq6output:
 
             # Add new line to existing table
             temp = pd.DataFrame(data=data, columns=top)
+            # Remove duplicate columns (sometimes EQ6 does this...)
+            temp = temp.loc[:,~temp.columns.duplicated()].copy()
             tab = pd.concat([tab, temp], ignore_index=True, sort=False)
 
         # Reformat table to delete duplicates and empty rows
@@ -429,7 +431,7 @@ class eq6output:
             x += count+3
 
         # Remove H column and duplicate rows
-        tab.drop(['H'], axis=1, inplace=True)
+        # tab.drop(['H'], axis=1, inplace=True)
         tab.drop_duplicates(inplace=True)
 
         self.elements = tab
