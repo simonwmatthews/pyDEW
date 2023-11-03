@@ -1,0 +1,13 @@
+{
+    "build": { "dockerfile": "Dockerfile_dev" },
+  
+  
+    "forwardPorts": [3000],
+    "customizations": { 
+      "vscode": {
+    
+
+    "extensions": ["ms-toolsai.jupyter","ms-python.python"]
+      }
+    }
+  }
