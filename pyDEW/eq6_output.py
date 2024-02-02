@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from pyDEW import core
 from warnings import warn
+import os
 
 # All of this code is from Fang's EQ6 output reading and plotting notebook
 
@@ -25,6 +26,18 @@ class eq6output:
         self.solid_solutions = None
 
         self._created_destroyed_begin = None
+
+        # Check if an output file exists, if not the calculation probably failed immediately
+        if os.path.exists(output_filepath) is False:
+            raise core.RunError("No output file found. Most likely the calculation failed.")
+        # Check if the tab file exists, if not the calculation probably failed immediately
+        if os.path.exists(tab_filepath) is False:
+            raise core.RunError("No tabtemp file found. Most likely the calculation failed.")
+        
+        # Check for any reported input errors on the output file
+        if self.check_for_errors(output_filepath) is False:
+            raise core.RunError("EQ6 returned an error. Check the output file for more information. "
+                                "It is most likely that an incorrect reactant has been specified.")
 
         try:
             self.read_ph(tab_filepath)
@@ -71,6 +84,13 @@ class eq6output:
         self.pH = self.table_pH['ph']
         self.T = self.table_pH['tempc']
         self.fO2 = self.table_pH['log fo2']
+
+    def check_for_errors(self, output_filepath):
+        file = open(output_filepath, 'r', errors='ignore')
+        for num, line in enumerate(file, 1):
+            if '* error' in line:
+                return False
+        return True
 
     def read_ph(self, tab_filepath):
         """

@@ -16,6 +16,9 @@ class InputError(Error):
     def __init__(self, message):
         self.message = message
 
+class RunError(Error):
+    def __init__(self, message):
+        self.message = message
 
 class CompatibilityError(Error):
     def __init__(self, message):
@@ -473,6 +476,19 @@ def run_eq3(working_directory="", executable_name=None):
 def run_eq6(working_directory="", executable_name=None):
     # Keep track of whether to delete EQ6 or not:
     tidyup = False
+    # Remove old output files to prevent an old run being read as this run
+    try:
+        os.remove(working_directory + '/output')
+    except OSError:
+        pass
+    try:
+        os.remove(working_directory + '/tab')
+    except OSError:
+        pass
+    try:
+        os.remove(working_directory + '/tabx')
+    except OSError:
+        pass
     # Copy the executable into the working folder
     if executable_name is None:
         if operatingsystem == "Darwin":
