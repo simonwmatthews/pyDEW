@@ -1,0 +1,49 @@
+                                                                                
+                                                                                
+endit.                                                                          
+     tempc=       300.00                                                        
+       rho=      1.02336    tdspkg=           0.     tdspl=           0.        
+       fep=        -27.3    uredox=                                             
+     tolbt=        .1E-7     toldl=        .1E-7    tolsat=           0.        
+    itermx= 99                                                                  
+  iopt1-10=     0    0    0    0    0    0    0    0    0   0                   
+  iopg1-10=     0   -1    0    0    1    0    1    0    0   0                   
+  iopr1-10=     0    2    0    0    0    0    1         0                       
+ iopr11-20=     0    0    0    0    0    0    0                                 
+  iodb1-10=     0    0    0    0    0    0    0                                 
+     uebal= H+                                                                  
+    uacion= CL-                                                                 
+     nxmod=  1                                                                  
+   SPECIES= H2CO3(AQ)                                                           
+      TYPE=  0              OPTION= -1              XLKMOD=   0.000             
+data file master species= NA+                                                   
+   switch with species=                                                         
+   jflag=  0   csp= 2.579498735E+01                                             
+data file master species= K+                                                    
+   switch with species=                                                         
+   jflag=  0   csp= 0.000000000E+00                                             
+data file master species= CA+2                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 4.134065301E-04                                             
+data file master species= MG+2                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 7.102971259E-01                                             
+data file master species= AL+3                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 1.293376416E-02                                             
+data file master species= H4SIO4(AQ)                                            
+   switch with species=                                                         
+   jflag=  0   csp= 9.621149689E-02                                             
+data file master species= CO3-2                                                 
+   switch with species=                                                         
+   jflag=  0   csp= 1.000000001E-03                                             
+data file master species= CL-                                                   
+   switch with species=                                                         
+   jflag=  0   csp= 1.000000000E-02                                             
+data file master species= FE+2                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 3.874804960E-04                                             
+data file master species= H+                                                    
+   switch with species=                                                         
+   jflag= 16   csp= -5.0000E+00                                                 
+endit.                                                                          

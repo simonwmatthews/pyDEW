@@ -1,0 +1,96 @@
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+endit.                                                                          
+    nmodl1=  1              nmodl2=  0                                          
+    tempc0=         300.0    jtemp=  0                                          
+       tk1=           0.0      tk2=           0.       tk3=           0.        
+    zistrt=          0.0     zimax=         1.0                                 
+     tstrt=           0.    timemx=           0.                                
+    kstpmx=        10000     cplim=           0.                                
+     dzipr=       1.e+38    dzprlg=         0.05    ksppmx= 10000               
+    dzplot=       1.e+38    dzpllg=       10000.    ksplmx= 10000               
+     ifile= 60                                                                  
+  iopt1-10=     0    0    0    1    0    0    0    0    0    0                  
+     11-20=     0    0                                                          
+  iopr1-10=     0    0    0    0    1    0    0    1    0    0                  
+     11-20=     0    0                                                          
+  iodb1-10=     0    0    0    0    0    0    0    0    0    0                  
+     11-20=     0    0    0                                                     
+     nxopt=  0                                                                  
+      NFFG=  0                                                                  
+      nrct=  3                                                                  
+  reactant= OLIVINE(SS)                                                         
+     jcode= 1                jreac=  0                                          
+      morr=      2.00          modr=           0.                               
+   FORSTERITE                 0.9000                                            
+   FAYALITE                   0.1000                                            
+   endit.                                                                       
+       nsk=  0                  sk=           0.        fk=           0.        
+       nrk=  1                nrpk=  0                                          
+       rk1=      1.0           rk2=           0.       rk3=           0.        
+  reactant= ORTHOPYROXENE(SS)                                                   
+     jcode= 1                jreac=  0                                          
+      morr=      2.00          modr=           0.                               
+   ENSTATITE_OR               0.8000                                            
+   FERROSILITE                0.2000                                            
+   endit.                                                                       
+       nsk=  0                  sk=           0.        fk=           0.        
+       nrk=  1                nrpk=  0                                          
+       rk1=      1.0           rk2=           0.       rk3=           0.        
+  reactant= DIAMOND                                                             
+     jcode= 0                jreac=  0                                          
+      morr=      0.20          modr=           0.                               
+       nsk=  0                  sk=           0.        fk=           0.        
+       nrk=  1                nrpk=  0                                          
+       rk1=      1.0           rk2=           0.       rk3=           0.        
+    dlzidp=           0.                                                        
+     tolbt=       1.e-10     toldl=       1.e-10      tolx=           0.        
+    tolsat=           0.    tolsst=           0.                                
+    screw1=           0.    screw2=           0.    screw3=           0.        
+    screw4=           0.    screw5=           0.    screw6=           0.        
+    zklogu=           0.    zklogl=           0.                                
+    dlzmx1=           0.    dlzmx2=           0.                                
+    itermx=  0              ntrymx=  0                                          
+    npslmx=  0              nsslmx=  0                                          
+                                                                                
+                                                                                
+endit.                                                                          
+    uacion= NA+                                                                 
+    tempci=   .30000E+03                                                        
+     nxmod=  0                                                                  
+     iopg1=  0               iopg2= -1               iopg3=  0                  
+     iopg4=  0               iopg5=  1               iopg6=  0                  
+     iopg7=  0               iopg8=  0               iopg9=  0                  
+    iopg10=  0                                                                  
+       kct=  7                 ksq=  8                 kmt=  8                  
+       kxt=  8                kdim=  8                kprs=  0                  
+   O                   .555313371648064E+02                                     
+   H                   .111040298761220E+03                                     
+   SI                  .534512341191089E-02                                     
+   CL                  .500000000000010E-01                                     
+   FE                  .276277026206039E-05                                     
+   MG                  .736150445045152E-03                                     
+   NA                  .500000000000008E-01                                     
+   electr              .243555176027144E-14                                     
+   H2O                H2O                     .174436091209183E+01              
+   H+                 H+                     -.518657829909499E+01              
+   H4SIO4(AQ)         H4SIO4(AQ)             -.229836253545544E+01              
+   CL-                CL-                    -.130622765825694E+01              
+   FE+2               FE+2                   -.593200981533693E+01              
+   MG+2               MG+2                   -.330688856061726E+01              
+   NA+                NA+                    -.130592251836071E+01              
+   O2(G)              O2(G)                  -.299689876063663E+02              
