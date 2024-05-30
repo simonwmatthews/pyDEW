@@ -51,10 +51,48 @@ def cy_bdslx(int nst):
     return result
 
 
+# These are the original fortran shapes- they are 1D in the c implementation
+#
 # ars : narxpa x ntprpa x nrstpa
 #          5   x    2   x  679
-def cy_arrset(double ars, double amn, double ags, double cess, double cdrs, 
-              double cdrm, double cdrg, double csts, double cstor, double xbarlg, 
+# polynomial coeffs for aqueous species [logK, 0, 0, 0, 0] for constant value
+#
+# amn : narxpa x ntprpa x nmtpar
+#          5   x    2   x  750
+# polynomial coeffs for minerals [logK, 0, 0, 0, 0] for constant value
+#
+# amn : narxpa x ntprpa x ngtpar
+#          5   x    2   x   15
+# polynomial coeffs for gases [logK, 0, 0, 0, 0] for constant value
+#
+# cess : nctpar x nstpar
+#          70      750
+# elemental composition (70 els) of the aqueous species (750 species)
+#
+# cdrs : nsqpa1 x nrstpa
+#          101  x   679
+# reaction coefficients for each aqueous species reaction (basis species x reactions)
+#
+# cdrm : nsqpa1 x nmtpar
+#          101  x   750
+# reaction coefficients for each mineral reaction (basis species x reactions)
+#
+# cdrg : nsqpa1 x ngtpar
+#          101  x   15
+# reaction coefficients for each gas reaction (basis species x reactions)
+#
+# cstor : 2 x nstpar
+#         2     750
+# Stoichiometric factors for H and O. Look in the EQ3 code for exactly how it is set up
+
+
+
+# csts : nsqpa1 x nstpar
+#          101  x  750
+# I think this is calculated in arrset. 
+
+def cy_arrset(ars, amn, ags, cess, cdrs, 
+              cdrm, cdrg, double cstor, double xbarlg, 
 	          double lamlg, double aa, double gm, double csp, double concbs, 
               double cte, double mte, double zvclg1, double cxistq, double conc, 
               double conclg, double act, double actlg, double glg, double glgx,
@@ -75,9 +113,24 @@ def cy_arrset(double ars, double amn, double ags, double cess, double cdrs,
               int ntprmx, int ker, int nloop, int noutpt, int nttyo, long int qhydth, 
               long int qpt4, long int qbswx, long int qbassw, long int uzvec1_len, 
               long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len):
+              
+              # Input parameters
+              cdef double[::1] ars_memview = ars
+              cdef double[::1] amn_memview = amn
+              cdef double[::1] ags_memview = ags
+              cdef double[::1] cess_memview = cess
+              cdef double[::1] cdrs_memview = cdrs
+              cdef double[::1] cdrm_memview = cdrm
+              cdef double[::1] cdrg_memview = cdrg
 
-              result = arrset_(&ars, &amn, &ags, &cess, &cdrs, 
-                               &cdrm, &cdrg, &csts, &cstor, &xbarlg, 
+              # Outputs to be filled in
+              cdef double[75000] csts
+              cdef double[::1] csts_memview = csts
+
+              result = arrset_(&ars_memview[0], &amn_memview[0], &ags_memview[0], 
+                               &cess_memview[0], &cdrs_memview[0], 
+                               &cdrm_memview[0], &cdrg_memview[0], 
+                               &csts_memview[0], &cstor, &xbarlg, 
                                &lamlg, &aa, &gm, &csp, &concbs, 
                                &cte, &mte, &zvclg1, &cxistq, &conc, 
                                &conclg, &act, &actlg, &glg, &glgx,
