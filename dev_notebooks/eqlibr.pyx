@@ -10,6 +10,10 @@
 # The f2c code also defines some odd variable types which are derived directly from
 # normal c types. This may cause an issue, but hopefully not.
 
+# Note that this is using a modified version of eqlibr, where I moved some functions
+# in from (I think) eq3nr. I forgot that I did this when I started making the cython
+# wrapper, but this could be a very useful thing anyway.
+
 # To do:
 # - Need to wrap gcsts function to calculate csts, cxistq, gntpr_
 
@@ -160,8 +164,26 @@ def cy_bdslx(int nst):
 #
 # press
 # Pressure bars
-
-
+#
+# fo2lg
+# fO2 - I think this is where you pass fO2, rather than it being a calculated variable.
+#
+# eh
+# redox potential- I think this can be used instead of fo2lg if iopt specifies so
+#
+# uzvec1 : kpar
+#          800
+# Names of species corresponding to the master iteration variables (basis species?).
+# kpar = 100, strings are 8 characters long I think- I guess it is an
+# abbreviated version
+#
+# uspec: nstpar 750 x 24
+#          18000
+# Names of species 
+#
+# umin: nmtpar 750 x 24
+#          18000
+# Names of pure minerals
 
 
 #
@@ -237,11 +259,25 @@ def cy_bdslx(int nst):
 # res : kpar
 #        100
 # A work array
-
+#
+# xi
+# The ionic strength- presumably it is calculated.
+#
+# xisteq
+# Related to the ionic strength- calculated in the code.
+#
+# dshm
+# Calculated in the code.
+#
+# shm
+# Calculated in the code.
 
 
 # al10
 # log(10)
+# Might be calculated in the code?
+# shmlim
+# om - 1
 # Might be calculated in the code?
 
 def cy_arrset(ars, amn, ags, cess, cdrs, 
@@ -249,9 +285,8 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
 	          lamlg, csp, cxistq, mwtss, z, 
               zsq2, titr, azero, hydn,
               xlkeh, ehfac, om, omlg, omi, tempc, 
-              tempk, press, double xi, double xisteq, double fo2lg, 
-	          double eh, double dshm, double shm, double shmlim,
-	          char uzvec1, char uspec, char umin, char ugas, char ujtype, 
+              tempk, press, fo2lg, 
+	          eh, uzvec1, uspec, umin, char ugas, char ujtype, 
 	          int nend, int jflag, int nsp, int nspec, int jsflag, int jsort, 
               int iindx1, int ibswx, int ibasis, int ir, int kill, int iopt1, 
               int iopt2, int iopg1, int iodb1, int iodb2, int ntpr, int iacion, 
@@ -288,6 +323,11 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] tempc_memview = tempc
               cdef double[::1] tempk_memview = tempk
               cdef double[::1] press_memview = press
+              cdef double[::1] fo2lg_memview = fo2lg
+              cdef double[::1] eh_memview = eh
+              cdef char[::1] uzvec1_memview = uzvec1 # Maybe this isn't defined right?
+              cdef char[::1] uspec_memview = uspec 
+              cdef char[::1] umin_memview = umin 
 
               # Outputs to be filled in
               cdef double[10000] aa
@@ -326,6 +366,14 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] ee_memview = ee
               cdef double[100] res
               cdef double[::1] res_memview = res
+              cdef double xi
+              cdef double[::1] xi_memview = xi
+              cdef double xisteq
+              cdef double[::1] xisteq_memview = xisteq
+              cdef double dshm
+              cdef double[::1] dshm_memview = dshm
+              cdef double shm
+              cdef double[::1] shm_memview = shm
 
               # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
               al10 = np.log(10)
@@ -338,6 +386,8 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] omlg_memview = omlg
               omi = 1.0 / om
               cdef double[::1] omi_memview = omi
+              shmlim = om - 1.0
+              cdef double[::1] shmlim_memview = shmlim
 
               result = arrset_(&ars_memview[0], &amn_memview[0], &ags_memview[0], 
                                &cess_memview[0], &cdrs_memview[0], 
@@ -350,9 +400,9 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
                                &zsq2_memview[0], &titr_memview[0], &azero_memview[0], &hydn_memview[0], &rhs_memview[0], 
                                &ee_memview[0], &res_memview[0], &al10_memview[0], &rconst_memview[0], &xlkeh_memview[0], 
                                &ehfac_memview[0], &om_memview[0], &omlg_memview[0], &omi_memview[0], &tempc_memview[0], 
-                               &tempk_memview[0], &press_memview[0], &xi, &xisteq, &fo2lg, 
-                               &eh, &dshm, &shm, &shmlim,
-                               &uzvec1, &uspec, &umin, &ugas, &ujtype, 
+                               &tempk_memview[0], &press_memview[0], &xi_memview[0], &xisteq_memview[0], &fo2lg_memview[0], 
+                               &eh_memview[0], &dshm_memview[0], &shm_memview[0], &shmlim_memview[0],
+                               &uzvec1_memview[0], &uspec_memview[0], &umin_memview[0], &ugas, &ujtype, 
                                &nend, &jflag, &nsp, &nspec, &jsflag, &jsort, 
                                &iindx1, &ibswx, &ibasis, &ir, &kill, &iopt1, 
                                &iopt2, &iopg1, &iodb1, &iodb2, &ntpr, &iacion, 
