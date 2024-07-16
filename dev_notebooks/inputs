@@ -1,0 +1,67 @@
+650 C & 5.0 kbar                                                                
+                                                                                
+Test NaCl fluid in equilibrium with:                                            
+                                                                                
+Muscovite, sillimanite, albite, quartz                                          
+                                                                                
+Trace amounts of Ca, Mg, and Fe                                                 
+                                                                                
+log fO2 at QFM                                                                  
+                                                                                
+                                                                                
+                                                                                
+endit.                                                                          
+     tempc=         650.                                                        
+       rho=      1.02336    tdspkg=           0.     tdspl=           0.        
+       fep=        -17.8    uredox=                                             
+     tolbt=           0.     toldl=           0.    tolsat=           0.        
+    itermx=  0                                                                  
+  iopt1-10=     0    0    0    0    0    0    0    0    0   0                   
+  iopg1-10=     0   -1    0    0    1    0    0    0    0   0                   
+  iopr1-10=     0    2    0    0    0    0    1         0                       
+ iopr11-20=     0    0    0    0    0    0    0                                 
+  iodb1-10=     0    0    0    0    0    0    0                                 
+     uebal= NA+                                                                 
+    uacion= CL-                                                                 
+     nxmod=  3                                                                  
+   SPECIES= AMORPHOUS_SILICA                                                    
+      TYPE=  1              OPTION= -1              XLKMOD=                     
+   SPECIES= SEPIOLITE                                                           
+      TYPE=  1              OPTION= -1              XLKMOD=                     
+   SPECIES= CA(OH)2                                                             
+      TYPE=  0              OPTION= -1              XLKMOD=                     
+data file master species= NA+                                                   
+   switch with species=                                                         
+   jflag=  0   csp= 0.5                                                         
+data file master species= CL-                                                   
+   switch with species=                                                         
+   jflag=  0   csp= 0.5                                                         
+data file master species= K+                                                    
+   switch with species=                                                         
+   jflag= 19   csp=                                                             
+   uphase= MUSCOVITE                                                            
+data file master species= CA++                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.001                                                       
+data file master species= MG++                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.00001                                                     
+data file master species= FE++                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 1.0e-08                                                     
+data file master species= AL+++                                                 
+   switch with species=                                                         
+   jflag= 19   csp=                                                             
+   uphase= SILLIMANITE                                                          
+data file master species= CO3--                                                 
+   switch with species=                                                         
+   jflag=  0   csp= 0.1                                                         
+data file master species= H+                                                    
+   switch with species=                                                         
+   jflag= 19   csp=                                                             
+   uphase= ALBITE                                                               
+data file master species= H4SIO4(AQ)                                            
+   switch with species=                                                         
+   jflag= 19   csp=                                                             
+   uphase= QUARTZ-ALPHA                                                         
+endit.                                                                          

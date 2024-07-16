@@ -1,4 +1,4 @@
-/* eq3nr110.f -- translated by f2c (version 20100827).
+ /* eq3nr110.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
 	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
@@ -11,6 +11,11 @@
 */
 
 #include "f2c.h"
+#include <stdio.h>
+
+
+
+
 
 /* Common Block Declarations */
 
@@ -415,9 +420,18 @@ static integer c__0 = 0;
 /*     Be sure to put the correct release and stage numbers in */
 /*     in parameters urelno and ustage. */
 
+/* Test */
+int MAINTEST__(void)
+{
+	printf("Entered main-test loop");
+	return 0;
+}
+
 /* Main program */ int MAIN__(void)
 {
     /* Initialized data */
+	printf("Entered main loop.");
+
 
     static doublereal screwd = 2.;
     static char uh2aq[8] = "H2(AQ)  ";
@@ -1245,7 +1259,8 @@ L20:
 
 /*     read the problem input. */
 
-    readx_(&ninpts, &qend);
+    readx_(&un_1.ninpt, &qend); /* First arg changed from &ninpts*/
+
 
     if (qend) {
 
@@ -9474,7 +9489,7 @@ L999:
 
 /*     qend is a flag which is true if the end of the input file has */
 /*     been reached. */
-
+	
     *qend = FALSE_;
 
 /*     utitl consists of up to thirty lines of text.  if there are less */
@@ -13263,3 +13278,5 @@ L150:
 
 
 /* Main program alias */ int eq3nr_ () { MAIN__ (); return 0; }
+
+

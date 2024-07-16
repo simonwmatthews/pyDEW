@@ -10,7 +10,12 @@ import numpy as np
 
 cdef extern from "eq3nr110.c":
     int MAIN__()
+    int MAINTEST__()
 
 def cy_main_loop():
     result = MAIN__()
+    return result
+
+def cy_maintest_loop():
+    result = MAINTEST__()
     return result

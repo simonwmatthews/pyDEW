@@ -280,141 +280,141 @@ def cy_bdslx(int nst):
 # om - 1
 # Might be calculated in the code?
 
-def cy_arrset(ars, amn, ags, cess, cdrs, 
-              cdrm, cdrg, csts, cstor, xbarlg, 
-	          lamlg, csp, cxistq, mwtss, z, 
-              zsq2, titr, azero, hydn,
-              xlkeh, ehfac, om, omlg, omi, tempc, 
-              tempk, press, fo2lg, 
-	          eh, uzvec1, uspec, umin, char ugas, char ujtype, 
-	          int nend, int jflag, int nsp, int nspec, int jsflag, int jsort, 
-              int iindx1, int ibswx, int ibasis, int ir, int kill, int iopt1, 
-              int iopt2, int iopg1, int iodb1, int iodb2, int ntpr, int iacion, 
-              int iebal, int nhydr, int nchlor, int nct, int nsb, int nsb1, int nsq, 
-              int nsqb, int nsq1, int nst, int nrst, int nmt, int ngt, int nxt, 
-              int kct, int ksb, int ksq, int kebal, int kdim, int kmax, int khydr, 
-              int nctmax, int nsqmax, int nsqmx1, int nstmax, int iktmax, int narxmx, 
-              int ntprmx, int ker, int nloop, int noutpt, int nttyo, long int qhydth, 
-              long int qpt4, long int qbswx, long int qbassw, long int uzvec1_len, 
-              long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len):
+# def cy_arrset(ars, amn, ags, cess, cdrs, 
+#               cdrm, cdrg, csts, cstor, xbarlg, 
+# 	          lamlg, csp, cxistq, mwtss, z, 
+#               zsq2, titr, azero, hydn,
+#               xlkeh, ehfac, om, omlg, omi, tempc, 
+#               tempk, press, fo2lg, 
+# 	          eh, uzvec1, uspec, umin, char ugas, char ujtype, 
+# 	          int nend, int jflag, int nsp, int nspec, int jsflag, int jsort, 
+#               int iindx1, int ibswx, int ibasis, int ir, int kill, int iopt1, 
+#               int iopt2, int iopg1, int iodb1, int iodb2, int ntpr, int iacion, 
+#               int iebal, int nhydr, int nchlor, int nct, int nsb, int nsb1, int nsq, 
+#               int nsqb, int nsq1, int nst, int nrst, int nmt, int ngt, int nxt, 
+#               int kct, int ksb, int ksq, int kebal, int kdim, int kmax, int khydr, 
+#               int nctmax, int nsqmax, int nsqmx1, int nstmax, int iktmax, int narxmx, 
+#               int ntprmx, int ker, int nloop, int noutpt, int nttyo, long int qhydth, 
+#               long int qpt4, long int qbswx, long int qbassw, long int uzvec1_len, 
+#               long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len):
               
-              # Input parameters
-              cdef double[::1] ars_memview = ars
-              cdef double[::1] amn_memview = amn
-              cdef double[::1] ags_memview = ags
-              cdef double[::1] cess_memview = cess
-              cdef double[::1] cdrs_memview = cdrs
-              cdef double[::1] cdrm_memview = cdrm
-              cdef double[::1] cdrg_memview = cdrg
-              cdef double[::1] csts_memview = csts
-              cdef double[::1] cstor_memview = cstor
-              cdef double[::1] xbarlg_memview = xbarlg
-              cdef double[::1] lamlg_memview = lamlg
-              cdef double[::1] csp_memview = csp
-              cdef double[::1] cxistq_memview = cxistq
-              cdef double[::1] mwtss_memview = mwtss
-              cdef double[::1] z_memview = z # Named z__ in the c code
-              cdef double[::1] zsq2_memview = zsq2
-              cdef double[::1] titr_memview = titr
-              cdef double[::1] azero_memview = azero
-              cdef double[::1] hydn_memview = hydn
-              cdef double[::1] xlkeh_memview = xlkeh
-              cdef double[::1] ehfac_memview = ehfac
-              cdef double[::1] tempc_memview = tempc
-              cdef double[::1] tempk_memview = tempk
-              cdef double[::1] press_memview = press
-              cdef double[::1] fo2lg_memview = fo2lg
-              cdef double[::1] eh_memview = eh
-              cdef char[::1] uzvec1_memview = uzvec1 # Maybe this isn't defined right?
-              cdef char[::1] uspec_memview = uspec 
-              cdef char[::1] umin_memview = umin 
+#               # Input parameters
+#               cdef double[::1] ars_memview = ars
+#               cdef double[::1] amn_memview = amn
+#               cdef double[::1] ags_memview = ags
+#               cdef double[::1] cess_memview = cess
+#               cdef double[::1] cdrs_memview = cdrs
+#               cdef double[::1] cdrm_memview = cdrm
+#               cdef double[::1] cdrg_memview = cdrg
+#               cdef double[::1] csts_memview = csts
+#               cdef double[::1] cstor_memview = cstor
+#               cdef double[::1] xbarlg_memview = xbarlg
+#               cdef double[::1] lamlg_memview = lamlg
+#               cdef double[::1] csp_memview = csp
+#               cdef double[::1] cxistq_memview = cxistq
+#               cdef double[::1] mwtss_memview = mwtss
+#               cdef double[::1] z_memview = z # Named z__ in the c code
+#               cdef double[::1] zsq2_memview = zsq2
+#               cdef double[::1] titr_memview = titr
+#               cdef double[::1] azero_memview = azero
+#               cdef double[::1] hydn_memview = hydn
+#               cdef double[::1] xlkeh_memview = xlkeh
+#               cdef double[::1] ehfac_memview = ehfac
+#               cdef double[::1] tempc_memview = tempc
+#               cdef double[::1] tempk_memview = tempk
+#               cdef double[::1] press_memview = press
+#               cdef double[::1] fo2lg_memview = fo2lg
+#               cdef double[::1] eh_memview = eh
+#               cdef char[::1] uzvec1_memview = uzvec1 # Maybe this isn't defined right?
+#               cdef char[::1] uspec_memview = uspec 
+#               cdef char[::1] umin_memview = umin 
 
-              # Outputs to be filled in
-              cdef double[10000] aa
-              cdef double[::1] aa_memview = aa
-              cdef double[10000] gm
-              cdef double[::1] gm_memview = gm
-              cdef double[100] concbs
-              cdef double[::1] concbs_memview = concbs
-              cdef double[100] cte
-              cdef double[::1] cte_memview = cte
-              cdef double[100] mte
-              cdef double[::1] mte_memview = mte
-              cdef double[100] zvclg1
-              cdef double[::1] zvclg1_memview = zvclg1
-              cdef double[750] conc
-              cdef double[::1] conc_memview = conc
-              cdef double[750] conclg
-              cdef double[::1] conclg_memview = conclg
-              cdef double[750] act
-              cdef double[::1] act_memview = act
-              cdef double[750] actlg
-              cdef double[::1] actlg_memview = actlg
-              cdef double[750] glg
-              cdef double[::1] glg_memview = glg
-              cdef double[750] glgx
-              cdef double[::1] glgx_memview = glgx
-              cdef double[679] xlks
-              cdef double[::1] xlks_memview = xlks
-              cdef double[750] xlkm
-              cdef double[::1] xlkm_memview = xlkm
-              cdef double[15] xlkg
-              cdef double[::1] xlkg_memview = xlkg
-              cdef double[100] rhs
-              cdef double[::1] rhs_memview = rhs
-              cdef double[100] ee
-              cdef double[::1] ee_memview = ee
-              cdef double[100] res
-              cdef double[::1] res_memview = res
-              cdef double xi
-              cdef double[::1] xi_memview = xi
-              cdef double xisteq
-              cdef double[::1] xisteq_memview = xisteq
-              cdef double dshm
-              cdef double[::1] dshm_memview = dshm
-              cdef double shm
-              cdef double[::1] shm_memview = shm
+#               # Outputs to be filled in
+#               cdef double[10000] aa
+#               cdef double[::1] aa_memview = aa
+#               cdef double[10000] gm
+#               cdef double[::1] gm_memview = gm
+#               cdef double[100] concbs
+#               cdef double[::1] concbs_memview = concbs
+#               cdef double[100] cte
+#               cdef double[::1] cte_memview = cte
+#               cdef double[100] mte
+#               cdef double[::1] mte_memview = mte
+#               cdef double[100] zvclg1
+#               cdef double[::1] zvclg1_memview = zvclg1
+#               cdef double[750] conc
+#               cdef double[::1] conc_memview = conc
+#               cdef double[750] conclg
+#               cdef double[::1] conclg_memview = conclg
+#               cdef double[750] act
+#               cdef double[::1] act_memview = act
+#               cdef double[750] actlg
+#               cdef double[::1] actlg_memview = actlg
+#               cdef double[750] glg
+#               cdef double[::1] glg_memview = glg
+#               cdef double[750] glgx
+#               cdef double[::1] glgx_memview = glgx
+#               cdef double[679] xlks
+#               cdef double[::1] xlks_memview = xlks
+#               cdef double[750] xlkm
+#               cdef double[::1] xlkm_memview = xlkm
+#               cdef double[15] xlkg
+#               cdef double[::1] xlkg_memview = xlkg
+#               cdef double[100] rhs
+#               cdef double[::1] rhs_memview = rhs
+#               cdef double[100] ee
+#               cdef double[::1] ee_memview = ee
+#               cdef double[100] res
+#               cdef double[::1] res_memview = res
+#               cdef double xi
+#               cdef double[::1] xi_memview = xi
+#               cdef double xisteq
+#               cdef double[::1] xisteq_memview = xisteq
+#               cdef double dshm
+#               cdef double[::1] dshm_memview = dshm
+#               cdef double shm
+#               cdef double[::1] shm_memview = shm
 
-              # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
-              al10 = np.log(10)
-              cdef double[::1] al10_memview = al10
-              rconst = 1.98726
-              cdef double[::1] rconst_memview = rconst
-              om = 55.5086815578
-              cdef double[::1] om_memview = om
-              omlg = np.log(om)
-              cdef double[::1] omlg_memview = omlg
-              omi = 1.0 / om
-              cdef double[::1] omi_memview = omi
-              shmlim = om - 1.0
-              cdef double[::1] shmlim_memview = shmlim
+#               # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
+#               al10 = np.log(10)
+#               cdef double[::1] al10_memview = al10
+#               rconst = 1.98726
+#               cdef double[::1] rconst_memview = rconst
+#               om = 55.5086815578
+#               cdef double[::1] om_memview = om
+#               omlg = np.log(om)
+#               cdef double[::1] omlg_memview = omlg
+#               omi = 1.0 / om
+#               cdef double[::1] omi_memview = omi
+#               shmlim = om - 1.0
+#               cdef double[::1] shmlim_memview = shmlim
 
-              result = arrset_(&ars_memview[0], &amn_memview[0], &ags_memview[0], 
-                               &cess_memview[0], &cdrs_memview[0], 
-                               &cdrm_memview[0], &cdrg_memview[0], 
-                               &csts_memview[0], &cstor_memview[0], &xbarlg_memview[0], 
-                               &lamlg_memview[0], &aa_memview[0], &gm_memview[0], &csp_memview[0], &concbs_memview[0], 
-                               &cte_memview[0], &mte_memview[0], &zvclg1_memview[0], &cxistq_memview[0], &conc_memview[0], 
-                               &conclg_memview[0], &act_memview[0], &actlg_memview[0], &glg_memview[0], &glgx_memview[0],
-                               &xlks_memview[0], &xlkm_memview[0], &xlkg_memview[0], &mwtss_memview[0], &z_memview[0], 
-                               &zsq2_memview[0], &titr_memview[0], &azero_memview[0], &hydn_memview[0], &rhs_memview[0], 
-                               &ee_memview[0], &res_memview[0], &al10_memview[0], &rconst_memview[0], &xlkeh_memview[0], 
-                               &ehfac_memview[0], &om_memview[0], &omlg_memview[0], &omi_memview[0], &tempc_memview[0], 
-                               &tempk_memview[0], &press_memview[0], &xi_memview[0], &xisteq_memview[0], &fo2lg_memview[0], 
-                               &eh_memview[0], &dshm_memview[0], &shm_memview[0], &shmlim_memview[0],
-                               &uzvec1_memview[0], &uspec_memview[0], &umin_memview[0], &ugas, &ujtype, 
-                               &nend, &jflag, &nsp, &nspec, &jsflag, &jsort, 
-                               &iindx1, &ibswx, &ibasis, &ir, &kill, &iopt1, 
-                               &iopt2, &iopg1, &iodb1, &iodb2, &ntpr, &iacion, 
-                               &iebal, &nhydr, &nchlor, &nct, &nsb, &nsb1, &nsq, 
-                               &nsqb, &nsq1, &nst, &nrst, &nmt, &ngt, &nxt, 
-                               &kct, &ksb, &ksq, &kebal, &kdim, &kmax, &khydr, 
-                               &nctmax, &nsqmax, &nsqmx1, &nstmax, &iktmax, &narxmx, 
-                               &ntprmx, &ker, &nloop, &noutpt, &nttyo, &qhydth, 
-                               &qpt4, &qbswx, &qbassw, <long int> uzvec1_len, 
-                               <long int> uspec_len, <long int> umin_len, <long int> ugas_len, <long int> ujtype_len)
+#               result = arrset_(&ars_memview[0], &amn_memview[0], &ags_memview[0], 
+#                                &cess_memview[0], &cdrs_memview[0], 
+#                                &cdrm_memview[0], &cdrg_memview[0], 
+#                                &csts_memview[0], &cstor_memview[0], &xbarlg_memview[0], 
+#                                &lamlg_memview[0], &aa_memview[0], &gm_memview[0], &csp_memview[0], &concbs_memview[0], 
+#                                &cte_memview[0], &mte_memview[0], &zvclg1_memview[0], &cxistq_memview[0], &conc_memview[0], 
+#                                &conclg_memview[0], &act_memview[0], &actlg_memview[0], &glg_memview[0], &glgx_memview[0],
+#                                &xlks_memview[0], &xlkm_memview[0], &xlkg_memview[0], &mwtss_memview[0], &z_memview[0], 
+#                                &zsq2_memview[0], &titr_memview[0], &azero_memview[0], &hydn_memview[0], &rhs_memview[0], 
+#                                &ee_memview[0], &res_memview[0], &al10_memview[0], &rconst_memview[0], &xlkeh_memview[0], 
+#                                &ehfac_memview[0], &om_memview[0], &omlg_memview[0], &omi_memview[0], &tempc_memview[0], 
+#                                &tempk_memview[0], &press_memview[0], &xi_memview[0], &xisteq_memview[0], &fo2lg_memview[0], 
+#                                &eh_memview[0], &dshm_memview[0], &shm_memview[0], &shmlim_memview[0],
+#                                &uzvec1_memview[0], &uspec_memview[0], &umin_memview[0], &ugas, &ujtype, 
+#                                &nend, &jflag, &nsp, &nspec, &jsflag, &jsort, 
+#                                &iindx1, &ibswx, &ibasis, &ir, &kill, &iopt1, 
+#                                &iopt2, &iopg1, &iodb1, &iodb2, &ntpr, &iacion, 
+#                                &iebal, &nhydr, &nchlor, &nct, &nsb, &nsb1, &nsq, 
+#                                &nsqb, &nsq1, &nst, &nrst, &nmt, &ngt, &nxt, 
+#                                &kct, &ksb, &ksq, &kebal, &kdim, &kmax, &khydr, 
+#                                &nctmax, &nsqmax, &nsqmx1, &nstmax, &iktmax, &narxmx, 
+#                                &ntprmx, &ker, &nloop, &noutpt, &nttyo, &qhydth, 
+#                                &qpt4, &qbswx, &qbassw, <long int> uzvec1_len, 
+#                                <long int> uspec_len, <long int> umin_len, <long int> ugas_len, <long int> ujtype_len)
             
-              return result
+#               return result
 
 
 
