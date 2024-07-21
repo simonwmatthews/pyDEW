@@ -1598,9 +1598,24 @@ L999:
 /* bdmlx    last revised 12/12/87 by tjw  TEST */
 /* *bdmlx  f77 rewrite 04/06/87 by tjw */
 
-int test_(integer testint)
+int test_(int *testint)
 {
-	printf("Testing...");
+	printf("Testing in test_...\n");
+	printf("%d",*testint);
+	return 0;
+}
+
+int testbool_(logical testbool)
+{
+	logical qtrue;
+	qtrue = TRUE_;
+	printf("Testing in testbool_...\n");
+	if(testbool == qtrue) {
+		printf("True!!");
+	}
+	else {
+		printf("False!!");
+	}
 	return 0;
 }
 
