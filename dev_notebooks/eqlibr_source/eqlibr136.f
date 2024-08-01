@@ -3363,7 +3363,7 @@ c
 c                                                                               
 c     compute stoichiometric factors for other master species                   
 c                                                                               
-      csts(nse,nse) = 1.                                                        
+      csts(nse,nse) = 1.   
 c                                                                               
       if (qbassw) then                                                          
         do 25 ns = 1,nct                                                        
@@ -3384,7 +3384,7 @@ c
       if (ns .lt. nsq) then                                                     
         if (jflag(ns) .ne. 30) go to 35                                         
       endif                                                                     
-      csum = -cdrs(nse,nrs)/cdrs(nsq1,nrs)                                      
+      csum = -cdrs(nse,nrs)/cdrs(nsq1,nrs)                                        
 c                                                                               
       if (qbassw) then                                                          
         do 30 nsg = 2,nsq                                                       
@@ -3403,7 +3403,7 @@ c
         endif                                                                   
    30   continue                                                                
       endif                                                                     
-c                                                                               
+c                                                                    
       csts(nse,ns) = csum                                                       
    35 continue                                                                  
 c                                                                               
@@ -11648,7 +11648,7 @@ c
       include "bt.h"
 c                                                                               
       character*(*) uzvec1(*),uspec(*),umin(*),ugas(*),ujtype(*)                
-      character*24 udef,ueb,ueh,ured,ust1,ust2                                  
+      character*24 udef,ueb,ueh,ured,ust1,ust2    
 c                                                                               
       dimension ars(narxmx,ntprmx,*),amn(narxmx,ntprmx,*),                      
      $ ags(narxmx,ntprmx,*),cess(nctmax,*),cdrs(nsqmx1,*),                      
@@ -11689,6 +11689,9 @@ c
 c                                                                               
 c----------------------------------------------------------------------         
 c     Added here to save having to wrap function separately:
+      write (noutpt, 942) nsq, nsqb, nst, nrst, nmt, ngt
+  942 format('nsq:',2x,i10,2x,'nsqb:',2x,i10,2x,'nst:',2x,i10,2x,'nrst:',2x,i10,2x,'nmt:',2x,i10,2x,'ngt:',2x,i10,2x)
+      qbassw = .false.
       call gcsts(csts,cdrs,cstor,ibasis,jsflag,jflag,                           
      $ nhydr,nct,nsb,nsb1,nsq,nsq1,nst,nsqmax,nsqmx1,nstmax,
      $ qbassw)                                                                            
@@ -11733,7 +11736,7 @@ c
       nloop=-1                                                                  
 c                                                                               
    25 nloop=nloop+1                                                             
-      if (qpr1) write (noutpt,33) nloop                                         
+      if (qpr1) write (nttyo,33) nloop                                         
    33 format(5x,'nloop= ',i2)                                                   
 c                                                                               
 c     get stoichiometric coefficients for the equivalent                        
@@ -11743,7 +11746,7 @@ c     print the iteration matrix structure.  execute any killer options.
 c     killer options are set only once.  they carry through after any           
 c     automatic basis switching.                                                
 c                                                                               
-      if (qpr1) write (noutpt,30)                                               
+      if (qpr1) write (nttyo,30)                                               
    30 format(/16x,'--- iteration matrix structure ---',//)                      
       if (iodb3 .ne. 0) write (nttyo,1050)                                      
  1050 format(/,' iteration variables')                                          
@@ -11764,7 +11767,7 @@ c
             ust2 = ured                                                         
           endif                                                                 
         else                                                                    
-            jflp1 = jfl + 1                                                     
+            jflp1 = jfl + 1   
             ust2 = ujtype(jflp1)                                                
         endif                                                                   
       endif                                                                     
@@ -11783,7 +11786,7 @@ c
       if (qpr1) then                                                            
         ust3=ublank                                                             
         if (iodb3.ne.0 .and. kill(kcol).ge.1) ust3=ukilld                       
-        write (noutpt,65) kcol,ns,ust1,ust2,ust3                                
+        write (nttyo,65) kcol,ns,ust1,ust2,ust3                                
    65   format(12x,2i5,3x,a24,3x,a24,2x,a8)                                     
       endif                                                                     
 c                                                                               
@@ -11812,7 +11815,7 @@ c
 c                                                                               
 c     set up preliminary estimates of basis species concentrations              
 c                                                                               
-      do 823 ns = 1,nst                                                         
+      do 823 ns=1,nst                                                 
       conc(ns) = 0.                                                             
   823 continue                                                                  
 c                                                                               

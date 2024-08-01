@@ -1,4 +1,4 @@
-/* eqlibr_source/eqlibr136.f -- translated by f2c (version 20100827).
+/* eqlibr136.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
 	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
@@ -11,6 +11,7 @@
 */
 
 #include "f2c.h"
+#include <stdio.h>
 
 /* Common Block Declarations */
 
@@ -400,6 +401,20 @@ static integer c__2 = 2;
 static doublereal c_b365 = .33333333333333331;
 static integer c__9 = 9;
 static integer c__3 = 3;
+
+/* TESTING THE CYTHON WRAPPER*/
+int test_array_pass_(doublereal *testarray, int arraylen)
+{
+	int i;
+
+	for (i=0; i < arraylen; i++){
+		printf("%f\n", testarray[i]);
+	}
+
+	testarray[3] = 0.0;
+
+	return 0;
+}
 
 /* eqlib    version 3245R136, last revised 02/09/88 by rmm */
 /* *eqlib  f77 check, ok 04/06/87 by tjw */
@@ -1585,8 +1600,44 @@ L999:
 /* bdmlx    last revised 12/12/87 by tjw  TEST */
 /* *bdmlx  f77 rewrite 04/06/87 by tjw */
 
+int test_(int *testint)
+{
+	printf("Testing in test_...\n");
+	printf("%d",*testint);
+	return 0;
+}
+
+int testbool_(logical *testbool)
+{
+	logical qtrue;
+	qtrue = TRUE_;
+	printf("Testing in testbool_...\n");
+	if(*testbool == qtrue) {
+		printf("True!!");
+	}
+	else {
+		printf("False!!");
+	}
+	return 0;
+}
+
+int testboolnopt_(logical testbool)
+{
+	logical qtrue;
+	qtrue = TRUE_;
+	printf("Testing in testbool_...\n");
+	if(testbool == qtrue) {
+		printf("True!!");
+	}
+	else {
+		printf("False!!");
+	}
+	return 0;
+}
+
 /* Subroutine */ int bdmlx_(integer *nst)
 {
+	printf("Testing...");
     /* System generated locals */
     integer i__1, i__2;
 
@@ -1692,16 +1743,19 @@ L999:
     i__1 = *nst;
     for (ns = 2; ns <= i__1; ++ns) {
 
-/*     set first index into nmxx */
+// /*     set first index into nmxx */
 
 	eqlpmx_1.nmxi[(ns << 1) - 2] = nxx;
-/*                             *----------------------------------------- */
-/*                             * search col 1, nmux array */
-/*                             *----------------------------------------- */
+// /*                             *----------------------------------------- */
+// /*                             * search col 1, nmux array */
+// /*                             *----------------------------------------- */
 	i__2 = eqlpmu_1.nmu;
-	for (k = 1; k <= i__2; ++k) {
-	    if (eqlpmu_1.nmux[k * 3 - 3] == ns) {
+	printf("\ni__2=%d", i__2);
+	printf("\nns=%d", ns);
 
+	for (k = 1; k <= i__2; ++k) {
+		
+	    if (eqlpmu_1.nmux[k * 3 - 3] == ns) {
 /*       found one, get two other indices and nmux index */
 
 		eqlpmx_1.nmxx[nxx * 3 - 3] = eqlpmu_1.nmux[k * 3 - 2];
@@ -1714,9 +1768,9 @@ L999:
 /* 1010     format(' * error - mu index array index overflow ', */
 /*     $    '(eqlib/bdmlx)') */
 		    s_stop("", (ftnlen)0);
-		}
+		 }
 	    }
-/* L20: */
+// /* L20: */
 	}
 /*                             *----------------------------------------- */
 /*                             * search col 2, nmux array */
@@ -1725,11 +1779,11 @@ L999:
 	for (k = 1; k <= i__2; ++k) {
 	    if (eqlpmu_1.nmux[k * 3 - 2] == ns) {
 
-/*       found one, get other index */
+// /*       found one, get other index */
 
 		nx1 = eqlpmu_1.nmux[k * 3 - 3];
 
-/*       skip if duplicate */
+// /*       skip if duplicate */
 
 		if (ns != nx1) {
 		    eqlpmx_1.nmxx[nxx * 3 - 3] = nx1;
@@ -1737,13 +1791,13 @@ L999:
 		    eqlpmx_1.nmxx[nxx * 3 - 1] = k;
 		    ++nxx;
 		    if (nxx > eqlpmx_1.nmxt) {
-/*            write (noutpl,1010) */
-/*            write (nttyol,1010) */
+// /*            write (noutpl,1010) */
+// /*            write (nttyol,1010) */
 			s_stop("", (ftnlen)0);
 		    }
 		}
 	    }
-/* L25: */
+// /* L25: */
 	}
 /*                             *----------------------------------------- */
 /*                             * search col 3, nmux array */
@@ -1752,12 +1806,12 @@ L999:
 	for (k = 1; k <= i__2; ++k) {
 	    if (eqlpmu_1.nmux[k * 3 - 1] == ns) {
 
-/*       found one, get other indices */
+// /*       found one, get other indices */
 
 		nx1 = eqlpmu_1.nmux[k * 3 - 3];
 		nx2 = eqlpmu_1.nmux[k * 3 - 2];
 
-/*       skip if duplicate */
+// /*       skip if duplicate */
 
 		if (ns != nx1 && ns != nx2) {
 		    eqlpmx_1.nmxx[nxx * 3 - 3] = nx1;
@@ -1765,19 +1819,19 @@ L999:
 		    eqlpmx_1.nmxx[nxx * 3 - 1] = k;
 		    ++nxx;
 		    if (nxx > eqlpmx_1.nmxt) {
-/*            write (noutpl,1010) */
-/*            write (nttyol,1010) */
+// /*            write (noutpl,1010) */
+// /*            write (nttyol,1010) */
 			s_stop("", (ftnlen)0);
 		    }
 		}
 	    }
-/* L30: */
+// /* L30: */
 	}
 
-/*     set last index into nmxx */
+// /*     set last index into nmxx */
 
 	eqlpmx_1.nmxi[(ns << 1) - 1] = nxx - 1;
-/* L40: */
+// /* L40: */
     }
 
     eqlpmx_1.nmlx = nxx - 1;
@@ -2095,11 +2149,11 @@ L999:
 
     /* Format strings */
     static char fmt_1007[] = "(\002 * error - insufficient floating point ep"
-	    "silon = \002,e12.5,/5x,\002needs to be at least as small as \002"
-	    ",e12.5,\002 (eqlib/chump)\002)";
+	    "silon = \002,e12.5/5x,\002needs to be at least as small as \002,"
+	    "e12.5,\002 (eqlib/chump)\002)";
     static char fmt_1008[] = "(\002 * error - insufficient floating point ex"
-	    "ponent range =\002,\002 +/- \002,i4,/5x,\002needs to be +/- at l"
-	    "east \002,i4,\002 (eqlib/chump)\002)";
+	    "ponent range = +/- \002,i4,/5x,\002needs to be +/- at least \002"
+	    ",i4,\002 (eqlib/chump)\002)";
     static char fmt_1009[] = "(/\002 * sorry, your computer is not adequat"
 	    "e\002,\002 (eqlib/chump)\002)";
 
@@ -3971,6 +4025,7 @@ L999:
     for (ii = 1; ii <= i__1; ++ii) {
 	i__ = *narxmx + 1 - ii;
 	*prop = arr[i__ + *ntpr * arr_dim1] + *tempc * *prop;
+	printf("%f\n", *prop);
 /* L10: */
     }
 
@@ -5515,7 +5570,7 @@ L15:
 {
     /* Format strings */
     static char fmt_205[] = "(\002 * error- bad activity coefficient option "
-	    "encountered\002,\002 (eqlib/gcoeff)\002)";
+	    "encountered (eqlib/gcoeff)\002)";
     static char fmt_1011[] = "(\002 * error - error, bad fdd call (eqlib/gco"
 	    "eff)\002)";
     static char fmt_1010[] = "(\002 * error - error, bad fdd call (eqlib/gco"
@@ -7132,10 +7187,10 @@ L999:
     /* Format strings */
     static char fmt_300[] = "(\002 * error - act. coeff. option not compatib"
 	    "le with\002,\002 supporting data file \002,a8,/3x,\002iopg1= "
-	    "\002,i3,\002, data file key= \002,a6,\002, correct key= \002,a6,"
-	    "/5x,\002provide the correct set of data files and try again\002,"
-	    "/5x,\002do not change the keys on the data files (eqlib/gkey)"
-	    "\002)";
+	    "\002,i3,\002, data file key= \002a6,\002, correct key= \002,a6,/"
+	    "5x,\002provide the correct set of data files and try again\002,/"
+	    "5x,\002do not change the keys on the data files (eqlib/gkey)\002)"
+	    ;
 
     /* Builtin functions */
     /* Subroutine */ int s_copy(char *, char *, ftnlen, ftnlen);
@@ -19934,6 +19989,7 @@ L10:
 	uspec_len, ftnlen umin_len, ftnlen ugas_len, ftnlen ujtype_len)
 {
     /* Initialized data */
+	printf("In arrset");
 
     static char udef[24] = "defining equation       ";
     static char ueb[24] = "elect. balance          ";
@@ -19948,9 +20004,6 @@ L10:
     static logical qcfrac = TRUE_;
 
     /* Format strings */
-    static char fmt_942[] = "(\002nsq:\002,2x,i10,2x,\002nsqb:\002,2x,i10,"
-	    "2x,\002nst:\002,2x,i10,2x,\002nrst:\002,2x,i10,2x,\002nmt:\002,2"
-	    "x,i10,2x,\002ngt:\002,2x,i10,2x)";
     static char fmt_2[] = "(\002 --- arrset ---\002)";
     static char fmt_33[] = "(5x,\002nloop= \002,i2)";
     static char fmt_30[] = "(/16x,\002--- iteration matrix structure ---\002"
@@ -20013,10 +20066,10 @@ L10:
 	    nend_offset, i__1;
 
     /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
+    integer s_wsfe(cilist *), e_wsfe(void);
     /* Subroutine */ int s_copy(char *, char *, ftnlen, ftnlen);
-    integer s_rsfe(cilist *), e_rsfe(void), s_cmp(char *, char *, ftnlen, 
-	    ftnlen);
+    integer do_fio(integer *, char *, ftnlen), s_rsfe(cilist *), e_rsfe(void),
+	     s_cmp(char *, char *, ftnlen, ftnlen);
     /* Subroutine */ int s_stop(char *, ftnlen);
 
     /* Local variables */
@@ -20056,14 +20109,12 @@ L10:
     extern /* Subroutine */ int betas_(logical *, logical *);
     static doublereal xdiff, pgrid;
     static logical qdshm, qabsw;
-    static doublereal sigza;
-    extern /* Subroutine */ int gcsts_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, integer *, integer *, integer 
-	    *, integer *, integer *, integer *, integer *, integer *, integer 
-	    *, integer *, logical *);
-    static doublereal tally;
+    static doublereal sigza, tally;
     static integer npass;
-    extern /* Subroutine */ int ncmpx_(void);
+    extern /* Subroutine */ int ncmpx_(void), gcsts_(doublereal *, doublereal 
+	    *, doublereal *, integer *, integer *, integer *, integer *, 
+	    integer *, integer *, integer *, integer *, integer *, integer *, 
+	    integer *, integer *, integer *, logical *);
     static doublereal sigzc, sigzm, sigzi, xinew;
     extern /* Subroutine */ int gcoeff_(doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *, doublereal *, 
@@ -20104,50 +20155,49 @@ L10:
     static logical qtestp;
 
     /* Fortran I/O blocks */
-    static cilist io___1274 = { 0, 0, 0, fmt_942, 0 };
-    static cilist io___1279 = { 0, 0, 0, fmt_2, 0 };
-    static cilist io___1283 = { 0, 0, 0, fmt_33, 0 };
-    static cilist io___1284 = { 0, 0, 0, fmt_30, 0 };
-    static cilist io___1286 = { 0, 0, 0, fmt_1050, 0 };
-    static cilist io___1291 = { 0, 0, 0, fmt_1052, 0 };
-    static cilist io___1292 = { 0, 0, 0, fmt_1054, 0 };
-    static cilist io___1293 = { 0, 0, 0, fmt_1056, 0 };
-    static cilist io___1296 = { 0, 0, 0, fmt_65, 0 };
-    static cilist io___1297 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1298 = { 0, 0, 0, fmt_1060, 0 };
-    static cilist io___1300 = { 0, 0, 0, fmt_1062, 0 };
-    static cilist io___1301 = { 0, 0, 0, fmt_1064, 0 };
-    static cilist io___1308 = { 0, 0, 0, fmt_3, 0 };
-    static cilist io___1309 = { 0, 0, 0, fmt_6, 0 };
-    static cilist io___1310 = { 0, 0, 0, fmt_4, 0 };
-    static cilist io___1311 = { 0, 0, 0, fmt_7, 0 };
-    static cilist io___1313 = { 0, 0, 0, fmt_742, 0 };
-    static cilist io___1315 = { 0, 0, 0, fmt_3247, 0 };
-    static cilist io___1321 = { 0, 0, 0, fmt_3250, 0 };
-    static cilist io___1322 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1323 = { 0, 0, 0, fmt_642, 0 };
-    static cilist io___1324 = { 0, 0, 0, fmt_643, 0 };
-    static cilist io___1326 = { 0, 0, 0, fmt_644, 0 };
-    static cilist io___1327 = { 0, 0, 0, fmt_647, 0 };
-    static cilist io___1328 = { 0, 0, 0, fmt_648, 0 };
-    static cilist io___1329 = { 0, 0, 0, fmt_649, 0 };
-    static cilist io___1330 = { 0, 0, 0, fmt_553, 0 };
-    static cilist io___1332 = { 0, 0, 0, fmt_557, 0 };
-    static cilist io___1333 = { 0, 0, 0, fmt_559, 0 };
-    static cilist io___1334 = { 0, 0, 0, fmt_573, 0 };
-    static cilist io___1335 = { 0, 0, 0, fmt_554, 0 };
-    static cilist io___1336 = { 0, 0, 0, fmt_559, 0 };
+    static cilist io___1278 = { 0, 0, 0, fmt_2, 0 };
+    static cilist io___1282 = { 0, 0, 0, fmt_33, 0 };
+    static cilist io___1283 = { 0, 0, 0, fmt_30, 0 };
+    static cilist io___1285 = { 0, 0, 0, fmt_1050, 0 };
+    static cilist io___1290 = { 0, 0, 0, fmt_1052, 0 };
+    static cilist io___1291 = { 0, 0, 0, fmt_1054, 0 };
+    static cilist io___1292 = { 0, 0, 0, fmt_1056, 0 };
+    static cilist io___1295 = { 0, 0, 0, fmt_65, 0 };
+    static cilist io___1296 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1297 = { 0, 0, 0, fmt_1060, 0 };
+    static cilist io___1299 = { 0, 0, 0, fmt_1062, 0 };
+    static cilist io___1300 = { 0, 0, 0, fmt_1064, 0 };
+    static cilist io___1307 = { 0, 0, 0, fmt_3, 0 };
+    static cilist io___1308 = { 0, 0, 0, fmt_6, 0 };
+    static cilist io___1309 = { 0, 0, 0, fmt_4, 0 };
+    static cilist io___1310 = { 0, 0, 0, fmt_7, 0 };
+    static cilist io___1312 = { 0, 0, 0, fmt_742, 0 };
+    static cilist io___1314 = { 0, 0, 0, fmt_3247, 0 };
+    static cilist io___1320 = { 0, 0, 0, fmt_3250, 0 };
+    static cilist io___1321 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1322 = { 0, 0, 0, fmt_642, 0 };
+    static cilist io___1323 = { 0, 0, 0, fmt_643, 0 };
+    static cilist io___1325 = { 0, 0, 0, fmt_644, 0 };
+    static cilist io___1326 = { 0, 0, 0, fmt_647, 0 };
+    static cilist io___1327 = { 0, 0, 0, fmt_648, 0 };
+    static cilist io___1328 = { 0, 0, 0, fmt_649, 0 };
+    static cilist io___1329 = { 0, 0, 0, fmt_553, 0 };
+    static cilist io___1331 = { 0, 0, 0, fmt_557, 0 };
+    static cilist io___1332 = { 0, 0, 0, fmt_559, 0 };
+    static cilist io___1333 = { 0, 0, 0, fmt_573, 0 };
+    static cilist io___1334 = { 0, 0, 0, fmt_554, 0 };
+    static cilist io___1335 = { 0, 0, 0, fmt_559, 0 };
+    static cilist io___1337 = { 0, 0, 0, fmt_420, 0 };
     static cilist io___1338 = { 0, 0, 0, fmt_420, 0 };
-    static cilist io___1339 = { 0, 0, 0, fmt_420, 0 };
-    static cilist io___1348 = { 0, 0, 0, fmt_155, 0 };
-    static cilist io___1358 = { 0, 0, 0, fmt_162, 0 };
-    static cilist io___1364 = { 0, 0, 0, fmt_163, 0 };
-    static cilist io___1368 = { 0, 0, 0, fmt_164, 0 };
-    static cilist io___1370 = { 0, 0, 0, fmt_177, 0 };
+    static cilist io___1347 = { 0, 0, 0, fmt_155, 0 };
+    static cilist io___1357 = { 0, 0, 0, fmt_162, 0 };
+    static cilist io___1363 = { 0, 0, 0, fmt_163, 0 };
+    static cilist io___1367 = { 0, 0, 0, fmt_164, 0 };
+    static cilist io___1369 = { 0, 0, 0, fmt_177, 0 };
+    static cilist io___1372 = { 0, 0, 0, fmt_210, 0 };
     static cilist io___1373 = { 0, 0, 0, fmt_210, 0 };
-    static cilist io___1374 = { 0, 0, 0, fmt_210, 0 };
-    static cilist io___1375 = { 0, 0, 0, fmt_190, 0 };
-    static cilist io___1376 = { 0, 0, 0, fmt_210, 0 };
+    static cilist io___1374 = { 0, 0, 0, fmt_190, 0 };
+    static cilist io___1375 = { 0, 0, 0, fmt_210, 0 };
 
 
 
@@ -20294,20 +20344,6 @@ L10:
 
 
 /* ---------------------------------------------------------------------- */
-/*     Added here to save having to wrap function separately: */
-    io___1274.ciunit = *noutpt;
-    s_wsfe(&io___1274);
-    do_fio(&c__1, (char *)&(*nsq), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*nsqb), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*nst), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*nrst), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*nmt), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*ngt), (ftnlen)sizeof(integer));
-    e_wsfe();
-    *qbassw = FALSE_;
-    gcsts_(&csts[csts_offset], &cdrs[cdrs_offset], cstor, &ibasis[1], &jsflag[
-	    1], &jflag[1], nhydr, nct, nsb, nsb1, nsq, nsq1, nst, nsqmax, 
-	    nsqmx1, nstmax, qbassw);
 
     qabsw = *iopt2 >= 1;
 
@@ -20315,8 +20351,8 @@ L10:
     qpr2 = *iodb2 >= 2;
     qpr3 = *iodb2 >= 3;
     if (qpr1) {
-	io___1279.ciunit = *noutpt;
-	s_wsfe(&io___1279);
+	io___1278.ciunit = *noutpt;
+	s_wsfe(&io___1278);
 	e_wsfe();
     }
 
@@ -20361,8 +20397,8 @@ L10:
 L25:
     ++(*nloop);
     if (qpr1) {
-	io___1283.ciunit = *nttyo;
-	s_wsfe(&io___1283);
+	io___1282.ciunit = *noutpt;
+	s_wsfe(&io___1282);
 	do_fio(&c__1, (char *)&(*nloop), (ftnlen)sizeof(integer));
 	e_wsfe();
     }
@@ -20375,13 +20411,13 @@ L25:
 /*     automatic basis switching. */
 
     if (qpr1) {
-	io___1284.ciunit = *nttyo;
-	s_wsfe(&io___1284);
+	io___1283.ciunit = *noutpt;
+	s_wsfe(&io___1283);
 	e_wsfe();
     }
     if (iodb3 != 0) {
-	io___1286.ciunit = *nttyo;
-	s_wsfe(&io___1286);
+	io___1285.ciunit = *nttyo;
+	s_wsfe(&io___1285);
 	e_wsfe();
     }
 
@@ -20409,18 +20445,18 @@ L25:
 	}
 
 	if (iodb3 != 0 && *nloop == 0) {
-	    io___1291.ciunit = *nttyo;
-	    s_wsfe(&io___1291);
+	    io___1290.ciunit = *nttyo;
+	    s_wsfe(&io___1290);
 	    do_fio(&c__1, (char *)&kcol, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, (char *)&ns, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, ust1, (ftnlen)24);
 	    do_fio(&c__1, ust2, (ftnlen)24);
 	    e_wsfe();
-	    io___1292.ciunit = *nttyo;
-	    s_wsfe(&io___1292);
+	    io___1291.ciunit = *nttyo;
+	    s_wsfe(&io___1291);
 	    e_wsfe();
-	    io___1293.ciunit = nttyi;
-	    s_rsfe(&io___1293);
+	    io___1292.ciunit = nttyi;
+	    s_rsfe(&io___1292);
 	    do_fio(&c__1, uyn, (ftnlen)8);
 	    e_rsfe();
 	    kill[kcol] = 0;
@@ -20434,8 +20470,8 @@ L25:
 	    if (iodb3 != 0 && kill[kcol] >= 1) {
 		s_copy(ust3, ukilld, (ftnlen)8, (ftnlen)8);
 	    }
-	    io___1296.ciunit = *nttyo;
-	    s_wsfe(&io___1296);
+	    io___1295.ciunit = *noutpt;
+	    s_wsfe(&io___1295);
 	    do_fio(&c__1, (char *)&kcol, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, (char *)&ns, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, ust1, (ftnlen)24);
@@ -20448,24 +20484,24 @@ L25:
     }
 
     if (qpr1) {
-	io___1297.ciunit = *noutpt;
-	s_wsfe(&io___1297);
+	io___1296.ciunit = *noutpt;
+	s_wsfe(&io___1296);
 	e_wsfe();
     }
 
 /*     echo killer option data */
 
     if (iodb3 > 0) {
-	io___1298.ciunit = *nttyo;
-	s_wsfe(&io___1298);
+	io___1297.ciunit = *nttyo;
+	s_wsfe(&io___1297);
 	e_wsfe();
 	tally = 0.;
 	i__1 = *kdim;
 	for (kcol = 1; kcol <= i__1; ++kcol) {
 	    if (kill[kcol] != 0) {
 		tally += 1;
-		io___1300.ciunit = *nttyo;
-		s_wsfe(&io___1300);
+		io___1299.ciunit = *nttyo;
+		s_wsfe(&io___1299);
 		do_fio(&c__1, (char *)&kcol, (ftnlen)sizeof(integer));
 		e_wsfe();
 	    }
@@ -20473,8 +20509,8 @@ L25:
 	}
 
 	if (tally == 0.) {
-	    io___1301.ciunit = *nttyo;
-	    s_wsfe(&io___1301);
+	    io___1300.ciunit = *nttyo;
+	    s_wsfe(&io___1300);
 	    e_wsfe();
 	}
     }
@@ -20594,23 +20630,23 @@ L3210:
     }
 
     if (qpr1) {
-	io___1308.ciunit = *noutpt;
-	s_wsfe(&io___1308);
+	io___1307.ciunit = *noutpt;
+	s_wsfe(&io___1307);
 	do_fio(&c__1, (char *)&npass, (ftnlen)sizeof(integer));
 	e_wsfe();
-	io___1309.ciunit = *noutpt;
-	s_wsfe(&io___1309);
+	io___1308.ciunit = *noutpt;
+	s_wsfe(&io___1308);
 	do_fio(&c__1, (char *)&(*xi), (ftnlen)sizeof(doublereal));
 	e_wsfe();
 	if (*iopg1 == 0) {
-	    io___1310.ciunit = *noutpt;
-	    s_wsfe(&io___1310);
+	    io___1309.ciunit = *noutpt;
+	    s_wsfe(&io___1309);
 	    do_fio(&c__1, (char *)&(*xisteq), (ftnlen)sizeof(doublereal));
 	    e_wsfe();
 	}
 	if (*qhydth) {
-	    io___1311.ciunit = *noutpt;
-	    s_wsfe(&io___1311);
+	    io___1310.ciunit = *noutpt;
+	    s_wsfe(&io___1310);
 	    do_fio(&c__1, (char *)&(*shm), (ftnlen)sizeof(doublereal));
 	    do_fio(&c__1, (char *)&(*dshm), (ftnlen)sizeof(doublereal));
 	    e_wsfe();
@@ -20629,8 +20665,8 @@ L3210:
 L3220:
     ++ncycle;
     if (qpr1) {
-	io___1313.ciunit = *noutpt;
-	s_wsfe(&io___1313);
+	io___1312.ciunit = *noutpt;
+	s_wsfe(&io___1312);
 	do_fio(&c__1, (char *)&ncycle, (ftnlen)sizeof(integer));
 	e_wsfe();
     }
@@ -20678,8 +20714,8 @@ L3220:
 /*     print values of master iteration variables */
 
     if (qpr2) {
-	io___1315.ciunit = *noutpt;
-	s_wsfe(&io___1315);
+	io___1314.ciunit = *noutpt;
+	s_wsfe(&io___1314);
 	e_wsfe();
 	i__1 = *kdim;
 	for (krow = 1; krow <= i__1; ++krow) {
@@ -20688,8 +20724,8 @@ L3220:
 	    zdum2 = texp_(&zdum1);
 	    s_copy(udum, uzvec1 + krow * uzvec1_len, (ftnlen)8, uzvec1_len);
 	    bdum = bt_1.beta[krow - 1];
-	    io___1321.ciunit = *noutpt;
-	    s_wsfe(&io___1321);
+	    io___1320.ciunit = *noutpt;
+	    s_wsfe(&io___1320);
 	    do_fio(&c__1, (char *)&krow, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, (char *)&idum, (ftnlen)sizeof(integer));
 	    do_fio(&c__1, udum, (ftnlen)8);
@@ -20699,8 +20735,8 @@ L3220:
 	    e_wsfe();
 /* L745: */
 	}
-	io___1322.ciunit = *noutpt;
-	s_wsfe(&io___1322);
+	io___1321.ciunit = *noutpt;
+	s_wsfe(&io___1321);
 	e_wsfe();
     }
 
@@ -20714,19 +20750,19 @@ L3220:
 /*     the others in the set. */
 
     if (qpr2) {
+	io___1322.ciunit = *noutpt;
+	s_wsfe(&io___1322);
+	e_wsfe();
 	io___1323.ciunit = *noutpt;
 	s_wsfe(&io___1323);
-	e_wsfe();
-	io___1324.ciunit = *noutpt;
-	s_wsfe(&io___1324);
 	e_wsfe();
 	i__1 = *ksq;
 	for (kcol = 2; kcol <= i__1; ++kcol) {
 	    ns = iindx1[kcol];
 	    ns2 = bt_1.nfac[kcol - 1];
 	    if (ns2 > 0) {
-		io___1326.ciunit = *noutpt;
-		s_wsfe(&io___1326);
+		io___1325.ciunit = *noutpt;
+		s_wsfe(&io___1325);
 		do_fio(&c__1, uspec + ns * uspec_len, uspec_len);
 		do_fio(&c__1, uspec + ns2 * uspec_len, uspec_len);
 		e_wsfe();
@@ -20738,18 +20774,18 @@ L3220:
     gbfac_(bt_1.nfac, bt_1.beta, bt_1.efac, ksq, bt_1.bfac);
 
     if (qpr3 && ! (*qbswx)) {
+	io___1326.ciunit = *noutpt;
+	s_wsfe(&io___1326);
+	e_wsfe();
 	io___1327.ciunit = *noutpt;
 	s_wsfe(&io___1327);
-	e_wsfe();
-	io___1328.ciunit = *noutpt;
-	s_wsfe(&io___1328);
 	e_wsfe();
 	i__1 = *ksq;
 	for (kcol = 2; kcol <= i__1; ++kcol) {
 	    if (bt_1.bfac[kcol - 1] > 0.f) {
 		ns = iindx1[kcol];
-		io___1329.ciunit = *noutpt;
-		s_wsfe(&io___1329);
+		io___1328.ciunit = *noutpt;
+		s_wsfe(&io___1328);
 		do_fio(&c__1, uspec + ns * uspec_len, uspec_len);
 		do_fio(&c__1, (char *)&bt_1.bfac[kcol - 1], (ftnlen)sizeof(
 			doublereal));
@@ -20773,24 +20809,24 @@ L3220:
     }
 
     if (qpr2) {
-	io___1330.ciunit = *noutpt;
-	s_wsfe(&io___1330);
+	io___1329.ciunit = *noutpt;
+	s_wsfe(&io___1329);
 	e_wsfe();
 	i__1 = *ksq;
 	for (kcol = 2; kcol <= i__1; ++kcol) {
 	    ns1 = iindx1[kcol];
 	    ns2 = ibswx[kcol];
 	    if (ns2 > 0) {
-		io___1332.ciunit = *noutpt;
-		s_wsfe(&io___1332);
+		io___1331.ciunit = *noutpt;
+		s_wsfe(&io___1331);
 		do_fio(&c__1, uspec + ns1 * uspec_len, uspec_len);
 		do_fio(&c__1, uspec + ns2 * uspec_len, uspec_len);
 		e_wsfe();
 	    }
 /* L570: */
 	}
-	io___1333.ciunit = *noutpt;
-	s_wsfe(&io___1333);
+	io___1332.ciunit = *noutpt;
+	s_wsfe(&io___1332);
 	e_wsfe();
     }
 
@@ -20799,24 +20835,24 @@ L3220:
     gabswx_(bt_1.beta, ksq, &ibswx[1]);
 
     if (qpr1) {
-	io___1334.ciunit = *noutpt;
-	s_wsfe(&io___1334);
+	io___1333.ciunit = *noutpt;
+	s_wsfe(&io___1333);
 	e_wsfe();
 	i__1 = *ksq;
 	for (kcol = 2; kcol <= i__1; ++kcol) {
 	    ns1 = iindx1[kcol];
 	    ns2 = ibswx[kcol];
 	    if (ns2 > 0) {
-		io___1335.ciunit = *noutpt;
-		s_wsfe(&io___1335);
+		io___1334.ciunit = *noutpt;
+		s_wsfe(&io___1334);
 		do_fio(&c__1, uspec + ns1 * uspec_len, uspec_len);
 		do_fio(&c__1, uspec + ns2 * uspec_len, uspec_len);
 		e_wsfe();
 	    }
 /* L575: */
 	}
-	io___1336.ciunit = *noutpt;
-	s_wsfe(&io___1336);
+	io___1335.ciunit = *noutpt;
+	s_wsfe(&io___1335);
 	e_wsfe();
     }
 
@@ -20832,12 +20868,12 @@ L3220:
 	    nerr, noutpt, nttyo, qhydth, qpt4, qbassw, uzvec1_len, uspec_len);
 
     if (nerr > 0) {
-	io___1338.ciunit = *nttyo;
-	s_wsfe(&io___1338);
+	io___1337.ciunit = *nttyo;
+	s_wsfe(&io___1337);
 	do_fio(&c__1, (char *)&(*nloop), (ftnlen)sizeof(integer));
 	e_wsfe();
-	io___1339.ciunit = *noutpt;
-	s_wsfe(&io___1339);
+	io___1338.ciunit = *noutpt;
+	s_wsfe(&io___1338);
 	do_fio(&c__1, (char *)&(*nloop), (ftnlen)sizeof(integer));
 	e_wsfe();
 	s_stop("", (ftnlen)0);
@@ -20878,8 +20914,8 @@ L3275:
 /*     estimate of the ionic strength. */
 
     if (qpr1) {
-	io___1348.ciunit = *noutpt;
-	s_wsfe(&io___1348);
+	io___1347.ciunit = *noutpt;
+	s_wsfe(&io___1347);
 	do_fio(&c__1, (char *)&bt_1.betamx, (ftnlen)sizeof(doublereal));
 	do_fio(&c__1, (char *)&bt_1.bbig, (ftnlen)sizeof(doublereal));
 	do_fio(&c__1, btc_1.ubbig, (ftnlen)24);
@@ -20958,8 +20994,8 @@ L3240:
     gxi_(&zsq2[1], &conc[1], &jsort[1], nst, &xic);
     bxi = (xic - *xi) / *xi;
     if (qpr1) {
-	io___1358.ciunit = *noutpt;
-	s_wsfe(&io___1358);
+	io___1357.ciunit = *noutpt;
+	s_wsfe(&io___1357);
 	do_fio(&c__1, (char *)&bxi, (ftnlen)sizeof(doublereal));
 	e_wsfe();
     }
@@ -20971,8 +21007,8 @@ L3240:
 	gxistq_(&cxistq[1], &conc[1], &jsort[1], nst, &xistqc);
 	bxistq = (xistqc - *xisteq) / *xisteq;
 	if (qpr1) {
-	    io___1364.ciunit = *noutpt;
-	    s_wsfe(&io___1364);
+	    io___1363.ciunit = *noutpt;
+	    s_wsfe(&io___1363);
 	    do_fio(&c__1, (char *)&bxistq, (ftnlen)sizeof(doublereal));
 	    e_wsfe();
 	}
@@ -20989,8 +21025,8 @@ L3240:
 	}
 	bshm = (shmc - *shm) / *shm;
 	if (qpr1) {
-	    io___1368.ciunit = *noutpt;
-	    s_wsfe(&io___1368);
+	    io___1367.ciunit = *noutpt;
+	    s_wsfe(&io___1367);
 	    do_fio(&c__1, (char *)&bshm, (ftnlen)sizeof(doublereal));
 	    e_wsfe();
 	}
@@ -21010,8 +21046,8 @@ L3240:
 	    btc_1.ubgamx, uspec_len, (ftnlen)24);
 
     if (qpr1) {
-	io___1370.ciunit = *noutpt;
-	s_wsfe(&io___1370);
+	io___1369.ciunit = *noutpt;
+	s_wsfe(&io___1369);
 	do_fio(&c__1, (char *)&bt_1.bgamx, (ftnlen)sizeof(doublereal));
 	do_fio(&c__1, btc_1.ubgamx, (ftnlen)24);
 	e_wsfe();
@@ -21033,11 +21069,11 @@ L3240:
 /*         quit- optimization ended outside requested limits */
 /*         because pass requirements were not satisfied */
 
-	    io___1373.ciunit = *noutpt;
-	    s_wsfe(&io___1373);
+	    io___1372.ciunit = *noutpt;
+	    s_wsfe(&io___1372);
 	    e_wsfe();
-	    io___1374.ciunit = *nttyo;
-	    s_wsfe(&io___1374);
+	    io___1373.ciunit = *nttyo;
+	    s_wsfe(&io___1373);
 	    e_wsfe();
 	    goto L999;
 	}
@@ -21053,8 +21089,8 @@ L3240:
 
 /*       optimization achieved within requested limits */
 
-	io___1375.ciunit = *noutpt;
-	s_wsfe(&io___1375);
+	io___1374.ciunit = *noutpt;
+	s_wsfe(&io___1374);
 	e_wsfe();
 	goto L999;
 
@@ -21071,8 +21107,8 @@ L3240:
 /*       because cycle requirements were not met */
 
 	if (qpr1) {
-	    io___1376.ciunit = *noutpt;
-	    s_wsfe(&io___1376);
+	    io___1375.ciunit = *noutpt;
+	    s_wsfe(&io___1375);
 	    e_wsfe();
 	}
 	goto L999;
@@ -21222,27 +21258,27 @@ L999:
 	     integer *, integer *, integer *, logical *, logical *);
 
     /* Fortran I/O blocks */
-    static cilist io___1395 = { 0, 0, 0, fmt_532, 0 };
-    static cilist io___1402 = { 0, 0, 0, fmt_65, 0 };
-    static cilist io___1403 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1404 = { 0, 0, 0, fmt_717, 0 };
-    static cilist io___1410 = { 0, 0, 0, fmt_720, 0 };
-    static cilist io___1411 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1421 = { 0, 0, 0, fmt_606, 0 };
-    static cilist io___1422 = { 0, 0, 0, fmt_607, 0 };
-    static cilist io___1423 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1429 = { 0, 0, 0, fmt_686, 0 };
-    static cilist io___1430 = { 0, 0, 0, fmt_687, 0 };
-    static cilist io___1431 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1433 = { 0, 0, 0, fmt_695, 0 };
+    static cilist io___1394 = { 0, 0, 0, fmt_532, 0 };
+    static cilist io___1401 = { 0, 0, 0, fmt_65, 0 };
+    static cilist io___1402 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1403 = { 0, 0, 0, fmt_717, 0 };
+    static cilist io___1409 = { 0, 0, 0, fmt_720, 0 };
+    static cilist io___1410 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1420 = { 0, 0, 0, fmt_606, 0 };
+    static cilist io___1421 = { 0, 0, 0, fmt_607, 0 };
+    static cilist io___1422 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1428 = { 0, 0, 0, fmt_686, 0 };
+    static cilist io___1429 = { 0, 0, 0, fmt_687, 0 };
+    static cilist io___1430 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1432 = { 0, 0, 0, fmt_695, 0 };
+    static cilist io___1433 = { 0, 0, 0, fmt_697, 0 };
     static cilist io___1434 = { 0, 0, 0, fmt_697, 0 };
-    static cilist io___1435 = { 0, 0, 0, fmt_697, 0 };
-    static cilist io___1437 = { 0, 0, 0, fmt_717, 0 };
-    static cilist io___1439 = { 0, 0, 0, fmt_720, 0 };
-    static cilist io___1440 = { 0, 0, 0, fmt_75, 0 };
-    static cilist io___1443 = { 0, 0, 0, fmt_727, 0 };
-    static cilist io___1444 = { 0, 0, 0, fmt_737, 0 };
-    static cilist io___1445 = { 0, 0, 0, fmt_729, 0 };
+    static cilist io___1436 = { 0, 0, 0, fmt_717, 0 };
+    static cilist io___1438 = { 0, 0, 0, fmt_720, 0 };
+    static cilist io___1439 = { 0, 0, 0, fmt_75, 0 };
+    static cilist io___1442 = { 0, 0, 0, fmt_727, 0 };
+    static cilist io___1443 = { 0, 0, 0, fmt_737, 0 };
+    static cilist io___1444 = { 0, 0, 0, fmt_729, 0 };
 
 
 
@@ -21388,8 +21424,8 @@ L530:
     if (! qpr3) {
 	goto L570;
     }
-    io___1395.ciunit = un_1.noutpt;
-    s_wsfe(&io___1395);
+    io___1394.ciunit = un_1.noutpt;
+    s_wsfe(&io___1394);
     e_wsfe();
 
     i__1 = isq;
@@ -21438,8 +21474,8 @@ L540:
 	s_copy(ust2, ueh, (ftnlen)24, (ftnlen)24);
 
 L560:
-	io___1402.ciunit = un_1.noutpt;
-	s_wsfe(&io___1402);
+	io___1401.ciunit = un_1.noutpt;
+	s_wsfe(&io___1401);
 	do_fio(&c__1, (char *)&irow, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&ns, (ftnlen)sizeof(integer));
 	do_fio(&c__1, ust1, (ftnlen)24);
@@ -21449,11 +21485,11 @@ L560:
 /* L565: */
     }
 
+    io___1402.ciunit = un_1.noutpt;
+    s_wsfe(&io___1402);
+    e_wsfe();
     io___1403.ciunit = un_1.noutpt;
     s_wsfe(&io___1403);
-    e_wsfe();
-    io___1404.ciunit = un_1.noutpt;
-    s_wsfe(&io___1404);
     e_wsfe();
 
     i__1 = ki_1.ksq;
@@ -21466,8 +21502,8 @@ L560:
 	zdum1 = zg_1.zvclg1[krow - 1];
 	s_copy(udum, nnu_1.uzvec1 + (krow - 1 << 3), (ftnlen)8, (ftnlen)8);
 	gdum = glgx[idum];
-	io___1410.ciunit = un_1.noutpt;
-	s_wsfe(&io___1410);
+	io___1409.ciunit = un_1.noutpt;
+	s_wsfe(&io___1409);
 	do_fio(&c__1, (char *)&krow, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&idum, (ftnlen)sizeof(integer));
 	do_fio(&c__1, udum, (ftnlen)8);
@@ -21478,8 +21514,8 @@ L567:
 	;
     }
 
-    io___1411.ciunit = un_1.noutpt;
-    s_wsfe(&io___1411);
+    io___1410.ciunit = un_1.noutpt;
+    s_wsfe(&io___1410);
     e_wsfe();
 L570:
 /*           build the matrix. */
@@ -21606,14 +21642,14 @@ L605:
     if (! qpr3) {
 	goto L609;
     }
-    io___1421.ciunit = un_1.noutpt;
-    s_wsfe(&io___1421);
+    io___1420.ciunit = un_1.noutpt;
+    s_wsfe(&io___1420);
     e_wsfe();
 
     i__1 = isq;
     for (irow = 1; irow <= i__1; ++irow) {
-	io___1422.ciunit = un_1.noutpt;
-	s_wsfe(&io___1422);
+	io___1421.ciunit = un_1.noutpt;
+	s_wsfe(&io___1421);
 	i__2 = isq;
 	for (icol = 1; icol <= i__2; ++icol) {
 	    do_fio(&c__1, (char *)&nn_1.aa[irow + icol * 100 - 101], (ftnlen)
@@ -21623,8 +21659,8 @@ L605:
 /* L608: */
     }
 
-    io___1423.ciunit = un_1.noutpt;
-    s_wsfe(&io___1423);
+    io___1422.ciunit = un_1.noutpt;
+    s_wsfe(&io___1422);
     e_wsfe();
 L609:
 
@@ -21824,16 +21860,16 @@ L690:
     if (! qpr3) {
 	goto L689;
     }
-    io___1429.ciunit = un_1.noutpt;
-    s_wsfe(&io___1429);
+    io___1428.ciunit = un_1.noutpt;
+    s_wsfe(&io___1428);
     e_wsfe();
 
     i__1 = isq;
     for (irow = 1; irow <= i__1; ++irow) {
 	idum = jjndex[irow - 1];
 	rdum = nn_1.rhs[irow - 1];
-	io___1430.ciunit = un_1.noutpt;
-	s_wsfe(&io___1430);
+	io___1429.ciunit = un_1.noutpt;
+	s_wsfe(&io___1429);
 	do_fio(&c__1, (char *)&irow, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&jjndex[irow - 1], (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&nn_1.rhs[irow - 1], (ftnlen)sizeof(doublereal))
@@ -21842,8 +21878,8 @@ L690:
 /* L688: */
     }
 
-    io___1431.ciunit = un_1.noutpt;
-    s_wsfe(&io___1431);
+    io___1430.ciunit = un_1.noutpt;
+    s_wsfe(&io___1430);
     e_wsfe();
 L689:
 
@@ -21852,14 +21888,14 @@ L689:
     msolvr_(nn_1.aa, nn_1.gm, nn_1.rhs, zg_1.del, nn_1.res, nn_1.ee, nn_1.ir, 
 	    &isq, &ki_1.kmax, &ier, &qfalse, &qfalse);
     if (ier > 0) {
+	io___1432.ciunit = un_1.noutpt;
+	s_wsfe(&io___1432);
+	e_wsfe();
 	io___1433.ciunit = un_1.noutpt;
 	s_wsfe(&io___1433);
 	e_wsfe();
-	io___1434.ciunit = un_1.noutpt;
+	io___1434.ciunit = un_1.nttyo;
 	s_wsfe(&io___1434);
-	e_wsfe();
-	io___1435.ciunit = un_1.nttyo;
-	s_wsfe(&io___1435);
 	e_wsfe();
 	s_stop("", (ftnlen)0);
     }
@@ -21881,8 +21917,8 @@ L715:
     if (! qpr3) {
 	goto L725;
     }
-    io___1437.ciunit = un_1.noutpt;
-    s_wsfe(&io___1437);
+    io___1436.ciunit = un_1.noutpt;
+    s_wsfe(&io___1436);
     e_wsfe();
 
     i__1 = isq;
@@ -21890,8 +21926,8 @@ L715:
 	idum = jjndex[irow - 1];
 	ddum = zg_1.del[irow - 1];
 	s_copy(udum, uspec + idum * uspec_len, (ftnlen)8, (ftnlen)8);
-	io___1439.ciunit = un_1.noutpt;
-	s_wsfe(&io___1439);
+	io___1438.ciunit = un_1.noutpt;
+	s_wsfe(&io___1438);
 	do_fio(&c__1, (char *)&irow, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&idum, (ftnlen)sizeof(integer));
 	do_fio(&c__1, udum, (ftnlen)8);
@@ -21900,8 +21936,8 @@ L715:
 /* L723: */
     }
 
-    io___1440.ciunit = un_1.noutpt;
-    s_wsfe(&io___1440);
+    io___1439.ciunit = un_1.noutpt;
+    s_wsfe(&io___1439);
     e_wsfe();
 L725:
 
@@ -21932,8 +21968,8 @@ L725:
 	    goto L735;
 	}
 	*ker = 1;
-	io___1443.ciunit = un_1.noutpt;
-	s_wsfe(&io___1443);
+	io___1442.ciunit = un_1.noutpt;
+	s_wsfe(&io___1442);
 	do_fio(&c__1, uspec + ns * uspec_len, uspec_len);
 	do_fio(&c__1, (char *)&cdum, (ftnlen)sizeof(doublereal));
 	e_wsfe();
@@ -21951,16 +21987,16 @@ L735:
     if (nerr <= 0) {
 	goto L738;
     }
-    io___1444.ciunit = un_1.noutpt;
-    s_wsfe(&io___1444);
+    io___1443.ciunit = un_1.noutpt;
+    s_wsfe(&io___1443);
     e_wsfe();
     *ker = 2;
     goto L999;
 
 L738:
     if (*ker == 1) {
-	io___1445.ciunit = un_1.noutpt;
-	s_wsfe(&io___1445);
+	io___1444.ciunit = un_1.noutpt;
+	s_wsfe(&io___1444);
 	e_wsfe();
     }
 
@@ -22147,8 +22183,8 @@ L35:
 	    *);
 
     /* Fortran I/O blocks */
-    static cilist io___1457 = { 0, 0, 0, fmt_1000, 0 };
-    static cilist io___1458 = { 0, 0, 0, fmt_1010, 0 };
+    static cilist io___1456 = { 0, 0, 0, fmt_1000, 0 };
+    static cilist io___1457 = { 0, 0, 0, fmt_1010, 0 };
 
 
 
@@ -22326,13 +22362,13 @@ L35:
 	if (jfdum == 4) {
 	    goto L140;
 	}
-	io___1457.ciunit = un_1.noutpt;
-	s_wsfe(&io___1457);
+	io___1456.ciunit = un_1.noutpt;
+	s_wsfe(&io___1456);
 	do_fio(&c__1, (char *)&jfdum, (ftnlen)sizeof(integer));
 	do_fio(&c__1, gg_1.uspec + (nse - 1) * 24, (ftnlen)24);
 	e_wsfe();
-	io___1458.ciunit = un_1.nttyo;
-	s_wsfe(&io___1458);
+	io___1457.ciunit = un_1.nttyo;
+	s_wsfe(&io___1457);
 	e_wsfe();
 	s_stop("", (ftnlen)0);
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -22946,16 +22982,16 @@ L20:
     static logical qadtst, qdltst;
 
     /* Fortran I/O blocks */
+    static cilist io___1493 = { 0, 0, 0, fmt_305, 0 };
     static cilist io___1494 = { 0, 0, 0, fmt_305, 0 };
-    static cilist io___1495 = { 0, 0, 0, fmt_305, 0 };
+    static cilist io___1496 = { 0, 0, 0, fmt_315, 0 };
     static cilist io___1497 = { 0, 0, 0, fmt_315, 0 };
-    static cilist io___1498 = { 0, 0, 0, fmt_315, 0 };
+    static cilist io___1503 = { 0, 0, 0, fmt_333, 0 };
     static cilist io___1504 = { 0, 0, 0, fmt_333, 0 };
-    static cilist io___1505 = { 0, 0, 0, fmt_333, 0 };
+    static cilist io___1505 = { 0, 0, 0, fmt_337, 0 };
     static cilist io___1506 = { 0, 0, 0, fmt_337, 0 };
-    static cilist io___1507 = { 0, 0, 0, fmt_337, 0 };
+    static cilist io___1507 = { 0, 0, 0, fmt_355, 0 };
     static cilist io___1508 = { 0, 0, 0, fmt_355, 0 };
-    static cilist io___1509 = { 0, 0, 0, fmt_355, 0 };
 
 
 
@@ -23031,11 +23067,11 @@ L20:
 
     qdltst = del[*idelmx] + *screwd <= eqleps_1.eps100;
     if (*idelmx == *kebal && qdltst) {
-	io___1494.ciunit = un_1.noutpt;
-	s_wsfe(&io___1494);
+	io___1493.ciunit = un_1.noutpt;
+	s_wsfe(&io___1493);
 	e_wsfe();
-	io___1495.ciunit = un_1.nttyo;
-	s_wsfe(&io___1495);
+	io___1494.ciunit = un_1.nttyo;
+	s_wsfe(&io___1494);
 	e_wsfe();
 	goto L999;
     }
@@ -23048,11 +23084,11 @@ L20:
     if (*idelmx == *kcarb && qdltst) {
 	ns = iindx1[*idelmx];
 	if (jflag[ns] == 10) {
-	    io___1497.ciunit = un_1.noutpt;
-	    s_wsfe(&io___1497);
+	    io___1496.ciunit = un_1.noutpt;
+	    s_wsfe(&io___1496);
 	    e_wsfe();
-	    io___1498.ciunit = un_1.nttyo;
-	    s_wsfe(&io___1498);
+	    io___1497.ciunit = un_1.nttyo;
+	    s_wsfe(&io___1497);
 	    e_wsfe();
 	    goto L999;
 	}
@@ -23069,22 +23105,22 @@ L20:
 	    dum = *screwd * .1f;
 	    adum = (d__1 = del[*khydr], abs(d__1));
 	    if (adum >= dum) {
-		io___1504.ciunit = un_1.noutpt;
-		s_wsfe(&io___1504);
+		io___1503.ciunit = un_1.noutpt;
+		s_wsfe(&io___1503);
 		e_wsfe();
-		io___1505.ciunit = un_1.nttyo;
-		s_wsfe(&io___1505);
+		io___1504.ciunit = un_1.nttyo;
+		s_wsfe(&io___1504);
 		e_wsfe();
 		goto L999;
 	    }
 	}
 
 	if (iopt1 > 1) {
-	    io___1506.ciunit = un_1.noutpt;
-	    s_wsfe(&io___1506);
+	    io___1505.ciunit = un_1.noutpt;
+	    s_wsfe(&io___1505);
 	    e_wsfe();
-	    io___1507.ciunit = un_1.nttyo;
-	    s_wsfe(&io___1507);
+	    io___1506.ciunit = un_1.nttyo;
+	    s_wsfe(&io___1506);
 	    e_wsfe();
 	    goto L999;
 	}
@@ -23092,11 +23128,11 @@ L20:
 
 L350:
 
-    io___1508.ciunit = un_1.noutpt;
-    s_wsfe(&io___1508);
+    io___1507.ciunit = un_1.noutpt;
+    s_wsfe(&io___1507);
     e_wsfe();
-    io___1509.ciunit = un_1.nttyo;
-    s_wsfe(&io___1509);
+    io___1508.ciunit = un_1.nttyo;
+    s_wsfe(&io___1508);
     e_wsfe();
 
 L999:

@@ -20,10 +20,13 @@
 import numpy as np
 
 cdef extern from "eqlibr136.c":
-    int test_(int *testint)
-    int test_array_pass_(double *testarray, int arraylen)
+    # int test_(int *testint)
+    # int test_array_pass_(double *testarray, int arraylen)
     int bdmlx_(int *nst)
     int bdslx_(int *nst)
+  #   int gcsts_(double *csts, double *cdrs, double *cstor, int *ibasis, int *jsflag, int *jflag, 
+  #              int *nhydr, int *nct, int *nsb, int *nsb1, int *nsq, int *nsq1, int *nst, integer *nsqmax, integer *nsqmx1, 
+	# integer *nstmax, logical *qbassw)
     int arrset_(double *ars, double *amn, double *ags, double *cess, double *cdrs, 
                 double *cdrm, double *cdrg, double *csts, double *cstor, double *xbarlg, 
 	            double *lamlg, double *aa, double *gm, double *csp, double *concbs, 
@@ -36,32 +39,39 @@ cdef extern from "eqlibr136.c":
                 double *tempk, double *press, double *xi, double *xisteq, double *fo2lg, 
 	            double *eh, double *dshm, double *shm, double *shmlim,
 	            char *uzvec1, char *uspec, char *umin, char *ugas, char *ujtype, 
-	            int *nend, int *jflag, int *nsp, int *nspec, int *jsflag, int *jsort, 
-                int *iindx1, int *ibswx, int *ibasis, int *ir, int *kill, int *iopt1, 
-                int *iopt2, int *iopg1, int *iodb1, int *iodb2, int *ntpr, int *iacion, 
-                int *iebal, int *nhydr, int *nchlor, int *nct, int *nsb, int *nsb1, int *nsq, 
-                int *nsqb, int *nsq1, int *nst, int *nrst, int *nmt, int *ngt, int *nxt, 
-                int *kct, int *ksb, int *ksq, int *kebal, int *kdim, int *kmax, int *khydr, 
-                int *nctmax, int *nsqmax, int *nsqmx1, int *nstmax, int *iktmax, int *narxmx, 
-                int *ntprmx, int *ker, int *nloop, int *noutpt, int *nttyo, bint *qhydth, 
-                bint *qpt4, bint *qbswx, bint *qbassw, long int uzvec1_len, 
+	            long *nend, long *jflag, long *nsp, long *nspec, long *jsflag, long *jsort, 
+                long *iindx1, long *ibswx, long *ibasis, long *ir, long *kill, long *iopt1, 
+                long *iopt2, long *iopg1, long *iodb1, long *iodb2, long *ntpr, long *iacion, 
+                long *iebal, long *nhydr, long *nchlor, long *nct, long *nsb, long *nsb1, long *nsq, 
+                long *nsqb, long *nsq1, long *nst, long *nrst, long *nmt, long *ngt, long *nxt, 
+                long *kct, long *ksb, long *ksq, long *kebal, long *kdim, long *kmax, long *khydr, 
+                long *nctmax, long *nsqmax, long *nsqmx1, long *nstmax, long *iktmax, long *narxmx, 
+                long *ntprmx, long *ker, long *nloop, long *noutpt, long *nttyo, bint *qhydth, 
+                bint *qpt4, bint *qbswx, bint *qbassw, 
+                long int uzvec1_len, 
                 long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len)
     int evdatc_(double *prop, double *arr, double *tempc, int *ntpr, int *narxmx, int *ntprmx)
-    int testbool_(bint testbool)
+    # int testbool_(bint *testbool)
+    # int testboolnopt_(bint testbool)
 
-def cy_testbool(testbool):
-    result = testbool_(testbool)
-    return result
+# def cy_testbool(bint testbool):
+#     result = testbool_(&testbool)
+#     return result
 
-def cy_test(int testint):
-    print('hi')
-    result = test_(&testint)
-    return result
+# def cy_testboolnopt(testbool):
+#     result = testboolnopt_(testbool)
+#     return result
 
-def cy_test_array_pass(testarray):
-    cdef double[::1] arr_memview = testarray
-    result = test_array_pass_(&arr_memview[0], arr_memview.shape[0])
-    return result
+# def cy_test(int testint):
+#     print('hi')
+#     result = test_(&testint)
+#     return result
+
+# def cy_test_array_pass(testarray):
+#     cdef double[::1] arr_memview = testarray
+#     result = test_array_pass_(&arr_memview[0], arr_memview.shape[0])
+#     print(testarray)
+#     return result
 
 def cy_evdatc(double prop, arr, double tempc, int ntpr, int narxmx, int ntprmx):
     cdef double[::1] arr_memview = arr
@@ -87,7 +97,7 @@ def cy_bdslx(int nst):
 #          5   x    2   x  750
 # polynomial coeffs for minerals [logK, 0, 0, 0, 0] for constant value
 #
-# amn : narxpa x ntprpa x ngtpar
+# ags : narxpa x ntprpa x ngtpar
 #          5   x    2   x   15
 # polynomial coeffs for gases [logK, 0, 0, 0, 0] for constant value
 #
@@ -111,8 +121,8 @@ def cy_bdslx(int nst):
 #          101  x  750
 # This is calculated immediately before arrset is called by gcsts
 #
-# cstor : 2 x nstpar
-#         2     750
+# cstor : nstpar x 2
+#           750  x 2
 # Stoichiometric factors for H and O. Look in the EQ3 code for exactly how it is set up
 #
 # xbarlg : iktpar x nxtpar
@@ -175,12 +185,6 @@ def cy_bdslx(int nst):
 #
 # eh
 # redox potential- I think this can be used instead of fo2lg if iopt specifies so
-#
-# uzvec1 : kpar
-#          800
-# Names of species corresponding to the master iteration variables (basis species?).
-# kpar = 100, strings are 8 characters long I think- I guess it is an
-# abbreviated version
 #
 # uspec: nstpar 750 x 24
 #          18000
@@ -339,7 +343,7 @@ def cy_bdslx(int nst):
 # qpt4
 # True if using hkf
 #
-# qbass
+# qbassw
 # I think this should be false for hkf. Might be set by code.
 
 #
@@ -451,7 +455,12 @@ def cy_bdslx(int nst):
 #
 # nloop
 # Loop counter for basis switching
-
+#
+# uzvec1 : kpar
+#          800
+# Names of species corresponding to the master iteration variables (basis species?).
+# kpar = 100, strings are 8 characters long I think- I guess it is an
+# abbreviated version. I think this is set by arrset
 
 
 # al10
@@ -462,21 +471,22 @@ def cy_bdslx(int nst):
 # Might be calculated in the code?
 
 def cy_arrset(ars, amn, ags, cess, cdrs, 
-              cdrm, cdrg, csts, cstor, xbarlg, 
-	          lamlg, csp, cxistq, mwtss, z, 
+              cdrm, cdrg, #csts, 
+              cstor, xbarlg, 
+	            lamlg, csp, cxistq, mwtss, z, 
               zsq2, titr, azero, hydn,
               xlkeh, ehfac, #om, omlg, omi, 
               tempc, 
               tempk, press, fo2lg, 
-	          eh, uzvec1, uspec, umin, ugas, ujtype, 
-	          nend, jflag, nsp, nspec, jsflag, jsort, 
-              iindx1, ibswx, int iopt1, 
-              int iopt2, int iopg1, int iodb1, int iodb2, int ntpr, int iacion, 
-              int iebal, int nhydr, int nchlor, int nct, int nsb, int nsb1, int nsq, 
-              int nsqb, int nst, int nrst, int nmt, int ngt, int nxt, 
-              int kct, int ksb, int ksq, int kebal, int kdim, int kmax,
-              int nctmax, int nsqmax, int nsqmx1, int nstmax, int iktmax, int narxmx, 
-              int ntprmx, int noutpt, int nttyo, bint qhydth, bint qpt4,
+	            eh, uspec, umin, ugas, ujtype, 
+	            nend, jflag, nsp, nspec, jsflag, jsort, 
+              ibswx, long iopt1, 
+              long iopt2, long iopg1, long iodb1, long iodb2, long ntpr, long iacion, 
+              long iebal, long nhydr, long nchlor, long nct, long nsb, long nsb1, long nsq, 
+              long nsqb, long nsq1, long nst, long nrst, long nmt, long ngt, long nxt, 
+              long kct, long ksb, long ksq, long kebal, long kdim, long kmax,
+              long nctmax, long nsqmax, long nsqmx1, long nstmax, long iktmax, long narxmx, 
+              long ntprmx, long noutpt, long nttyo, bint qhydth, bint qpt4,
               bint qbswx, bint qbassw,
               ):
               
@@ -488,7 +498,7 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] cdrs_memview = cdrs
               cdef double[::1] cdrm_memview = cdrm
               cdef double[::1] cdrg_memview = cdrg
-              cdef double[::1] csts_memview = csts
+              # cdef double[::1] csts_memview = csts
               cdef double[::1] cstor_memview = cstor
               cdef double[::1] xbarlg_memview = xbarlg
               cdef double[::1] lamlg_memview = lamlg
@@ -507,19 +517,19 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] press_memview = press
               cdef double[::1] fo2lg_memview = fo2lg
               cdef double[::1] eh_memview = eh
-              cdef char[::1] uzvec1_memview = uzvec1 # Maybe this isn't defined right?
+              # cdef char[::1] uzvec1_memview = uzvec1 # Maybe this isn't defined right?
               cdef char[::1] uspec_memview = uspec 
               cdef char[::1] umin_memview = umin 
               cdef char[::1] ugas_memview = ugas 
               cdef char[::1] ujtype_memview = ujtype
-              cdef int[::1] nend_memview = nend
-              cdef int[::1] jflag_memview = jflag
-              cdef int[::1] nsp_memview = nsp
-              cdef int[::1] nspec_memview = nspec
-              cdef int[::1] jsflag_memview = jsflag
-              cdef int[::1] jsort_memview = jsort
-              cdef int[::1] iindx1_memview = iindx1
-              cdef int[::1] ibswx_memview = ibswx
+              cdef long[::1] nend_memview = nend
+              cdef long[::1] jflag_memview = jflag
+              cdef long[::1] nsp_memview = nsp
+              cdef long[::1] nspec_memview = nspec
+              cdef long[::1] jsflag_memview = jsflag
+              cdef long[::1] jsort_memview = jsort
+              # cdef int[::1] iindx1_memview = iindx1
+              cdef long[::1] ibswx_memview = ibswx
             #   cdef int[::1] iopt1_memview = iopt1
             #   cdef int[::1] iopt2_memview = iopt2
             #   cdef int[::1] iopg1_memview = iopg1
@@ -567,8 +577,9 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] mte_memview = mte
               cdef double[100] zvclg1
               cdef double[::1] zvclg1_memview = zvclg1
-              cdef double[750] conc
-              cdef double[::1] conc_memview = conc
+
+              # cdef double[750] conc
+              # cdef double[::1] conc_memview = conc
               cdef double[750] conclg
               cdef double[::1] conclg_memview = conclg
               cdef double[750] act
@@ -599,17 +610,30 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
             #   cdef double[::1] dshm_memview = dshm
               cdef double shm
             #   cdef double[::1] shm_memview = shm
-              cdef int[100] ir
-              cdef int[::1] ir_memview = ir
-              cdef int[100] kill
-              cdef int[::1] kill_memview = kill
-              cdef int nsq1
-              cdef int khydr
-              cdef int ker
-              cdef int nloop
+              cdef long[100] ir
+              cdef long[::1] ir_memview = ir
+              cdef long[100] kill
+              cdef long[::1] kill_memview = kill
+              # cdef long nsq1
+              cdef long khydr
+              cdef long ker
+              cdef long nloop
 
-              ibasis = np.zeros([750])
-              cdef int[::1] ibasis_memview = ibasis
+              conc = np.zeros([750])
+              cdef double[::1] conc_memview = conc
+
+              uzvec1 = np.array([b' ']*800)
+              cdef char[::1] uzvec1_memview = uzvec1
+
+
+              ibasis = np.zeros([750], dtype=np.int64)
+              cdef long[::1] ibasis_memview = ibasis
+
+              iindx1 = np.array([0]*100, dtype=np.int64)
+              cdef long[::1] iindx1_memview = iindx1
+
+              csts = np.zeros([101*750])
+              cdef double[::1] csts_memview = csts
               
 
               # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
@@ -631,6 +655,11 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double shmlim
               shmlim = om - 1.0
             #   cdef double[::1] shmlim_memview = shmlim
+
+              # cdef long nst2
+              # nst2 = nst
+              # cdef long nmt2
+              # nmt2 = 0
 
               result = arrset_(&ars_memview[0], &amn_memview[0], &ags_memview[0], 
                                &cess_memview[0], &cdrs_memview[0], 
@@ -654,10 +683,11 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
                                &kct, &ksb, &ksq, &kebal, &kdim, &kmax, &khydr, 
                                &nctmax, &nsqmax, &nsqmx1, &nstmax, &iktmax, &narxmx, 
                                &ntprmx, &ker, &nloop, &noutpt, &nttyo, &qhydth, 
-                               &qpt4, &qbswx, &qbassw, <long int> uzvec1_memview[1], 
+                               &qpt4, &qbswx, &qbassw, 
+                               <long int> uzvec1_memview[1], 
                                <long int> uspec_memview[1], <long int> umin_memview[1], <long int> ugas_memview[1], <long int> ujtype_memview[1])
             
-              return result
+              return result, iindx1, ker
 
 
 
