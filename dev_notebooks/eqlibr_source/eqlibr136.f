@@ -3363,7 +3363,7 @@ c
 c                                                                               
 c     compute stoichiometric factors for other master species                   
 c                                                                               
-      csts(nse,nse) = 1.   
+      csts(nse,nse) = 1.                                                        
 c                                                                               
       if (qbassw) then                                                          
         do 25 ns = 1,nct                                                        
@@ -3384,7 +3384,7 @@ c
       if (ns .lt. nsq) then                                                     
         if (jflag(ns) .ne. 30) go to 35                                         
       endif                                                                     
-      csum = -cdrs(nse,nrs)/cdrs(nsq1,nrs)                                        
+      csum = -cdrs(nse,nrs)/cdrs(nsq1,nrs)                                      
 c                                                                               
       if (qbassw) then                                                          
         do 30 nsg = 2,nsq                                                       
@@ -3403,7 +3403,7 @@ c
         endif                                                                   
    30   continue                                                                
       endif                                                                     
-c                                                                    
+c                                                                               
       csts(nse,ns) = csum                                                       
    35 continue                                                                  
 c                                                                               
@@ -7419,7 +7419,7 @@ c newton   last revised 01/25/88 by rmm
      $ screwn,tolbt,toldl,tempc,press,betamx,bbig,bneg,bgamx,xi,xisteq,         
      $ dshm,shm,shmlim,uspec,uzvec1,uqdel,uqbeta,ubbig,ubneg,ubgamx,            
      $ jsflag,jsort,ir,iter,itermx,idelmx,ibetmx,iacion,kmax,kdim,              
-     $ nsqmx1,nsb,nsq,nst,nhydr,nchlor,ier,matrxe,ncmpe,betae,                  
+     $ nsqmx1,nsb,nsq,nst,nhydr,nchlor,ier,                  
      $ qpra,qprb,qprc,ncarb)
 c                                                                               
 c     this routine performs hybrid newton-raphson iteration to solve            
@@ -7542,7 +7542,6 @@ c
      $ zsq2(*),azero(*),hydn(*),glg(*),glgo(*),betao(*),delo(*),                
      $ concbs(*),jsflag(*),jsort(*),ir(*)                                       
 c                                                                               
-      external matrxe,ncmpe,betae                                               
 c                                                                               
       data ublank/'        '/                                                   
       data qfalse/.false./                                                      
@@ -7620,7 +7619,7 @@ c
       call ngcadv(cdrs,glg,glgo,z,zsq2,azero,hydn,conc,concbs,                  
      $ cxistq,xi,xisteq,shm,shmlim,dshm,tempc,press,xio,xistqo,shmo,            
      $ uspec,jsflag,jsort,nsb,nsq,nsqmx1,nst,nhydr,nchlor,iacion,               
-     $ iter,ier,ncmpe,qprb,ncarb)
+     $ iter,ier,qprb,ncarb)
 c                                                                               
 c     calculate xi, etc., related residual functions.  save old values          
 c     of xi, etc., and the activity coefficients                                
@@ -7649,7 +7648,7 @@ c     algorithm.
 c                                                                               
 c     recalculate the newton-raphson residual functions.                        
 c                                                                               
-      call betae(qfalse,qfalse)                                                 
+      call betas(qfalse,qfalse)                                                 
 c                                                                               
 c     save the current values of beta and del for use in                        
 c     under-relaxation schemes.                                                 
@@ -7746,7 +7745,7 @@ c
       call nrstep(aa,gm,rhs,res,ee,ir,zvclg1,alpha,beta,del,                    
      $ betao,delo,screwd,screwn,betamx,delmax,delfnc,betfnc,                    
      $ uzvec1,itermx,kdim,kmax,idelmx,iter,negdfc,negbfc,npconv,ier,            
-     $ matrxe,ncmpe,betae,qcbeta,qcgam,qprb,qprc)                               
+     $ qcbeta,qcgam,qprb,qprc)                               
 c                                                                               
       if (ier .gt. 0) then                                                      
 c                                                                               
@@ -7796,14 +7795,14 @@ c
       call ngcadv(cdrs,glg,glgo,z,zsq2,azero,hydn,conc,concbs,                  
      $ cxistq,xi,xisteq,shm,shmlim,dshm,tempc,press,xio,xistqo,shmo,            
      $ uspec,jsflag,jsort,nsb,nsq,nsqmx1,nst,nhydr,nchlor,iacion,               
-     $ iter,ier,ncmpe,qprb,ncarb)
+     $ iter,ier,qprb,ncarb)
 c                                                                               
       if (qprb) then                                                            
 c                                                                               
 c       note- the following betae call is purely in support of a                
 c       debugging print.                                                        
 c                                                                               
-        call betae(qfalse,qfalse)                                               
+        call betas(qfalse,qfalse)                                               
         write (noutpl,2150)                                                     
         do 967 kcol = 1,kdim                                                    
         write (noutpl,2145) kcol,uzvec1(kcol),beta(kcol)                        
@@ -7819,7 +7818,7 @@ c ngcadv   last revised 01/15/88 by tjw
       subroutine ngcadv(cdrs,glg,glgo,z,zsq2,azero,hydn,conc,concbs,            
      $ cxistq,xi,xisteq,shm,shmlim,dshm,tempc,press,xio,xistqo,shmo,            
      $ uspec,jsflag,jsort,nsb,nsq,nsqmx1,nst,nhydr,nchlor,iacion,               
-     $ iter,ier,ncmpe,qpr,ncarb)
+     $ iter,ier,qpr,ncarb)
 c                                                                               
 c     this routine recalculates the ionic strength, etc., and the               
 c     activity coefficients of aqueous species, and then recalculates           
@@ -7890,7 +7889,6 @@ c
       dimension cdrs(nsqmx1,*),glg(*),glgo(*),z(*),zsq2(*),azero(*),            
      $ hydn(*),conc(*),concbs(*),cxistq(*),jsflag(*),jsort(*)                   
 c                                                                               
-      external ncmpe                                                            
 c                                                                               
       data xlim/25./                                                            
 c                                                                               
@@ -7944,7 +7942,7 @@ c
 c                                                                               
 c     recalculate the concentrations of dependent species, etc.                 
 c                                                                               
-      call ncmpe                                                                
+      call ncmpx                                                               
 c                                                                               
   999 continue                                                                  
       end                                                                       
@@ -7952,7 +7950,7 @@ c nrstep   last revised 12/28/87 by tjw
       subroutine nrstep(aa,gm,rhs,res,ee,ir,zvclg1,alpha,beta,del,              
      $ betao,delo,screwd,screwn,betamx,delmax,delfnc,betfnc,uzvec1,             
      $ itermx,kdim,kmax,idelmx,iter,negdfc,negbfc,npconv,ier,                   
-     $ matrxe,ncmpe,betae,qcbeta,qcgam,qprb,qprc)                               
+     $ qcbeta,qcgam,qprb,qprc)                               
 c                                                                               
 c     this routine performs one newton-raphson iteration step.                  
 c                                                                               
@@ -8039,7 +8037,6 @@ c
       dimension aa(kmax,*),gm(kmax,*),ee(*),res(*),zvclg1(*),rhs(*)             
       dimension alpha(*),beta(*),del(*),betao(*),delo(*)                        
 c                                                                               
-      external matrxe,ncmpe,betae                                               
 c                                                                               
       data qfalse/.false./                                                      
 c                                                                               
@@ -8107,7 +8104,7 @@ c
 c     calculate the jacobian matrix (matrxe = matrix for eq3nr,                 
 c     matrxz for eq6)                                                           
 c                                                                               
-      call matrxe                                                               
+      call matrix                                                               
 c                                                                               
       do 235 krow = 1,kdim                                                      
       rhs(krow) = -alpha(krow)                                                  
@@ -8220,8 +8217,8 @@ c     constant,that is, not to update them until all under-relaxation
 c     has been completed.  ncmpe = ncmpx for eq3nr, ncmpz for eq6.              
 c     betae = betas for eq3nr, betaz for eq6.                                   
 c                                                                               
-      call ncmpe                                                                
-      call betae(qfalse,qfalse)                                                 
+      call ncmpx                                                                
+      call betas(qfalse,qfalse)                                                 
 c                                                                               
       if (qprb) then                                                            
         write (noutpl,2150)                                                     
@@ -11648,7 +11645,7 @@ c
       include "bt.h"
 c                                                                               
       character*(*) uzvec1(*),uspec(*),umin(*),ugas(*),ujtype(*)                
-      character*24 udef,ueb,ueh,ured,ust1,ust2    
+      character*24 udef,ueb,ueh,ured,ust1,ust2                                  
 c                                                                               
       dimension ars(narxmx,ntprmx,*),amn(narxmx,ntprmx,*),                      
      $ ags(narxmx,ntprmx,*),cess(nctmax,*),cdrs(nsqmx1,*),                      
@@ -11689,9 +11686,6 @@ c
 c                                                                               
 c----------------------------------------------------------------------         
 c     Added here to save having to wrap function separately:
-      write (noutpt, 942) nsq, nsqb, nst, nrst, nmt, ngt
-  942 format('nsq:',2x,i10,2x,'nsqb:',2x,i10,2x,'nst:',2x,i10,2x,'nrst:',2x,i10,2x,'nmt:',2x,i10,2x,'ngt:',2x,i10,2x)
-      qbassw = .false.
       call gcsts(csts,cdrs,cstor,ibasis,jsflag,jflag,                           
      $ nhydr,nct,nsb,nsb1,nsq,nsq1,nst,nsqmax,nsqmx1,nstmax,
      $ qbassw)                                                                            
@@ -11736,7 +11730,7 @@ c
       nloop=-1                                                                  
 c                                                                               
    25 nloop=nloop+1                                                             
-      if (qpr1) write (nttyo,33) nloop                                         
+      if (qpr1) write (noutpt,33) nloop                                         
    33 format(5x,'nloop= ',i2)                                                   
 c                                                                               
 c     get stoichiometric coefficients for the equivalent                        
@@ -11746,7 +11740,7 @@ c     print the iteration matrix structure.  execute any killer options.
 c     killer options are set only once.  they carry through after any           
 c     automatic basis switching.                                                
 c                                                                               
-      if (qpr1) write (nttyo,30)                                               
+      if (qpr1) write (noutpt,30)                                               
    30 format(/16x,'--- iteration matrix structure ---',//)                      
       if (iodb3 .ne. 0) write (nttyo,1050)                                      
  1050 format(/,' iteration variables')                                          
@@ -11767,7 +11761,7 @@ c
             ust2 = ured                                                         
           endif                                                                 
         else                                                                    
-            jflp1 = jfl + 1   
+            jflp1 = jfl + 1                                                     
             ust2 = ujtype(jflp1)                                                
         endif                                                                   
       endif                                                                     
@@ -11786,7 +11780,7 @@ c
       if (qpr1) then                                                            
         ust3=ublank                                                             
         if (iodb3.ne.0 .and. kill(kcol).ge.1) ust3=ukilld                       
-        write (nttyo,65) kcol,ns,ust1,ust2,ust3                                
+        write (noutpt,65) kcol,ns,ust1,ust2,ust3                                
    65   format(12x,2i5,3x,a24,3x,a24,2x,a8)                                     
       endif                                                                     
 c                                                                               
@@ -11815,7 +11809,7 @@ c
 c                                                                               
 c     set up preliminary estimates of basis species concentrations              
 c                                                                               
-      do 823 ns=1,nst                                                 
+      do 823 ns = 1,nst                                                         
       conc(ns) = 0.                                                             
   823 continue                                                                  
 c                                                                               
@@ -13401,3 +13395,260 @@ c
 c                                                                               
   999 continue                                                                  
       end                                                                       
+c
+c matrix   last revised 12/14/87 by tjw                                         
+      subroutine matrix                                                         
+c                                                                               
+c     this routine builds the jacobian matrix aa(kdim,kdim).                    
+c     the matrix is written row-by-row.                                         
+c                                                                               
+      include "implicit.h"                                                     
+c                                                                               
+      include "parset.h"                                                       
+c                                                                               
+      dimension jrs(nrstpa)                                                     
+c                                                                               
+      include "blank.h"                                                        
+      include "an.h"                                                           
+      include "bt.h"                                                           
+      include "cc.h"                                                           
+      include "ee.h"                                                           
+      include "gg.h"                                                           
+      include "hh.h"                                                           
+      include "jj.h"                                                           
+      include "ka.h"                                                           
+      include "ki.h"                                                           
+      include "nn.h"                                                           
+      include "op.h"                                                           
+      include "op1.h"                                                          
+      include "op2.h"                                                          
+      include "ps.h"                                                           
+      include "st.h"                                                           
+      include "tt.h"                                                           
+      include "tu.h"                                                           
+      include "un.h"                                                           
+      include "uu.h"                                                           
+      include "vv.h"                                                           
+      include "ww.h"                                                           
+      include "xx.h"                                                           
+      include "yy.h"                                                           
+      include "zg.h"                                                           
+      include "eqldd.h"                                        
+      include "eqlpp.h"                                        
+      include "eqlgp.h"                                        
+c                                                                               
+c----------------------------------------------------------------------         
+c                                                                               
+c     initialize array aa to zeroes                                             
+c                                                                               
+      do 10 krow=1,kdim                                                         
+      do 5 kcol=1,kdim                                                          
+      aa(krow,kcol)=0.                                                          
+    5 continue                                                                  
+   10 continue                                                                  
+c                                                                               
+c     arrange the reactions in order of increasing concentration of             
+c     the associated aqueous species.                                           
+c                                                                               
+      nrr=0                                                                     
+      do 15 nss=1,nst                                                           
+      nsc=jsort(nss)                                                            
+      nrs=nsc-nsb                                                               
+      if (nrs.le.0) go to 15                                                    
+      nrr=nrr+1                                                                 
+      jrs(nrr)=nrs                                                              
+   15 continue                                                                  
+c                                                                               
+c     the first row/column is currently unused                                  
+c                                                                               
+      aa(1,1)=1.                                                                
+c                                                                               
+c- - - - - - - - - - begin main loop - - - - - - - - - - - - - - - - - -        
+c                                                                               
+c     write rows 2 through ksq.                                                 
+c                                                                               
+      do 400 krow=2,ksq                                                         
+      nse=iindx1(krow)                                                          
+c                                                                               
+c      test for various constraints                                             
+c                                                                               
+c      test for charge balance                                                  
+      if (nse.eq.iebal) go to 70                                                
+      jfdum=jflag(nse)                                                          
+c      test for mineral equilibrium                                             
+      if (jfdum.eq.19) go to 200                                                
+      if (jfdum.eq.20) go to 200                                                
+c      test for gas equilibrium                                                 
+      if (jfdum.eq.21) go to 250                                                
+c      test for log fo2                                                         
+      if (nse.eq.nsb) go to 300                                                 
+c      test for mass balance                                                    
+      if (jfdum.eq.0) go to 30                                                  
+c      test for alkalinity balance                                              
+      if (jfdum.eq.10) go to 110                                                
+c      test for log activity                                                    
+      if (jfdum.eq.16) go to 170                                                
+c      test for aqueous homogeneous equilibrium                                 
+      if (jfdum.eq.27) go to 700                                                
+c      test for free concentration                                              
+      if (jfdum.eq.4) go to 175                                                 
+c      test for alkalinity balance                                              
+      if (jfdum.eq.12) go to 110                                                
+      write (noutpt,1000) jfdum,uspec(nse)                                      
+ 1000 format(1x,'illegal jflag value = ',i5,' encountered for ',                
+     $ a18,' in matrix')                                                        
+      stop                                                                      
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        mass balance constraint.                                               
+c                                                                               
+   30 do 35 ns = 1,nst                                                          
+      store(ns) = csts(nse,ns)                                                  
+   35 continue                                                                  
+c                                                                               
+      call balcon(store,jrs,krow)                                               
+c                                                                               
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        charge balance constraint.                                             
+c                                                                               
+   70 continue                                                                  
+c                                                                               
+      call balcon(z,jrs,krow)                                                   
+c                                                                               
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        alkalinity balance constraint.                                         
+c                                                                               
+  110 continue                                                                  
+c                                                                               
+      call balcon(titr,jrs,krow)                                                
+c                                                                               
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        log activity constraint.                                               
+c                                                                               
+  170 continue                                                                  
+      aa(krow,krow)=1.0                                                         
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        free concentration constraint.                                         
+c                                                                               
+  175 continue                                                                  
+      aa(krow,krow)=1.                                                          
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        mineral equilibrium constraint.                                        
+c                                                                               
+  200 continue                                                                  
+      nm=nsp(nse)                                                               
+      if (nm.lt.50000) go to 205                                                
+      nm=nm-50000                                                               
+      nx = nm/100                                                               
+      ik=nm-100*nx                                                              
+      nm=nend(ik,nx)                                                            
+  205 continue                                                                  
+c                                                                               
+      do 215 kcol=2,ksq                                                         
+      if (kcol.eq.krow) go to 215                                               
+      ns=iindx1(kcol)                                                           
+      aa(krow,kcol) = -cdrm(ns,nm)/cdrm(nse,nm)                                 
+  215 continue                                                                  
+c                                                                               
+      aa(krow,krow)=-1.0                                                        
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        gas equilibrium constraint.                                            
+c                                                                               
+  250 continue                                                                  
+      ng=nsp(nse)                                                               
+c                                                                               
+      do 260 kcol=2,ksq                                                         
+      if (kcol.eq.krow) go to 260                                               
+      ns=iindx1(kcol)                                                           
+      aa(krow,kcol) = -cdrg(ns,ng)/cdrg(nse,ng)                                 
+  260 continue                                                                  
+c                                                                               
+      aa(krow,krow)=-1.0                                                        
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        aqueous homogeneous equilibrium constraint.                            
+c                                                                               
+  700 continue                                                                  
+      nrs=nse-nsb                                                               
+c                                                                               
+      do 705 kcol=2,ksq                                                         
+      if (kcol.eq.krow) go to 705                                               
+      ns=iindx1(kcol)                                                           
+      aa(krow,kcol) = -cdrs(ns,nrs)/cdrs(nsq1,nrs)                              
+  705 continue                                                                  
+c                                                                               
+      aa(krow,krow)=-1.0                                                        
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c        log fo2 constraints.                                                   
+c                                                                               
+c           identity constraint.                                                
+c                                                                               
+  300 continue                                                                  
+      if (iopt1.ne.0) go to 310                                                 
+      aa(krow,ksb)=1.                                                           
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c           eh constraint (note--an input p e- value has been                   
+c           converted to an eh value by routine setup)                          
+c                                                                               
+  310 continue                                                                  
+      if (iopt1.ge.1) go to 330                                                 
+      aa(krow,khydr)=-4.0                                                       
+      aa(krow,krow)=-1.0                                                        
+      go to 400                                                                 
+c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -         
+c                                                                               
+c           cross-linking (homogeneous aqueous redox) equilibrium.              
+c                                                                               
+  330 continue                                                                  
+      nsc=iopt1+nsb                                                             
+      aa(krow,ksb)=-1.0                                                         
+c                                                                               
+      do 340 kcol=2,ksq                                                         
+      if (kcol.eq.ksb) go to 340                                                
+      ns=iindx1(kcol)                                                           
+      if (ns.eq.nsc) then                                                       
+        aa(krow,kcol) = -cdrs(nsq1,iopt1)/cdrs(nsb,iopt1)                       
+      else                                                                      
+      aa(krow,kcol) = -cdrs(ns,iopt1)/cdrs(nsb,iopt1)                           
+      endif                                                                     
+  340 continue                                                                  
+  400 continue                                                                  
+c                                                                               
+c - - - - - - - - - - end of main loop - - - - - - - - - - - - - - - - -        
+c                                                                               
+      if (iodb3 .gt. 0) then                                                    
+c                                                                               
+c       variable-killer option here                                             
+c                                                                               
+        do 495 k=1,kdim                                                         
+        if (kill(k) .eq. 0) go to 495                                           
+        do 492 krow=1,kdim                                                      
+        aa(krow,k) = 0.                                                         
+  492   continue                                                                
+        do 493 kcol=1,kdim                                                      
+        aa(k,kcol) = 0.                                                         
+  493   continue                                                                
+        aa(k,k) = 1.                                                            
+  495   continue                                                                
+      endif                                                                     
+c                                                                               
+  999 continue                                                                  
+      end                                                                       
+      

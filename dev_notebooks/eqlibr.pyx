@@ -22,11 +22,9 @@ import numpy as np
 cdef extern from "eqlibr136.c":
     # int test_(int *testint)
     # int test_array_pass_(double *testarray, int arraylen)
-    int bdmlx_(int *nst)
-    int bdslx_(int *nst)
-  #   int gcsts_(double *csts, double *cdrs, double *cstor, int *ibasis, int *jsflag, int *jflag, 
-  #              int *nhydr, int *nct, int *nsb, int *nsb1, int *nsq, int *nsq1, int *nst, integer *nsqmax, integer *nsqmx1, 
-	# integer *nstmax, logical *qbassw)
+    # int testbool_(bint *testbool)
+    # int testboolnopt_(bint testbool)
+
     int arrset_(double *ars, double *amn, double *ags, double *cess, double *cdrs, 
                 double *cdrm, double *cdrg, double *csts, double *cstor, double *xbarlg, 
 	            double *lamlg, double *aa, double *gm, double *csp, double *concbs, 
@@ -50,9 +48,20 @@ cdef extern from "eqlibr136.c":
                 bint *qpt4, bint *qbswx, bint *qbassw, 
                 long int uzvec1_len, 
                 long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len)
-    int evdatc_(double *prop, double *arr, double *tempc, int *ntpr, int *narxmx, int *ntprmx)
-    # int testbool_(bint *testbool)
-    # int testboolnopt_(bint testbool)
+    int newton_(double *cdrs, double *aa, double *gm, double *zvclg1, double *del_, double *rhs, double *ee,
+	              double *res, double *conc, double *cxistq, double *beta, double *alpha, double *z__, double *zsq2, 
+	              double *azero, double *hydn, double *glg, double *glgo, double *betao, double *delo, double *concbs, 
+	              double *screwd, double *screwn, double *tolbt, double *toldl, double *tempc, double *press, double *betamx, 
+	              double *bbig, double *bneg, double *bgamx, double *xi, double *xisteq, double *dshm, double *shm, 
+                double *shmlim, char *uspec, char *uzvec1, char *uqdel, char *uqbeta, char *ubbig, char *ubneg, 
+                char *ubgamx, int *jsflag, int *jsort, int *ir, int *iter, int *itermx, int *idelmx, int *ibetmx, 
+                int *iacion, int *kmax, int *kdim, int *nsqmx1, int *nsb, int *nsq, int *nst, int *nhydr, 
+	              int *nchlor, int *ier, 
+                # U_fp matrxe, U_fp ncmpe, S_fp betae, These were external functions- but have replaced them for explicit function calls in fortran code.
+	              bint *qpra, bint *qprb, bint *qprc, int *ncarb, 
+                int uspec_len, int uzvec1_len, int uqdel_len, int uqbeta_len, 
+	              int ubbig_len, int ubneg_len, int ubgamx_len)
+    
 
 # def cy_testbool(bint testbool):
 #     result = testbool_(&testbool)
@@ -72,19 +81,6 @@ cdef extern from "eqlibr136.c":
 #     result = test_array_pass_(&arr_memview[0], arr_memview.shape[0])
 #     print(testarray)
 #     return result
-
-def cy_evdatc(double prop, arr, double tempc, int ntpr, int narxmx, int ntprmx):
-    cdef double[::1] arr_memview = arr
-    result = evdatc_(&prop, &arr_memview[0], &tempc, &ntpr, &narxmx, &ntprmx)
-    return prop
-
-def cy_bdmlx(int nst):
-    result = bdmlx_(&nst)
-    return result
-
-def cy_bdslx(int nst):
-    result = bdslx_(&nst)
-    return result
 
 
 # These are the original fortran shapes- they are 1D in the c implementation
@@ -688,6 +684,68 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
                                <long int> uspec_memview[1], <long int> umin_memview[1], <long int> ugas_memview[1], <long int> ujtype_memview[1])
             
               return result, iindx1, ker
+  
+def cy_newton(cdrs, aa, gm, zvclg1, double *del_, double *rhs, ee,
+              res, conc, cxistq, double *beta, double *alpha, z, zsq2, 
+              azero, hydn, glg, double *glgo, double *betao, double *delo, concbs, 
+              double *screwd, double *screwn, double *tolbt, double *toldl, tempc, press, double *betamx, 
+              double *bbig, double *bneg, double *bgamx, xi, xisteq, dshm, shm, 
+              uspec, uzvec1, char *uqdel, char *uqbeta, char *ubbig, char *ubneg, 
+              char *ubgamx, jsflag, jsort, ir, int *iter, int *itermx, int *idelmx, int *ibetmx, 
+              long iacion, long kmax, long kdim, long nsqmx1, long nsb, long nsq, long nst, long *nhydr, 
+              int *nchlor, int *ier, 
+              bint *qpra, bint *qprb, bint *qprc, int *ncarb, 
+              int uzvec1_len, int uqdel_len, int uqbeta_len, 
+              int ubbig_len, int ubneg_len, int ubgamx_len):
+
+    cdef double[::1] cdrs_memview = cdrs
+    cdef double[::1] aa_memview = aa
+    cdef double[::1] gm_memview = gm
+    cdef double[::1] zvclg1_memview = zvclg1
+    cdef double[::1] ee_memview = ee
+    cdef double[::1] res_memview = res
+    cdef double[::1] conc_memview = conc
+    cdef double[::1] cxistq_memview = cxistq
+    cdef double[::1] z_memview = z # Named z__ in the c code
+    cdef double[::1] zsq2_memview = zsq2
+    cdef double[::1] azero_memview = azero
+    cdef double[::1] hydn_memview = hydn
+    cdef double[::1] glg_memview = glg
+    cdef double[::1] concbs_memview = concbs
+    cdef double[::1] tempc_memview = tempc # Maybe doesn't need to be memview?
+    cdef double[::1] press_memview = press # Maybe doesn't need to be memview?
+    cdef char[::1] uspec_memview = uspec 
+    cdef char[::1] uzvec1_memview = uzvec1
+    cdef long[::1] jsflag_memview = jsflag
+    cdef long[::1] jsort_memview = jsort
+    cdef long[::1] ir_memview = ir
+
+    # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
+    cdef double al10
+    al10 = np.log(10)
+    cdef double rconst
+    rconst = 1.98726
+    cdef double om
+    om = 55.5086815578
+    cdef double omlg
+    omlg = np.log(om)
+    cdef double omi
+    omi = 1.0 / om
+    cdef double shmlim
+    shmlim = om - 1.0
+
+    result = newton_(&cdrs_memview[0], &aa_memview[0], &gm_memview[0], &zvclg1_memview[0], double *del_, double *rhs, &ee_memview[0],
+	                   &res_memview[0], &conc_memview[0], &cxistq_memview[0], double *beta, double *alpha, &z_memview[0], &zsq2_memview[0], 
+	                   &azero_memview[0], &hydn_memview[0], &glg_memview[0], double *glgo, double *betao, double *delo, concbs_memview[0], 
+	                   double *screwd, double *screwn, double *tolbt, double *toldl, &tempc_memview[0], &press_memview[0], double *betamx, 
+	                   double *bbig, double *bneg, double *bgamx, &xi, &xisteq, &dshm, &shm, 
+                     &shmlim, &uspec_memview[0], &uzvec1_memview[0], char *uqdel, char *uqbeta, char *ubbig, char *ubneg, 
+                     char *ubgamx, &jsflag_memview[0], &jsort_memview[0], &ir_memview[0], int *iter, int *itermx, int *idelmx, int *ibetmx, 
+                     &iacion, &kmax, &kdim, &nsqmx1, &nsb, &nsq, &nst, int *nhydr, 
+	                   int *nchlor, int *ier, 
+	                   bint *qpra, bint *qprb, bint *qprc, int *ncarb, 
+                     <long int> uspec_memview[1], <long int> uzvec1_memview[1], int uqdel_len, int uqbeta_len, 
+	                   int ubbig_len, int ubneg_len, int ubgamx_len)
 
 
 
