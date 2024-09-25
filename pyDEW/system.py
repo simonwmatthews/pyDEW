@@ -14,6 +14,7 @@ from contextlib import redirect_stdout
 import io
 
 from thermoengine import aqueous
+aqueous.cy_HKF_set_gSolvent_low_density_limit(0.3)
 
 DuanAndZhangCO2 = ObjCClass('DuanCO2')
 objCO2 = DuanAndZhangCO2.alloc().init()
