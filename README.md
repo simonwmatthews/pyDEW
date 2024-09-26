@@ -13,6 +13,6 @@ To use a binder instance of the code, go here:
 ## Running pyDEW in Docker
 At the time of writing (May 2023) the capacity of myBinder has reduced substantially, making it rather unreliable for running pyDEW. We will soon have pyDEW available on the ENKI server, but until then the easiest way to get pyDEW running is to use a [Docker](http://www.docker.com) container. Once you have Docker installed, and running, you can run the following command (at least in OSX or linux)| in a terminal to download and run the pyDEW container:
 
-`docker run -p 8888:8888 --env JUPYTER_ENABLE_LAB=yes --user root -e GRANT_SUDO=yes simonwmatthews/pydew:v2.9`
+`docker run -p 8888:8888 --env JUPYTER_ENABLE_LAB=yes --user root -e GRANT_SUDO=yes simonwmatthews/pydew:v2.14`
 
 You may run into issues if you already have an instance of Jupyter Lab running on your computer. Feel free to get in touch with me if you would like help in getting pyDEW running on your computer.
