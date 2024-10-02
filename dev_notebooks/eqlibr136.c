@@ -12911,7 +12911,7 @@ L999:
 
 /* newton   last revised 01/25/88 by rmm */
 /* Subroutine */ int newton_(doublereal *cdrs, doublereal *aa, doublereal *gm,
-	 doublereal *zvclg1, doublereal *del, doublereal *rhs, doublereal *ee,
+	 doublereal *zvclg1, doublereal *del_, doublereal *rhs, doublereal *ee,
 	 doublereal *res, doublereal *conc, doublereal *cxistq, doublereal *
 	beta, doublereal *alpha, doublereal *z__, doublereal *zsq2, 
 	doublereal *azero, doublereal *hydn, doublereal *glg, doublereal *
@@ -12922,7 +12922,7 @@ L999:
 	 doublereal *xisteq, doublereal *dshm, doublereal *shm, doublereal *
 	shmlim, char *uspec, char *uzvec1, char *uqdel, char *uqbeta, char *
 	ubbig, char *ubneg, char *ubgamx, integer *jsflag, integer *jsort, 
-	integer *ir, integer *iter, integer *itermx, integer *idelmx, integer 
+	integer *ir, integer *iter_, integer *itermx, integer *idelmx, integer 
 	*ibetmx, integer *iacion, integer *kmax, integer *kdim, integer *
 	nsqmx1, integer *nsb, integer *nsq, integer *nst, integer *nhydr, 
 	integer *nchlor, integer *ier, logical *qpra, logical *qprb, logical *
@@ -12931,6 +12931,10 @@ L999:
 	ftnlen ubgamx_len)
 {
     /* Initialized data */
+
+	/* Changed name in function declaration so it wouldn't conflict with python*/
+	doublereal *del = &del_;
+	integer *iter = &iter_;
 
     static char ublank[8] = "        ";
     static logical qfalse = FALSE_;

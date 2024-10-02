@@ -259,3 +259,8 @@ ret, iindx1, ker = eqlibr.cy_arrset(ars, amn, ags, cess, cdrs,
 print(ret)
 print(iindx1)
 print(ker)
+
+
+
+screwd = 2.0
+scren = 1.0

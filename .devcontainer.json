@@ -4,5 +4,8 @@
   
     "forwardPorts": [3000],
 
-    "extensions": ["Jupyter", "ipython", "ipykernel"]
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+    ]
   }

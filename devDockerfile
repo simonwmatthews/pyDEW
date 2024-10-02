@@ -1,1 +1,1 @@
-FROM registry.hub.docker.com/simonwmatthews/pydew:v2.12
+FROM registry.hub.docker.com/simonwmatthews/pydew:v2.14
