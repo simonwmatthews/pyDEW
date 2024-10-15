@@ -49,19 +49,19 @@ cdef extern from "eqlibr136.c":
                 bint *qpt4, bint *qbswx, bint *qbassw, 
                 long int uzvec1_len, 
                 long int uspec_len, long int umin_len, long int ugas_len, long int ujtype_len)
-    # int newton_(double *cdrs, double *aa, double *gm, double *zvclg1, double *del_, double *rhs, double *ee,
-	  #             double *res, double *conc, double *cxistq, double *beta, double *alpha, double *z__, double *zsq2, 
-	  #             double *azero, double *hydn, double *glg, double *glgo, double *betao, double *delo, double *concbs, 
-	  #             double *screwd, double *screwn, double *tolbt, double *toldl, double *tempc, double *press, double *betamx, 
-	  #             double *bbig, double *bneg, double *bgamx, double *xi, double *xisteq, double *dshm, double *shm, 
-    #             double *shmlim, char *uspec, char *uzvec1, char *uqdel, char *uqbeta, char *ubbig, char *ubneg, 
-    #             char *ubgamx, long *jsflag, long *jsort, long *ir, long *iter_, long *itermx, long *idelmx, long *ibetmx, 
-    #             long *iacion, long *kmax, long *kdim, long *nsqmx1, long *nsb, long *nsq, long *nst, long *nhydr, 
-	  #             long *nchlor, long *ier, 
-    #             # U_fp matrxe, U_fp ncmpe, S_fp betae, These were external functions- but have replaced them for explicit function calls in fortran code.
-	  #             bint *qpra, bint *qprb, bint *qprc, long *ncarb, 
-    #             long int uspec_len, long int uzvec1_len, long int uqdel_len, long int uqbeta_len, 
-	  #             long int ubbig_len, long int ubneg_len, long int ubgamx_len)
+    int newton_(double *cdrs, double *aa, double *gm, double *zvclg1, double *del_, double *rhs, double *ee,
+	              double *res, double *conc, double *cxistq, double *beta, double *alpha, double *z__, double *zsq2, 
+	              double *azero, double *hydn, double *glg, double *glgo, double *betao, double *delo, double *concbs, 
+	              double *screwd, double *screwn, double *tolbt, double *toldl, double *tempc, double *press, double *betamx, 
+	              double *bbig, double *bneg, double *bgamx, double *xi, double *xisteq, double *dshm, double *shm, 
+                double *shmlim, char *uspec, char *uzvec1, char *uqdel, char *uqbeta, char *ubbig, char *ubneg, 
+                char *ubgamx, long *jsflag, long *jsort, long *ir, long *iter_, long *itermx, long *idelmx, long *ibetmx, 
+                long *iacion, long *kmax, long *kdim, long *nsqmx1, long *nsb, long *nsq, long *nst, long *nhydr, 
+	              long *nchlor, long *ier, 
+                # U_fp matrxe, U_fp ncmpe, S_fp betae, These were external functions- but have replaced them for explicit function calls in fortran code.
+	              bint *qpra, bint *qprb, bint *qprc, long *ncarb, 
+                long int uspec_len, long int uzvec1_len, long int uqdel_len, long int uqbeta_len, 
+	              long int ubbig_len, long int ubneg_len, long int ubgamx_len)
     
 
 # def cy_testbool(bint testbool):
@@ -572,7 +572,7 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
               cdef double[::1] cte_memview = cte
               cdef double[100] mte
               cdef double[::1] mte_memview = mte
-              cdef double[100] zvclg1
+              cdef double[100] zvclg1 #= np.ascontiguousarray(np.empty([100]))
               cdef double[::1] zvclg1_memview = zvclg1
 
               # cdef double[750] conc
@@ -684,109 +684,114 @@ def cy_arrset(ars, amn, ags, cess, cdrs,
                                <long int> uzvec1_memview[1], 
                                <long int> uspec_memview[1], <long int> umin_memview[1], <long int> ugas_memview[1], <long int> ujtype_memview[1])
             
-              return result, iindx1, ker
+              return result, iindx1, ker, zvclg1, concbs, xisteq, dshm, shm, uzvec1, ir
   
-# def cy_newton(cdrs, aa, gm, zvclg1, ee,
-#               res, conc, cxistq, z, zsq2, 
-#               azero, hydn, glg, concbs, 
-#               screwd, screwn, tolbt, toldl, tempc, press,
-#               xi, xisteq, dshm, shm, 
-#               uspec, uzvec1, uqdel, uqbeta,
-#               jsflag, jsort, ir, itermx,
-#               iacion, kmax, kdim, nsqmx1, nsb, nsq, long nst, long nhydr, 
-#               long nchlor,
-#               bint qpra, bint qprb, bint qprc, long ncarb):
+def cy_newton(cdrs, zvclg1,
+              cxistq, z, zsq2, 
+              azero, hydn, concbs, 
+              double screwd, double screwn, double tolbt, double toldl, tempc, press,
+              double xisteq, double dshm, double shm, 
+              uspec, uzvec1, uqdel, uqbeta,
+              jsflag, jsort, ir, itermx,
+              iacion, kmax, kdim, nsqmx1, nsb, nsq, long nst, long nhydr, 
+              long nchlor,
+              bint qpra, bint qprb, bint qprc, long ncarb):
 
-#     cdef double[::1] cdrs_memview = cdrs
-#     cdef double[::1] aa_memview = aa
-#     cdef double[::1] gm_memview = gm
-#     cdef double[::1] zvclg1_memview = zvclg1
-#     cdef double[::1] ee_memview = ee
-#     cdef double[::1] res_memview = res
-#     cdef double[::1] conc_memview = conc
-#     cdef double[::1] cxistq_memview = cxistq
-#     cdef double[::1] z_memview = z # Named z__ in the c code
-#     cdef double[::1] zsq2_memview = zsq2
-#     cdef double[::1] azero_memview = azero
-#     cdef double[::1] hydn_memview = hydn
-#     cdef double[::1] glg_memview = glg
-#     cdef double[::1] concbs_memview = concbs
-#     cdef double[::1] tempc_memview = tempc # Maybe doesn't need to be memview?
-#     cdef double[::1] press_memview = press # Maybe doesn't need to be memview?
-#     cdef double[::1] xi_memview = xi # Doesn't need [::1]?
-#     cdef double[::1] xisteq_memview = xisteq # Doesn't need [::1]?
-#     cdef double[::1] dshm_memview = dshm # Doesn't need [::1]?
-#     cdef double[::1] shm_memview = shm # Doesn't need [::1]?
-#     cdef char[::1] uspec_memview = uspec 
-#     cdef char[::1] uzvec1_memview = uzvec1
-#     cdef long[::1] jsflag_memview = jsflag
-#     cdef long[::1] jsort_memview = jsort
-#     cdef long[::1] ir_memview = ir
-#     cdef long itermx_memview = itermx # Doesn't need [::1]?
-#     cdef long iacion_memview = iacion # Can just be declared long in func def I think
-#     cdef long kmax_memview = kmax # Can just be declared long in func def I think
-#     cdef long kdim_memview = kdim # Can just be declared long in func def I think
-#     cdef long nsqmx1_memview = nsqmx1 # Can just be declared long in func def I think
-#     cdef long nsb_memview = nsb # Can just be declared long in func def I think
-#     cdef long nsq_memview = nsq # Can just be declared long in func def I think
-#     cdef char[::1] uqdel_memview = uqdel
-#     cdef char[::1] uqbeta_memview = uqbeta
+    cdef double[::1] cdrs_memview = cdrs
+    cdef double[::1] zvclg1_memview = zvclg1
+    # cdef double[::1] conc_memview = conc
+    cdef double[::1] cxistq_memview = cxistq
+    cdef double[::1] z_memview = z # Named z__ in the c code
+    cdef double[::1] zsq2_memview = zsq2
+    cdef double[::1] azero_memview = azero
+    cdef double[::1] hydn_memview = hydn
+    # cdef double[::1] glg_memview = glg
+    cdef double[::1] concbs_memview = concbs
+    cdef double[::1] tempc_memview = tempc # Maybe doesn't need to be memview?
+    cdef double[::1] press_memview = press # Maybe doesn't need to be memview?
+    # cdef double[::1] xi_memview = xi # Doesn't need [::1]?
+    # cdef double[::1] xisteq_memview = xisteq # Doesn't need [::1]?
+    # cdef double[::1] dshm_memview = dshm # Doesn't need [::1]?
+    # cdef double[::1] shm_memview = shm # Doesn't need [::1]?
+    cdef char[::1] uspec_memview = uspec 
+    cdef char[::1] uzvec1_memview = uzvec1
+    cdef long[::1] jsflag_memview = jsflag
+    cdef long[::1] jsort_memview = jsort
+    cdef long[::1] ir_memview = ir
+    cdef long itermx_memview = itermx # Doesn't need [::1]?
+    cdef long iacion_memview = iacion # Can just be declared long in func def I think
+    cdef long kmax_memview = kmax # Can just be declared long in func def I think
+    cdef long kdim_memview = kdim # Can just be declared long in func def I think
+    cdef long nsqmx1_memview = nsqmx1 # Can just be declared long in func def I think
+    cdef long nsb_memview = nsb # Can just be declared long in func def I think
+    cdef long nsq_memview = nsq # Can just be declared long in func def I think
+    cdef char[::1] uqdel_memview = uqdel
+    cdef char[::1] uqbeta_memview = uqbeta
 
-#     cdef double[::1] screwd_memview = screwd # Maybe doesn't need to be memview
-#     cdef double[::1] screwn_memview = screwn # Maybe doesn't need to be memview
-#     cdef double[::1] tolbt_memview = tolbt # Maybe doesn't need to be memview
-#     cdef double[::1] toldl_memview = toldl # Maybe doesn't need to be memview
+    # cdef double[::1] screwd_memview = screwd # Maybe doesn't need to be memview
+    # cdef double[::1] screwn_memview = screwn # Maybe doesn't need to be memview
+    # cdef double[::1] tolbt_memview = tolbt # Maybe doesn't need to be memview
+    # cdef double[::1] toldl_memview = toldl # Maybe doesn't need to be memview
 
-#     # Outputs to be filled in
-#     cdef double[100] del_
-#     # cdef double[::1] del_memview = del_ # I don't think this is needed
-#     cdef double[100] rhs
-#     cdef double[100] beta
-#     cdef double[100] alpha
-#     cdef double[750] glgo # Not certain of dimensioning- but probably same as glg
-#     cdef double[100] betao # Not certain of dimensioning- probably same as beta
-#     cdef double[100] delo # Not certain of dimensioning- probably same as del_
-#     cdef double betamx
-#     cdef double bbig
-#     cdef double bneg
-#     cdef double bgamx
-#     cdef char[24] ubbig
-#     cdef char[::1] ubbig_memview = ubbig
-#     cdef char[24] ubneg
-#     cdef char[::1] ubneg_memview = ubneg
-#     cdef char[24] ubgamx
-#     cdef char[::1] ubgamx_memview = ubgamx
-#     cdef long iter_
-#     cdef long idelmx
-#     cdef long ibetmx
-#     cdef long ier
+    # Outputs to be filled in
+    cdef double[10000] aa
+    cdef double[10000] gm
+    cdef double[100] del_
+    cdef double[100] ee
+    cdef double[100] res
+    cdef double[750] conc
+    cdef double[750] glg
+    # cdef double[::1] del_memview = del_ # I don't think this is needed
+    cdef double[100] rhs
+    cdef double[100] beta
+    cdef double[100] alpha
+    cdef double[750] glgo # Not certain of dimensioning- but probably same as glg
+    cdef double[100] betao # Not certain of dimensioning- probably same as beta
+    cdef double[100] delo # Not certain of dimensioning- probably same as del_
+    cdef double betamx
+    cdef double bbig
+    cdef double bneg
+    cdef double bgamx
+    cdef double xi
+    cdef char[24] ubbig
+    cdef char[::1] ubbig_memview = ubbig
+    cdef char[24] ubneg
+    cdef char[::1] ubneg_memview = ubneg
+    cdef char[24] ubgamx
+    cdef char[::1] ubgamx_memview = ubgamx
+    cdef long iter_
+    cdef long idelmx
+    cdef long ibetmx
+    cdef long ier
 
-#     # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
-#     cdef double al10
-#     al10 = np.log(10)
-#     cdef double rconst
-#     rconst = 1.98726
-#     cdef double om
-#     om = 55.5086815578
-#     cdef double omlg
-#     omlg = np.log(om)
-#     cdef double omi
-#     omi = 1.0 / om
-#     cdef double shmlim
-#     shmlim = om - 1.0
+    # Defining this here may be unnecessary- it might be calculated in the c code, but I am not certain
+    cdef double al10
+    al10 = np.log(10)
+    cdef double rconst
+    rconst = 1.98726
+    cdef double om
+    om = 55.5086815578
+    cdef double omlg
+    omlg = np.log(om)
+    cdef double omi
+    omi = 1.0 / om
+    cdef double shmlim
+    shmlim = om - 1.0
 
-#     result = newton_(&cdrs_memview[0], &aa_memview[0], &gm_memview[0], &zvclg1_memview[0], &del_[0], &rhs[0], &ee_memview[0],
-# 	                   &res_memview[0], &conc_memview[0], &cxistq_memview[0], &beta[0], &alpha[0], &z_memview[0], &zsq2_memview[0], 
-# 	                   &azero_memview[0], &hydn_memview[0], &glg_memview[0], &glgo[0], &betao[0], &delo[0], &concbs_memview[0], 
-# 	                   &screwd_memview[0], &screwn_memview[0], &tolbt_memview[0], &toldl_memview[0], &tempc_memview[0], &press_memview[0], &betamx, 
-# 	                   &bbig, &bneg, &bgamx, &xi_memview[0], &xisteq_memview[0], &dshm_memview[0], &shm_memview[0], 
-#                      &shmlim, &uspec_memview[0], &uzvec1_memview[0], &uqdel_memview[0], &uqbeta_memview[0], &ubbig[0], &ubneg[0], 
-#                      &ubgamx[0], &jsflag_memview[0], &jsort_memview[0], &ir_memview[0], &iter_, &itermx_memview, &idelmx, &ibetmx, 
-#                      &iacion_memview, &kmax_memview, &kdim_memview, &nsqmx1_memview, &nsb_memview, &nsq_memview, &nst, &nhydr, 
-# 	                   &nchlor, &ier, 
-# 	                   &qpra, &qprb, &qprc, &ncarb, 
-#                      <long int> uspec_memview[1], <long int> uzvec1_memview[1], <long int> uqdel_memview[1], <long int> uqbeta_memview[1], 
-# 	                   <long int> ubbig_memview[1], <long int> ubneg_memview[1], <long int> ubgamx_memview[1])
+    result = newton_(&cdrs_memview[0], &aa[0], &gm[0], &zvclg1_memview[0], &del_[0], &rhs[0], &ee[0],
+	                   &res[0], &conc[0], &cxistq_memview[0], &beta[0], &alpha[0], &z_memview[0], &zsq2_memview[0], 
+	                   &azero_memview[0], &hydn_memview[0], &glg[0], &glgo[0], &betao[0], &delo[0], &concbs_memview[0], 
+	                   &screwd, &screwn, &tolbt, &toldl, &tempc_memview[0], &press_memview[0], &betamx, 
+	                   &bbig, &bneg, &bgamx, &xi, &xisteq, &dshm, &shm, 
+                     &shmlim, &uspec_memview[0], &uzvec1_memview[0], &uqdel_memview[0], &uqbeta_memview[0], &ubbig[0], &ubneg[0], 
+                     &ubgamx[0], &jsflag_memview[0], &jsort_memview[0], &ir_memview[0], &iter_, &itermx_memview, &idelmx, &ibetmx, 
+                     &iacion_memview, &kmax_memview, &kdim_memview, &nsqmx1_memview, &nsb_memview, &nsq_memview, &nst, &nhydr, 
+	                   &nchlor, &ier, 
+	                   &qpra, &qprb, &qprc, &ncarb, 
+                     <long int> uspec_memview[1], <long int> uzvec1_memview[1], <long int> uqdel_memview[1], <long int> uqbeta_memview[1], 
+	                   <long int> ubbig_memview[1], <long int> ubneg_memview[1], <long int> ubgamx_memview[1])
+    
+    return conc, glg, xi
 
 
 

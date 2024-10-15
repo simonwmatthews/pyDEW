@@ -231,26 +231,27 @@ qpt4 = True
 qbassw = False
 
 
-ret, iindx1, ker = eqlibr.cy_arrset(ars, amn, ags, cess, cdrs, 
-              cdrm, cdrg, #csts, 
-              cstor, xbarlg, 
-	          lamlg, csp, cxistq, mwtss, z, 
-              zsq2, titr, azero, hydn,
-              xlkeh, ehfac,
-              tempc, 
-              tempk, press, fo2lg, 
-	          eh, uspec, umin, ugas, ujtype, 
-	          nend, jflag, nsp, nspec, jsflag, jsort, 
-              #iindx1, 
-              ibswx, iopt1, 
-              iopt2, iopg1, iodb1, iodb2, ntpr, iacion, 
-              iebal, nhydr, nchlor, nct, nsb, nsb1, nsq, 
-              nsqb, nsq1, nst, nrst, nmt, ngt, nxt, 
-              kct, ksb, ksq, kebal, kdim, kmax,
-              nctmax, nsqmax, nsqmx1, nstmax, iktmax, narxmx, 
-              ntprmx, noutpt, nttyo, qhydth, qpt4,
-              qbswx, qbassw,
-              )
+ret, iindx1, ker, zvclg1, concbs, xisteq, dshm, shm, uzvec1, ir = eqlibr.cy_arrset(
+                                                                        ars, amn, ags, cess, cdrs, 
+                                                                        cdrm, cdrg, #csts, 
+                                                                        cstor, xbarlg, 
+                                                                        lamlg, csp, cxistq, mwtss, z, 
+                                                                        zsq2, titr, azero, hydn,
+                                                                        xlkeh, ehfac,
+                                                                        tempc, 
+                                                                        tempk, press, fo2lg, 
+                                                                        eh, uspec, umin, ugas, ujtype, 
+                                                                        nend, jflag, nsp, nspec, jsflag, jsort, 
+                                                                        #iindx1, 
+                                                                        ibswx, iopt1, 
+                                                                        iopt2, iopg1, iodb1, iodb2, ntpr, iacion, 
+                                                                        iebal, nhydr, nchlor, nct, nsb, nsb1, nsq, 
+                                                                        nsqb, nsq1, nst, nrst, nmt, ngt, nxt, 
+                                                                        kct, ksb, ksq, kebal, kdim, kmax,
+                                                                        nctmax, nsqmax, nsqmx1, nstmax, iktmax, narxmx, 
+                                                                        ntprmx, noutpt, nttyo, qhydth, qpt4,
+                                                                        qbswx, qbassw,
+                                                            )
 
 # ret = eqlibr.cy_testbool(True)
 
@@ -259,8 +260,45 @@ ret, iindx1, ker = eqlibr.cy_arrset(ars, amn, ags, cess, cdrs,
 print(ret)
 print(iindx1)
 print(ker)
-
+print(type(zvclg1))
 
 
 screwd = 2.0
-scren = 1.0
+screwn = 1.0
+tolbt = 0.0 # I think these will take default values if set to zero
+toldl = 0.0 # I think these will take default values if set to zero
+uqdel = np.array([b' ']*8) # I don't think length matters- arbitrary value chosen
+uqdel[0] = b'm' # Either moles or conc
+uqdel[1] = b'o'
+uqdel[2] = b'l'
+uqdel[3] = b'e'
+uqdel[4] = b's'
+uqbeta = np.array([b' ']*8) # I don't think length matters- arbitrary value chosen
+uqbeta[0] = b'm' # Either moles or conc
+uqbeta[1] = b'o'
+uqbeta[2] = b'l'
+uqbeta[3] = b'e'
+uqbeta[4] = b's'
+itermx = 30
+qpra = 0
+qprb = 0
+qprc = 0
+ncarb = 0 # I don't think this is ever used in the EQ3 code
+
+
+# conc = np.zeros([750]) # I am not sure this needs to be set in advance or not- trying to see if it doesn't
+
+conc, glg, xi, = eqlibr.cy_newton(cdrs, np.array(zvclg1), 
+                                cxistq, z, zsq2, 
+                                azero, hydn, np.array(concbs), 
+                                screwd, screwn, tolbt, toldl, tempc, press,
+                                xisteq, dshm, shm, 
+                                uspec, uzvec1, uqdel, uqbeta,
+                                jsflag, jsort, np.array(ir), itermx,
+                                iacion, kmax, kdim, nsqmx1, nsb, nsq, nst, nhydr,
+                                nchlor,
+                                qpra, qprb, qprc, ncarb)
+
+print(conc)
+print(glg)
+print(xi)
