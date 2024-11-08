@@ -331,8 +331,8 @@ class reaction:
 
         s += '     jcode= ' + jcode + '                jreac=  0\n'
 
-        mol_string = '{:.2f}'.format(reactant['moles'])
-        s += '      morr=' + (7 - len(mol_string.split('.')[0]))*' ' + mol_string
+        mol_string = '{:.5f}'.format(reactant['moles'])
+        s += '   morr=' + (7 - len(mol_string.split('.')[0]))*' ' + mol_string
         s += '          modr=           0.\n'
 
         if jcode == '1':
