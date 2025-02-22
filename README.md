@@ -1,3 +1,5 @@
+**NOTE: Development of pyDEW is moving to gitlab.com/swmatthews-research/pyDEW**
+
 # pyDEW
 Tools for interacting with DEW, EQPT, and EQ3, via python (formerly known as pyQ3).
 
